@@ -1,0 +1,114 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    
+}
+
+.table-bordered{
+    margin-top: 70px;
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    margin-top: 100px;
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background-color: #f30909;
+}
+
+thead {
+    text-align: center;
+    background-color: #007bff;
+    color: white;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #333;
+    color: white;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.gender-box-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.gender-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border: 1px solid;
+    border-radius: 2px;
+    font-size: 13px;
+    color: black;
+    margin: auto;
+}
+.female {
+    background-color: rgba(255, 192, 203, 0.3); /* Warna Pink Transparan */
+    border-color: #FF69B4; /* Warna Border Pink */
+}
+
+.male {
+    background-color: rgba(173, 216, 230, 0.3); /* Warna Biru Muda Transparan */
+    border-color: #1E90FF; /* Warna Border Biru */
+}
+
+/* Warna untuk point */
+.positif {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 3px 8px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.negatif {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 3px 8px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+/* Agar tabel responsif */
+@media screen and (max-width: 768px) {
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+    
+    tr {
+        margin-bottom: 15px;
+    }
+
+    td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+    }
+    
+    td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        padding-right: 10px;
+        white-space: nowrap;
+    }
+}
