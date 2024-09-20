@@ -54,7 +54,7 @@
                                     <td>10</td>
                                     <td>20</td>
                                     <td>
-                                        <button class="add-btn">View More</button>
+                                        <button class="icon-btn edit-btn"><i class="fas fa-edit"></i></button>
                                     </td>
                                 </tr>
                                 <tr>
@@ -67,7 +67,7 @@
                                     <td>15</td>
                                     <td>25</td>
                                     <td>
-                                        <button class="add-btn">View More</button>
+                                        <button class="icon-btn edit-btn"><i class="fas fa-edit"></i></button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -109,7 +109,7 @@
                                     <td>10</td>
                                     <td>20</td>
                                     <td>
-                                        <button class="add-btn">View More</button>
+                                        <button class="icon-btn edit-btn"><i class="fas fa-edit"></i></button>
                                     </td>
                                 </tr>
                                 <tr>
@@ -122,7 +122,7 @@
                                     <td>15</td>
                                     <td>25</td>
                                     <td>
-                                        <button class="add-btn">View More</button>
+                                        <button class="icon-btn edit-btn"><i class="fas fa-edit"></i></button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -164,7 +164,7 @@
                                     <td>10</td>
                                     <td>20</td>
                                     <td>
-                                        <button class="add-btn">View More</button>
+                                        <button class="icon-btn edit-btn"><i class="fas fa-edit"></i></button>
                                     </td>
                                 </tr>
                                 <tr>
@@ -177,7 +177,7 @@
                                     <td>15</td>
                                     <td>25</td>
                                     <td>
-                                        <button class="add-btn">View More</button>
+                                        <button class="icon-btn edit-btn"><i class="fas fa-edit"></i></button>
                                     </td>
                                 </tr>
                             </tbody>

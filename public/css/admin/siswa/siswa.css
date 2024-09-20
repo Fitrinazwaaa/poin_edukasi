@@ -54,7 +54,7 @@
     transform: scale(1.05);
   }
   
-  .icon-btn {
+  /* .icon-btn {
     display: flex;
     float: right;
     padding: 11px;
@@ -64,9 +64,18 @@
     border-radius: 4px;
     text-align: center;
     margin: 20px 21px 20px 0;
-  }
+  } */
   
   .icon-btn.delete-btn {
+    display: flex;
+    float: right;
+    padding: 11px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    text-align: center;
+    margin: 20px 21px 20px 0;
     background-color: #f44336;
     color: white;
     transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
@@ -78,6 +87,27 @@
     transform: scale(1.05);
   }
   
+  .icon-btn.edit-btn {
+    display: flex;
+    /* justify-content: center;
+    align-items: center; */
+    padding: 11px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    text-align: center;
+    margin: 5px auto;
+    background-color: #2196F3;
+    color: white;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Menambahkan bayangan */
+  }
+
+  .icon-btn.edit-btn:hover {
+    background-color: #328cd6;
+    transform: scale(1.05);
+  }
 
 /* Toggle Button */
 label.btn-toggle {
@@ -212,23 +242,4 @@ td {
   border-radius: 3px;
   font-size: 12px;
   background-color: #147ae7;
-}
-
-/* Additional Button */
-.add-btn {
-    padding: 5px 15px;
-    background-color: #FFFF00;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    color: black;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 10px;
-    font-weight: 500;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.add-btn:hover {
-    background-color: #dada5d;
-    transform: scale(1.05);
 }
