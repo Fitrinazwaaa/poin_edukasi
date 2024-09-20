@@ -1,0 +1,100 @@
+/* GLOBAL STYLES */
+  /* Mengatur font umum menjadi Arial dan latar belakang halaman menjadi biru muda */
+  body {
+    font-family: Arial, sans-serif;
+    padding-top: 100px;
+}
+body.body {
+    background-color: #e7f4ff;
+
+}
+
+/* FORMULIR */
+/* Container form */
+div.container{
+    background: #fff;
+    padding: 40px 40px 25px 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+/* Mengatur teks judul */
+p.text-center {
+    text-align: center;
+    color: #180853;
+    margin-bottom: 30px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+/* Form Group */
+.form-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+
+/* Label */
+.form-row label {
+    width: 120px;
+    font-size: 14px;
+    color: #333;
+    margin-right: 10px;
+}
+
+
+/* Input dan Select Field */
+.form-control {
+    flex: 1;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Radio Button */
+.form-row div {
+    display: flex;
+    justify-content: start;
+    
+}
+
+.form-row div label {
+    font-size: 14px;
+    color: #333;
+}
+
+/* Tombol Submit dan Kembali */
+.button-group {
+    display: flex;
+    justify-content: flex-end; /* Menyusun elemen ke kanan */
+    gap: 10px; /* Memberi jarak antar tombol */
+}
+
+button {
+    padding: 4px 20px 6px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+button.btn-satu {
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 3px;
+}
+
+button.btn-satu:hover{
+    background-color: #2f9232;
+}
+
+button.btn-dua {
+    background-color: #438BC9;
+    color: white;
+    border-radius: 3px;
+}
+
+button.btn-dua:hover{
+    background-color: #336fa3;   
+}

@@ -21,7 +21,7 @@ class User_Seeder extends Seeder
             ],
             [
                 'username' => 'Kesiswaan',
-                'role'     => 'user',
+                'role'     => 'user1',
                 'password' => bcrypt('000002'),
             ],
             [ 
@@ -31,7 +31,7 @@ class User_Seeder extends Seeder
             ],
             [
                 'username' => 'OSIS',
-                'role'     => 'user',
+                'role'     => 'user2',
                 'password' => bcrypt('000004'),
             ],
         ];

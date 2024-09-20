@@ -1,0 +1,79 @@
+/* NAVBAR-START */
+
+/* Mengatur lebar navbar offcanvas saat dalam posisi start (kiri) */
+div#offcanvasDarkNavbar.offcanvas.offcanvas-start {
+    width: 270px;
+}
+
+/* Mengatur warna latar belakang navbar offcanvas */
+.offcanvas.offcanvas-start {
+    background-color: #388DD8;
+}
+
+/* Mengatur warna latar belakang navbar bagian atas */
+.navbar {
+    background-color: #388DD8;
+    position: fixed;
+    height: 72px;
+}
+
+/* Mengatur warna teks judul navbar menjadi putih */
+.offcanvas-title {
+    color: white;
+}
+
+/* Memberi padding di sebelah kiri setiap item dalam navbar */
+li.nav-item {
+    padding-left: 15px;
+}
+
+/* Mengatur warna garis pemisah dalam menu navbar menjadi putih dan tanpa margin */
+ul hr {
+    color: white;
+    margin: 0;
+}
+
+/* Mengatur padding tautan navbar */
+a.nav-link {
+    padding: 15px 0;
+}
+
+/* Mengubah tampilan item navbar saat di-hover dengan menambahkan bayangan dan mengubah warna latar belakang */
+.offcanvas ul li:hover {
+    box-shadow: 0 0.5px 5px rgba(0, 0, 0, 0.192);
+    background: #1676ca;
+    border-style: solid;
+    border-color: #ffffff;
+    border-width: 5px;
+    border-right: black;
+    border-top: black;
+    border-bottom: black;
+}
+
+/* Mengatur warna tautan navbar menjadi putih saat di-hover */
+.offcanvas ul li .nav-link:hover {
+    color: white;
+}
+
+div.satu{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+
+h5.offcanvas-title{
+    margin-left: 20px;
+}
+
+/* Menghapus padding default pada body offcanvas */
+div.offcanvas-body {
+    padding-top: 0;
+}
+
+/* Menambahkan padding bawah pada header offcanvas */
+div.offcanvas-header {
+    padding-bottom: 10px;
+}
+
+/* NAVBAR-END */

@@ -16,10 +16,10 @@
                 @if (Auth::user()->role == 'admin')
                     <li class="list-group-item">Menu Bimbingan Konseling</li>
                 @endif
-                @if (Auth::user()->role == 'user')
+                @if (Auth::user()->role == 'user2')
                     <li class="list-group-item">Menu OSIS</li>
                 @endif
-                @if (Auth::user()->role == 'user')
+                @if (Auth::user()->role == 'user1')
                     <li class="list-group-item">Menu Kesiswaan</li>
                 @endif
                 @if (Auth::user()->role == 'user_edit')

@@ -15,9 +15,13 @@ class Admin_Controller extends Controller
     {
         return view('admin/poin_siswa/SiswaPoin');
     }
-    public function user()
+    public function user1()
     {
-        return view('user/laporan_data_siswa');
+        return view('user1/laporan_poin_siswa');
+    }
+    public function user2()
+    {
+        return view('user2/laporan_poin_siswa');
     }
     public function user_edit()
     {

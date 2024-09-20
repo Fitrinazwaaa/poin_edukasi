@@ -1,0 +1,96 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #C0E2FF;
+  /* margin-top: 50px; */
+  overflow-x: hidden;
+}
+
+.tambah {
+  display: flex;
+  align-items: center; /* Menyelaraskan konten secara vertikal */
+  gap: 8px; /* Jarak antara gambar dan teks */
+  padding: 8px 16px; /* Ruang dalam tombol */
+  background-color: #FFFF00; /* Warna latar belakang tombol */
+  border: none; /* Menghilangkan border tombol */
+  border-radius: 10px; /* Sudut membulat */
+  cursor: pointer; /* Mengubah kursor menjadi pointer saat hover */
+  /* float: right;  */
+  margin: 20px 0 10px 10%;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.tambah img {
+  vertical-align: middle; /* Menyelaraskan gambar secara vertikal dengan teks */
+}
+
+.tambah:hover {
+  background-color: #dada5d; /* Warna saat di-hover */
+}
+
+/* TABLE STYLES */
+.table-wrapper3 {
+  width: 100%;
+  border: 3px solid #dcefff;
+}
+
+table {
+  width: 100%;
+  background-color: white;
+}
+
+th {
+  background-color: #dcefff;
+  color: white;
+  position: sticky;
+  top: 0;
+}
+
+th, td {
+  padding: 8px 12px;
+  text-align: left;
+}
+
+table tbody tr:hover {
+  background-color: #f9fcff;
+}
+
+
+/* TIPE POIN */
+.tipe-poin .tipe {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* margin-bottom: 30px; */
+}
+
+.tipe-poin .tipe a {
+  text-decoration: none;
+  text-align: center;
+  color: black;
+  position: relative;
+  transition: color 0.2s ease-in-out;
+  font-size: 17px;
+  font-weight: 500;
+  padding: 15px 50px;
+  display: inline-block; /* Ensures proper sizing for relative positioning */
+}
+
+.tipe-poin .tipe a::after {
+  content: '';
+  position: absolute;
+  left: 50%; /* Center horizontally */
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: black;
+  transition: width 0.4s ease-in-out, background-color 0.4s ease-in-out;
+  transform: translateX(-50%); /* Center horizontally by adjusting left position */
+}
+
+
+
+.tipe-poin .tipe a:hover::after,
+.tipe-poin .tipe a.active::after {
+  width: 50%; /* Adjust width of the underline */
+}
