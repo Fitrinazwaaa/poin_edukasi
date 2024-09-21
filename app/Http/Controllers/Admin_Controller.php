@@ -13,7 +13,7 @@ class Admin_Controller extends Controller
     }
     public function admin()
     {
-        return view('admin/poin_siswa/SiswaPoin');
+        return view('admin/siswa/siswa');
     }
     public function user1()
     {

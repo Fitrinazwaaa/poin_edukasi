@@ -1,20 +1,29 @@
-  /* Global Styles */
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #C0E2FF;
-    padding-top: 110px;
-    overflow-y: auto; /* Mengizinkan scroll bar vertikal jika konten melebihi tinggi maksimum */
-    overflow-x: hidden; /* Menghilangkan scroll bar horizontal */
+/* Global Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #C0E2FF;
+  padding-top: 110px;
+  overflow-y: auto; /* Mengizinkan scroll bar vertikal jika konten melebihi tinggi maksimum */
+  overflow-x: hidden; /* Menghilangkan scroll bar horizontal */
 }
 
 /* Hero Section */
 .hero {
-    margin: 0 30px;
+  margin: 0 30px;
 }
 
+/* Container yang menggabungkan judul dan tombol */
+.judul_dan_tombol {
+  display: flex;
+  justify-content: space-between; /* Membuat jarak antara judul dan tombol */
+  align-items: center; /* Menyelaraskan elemen secara vertikal */
+  margin: 20px 21px 0 21px; /* Memberikan jarak atas-bawah */
+}
+
+/* Judul-judul */
 .judul-awal {
-  text-align: center;
-  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column; /* Membuat judul 1 dan judul 2 dalam satu kolom */
 }
 
 .judul1 {
@@ -30,84 +39,77 @@
   font-weight: 400;
 }
 
+/* Container untuk tombol tambah dan hapus */
+.tambah_dan_hapus {
+  display: flex;
+  gap: 10px; /* Mengatur jarak antara tombol */
+}
+
 /* Add Button */
 .tambah {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 10px 20px;
-    background-color: #FFFF00;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 13px;
-    font-weight: 600;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    float: right;
-    margin: 20px 21px 20px 0;
-  }
-  
-  .tambah:hover {
-    background-color: #dada5d;
-    transform: scale(1.05);
-  }
-  
-  /* .icon-btn {
-    display: flex;
-    float: right;
-    padding: 11px;
-    font-size: 16px;
-    cursor: pointer;
-    border: none;
-    border-radius: 4px;
-    text-align: center;
-    margin: 20px 21px 20px 0;
-  } */
-  
-  .icon-btn.delete-btn {
-    display: flex;
-    float: right;
-    padding: 11px;
-    font-size: 16px;
-    cursor: pointer;
-    border: none;
-    border-radius: 4px;
-    text-align: center;
-    margin: 20px 21px 20px 0;
-    background-color: #f44336;
-    color: white;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Menambahkan bayangan */
-  }
-  
-  .icon-btn.delete-btn:hover {
-    background-color: #cd3f35;
-    transform: scale(1.05);
-  }
-  
-  .icon-btn.edit-btn {
-    display: flex;
-    /* justify-content: center;
-    align-items: center; */
-    padding: 11px;
-    font-size: 16px;
-    cursor: pointer;
-    border: none;
-    border-radius: 4px;
-    text-align: center;
-    margin: 5px auto;
-    background-color: #2196F3;
-    color: white;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Menambahkan bayangan */
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  background-color: #FFFF00;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
-  .icon-btn.edit-btn:hover {
-    background-color: #328cd6;
-    transform: scale(1.05);
-  }
+.tambah:hover {
+  background-color: #dada5d;
+  transform: scale(1.05);
+}
+
+/* Delete Button */
+.icon-btn.delete-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  background-color: #f44336;
+  color: white;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.icon-btn.delete-btn:hover {
+  background-color: #cd3f35;
+  transform: scale(1.05);
+}
+
+  
+.icon-btn.edit-btn {
+  display: flex;
+  /* justify-content: center;
+  align-items: center; */
+  padding: 11px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  text-align: center;
+  margin: 5px auto;
+  background-color: #2196F3;
+  color: white;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Menambahkan bayangan */
+}
+
+.icon-btn.edit-btn:hover {
+  background-color: #328cd6;
+  transform: scale(1.05);
+}
 
 /* Toggle Button */
 label.btn-toggle {
@@ -146,8 +148,20 @@ label.btn-toggle:hover {
     background-color: #2e81c9;
 }
 
-input[type="checkbox"] {
+/* Sembunyikan checkbox untuk dropdown */
+input[type="checkbox"][id^="dropdown"] {
     display: none;
+}
+
+/* Styling untuk checkbox pada tabel */
+input[type="checkbox"][name="hapus[]"] {
+    width: 14px;
+    height: 14px;
+    border: 2px solid #388DD8; /* Border biru */
+    border-radius: 3px; /* Membuat sedikit membulat */
+    top: 3px;
+    margin: auto 5px;
+    position: relative;
 }
 
 /* Dropdown Content */
@@ -204,7 +218,7 @@ th {
     padding: 8px;
     /* text-align: center; */
     font-weight: 500;
-    font-size: 12px;
+    font-size: 13px;
 }
 
 td {

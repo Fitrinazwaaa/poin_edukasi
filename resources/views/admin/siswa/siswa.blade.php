@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,13 +12,17 @@
 <body>
     @extends('navbar/nav-utama')
     <div class="hero">
-        <div class="judul-awal">
-            <p class="judul1">TABEL SISWA SMK N 1 KAWALI</p>
-            <p class="judul2">PERIODE 2022-2024<p>
-        </div>
-        <div class="tambah_dan_hapus">
-            <button class="icon-btn delete-btn"><i class="fas fa-trash-alt"></i></button>
-            <button class="tambah" onclick="window.location.href='{{ route('TambahSiswa') }}';"><i class="fas fa-plus"></i>Tambahkan</button>
+        <div class="judul_dan_tombol">
+            <div class="judul-awal">
+                <p class="judul1">TABEL SISWA SMK N 1 KAWALI</p>
+                <p class="judul2">PERIODE 2022-2024</p>
+            </div>
+            <div class="tambah_dan_hapus">
+                <button class="icon-btn delete-btn"><i class="fas fa-trash-alt"></i></button>
+                <button class="tambah" onclick="window.location.href='{{ route('TambahSiswa') }}';">
+                    <i class="fas fa-plus"></i> Tambahkan
+                </button>
+            </div>
         </div>
 
         <!-- Dropdown with CSS only -->
@@ -32,42 +37,77 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <th>NO</th>
-                                    <th>NIS</th>
-                                    <th>NAMA</th>
-                                    <th>JENIS <br> KELAMIN</th>
-                                    <th>KELAS</th>
-                                    <th>JURUSAN</th>
-                                    <th>NEGATIF</th>
-                                    <th>POSITIF</th>
                                     <th></th>
+                                    <th>No</th>
+                                    <th>NIS</th>
+                                    <th>Nama</th>
+                                    <th>Jenis<br>Kelamin</th>
+                                    <th>Kelas</th>
+                                    <th>Angkatan (Tahun)</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>1</td>
-                                    <td>222310392</td>
-                                    <td class="align-left">Alinda Eka Yuniarti</td>
-                                    <td><div class="gender-box female">P</div></td>
-                                    <td>12 RPL 3</td>
-                                    <td>Rekayasa Perangkat Lunak</td>
-                                    <td>10</td>
-                                    <td>20</td>
                                     <td>
-                                        <button class="icon-btn edit-btn"><i class="fas fa-edit"></i></button>
+                                        <input type="checkbox" name="hapus[]" id="hapus" value="222310372">
+                                    </td>
+                                    <td>1</td>
+                                    <td>222310372</td>
+                                    <td class="align-left">nama perempuan 1</td>
+                                    <td>
+                                        <div class="gender-box female">P</div>
+                                    </td>
+                                    <td class="align-left">10 Rekayasa Perangkat Lunak 3</td>
+                                    <td>2023-2024</td>
+                                    <td>
+                                        <button class="icon-btn edit-btn" onclick="window.location.href='{{ route('EditSiswa') }}';"><i class="fas fa-edit"></i></button>
+                                    </td>
+                                </tr>
+                                    <td>
+                                        <input type="checkbox" name="hapus[]" id="hapus" value="222310372">
+                                    </td>
+                                    <td>2</td>
+                                    <td>222310371</td>
+                                    <td class="align-left">nama laki laki 1</td>
+                                    <td>
+                                        <div class="gender-box male">L</div>
+                                    </td>
+                                    <td class="align-left">10 Gim 1</td>
+                                    <td>2023-2024</td>
+                                    <td>
+                                        <button class="icon-btn edit-btn" onclick="window.location.href='{{ route('EditSiswa') }}';"><i class="fas fa-edit"></i></button>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>2</td>
-                                    <td>222310393</td>
-                                    <td class="align-left">Andi Rahmat</td>
-                                    <td><div class="gender-box male">L</div></td>
-                                    <td>12 RPL 2</td>
-                                    <td>Rekayasa Perangkat Lunak</td>
-                                    <td>15</td>
-                                    <td>25</td>
                                     <td>
-                                        <button class="icon-btn edit-btn"><i class="fas fa-edit"></i></button>
+                                        <input type="checkbox" name="hapus[]" id="hapus" value="222310372">
+                                    </td>
+                                    <td>3</td>
+                                    <td>222310370</td>
+                                    <td class="align-left">nama perempuan 2</td>
+                                    <td>
+                                        <div class="gender-box female">P</div>
+                                    </td>
+                                    <td class="align-left">10 Teknik Komputer Jaringan 3</td>
+                                    <td>2023-2024</td>
+                                    <td>
+                                        <button class="icon-btn edit-btn" onclick="window.location.href='{{ route('EditSiswa') }}';"><i class="fas fa-edit"></i></button>
+                                    </td>
+                                </tr>
+                                    <td>
+                                        <input type="checkbox" name="hapus[]" id="hapus" value="222310372">
+                                    </td>
+                                    <td>4</td>
+                                    <td>222310369</td>
+                                    <td class="align-left">nama laki laki 2</td>
+                                    <td>
+                                        <div class="gender-box male">L</div>
+                                    </td>
+                                    <td class="align-left">10 Seni Karawitan 1</td>
+                                    <td>2023-2024</td>
+                                    <td>
+                                        <button class="icon-btn edit-btn" onclick="window.location.href='{{ route('EditSiswa') }}';"><i class="fas fa-edit"></i></button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -87,42 +127,47 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <th>NO</th>
-                                    <th>NIS</th>
-                                    <th>NAMA</th>
-                                    <th>JENIS <br> KELAMIN</th>
-                                    <th>KELAS</th>
-                                    <th>JURUSAN</th>
-                                    <th>NEGATIF</th>
-                                    <th>POSITIF</th>
                                     <th></th>
+                                    <th>No</th>
+                                    <th>NIS</th>
+                                    <th>Nama</th>
+                                    <th>Jenis<br>Kelamin</th>
+                                    <th>Kelas</th>
+                                    <th>Angkatan (Tahun)</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>1</td>
-                                    <td>222310392</td>
-                                    <td class="align-left">Alinda Eka Yuniarti</td>
-                                    <td><div class="gender-box female">P</div></td>
-                                    <td>12 RPL 3</td>
-                                    <td>Rekayasa Perangkat Lunak</td>
-                                    <td>10</td>
-                                    <td>20</td>
                                     <td>
-                                        <button class="icon-btn edit-btn"><i class="fas fa-edit"></i></button>
+                                        <input type="checkbox" name="hapus[]" id="hapus" value="222310372">
+                                    </td>
+                                    <td>1</td>
+                                    <td>222310382</td>
+                                    <td class="align-left">nama perempuan</td>
+                                    <td>
+                                        <div class="gender-box female">P</div>
+                                    </td>
+                                    <td class="align-left">11 Desain Permodelan Informasi Bangunan 2</td>
+                                    <td>2022-2023</td>
+                                    <td>
+                                        <button class="icon-btn edit-btn" onclick="window.location.href='{{ route('EditSiswa') }}';"><i class="fas fa-edit"></i></button>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>2</td>
-                                    <td>222310393</td>
-                                    <td class="align-left">Andi Rahmat</td>
-                                    <td><div class="gender-box male">L</div></td>
-                                    <td>12 RPL 2</td>
-                                    <td>Rekayasa Perangkat Lunak</td>
-                                    <td>15</td>
-                                    <td>25</td>
                                     <td>
-                                        <button class="icon-btn edit-btn"><i class="fas fa-edit"></i></button>
+                                        <input type="checkbox" name="hapus[]" id="hapus" value="222310372">
+                                    </td>
+                                    <td>2</td>
+                                    <td>222310381</td>
+                                    <td class="align-left">nama laki laki</td>
+                                    <td>
+                                        <div class="gender-box male">L</div>
+                                    </td>
+                                    <td class="align-left">11 Teknik Kendaraan Ringan Otomotif 3</td>
+                                    <td>2022-2023</td>
+                                    <td>
+                                        <button class="icon-btn edit-btn" onclick="window.location.href='{{ route('EditSiswa') }}';"><i class="fas fa-edit"></i></button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -142,42 +187,47 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <th>NO</th>
-                                    <th>NIS</th>
-                                    <th>NAMA</th>
-                                    <th>JENIS <br> KELAMIN</th>
-                                    <th>KELAS</th>
-                                    <th>JURUSAN</th>
-                                    <th>NEGATIF</th>
-                                    <th>POSITIF</th>
                                     <th></th>
+                                    <th>No</th>
+                                    <th>NIS</th>
+                                    <th>Nama</th>
+                                    <th>Jenis<br>Kelamin</th>
+                                    <th>Kelas</th>
+                                    <th>Angkatan (Tahun)</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
+                                    <td>
+                                        <input type="checkbox" name="hapus[]" id="hapus" value="222310372">
+                                    </td>
                                     <td>1</td>
                                     <td>222310392</td>
-                                    <td class="align-left">Alinda Eka Yuniarti</td>
-                                    <td><div class="gender-box female">P</div></td>
-                                    <td>12 RPL 3</td>
-                                    <td>Rekayasa Perangkat Lunak</td>
-                                    <td>10</td>
-                                    <td>20</td>
+                                    <td class="align-left">nama perempuan</td>
                                     <td>
-                                        <button class="icon-btn edit-btn"><i class="fas fa-edit"></i></button>
+                                        <div class="gender-box female">P</div>
+                                    </td>
+                                    <td class="align-left">12 Akuntansi 3</td>
+                                    <td>2021-2022</td>
+                                    <td>
+                                        <button class="icon-btn edit-btn" onclick="window.location.href='{{ route('EditSiswa') }}';"><i class="fas fa-edit"></i></button>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>2</td>
-                                    <td>222310393</td>
-                                    <td class="align-left">Andi Rahmat</td>
-                                    <td><div class="gender-box male">L</div></td>
-                                    <td>12 RPL 2</td>
-                                    <td>Rekayasa Perangkat Lunak</td>
-                                    <td>15</td>
-                                    <td>25</td>
                                     <td>
-                                        <button class="icon-btn edit-btn"><i class="fas fa-edit"></i></button>
+                                        <input type="checkbox" name="hapus[]" id="hapus" value="222310372">
+                                    </td>
+                                    <td>2</td>
+                                    <td>222310391</td>
+                                    <td class="align-left">nama laki laki</td>
+                                    <td>
+                                        <div class="gender-box male">L</div>
+                                    </td>
+                                    <td class="align-left">12 Menejemen Perkantoran 3</td>
+                                    <td>2021-2022</td>
+                                    <td>
+                                        <button class="icon-btn edit-btn" onclick="window.location.href='{{ route('EditSiswa') }}';"><i class="fas fa-edit"></i></button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -188,6 +238,20 @@
         </div>
     </div>
     <script>
+        function deleteSelected() {
+            const checkedBoxes = document.querySelectorAll('input[name="hapus[]"]:checked');
+            if (checkedBoxes.length === 0) {
+                alert('Tidak ada siswa yang dipilih untuk dihapus.');
+                return;
+            }
+
+            const selectedValues = Array.from(checkedBoxes).map(cb => cb.value);
+            console.log('Siswa yang dipilih untuk dihapus:', selectedValues);
+
+            // Kirim data untuk dihapus atau lakukan aksi lain
+        }
+
+        6
         document.querySelectorAll('input[type="checkbox"]').forEach(function(checkbox) {
             checkbox.addEventListener('change', function() {
                 if (this.checked) {
@@ -198,7 +262,7 @@
                 }
             });
         });
-    </script>    
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

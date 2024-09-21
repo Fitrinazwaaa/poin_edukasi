@@ -10,7 +10,7 @@
     <body class="body">
        @extends('navbar/nav-form')
        
-       <p class="text-center">FORMULIR INPUT DATA SISWA</p>
+       <p class="text-center">FORMULIR EDIT DATA SISWA</p>
        <div class="container">
           <form>
                <div class="form-row">
