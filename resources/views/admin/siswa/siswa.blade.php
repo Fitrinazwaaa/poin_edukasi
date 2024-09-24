@@ -16,6 +16,7 @@
             <div class="judul-awal">
                 <p class="judul1">TABEL SISWA SMK N 1 KAWALI</p>
                 <p class="judul2">PERIODE 2022-2024</p>
+                <p class="judul2">PERIODE 2022-FITRI NAJWA FATIMATU JAHRO</p>
             </div>
             <div class="tambah_dan_hapus">
                 <button class="icon-btn delete-btn"><i class="fas fa-trash-alt"></i></button>
