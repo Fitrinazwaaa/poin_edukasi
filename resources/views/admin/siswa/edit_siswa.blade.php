@@ -1,4 +1,5 @@
-<html lang="en">
+ 
+ <html lang="en">
     <head>
        <meta charset="UTF-8">
        <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,30 +13,42 @@
        
        <p class="text-center">FORMULIR EDIT DATA SISWA</p>
        <div class="container">
-          <form>
+           <form method="POST" action="{{ route('SiswaStore') }}">
+              @csrf
+              @method('PUT')
+              <div class="form-row">
+                  <label for="nis">Nis</label>
+                  <input type="text" name="nis" value="{{ $data['nis'] }}" class="form-control">
+              </div>
+
                <div class="form-row">
-                   <label for="nama">Nama</label>
-                   <input type="text" name="nama" class="form-control">
+                   <label for="nama">Nama Lengkap</label>
+                   <input type="text" name="nama" value="{{ $data['nama'] }}" class="form-control">
                </div>
-   
+
                <div class="form-row">
                    <label for="kelas">Kelas</label>
+                   <input type="text" name="kelas" value="{{ $data['kelas'] }}" class="form-control">
+               </div>
+   
+               {{-- <div class="form-row">
+                   <label for="kelas">Kelas</label>
                    <select name="kelas" class="form-control" style="margin-right:30px;">
-                       <option value="" style="color: #ccc;" disabled selected>Pilih kelas</option>
+                       <option value="" style="color: #ccc;" disabled selected>Pilih Tingkatan</option>
                        <option value="10">10</option>
                        <option value="11">11</option>
                        <option value="12">12</option>
                    </select>
                    <select name="kelas" class="form-control" style="margin-right:30px;">
-                       <option value="" style="color: #ccc;" disabled selected>Pilih kelas</option>
-                       <option value="Teknik Kendaraan Ringan">Teknik Otomotif</option>
+                       <option value="" style="color: #ccc;" disabled selected>Pilih Jurusan</option>
+                       <option value="Teknik-Kendaraa-Ringan">Teknik Kendaraan Ringan</option>
                        <option value="Akuntansi">Akuntansi</option>
-                       <option value="Menejemen Perkantoran">Perkantoran</option>
-                       <option value="Rekayasa Perangkat Lunak">Rekayasa Perangkat Lunak</option>
-                       <option value="Gim">Perkantoran</option>
-                       <option value="Teknik Komputer Jaringan">Perkantoran</option>
-                       <option value="Desain Permodelan Dan Informasi Bangunan">Perkantoran</option>
-                       <option value="Seni Karawitan">Perkantoran</option>
+                       <option value="Menejemen-Perkantoran">Menejemen Perkantoran</option>
+                       <option value="Rekayasa-Perangkat-Lunak">Rekayasa Perangkat Lunak</option>
+                       <option value="Gim">Gim</option>
+                       <option value="Teknik-Komputer-Jaringan">Teknik Komputer Jaringan</option>
+                       <option value="Desain-Permodelan Dan Informasi Bangunan">Desain Permodelan Dan Informasi Bangunan</option>
+                       <option value="Seni-Karawitan">Seni Karawitan</option>
                    </select>
                    <select name="kelas" class="form-control">
                        <option value="" style="color: #ccc;" disabled selected>Pilih kelas</option>
@@ -43,25 +56,24 @@
                        <option value="2">2</option>
                        <option value="3">3</option>
                    </select>
-               </div>
+               </div> --}}
+   
+                <div class="form-row">
+                    <label for="jenis_kelamin">Jenis Kelamin</label>
+                    <select name="jenis_kelamin" class="form-control">
+                        <option value="laki-laki" {{ old('jenis_kelamin', $data->jenis_kelamin) == 'laki-laki' ? 'selected' : '' }}>Laki-Laki</option>
+                        <option value="perempuan" {{ old('jenis_kelamin', $data->jenis_kelamin) == 'perempuan' ? 'selected' : '' }}>Perempuan</option>
+                    </select>
+                </div>                       
    
                <div class="form-row">
-                   <label for="nis">Nis</label>
-                   <input type="text" name="nis" class="form-control">
-               </div>
-   
-               <div class="form-row">
-                   <label for="jenis_kelamin">Jenis Kelamin</label>
-                   <select name="jenis_kelamin" class="form-control">
-                       <option value="" style="color: #ccc;" disabled selected>Pilih Jenis Kelamin</option>
-                       <option value="laki-laki">Laki-Laki</option>
-                       <option value="perempuan">Perempuan</option>
-                   </select>
+                   <label for="tahun-masuk">Tahun Ajar / masuk</label>
+                   <input type="text" name="tahun-masuk" value="{{ $data['tahun_angkatan'] }}"class="form-control">
                </div>
    
                <div class="button-group">
                    <button type="button" class="btn-dua" onclick="window.location.href='{{ route('Siswa') }}';">Kembali</button>
-                   <button type="button" class="btn-satu" onclick="window.location.href='{{ route('EditSiswa') }}';">Kirim</button>
+                   <button type="submit" class="btn-satu" >Kirim</button>
                </div>
            </form>
        </div>

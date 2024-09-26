@@ -171,6 +171,10 @@
                         </li>
                         <hr>
                         <li class="nav-item">
+                            {{-- <a class="nav-link" aria-current="page" href="{{ route('jurusanIndex') }}">Pengaturan Akun</a> --}}
+                        </li>
+                        <hr>
+                        <li class="nav-item">
                             <a class="nav-link" href="/logout">Keluar Akun</a>
                         </li>
                         <hr>

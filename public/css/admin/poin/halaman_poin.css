@@ -94,3 +94,50 @@ table tbody tr:hover {
 .tipe-poin .tipe a.active::after {
   width: 50%; /* Adjust width of the underline */
 }
+
+/* Container untuk tombol tambah dan hapus */
+.tambah_dan_hapus {
+  display: flex;
+  gap: 10px; /* Mengatur jarak antara tombol */
+}
+
+/* Add Button */
+.tambah {
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  background-color: #FFFF00;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.tambah:hover {
+  background-color: #dada5d;
+  transform: scale(1.05);
+}
+
+/* Delete Button */
+.icon-btn.delete-btn {
+  align-items: center;
+  justify-content: center;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  background-color: #f44336;
+  color: white;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.icon-btn.delete-btn:hover {
+  background-color: #cd3f35;
+  transform: scale(1.05);
+}

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Models\DataSiswa; // Menggunakan model DataSiswa
+
 
 class Admin_Controller extends Controller
 {
@@ -13,7 +15,17 @@ class Admin_Controller extends Controller
     }
     public function admin()
     {
-        return view('admin/siswa/siswa');
+        // Mengambil semua data siswa
+        $siswa = DataSiswa::all();
+    
+        // Mengelompokkan siswa berdasarkan tahun angkatan
+        $siswaByTahun = $siswa->groupBy(function($item) {
+            // Asumsikan tahun angkatan disimpan dalam kolom 'tahun_angkatan'
+            return $item->tahun_angkatan;
+        });
+    
+        // Mengirim data ke view
+        return view('admin.siswa.siswa', compact('siswaByTahun'));
     }
     public function user1()
     {

@@ -10,99 +10,31 @@
 <body>
     <div class="scroll-container">
         <div class="table-wrapper1 scrollable-table1">
+            {{-- admin/poin/positif.blade.php --}}
             <table>
                 <thead>
                     <tr>
+                        <th></th>
                         <th>No</th>
-                        <th>Pakaian / Seragam</th>
+                        <th>Keterangan</th>
+                        <th>Kategori</th>
                         <th>Poin</th>
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($poinPositif as $poin)
                     <tr>
-                        <td>1</td>
-                        <td>keterangan poin positif</td>
-                        <td>-4</td>
+                        <td><input type="checkbox" name="hapus[]" value="{{ $poin->id_poin }}"></td>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $poin->np }}</td>
+                        <td>{{ $poin->kategori }}</td>
+                        <td>{{ $poin->poin }}</td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>keterangan poin positif</td>
-                        <td>-4</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>keterangan poin positif</td>
-                        <td>-4</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>keterangan poin positif</td>
-                        <td>-4</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>keterangan poin positif</td>
-                        <td>-4</td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>keterangan poin positif</td>
-                        <td>-4</td>
-                    </tr>
-                    <tr>
-                        <td>7</td>
-                        <td>keterangan poin positif</td>
-                        <td>-4</td>
-                    </tr>
-                    <tr>
-                        <td>8</td>
-                        <td>keterangan poin positif</td>
-                        <td>-4</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>keterangan poin positif</td>
-                        <td>-4</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>keterangan poin positif</td>
-                        <td>-4</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>keterangan poin positif</td>
-                        <td>-4</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>keterangan poin positif</td>
-                        <td>-4</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>keterangan poin positif</td>
-                        <td>-4</td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>keterangan poin positif</td>
-                        <td>-4</td>
-                    </tr>
-                    <tr>
-                        <td>7</td>
-                        <td>keterangan poin positif</td>
-                        <td>-4</td>
-                    </tr>
-                    <tr>
-                        <td>8</td>
-                        <td>keterangan poin positif</td>
-                        <td>-4</td>
-                    </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
-    </div>
+    </div>    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

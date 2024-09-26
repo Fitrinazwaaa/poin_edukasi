@@ -5,7 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class data_siswa extends Model
+class DataSiswa extends Model
 {
-    use HasFactory;
+    protected $table='data_siswa';
+    protected $guarded=[];
 }

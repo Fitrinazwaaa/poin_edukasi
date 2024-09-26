@@ -6,7 +6,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="{{ asset('css/admin/poin/halaman_poin.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-</head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 <body>
     @extends('navbar/nav-utama')
 {{-- TIPE POIN --}}
@@ -14,9 +14,12 @@
     <div class="tipe">
         <a href="javascript:void(0)" id="negatif-link" class="active" onclick="showTable('negatif')">Negatif</a>
         <a href="javascript:void(0)" id="positif-link" onclick="showTable('positif')">Positif</a>
-        <button class="tambah" onclick="window.location.href='{{ route('Tambah_Poin') }}';">
-            <img src="https://cdn-icons-png.flaticon.com/512/1237/1237946.png" alt="add" width="13" height="13">    Tambahkan
-        </button>
+        <div class="tambah_dan_hapus">
+            <button class="icon-btn delete-btn" style="padding-top: 10px; padding-bottom:10px;"><i class="fas fa-trash-alt"></i></button>
+            <button class="tambah" onclick="window.location.href='{{ route('TambahSiswa') }}';">
+                <i class="fas fa-plus"></i> Tambahkan
+            </button>
+        </div>
     </div>
 </div>
 

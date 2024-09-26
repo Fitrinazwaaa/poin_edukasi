@@ -117,4 +117,14 @@ class user_admin_controller extends Controller
     {
         return view('admin/siswa/tambah_siswa');
     }
+
+
+    public function jurusan1()
+    {
+        return view('admin/jurusan/jurusan');
+    }
+    public function jurusan2()
+    {
+        return view('admin/jurusan/tambah_jurusan');
+    }
 }
