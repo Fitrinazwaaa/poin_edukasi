@@ -58,7 +58,8 @@ class DataSiswaController extends Controller
     public function edit(string $id)
     {
         $data=DataSiswa::where('nis', $id)->firstorfail();
-        return view('admin.siswa.edit_siswa', compact('data'));
+        return $data;
+        // return view('admin.siswa.edit_siswa', compact('data'));
     }
 
     /**

@@ -67,8 +67,8 @@
                 </div>                       
    
                <div class="form-row">
-                   <label for="tahun-masuk">Tahun Ajar / masuk</label>
-                   <input type="text" name="tahun-masuk" value="{{ $data['tahun_angkatan'] }}"class="form-control">
+                   <label for="tahun_angkatan">Tahun Ajar / masuk</label>
+                   <input type="text" name="tahun_angkatan" value="{{ $data['tahun_angkatan'] }}"class="form-control">
                </div>
    
                <div class="button-group">

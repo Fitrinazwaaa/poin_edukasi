@@ -66,10 +66,11 @@
                     </select>
                </div>
    
-               <div class="form-row">
-                   <label for="tahun-masuk">Tahun Ajar / masuk</label>
-                   <input type="text" name="tahun-masuk" class="form-control">
-               </div>
+
+                <div class="form-row">
+                    <label for="tahun_angkatan">Tahun Angkatan</label>
+                    <input type="text" name="tahun_angkatan" class="form-control">
+                </div>
    
                <div class="button-group">
                    <button type="button" class="btn-dua" onclick="window.location.href='{{ route('Siswa') }}';">Kembali</button>

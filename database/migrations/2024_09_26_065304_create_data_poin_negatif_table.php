@@ -10,17 +10,16 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up()
-    {
-        Schema::create('data_poin_negatif', function (Blueprint $table) {
-            $table->id();
-            $table->string('np');
-            $table->integer('id_poin');
-            $table->integer('poin');
-            $table->string('kategori');  // Mengubah kategori menjadi string untuk konsistensi
-            $table->timestamps();
-        });
-    }
-    
+{
+    Schema::create('data_poin_negatif', function (Blueprint $table) {
+        $table->id('id_poin');
+        $table->string('np');
+        $table->integer('poin');
+        $table->string('kategori');  // Mengubah kategori menjadi string untuk konsistensi
+        $table->timestamps();
+    });
+}
+
 
 
     /**
