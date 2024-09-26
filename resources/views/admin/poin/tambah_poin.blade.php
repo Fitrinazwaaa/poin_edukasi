@@ -70,10 +70,11 @@ function updateKategori(tipePoin) {
 
     let options = [];
     if (tipePoin === 'positif') {
-        options = ['Tepat Waktu', 'Membantu Sesama', 'Prestasi'];
+        options = ['A. Prestasi Lomba', 'B. Prestasi Keagamaan', 'C. Prestasi Organisasi', 'D. Perilaku Teladan'];
     } else {
-        options = ['Melanggar Aturan', 'Terlambat', 'Tidak Disiplin'];
+        options = ['A. Pakaian', 'B. Rambut', 'C. Aksesoris', 'D. Pelanggaran Berat'];
     }
+
 
     options.forEach(function(option) {
         const newOption = document.createElement('option');
