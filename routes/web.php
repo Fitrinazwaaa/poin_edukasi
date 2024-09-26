@@ -62,4 +62,5 @@ Route::get('/siswa', [DataSiswaController::class, 'index'])->name('Siswa');
 Route::get('/siswa/create', [DataSiswaController::class, 'create'])->name('TambahSiswa');
 Route::PUT('/siswa/store', [DataSiswaController::class, 'store'])->name('SiswaStore');
 Route::get('/siswa/edit/{id}', [DataSiswaController::class, 'edit'])->name('SiswaEdit');
+Route::PUT('/siswa/update/{id}', [DataSiswaController::class, 'update'])->name('SiswaUpdate');
 // Route::PUT('/siswa/store', [DataSiswaController::class, 'store'])->name('SiswaStore');

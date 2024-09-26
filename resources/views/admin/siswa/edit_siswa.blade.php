@@ -13,7 +13,7 @@
        
        <p class="text-center">FORMULIR EDIT DATA SISWA</p>
        <div class="container">
-           <form method="POST" action="{{ route('SiswaStore') }}">
+           <form method="POST" action="{{ route('SiswaUpdate', $data['nis']) }}">
               @csrf
               @method('PUT')
               <div class="form-row">
@@ -61,13 +61,13 @@
                 <div class="form-row">
                     <label for="jenis_kelamin">Jenis Kelamin</label>
                     <select name="jenis_kelamin" class="form-control">
-                        <option value="laki-laki" {{ old('jenis_kelamin', $data->jenis_kelamin) == 'laki-laki' ? 'selected' : '' }}>Laki-Laki</option>
-                        <option value="perempuan" {{ old('jenis_kelamin', $data->jenis_kelamin) == 'perempuan' ? 'selected' : '' }}>Perempuan</option>
+                        <option @if($data['jenis_kelamin']=='Laki-Laki') selected @endif value="Laki-Laki" >Laki-Laki</option>
+                        <option @if($data['jenis_kelamin']=='Perempuan') selected @endif value="Perempuan" >Perempuan</option>
                     </select>
                 </div>                       
    
                <div class="form-row">
-                   <label for="tahun_angkatan">Tahun Ajar / masuk</label>
+                   <label for="tahun_angkatan">Tahun Angkatan</label>
                    <input type="text" name="tahun_angkatan" value="{{ $data['tahun_angkatan'] }}"class="form-control">
                </div>
    

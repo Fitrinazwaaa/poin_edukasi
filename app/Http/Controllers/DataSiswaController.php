@@ -58,8 +58,7 @@ class DataSiswaController extends Controller
     public function edit(string $id)
     {
         $data=DataSiswa::where('nis', $id)->firstorfail();
-        return $data;
-        // return view('admin.siswa.edit_siswa', compact('data'));
+        return view('admin.siswa.edit_siswa', compact('data'));
     }
 
     /**
@@ -67,7 +66,16 @@ class DataSiswaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = DataSiswa::where('nis', $id)
+            ->update([
+                'nis'               => $request->input('nis'),
+                'nama'              => $request->input('nama'),
+                'jenis_kelamin'     => $request->input('jenis_kelamin'),
+                'kelas'             => $request->input('kelas'),
+                'tahun_angkatan'    => $request->input('tahun_angkatan'), // Perbaiki penamaan ini
+            ]);
+    
+        return redirect()->route('Siswa');
     }
 
     /**
