@@ -65,3 +65,7 @@ Route::get('/siswa/edit/{id}', [DataSiswaController::class, 'edit'])->name('Sisw
 Route::PUT('/siswa/update/{id}', [DataSiswaController::class, 'update'])->name('SiswaUpdate');
 Route::get('/siswa/hapus/{id}', [DataSiswaController::class, 'destroy'])->name('SiswaHapus');
 Route::post('/siswa/hapus-multiple', [DataSiswaController::class, 'destroyMultiple'])->name('SiswaHapusMultiple');
+
+use App\Http\Controllers\SiswaController;
+
+Route::get('/search', [SiswaController::class, 'search'])->name('searchSiswa');
