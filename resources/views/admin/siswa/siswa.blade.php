@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,11 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">    
     <title>Daftar Siswa SMK</title>
     <link rel="stylesheet" href="{{ asset('css/admin/siswa/siswa.css') }}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 </head>
 <body>
     @extends('navbar/nav-utama')
+    <!-- Confirmation Modal -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="margin-top: -20px; padding: -20px;">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmDeleteModalLabel">Konfirmasi Penghapusan</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p style="font-size: 13px;">Anda yakin ingin menghapus siswa yang dipilih?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Hapus</button>
+            </div>
+        </div>
+    </div>
+</div>
+
     <div class="hero">
         <div class="judul_dan_tombol">
             <div class="judul-awal">
@@ -18,7 +36,10 @@
                 <p class="judul2">PERIODE 2022-2024</p>
             </div>
             <div class="tambah_dan_hapus">
-                <button class="icon-btn delete-btn"><i class="fas fa-trash-alt"></i></button>
+                <form id="deleteForm" action="{{ route('SiswaHapusMultiple') }}" method="POST" style="display: inline;">
+                    @csrf
+                    <button type="button" class="icon-btn delete-btn" onclick="deleteSelected();"><i class="fas fa-trash-alt"></i></button>
+                </form>
                 <button class="tambah" onclick="window.location.href='{{ route('TambahSiswa') }}';">
                     <i class="fas fa-plus"></i> Tambahkan
                 </button>
@@ -29,6 +50,7 @@
             <input type="checkbox" id="dropdown{{ $tahun_angkatan }}">
             <label class="btn-toggle" for="dropdown{{ $tahun_angkatan }}">
                 ANGKATAN TAHUN {{ $tahun_angkatan }}
+                <span class="float-end" style="font-weight: 500; margin-right: 30px">Jumlah Siswa: {{ count($siswa) }}</span> <!-- Add this line -->
             </label>
             <div class="collapse-content" id="content{{ $tahun_angkatan }}">
                 <div class="card card-body">
@@ -55,7 +77,7 @@
                                     <td>{{ $item->kelas }}</td>
                                     <td>{{ $item->tahun_angkatan }}</td>
                                     <td>
-                                        <button class="icon-btn edit-btn" onclick="window.location.href='{{ route('SiswaEdit', $item['nis']) }}';">
+                                        <button class="icon-btn edit-btn" onclick="window.location.href='{{ route('SiswaEdit', $item->nis) }}';">
                                             <i class="fas fa-edit"></i>
                                         </button>
                                     </td>
@@ -67,23 +89,39 @@
                 </div>
             </div>
         </div>
-    @endforeach        
+        @endforeach        
     </div>
+    
     <script>
-        function deleteSelected() {
-            const checkedBoxes = document.querySelectorAll('input[name="hapus[]"]:checked');
-            if (checkedBoxes.length === 0) {
-                alert('Tidak ada siswa yang dipilih untuk dihapus.');
-                return;
-            }
+function deleteSelected() {
+    const checkedBoxes = document.querySelectorAll('input[name="hapus[]"]:checked');
+    if (checkedBoxes.length === 0) {
+        alert('Tidak ada siswa yang dipilih untuk dihapus.');
+        return;
+    }
 
-            const selectedValues = Array.from(checkedBoxes).map(cb => cb.value);
-            console.log('Siswa yang dipilih untuk dihapus:', selectedValues);
+    const selectedValues = Array.from(checkedBoxes).map(cb => cb.value);
+    console.log('Siswa yang dipilih untuk dihapus:', selectedValues);
 
-            // Kirim data untuk dihapus atau lakukan aksi lain
-        }
+    // Show modal for confirmation
+    const confirmModal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'));
+    confirmModal.show();
 
-        6
+    // Attach event listener to the delete button inside the modal
+    document.getElementById('confirmDeleteBtn').onclick = function() {
+        const deleteForm = document.getElementById('deleteForm');
+        checkedBoxes.forEach(cb => {
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'nis[]'; // Ensure this matches the expected array in the controller
+            input.value = cb.value;
+            deleteForm.appendChild(input);
+        });
+        deleteForm.submit();
+    };
+}
+
+
         document.querySelectorAll('input[type="checkbox"]').forEach(function(checkbox) {
             checkbox.addEventListener('change', function() {
                 if (this.checked) {
@@ -95,6 +133,6 @@
             });
         });
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

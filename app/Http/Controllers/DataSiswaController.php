@@ -77,12 +77,23 @@ class DataSiswaController extends Controller
     
         return redirect()->route('Siswa');
     }
-
+    
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroyMultiple(Request $request)
     {
-        //
+        // Validate the request to ensure at least one NIS is provided
+        $request->validate([
+            'nis' => 'required|array',
+            'nis.*' => 'exists:data_siswa,nis', // Ensure each NIS exists in the database
+        ]);
+    
+        // Delete the students with the specified NIS
+        DataSiswa::whereIn('nis', $request->nis)->delete();
+    
+        return redirect()->route('Siswa')->with('success', 'Siswa yang dipilih berhasil dihapus.');
     }
+    
+
 }

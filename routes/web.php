@@ -63,4 +63,5 @@ Route::get('/siswa/create', [DataSiswaController::class, 'create'])->name('Tamba
 Route::PUT('/siswa/store', [DataSiswaController::class, 'store'])->name('SiswaStore');
 Route::get('/siswa/edit/{id}', [DataSiswaController::class, 'edit'])->name('SiswaEdit');
 Route::PUT('/siswa/update/{id}', [DataSiswaController::class, 'update'])->name('SiswaUpdate');
-// Route::PUT('/siswa/store', [DataSiswaController::class, 'store'])->name('SiswaStore');
+Route::get('/siswa/hapus/{id}', [DataSiswaController::class, 'destroy'])->name('SiswaHapus');
+Route::post('/siswa/hapus-multiple', [DataSiswaController::class, 'destroyMultiple'])->name('SiswaHapusMultiple');
