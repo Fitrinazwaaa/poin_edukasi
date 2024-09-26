@@ -60,6 +60,14 @@ p.text-center {
     
 }
 
+.form-row .positif {
+    margin-left: 100px;
+}
+
+.form-row .negatif {
+    margin-left: 50px;
+}
+
 .form-row div label {
     font-size: 14px;
     color: #333;
@@ -97,4 +105,20 @@ button.btn-dua {
 
 button.btn-dua:hover{
     background-color: #336fa3;   
+}
+
+.keterangan {
+    display: flex; /* Mengatur dropdown pada satu baris */
+    gap: 10px; /* Jarak antara dropdown */
+}
+
+select.kategori-satu,
+select.kategori-dua {
+    margin-left: 60px;
+    border: 1px solid #ccc;
+    width: 450px; /* Lebar dropdown */
+    border-radius: 4px;
+    font-size: 14px;
+    padding: 8px 10px; /* Padding dalam dropdown */
+    box-sizing: border-box; /* Agar padding dan border dihitung dalam lebar elemen */
 }

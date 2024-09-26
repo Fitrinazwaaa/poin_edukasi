@@ -9,19 +9,25 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('data_siswas', function (Blueprint $table) {
+        Schema::create('data_poin_negatif', function (Blueprint $table) {
             $table->id();
+            $table->string('np');
+            $table->integer('id_poin');
+            $table->integer('poin');
+            $table->string('kategori');  // Mengubah kategori menjadi string untuk konsistensi
             $table->timestamps();
         });
     }
+    
+
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('data_siswas');
+        Schema::dropIfExists('data_poin_negatif');
     }
 };

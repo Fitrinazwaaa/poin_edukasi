@@ -24,6 +24,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/role/user_osis', [Admin_Controller::class, 'user2'])->name('OsisPage');
     Route::get('/role/user_edit', [Admin_Controller::class, 'user_edit'])->name('GuruPage');
     Route::get('/logout', [Koneksi_Controller::class, 'logout']);
+    Route::get('/form', [PoinController::class, 'create']);
+Route::post('/form', [PoinController::class, 'store'])->name('submitPoin');
 });
 
 
