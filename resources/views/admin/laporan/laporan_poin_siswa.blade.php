@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{ asset('css/admin/laporan/laporan_poin_siswa.css') }}">
 </head>
 <body>
-    @extends('navbar/nav-utama')
+    @extends('navbar/nav-form')
     <table class="table table-bordered">
         <thead>
             <tr>
