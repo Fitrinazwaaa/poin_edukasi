@@ -2,6 +2,7 @@ body {
   font-family: Arial, sans-serif;
   background-color: #C0E2FF;
   /* margin-top: 50px; */
+  padding-top: 100px;
   overflow-x: hidden;
 }
 
@@ -27,6 +28,8 @@ body {
 .tambah:hover {
   background-color: #dada5d; /* Warna saat di-hover */
 }
+
+
 
 /* TABLE STYLES */
 .table-wrapper3 {
@@ -57,6 +60,12 @@ table tbody tr:hover {
 
 
 /* TIPE POIN */
+.tipe-poin{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .tipe-poin .tipe {
   display: flex;
   justify-content: center;
@@ -102,28 +111,26 @@ table tbody tr:hover {
 }
 
 /* Add Button */
-.tambah {
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 10px 20px;
-  font-size: 13px;
+.btn.btn-primary{
+  color: black;
   font-weight: 600;
-  cursor: pointer;
   border: none;
-  border-radius: 8px;
   background-color: #FFFF00;
   transition: background-color 0.3s ease, transform 0.2s ease;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.tambah:hover {
+.btn.btn-primary:hover {
+  font-weight: 600;
+  color: black;
   background-color: #dada5d;
   transform: scale(1.05);
 }
 
+
 /* Delete Button */
 .icon-btn.delete-btn {
+  margin-left: 190px;
   align-items: center;
   justify-content: center;
   padding: 10px 15px;
@@ -139,5 +146,77 @@ table tbody tr:hover {
 
 .icon-btn.delete-btn:hover {
   background-color: #cd3f35;
+  transform: scale(1.05);
+}
+
+
+
+.table-wrapper1 {
+  /* margin-top: 10px; */
+  width: 60%;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  /* border-collapse: collapse; */
+  background-color: white;
+}
+
+th, td {
+  padding: 8px 12px;
+  text-align: left;
+  font-size: 14px;
+  /* border-color: #96D4D4; */
+}
+
+table tbody tr{
+  border: 1px solid #dcefff;
+}
+
+table tbody tr:hover {
+  background-color: #f9fcff;
+}
+
+th {
+  background-color: #dcefff;
+  color: black;
+  position: sticky;
+  top: 0;
+  font-weight: 500;
+  z-index: 2;
+  border: none;
+}
+
+.scroll-container {
+  margin: 10px auto;
+  width: 700px;
+  border: 3px solid #dcefff;
+}
+
+.scrollable-table1 {
+  height: 410px; /* Mengatur tinggi maksimal tabel */
+  width: 100%; /* Membuat kedua tabel berbagi lebar yang sama */
+}
+
+.icon-btn.edit-btn {
+  display: flex;
+  /* justify-content: center;
+  align-items: center; */
+  padding: 11px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  text-align: center;
+  margin: 5px auto;
+  background-color: #2196F3;
+  color: white;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Menambahkan bayangan */
+}
+
+.icon-btn.edit-btn:hover {
+  background-color: #328cd6;
   transform: scale(1.05);
 }

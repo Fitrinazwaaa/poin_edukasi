@@ -16,38 +16,42 @@
     <div class="container">
         <div class="form-row">
             <label for="tipe_poin">Tipe Poin</label>
-            <div>
-                <label><input type="checkbox" class="positif" style="margin-right: 10px;" id="poin_positif" name="type" value="positive"> Positif</label>
-                <label><input type="checkbox" class="negatif" style="margin-right: 10px;" id="poin_negatif" name="type" value="negative"> Negatif</label>
+            <div class="positif_negatif">
+                <label>
+                    <input type="checkbox" class="positif" id="poin_positif" name="type" value="positive"> Positif
+                </label>
+                <label>
+                    <input type="checkbox" class="negatif" id="poin_negatif" name="type" value="negative"> Negatif
+                </label>
             </div>
         </div>
 
-            <div class="form-row">
-                <label for="nama">Id Poin</label>
-                <input type="text" name="id_poin" class="form-control" >
-            </div>
-            
-            <div class="form-row">
-                <label for="nama">Nama Pelanggaran</label>
-                <input type="text" name="np" class="form-control" >
-            </div>
+        <div class="form-row">
+            <label for="id_poin">Id Poin</label>
+            <input type="text" name="id_poin" class="form-control" >
+        </div>
+        
+        <div class="form-row">
+            <label for="np">Nama Pelanggaran</label>
+            <input type="text" name="np" class="form-control" >
+        </div>
 
-            <div class="form-row">
-                <label for="nama">Poin</label>
-                <input type="text" name="poin" class="form-control" >
-            </div>
+        <div class="form-row">
+            <label for="poin">Poin</label>
+            <input type="text" name="poin" class="form-control" >
+        </div>
 
-            <div class="form-row">
-                <label for="kategori" >Kategori</label>
-                <select id="kategori" name="kategori" class="form-control">
-                    <!-- Options will be dynamically filled -->
-                </select>
-            </div>
+        <div class="form-row">
+            <label for="kategori" >Kategori</label>
+            <select id="kategori" name="kategori" class="form-control">
+                <!-- Options will be dynamically filled -->
+            </select>
+        </div>
 
-            <div class="button-group">
-                <button type="button" class="btn-dua" onclick="window.location.href='{{ route('TipePoinSiswa') }}';">Kembali</button>
-               <button type="submit" class="btn-dua">Submit</button>
-            </div>
+        <div class="button-group">
+            <button type="button" class="btn-dua" onclick="window.location.href='{{ route('TipePoinSiswa') }}';">Kembali</button>
+            <button type="submit" class="btn-satu" >Kirim</button>
+        </div>
     </div>
 
 </form>
