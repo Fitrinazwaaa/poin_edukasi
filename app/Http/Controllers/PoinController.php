@@ -15,8 +15,10 @@ class PoinController extends Controller
     // ////////
     public function index()
     {
-        $poinPositif = DataPoinPositif::all();
-        $poinNegatif = DataPoinNegatif::all(); 
+        $poinNegatif = DataPoinNegatif::orderBy('kategori', 'asc')->get();
+    
+        // Mengambil dan mengurutkan data poin positif berdasarkan kategori
+        $poinPositif = DataPoinPositif::orderBy('kategori', 'asc')->get();
         $poinPeringatan = PoinPeringatan::all(); 
         return view('admin.poin.halaman_poin', compact('poinPositif', 'poinNegatif', 'poinPeringatan')); // Mengirim kedua variabel
     }
@@ -113,5 +115,4 @@ class PoinController extends Controller
 
         return redirect()->back()->with('success', 'Poin yang dipilih berhasil dihapus.');
     }
-
 }

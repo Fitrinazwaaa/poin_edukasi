@@ -196,8 +196,9 @@ th {
 }
 
 .scrollable-table1 {
-  height: 410px; /* Mengatur tinggi maksimal tabel */
-  width: 100%; /* Membuat kedua tabel berbagi lebar yang sama */
+  max-height: 380px; /* Tentukan tinggi maksimal yang diizinkan sebelum scroll muncul */
+  overflow-y: auto; /* Pastikan scroll hanya muncul secara vertikal */
+  width: 100%; /* Memastikan tabel memenuhi lebar container */
 }
 
 .icon-btn.edit-btn {
