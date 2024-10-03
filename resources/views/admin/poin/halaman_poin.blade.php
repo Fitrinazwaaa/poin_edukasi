@@ -121,90 +121,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Teguran lisan</td>
-                        <td>&gt;=12</td>
-                        <td>
-                            <button class="icon-btn edit-btn" onclick="window.location.href='{{ route('EditPoin') }}';">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Peringatan tertulis</td>
-                        <td>&gt;=8</td>
-                        <td>
-                            <button class="icon-btn edit-btn" onclick="window.location.href='{{ route('EditPoin') }}';">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Peringatan tertulis disampaikan kepada orang tua</td>
-                        <td>&gt;=22</td>
-                        <td>
-                            <button class="icon-btn edit-btn" onclick="window.location.href='{{ route('EditPoin') }}';">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Pemanggilan orang tua</td>
-                        <td>&gt;=50</td>
-                        <td>
-                            <button class="icon-btn edit-btn" onclick="window.location.href='{{ route('EditPoin') }}';">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Siswa dan orang tua membuat surat perjanjian bermaterai</td>
-                        <td>&gt;=75</td>
-                        <td>
-                            <button class="icon-btn edit-btn" onclick="window.location.href='{{ route('EditPoin') }}';">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>Siswa di skors selama 3 hari</td>
-                        <td>&gt;=100</td>
-                        <td>
-                            <button class="icon-btn edit-btn" onclick="window.location.href='{{ route('EditPoin') }}';">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>7</td>
-                        <td>Siswa di skors selama 6 hari</td>
-                        <td>&gt;=135</td>
-                        <td>
-                            <button class="icon-btn edit-btn" onclick="window.location.href='{{ route('EditPoin') }}';">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>8</td>
-                        <td>Siswa dikembalikan kepada orang tua</td>
-                        <td>&gt;=200</td>
-                        <td>
-                            <button class="icon-btn edit-btn" onclick="window.location.href='{{ route('EditPoin') }}';">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                        </td>
-                    </tr>
+                    @foreach ($poinPeringatan as $peringatan)
+                        <tr>
+                            <td>{{ $loop-> iteration }}</td>
+                            <td>{{ $peringatan-> peringatan }}</td>
+                            <td>>={{ $peringatan-> max_poin }}</td>
+                            <td>
+                                <!-- <a href="{{ route('poinEdit', $peringatan->id_peringatan) }}" class="btn btn-warning">Edit</a> -->
+                                <button class="icon-btn edit-btn" onclick="window.location.href='{{ route('poinEdit', $peringatan->id_peringatan) }}';"><i class="fas fa-edit"></i></button>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
     </div>
+
     <script>
 function showTable(type) {
     // Sembunyikan semua tabel

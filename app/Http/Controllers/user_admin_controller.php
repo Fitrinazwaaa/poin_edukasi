@@ -31,25 +31,9 @@ class user_admin_controller extends Controller
     }
 
 
-    public function poin1()
+    public function edit()
     {
-        return view('admin/poin/negatif');
-    }
-    public function poin2()
-    {
-        return view('admin/poin/tambah_PeringatanPoin');
-    }
-    public function poin3()
-    {
-        return view('admin/poin/tambah_poin');
-    }
-    public function poin4()
-    {
-        return view('admin/poin/halaman_poin');
-    }
-    public function poin5()
-    {
-        return view('admin/poin/positif');
+        return view('admin/poin/edit_peringatan');
     }
 
 

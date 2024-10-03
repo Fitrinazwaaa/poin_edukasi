@@ -33,11 +33,7 @@ Route::get('/akun_guru', [user_admin_controller::class, 'pengaturan_akun2'])->na
 Route::get('/akun_kesiswaan', [user_admin_controller::class, 'pengaturan_akun3'])->name('AkunKesiswaan');
 Route::get('/akun_osis', [user_admin_controller::class, 'pengaturan_akun4'])->name('AkunOsis');
 
-Route::get('/poin/negatif', [user_admin_controller::class, 'poin1'])->name('Negatif');
-Route::get('/tambah_peringatan', [user_admin_controller::class, 'poin2'])->name('TambahPeringatan');
-// Route::get('/tambah_poin', [user_admin_controller::class, 'poin3'])->name('Tambah_Poin');
-// Route::get('/halamanPoin', [user_admin_controller::class, 'poin4'])->name('HalamanPoin');
-// Route::get('/poin/positif', [user_admin_controller::class, 'poin5'])->name('Positif');
+Route::get('/poin/ubah', [user_admin_controller::class, 'edit']);
 
 Route::get('/siswapoin', [user_admin_controller::class, 'poin_siswa1'])->name('PoinSiswa');
 Route::get('/siswapoin/type', [user_admin_controller::class, 'poin_siswa2'])->name('TipePoinSiswa');
@@ -56,11 +52,9 @@ Route::get('/notifikasi8', [user_admin_controller::class, 'notifikasi8'])->name(
 Route::get('/poin', [PoinController::class, 'index'])->name('HalamanPoin');
 Route::get('/poin/create', [PoinController::class, 'create'])->name('Tambah_Poin');
 Route::post('/poin/store', [PoinController::class, 'store'])->name('submitPoin');
-Route::get('/poin/edit/{id}', [PoinController::class, 'edit'])->name('EditPoin');
+Route::get('/poin/edit/{id}', [PoinController::class, 'edit'])->name('poinEdit');
+Route::PUT('/poin/update/{id}', [PoinController::class, 'update'])->name('poinUpdate');
 Route::delete('/poin/hapus-multiple', [PoinController::class, 'destroy'])->name('PoinHapusMultiple');
-Route::put('/poin/update/{id}', [PoinController::class, 'update'])->name('UpdatePoin');
-
-
 
 
 Route::get('/siswa', [DataSiswaController::class, 'index'])->name('Siswa');
@@ -68,5 +62,4 @@ Route::get('/siswa/create', [DataSiswaController::class, 'create'])->name('Tamba
 Route::PUT('/siswa/store', [DataSiswaController::class, 'store'])->name('SiswaStore');
 Route::get('/siswa/edit/{id}', [DataSiswaController::class, 'edit'])->name('SiswaEdit');
 Route::PUT('/siswa/update/{id}', [DataSiswaController::class, 'update'])->name('SiswaUpdate');
-// Route::get('/siswa/hapus/{id}', [DataSiswaController::class, 'destroy'])->name('SiswaHapus');
 Route::post('/siswa/hapus-multiple', [DataSiswaController::class, 'destroyMultiple'])->name('SiswaHapusMultiple');
