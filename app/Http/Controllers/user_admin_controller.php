@@ -37,24 +37,6 @@ class user_admin_controller extends Controller
     }
 
 
-    public function poin_siswa1()
-    {
-        return view('admin/poin_siswa/SiswaPoin');
-    }
-    public function poin_siswa2()
-    {
-        return view('admin/poin_siswa/pilihTipe_poin_siswa');
-    }
-    public function poin_siswa3()
-    {
-        return view('admin/poin_siswa/tambahNama_siswa_poin');
-    }
-    public function poin_siswa4()
-    {
-        return view('admin/poin_siswa/tambahNis_siswa_poin');
-    }
-
-
     public function notifikasi1()
     {
         return view('admin/poin_siswa/notifikasi/PemanggilanOrangTua');

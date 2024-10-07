@@ -69,149 +69,26 @@
                                     <th>NAMA</th>
                                     <th>JENIS <br> KELAMIN</th>
                                     <th>KELAS</th>
-                                    <th>JURUSAN</th>
                                     <th>NEGATIF</th>
                                     <th>POSITIF</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach($dataSiswa as $siswa)
                                 <tr>
-                                    <td>1</td>
-                                    <td>222310392</td>
-                                    <td class="align-left">Alinda Eka Yuniarti</td>
-                                    <td><div class="gender-box female">P</div></td>
-                                    <td>12 RPL 3</td>
-                                    <td>Rekayasa Perangkat Lunak</td>
-                                    <td>10</td>
-                                    <td>20</td>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $siswa->nis }}</td>
+                                    <td>{{ $siswa->nama }}</td>
+                                    <td>{{ $siswa->jenis_kelamin }}</td>
+                                    <td>{{ $siswa->kelas }}</td>
+                                    <td>{{ $siswa->total_poin_negatif }}</td>
+                                    <td>{{ $siswa->total_poin_positif }}</td>
                                     <td>
                                         <button class="add-btn">View More</button>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>222310393</td>
-                                    <td class="align-left">Andi Rahmat</td>
-                                    <td><div class="gender-box male">L</div></td>
-                                    <td>12 RPL 2</td>
-                                    <td>Rekayasa Perangkat Lunak</td>
-                                    <td>15</td>
-                                    <td>25</td>
-                                    <td>
-                                        <button class="add-btn">View More</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="tabel">
-            <input type="checkbox" id="dropdown2">
-            <label class="btn-toggle" for="dropdown2">
-                ANGKATAN TAHUN 2022 - 2023
-            </label>
-            <div class="collapse-content" id="content2">
-                <div class="card card-body">
-                    <div class="table-wrapper">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>NO</th>
-                                    <th>NIS</th>
-                                    <th>NAMA</th>
-                                    <th>JENIS <br> KELAMIN</th>
-                                    <th>KELAS</th>
-                                    <th>JURUSAN</th>
-                                    <th>NEGATIF</th>
-                                    <th>POSITIF</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>222310392</td>
-                                    <td class="align-left">Alinda Eka Yuniarti</td>
-                                    <td><div class="gender-box female">P</div></td>
-                                    <td>12 RPL 3</td>
-                                    <td>Rekayasa Perangkat Lunak</td>
-                                    <td>10</td>
-                                    <td>20</td>
-                                    <td>
-                                        <button class="add-btn">View More</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>222310393</td>
-                                    <td class="align-left">Andi Rahmat</td>
-                                    <td><div class="gender-box male">L</div></td>
-                                    <td>12 RPL 2</td>
-                                    <td>Rekayasa Perangkat Lunak</td>
-                                    <td>15</td>
-                                    <td>25</td>
-                                    <td>
-                                        <button class="add-btn">View More</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="tabel">
-            <input type="checkbox" id="dropdown3">
-            <label class="btn-toggle" for="dropdown3">
-                ANGKATAN TAHUN 2021 - 2022
-            </label>
-            <div class="collapse-content" id="content3">
-                <div class="card card-body">
-                    <div class="table-wrapper">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>NO</th>
-                                    <th>NIS</th>
-                                    <th>NAMA</th>
-                                    <th>JENIS <br> KELAMIN</th>
-                                    <th>KELAS</th>
-                                    <th>JURUSAN</th>
-                                    <th>NEGATIF</th>
-                                    <th>POSITIF</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>222310392</td>
-                                    <td class="align-left">Alinda Eka Yuniarti</td>
-                                    <td><div class="gender-box female">P</div></td>
-                                    <td>12 RPL 3</td>
-                                    <td>Rekayasa Perangkat Lunak</td>
-                                    <td>10</td>
-                                    <td>20</td>
-                                    <td>
-                                        <button class="add-btn">View More</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>222310393</td>
-                                    <td class="align-left">Andi Rahmat</td>
-                                    <td><div class="gender-box male">L</div></td>
-                                    <td>12 RPL 2</td>
-                                    <td>Rekayasa Perangkat Lunak</td>
-                                    <td>15</td>
-                                    <td>25</td>
-                                    <td>
-                                        <button class="add-btn">View More</button>
-                                    </td>
-                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

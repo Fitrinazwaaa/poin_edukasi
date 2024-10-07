@@ -10,7 +10,41 @@
 <body class="body">
     @extends('navbar/nav-form')
 
-    <p class="text-center">FORMULIR INPUT POIN DENGAN NIS</p>
+    @section('content')
+<div class="container">
+    <h1>Tambah Poin Siswa</h1>
+
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    <form action="{{ route('StoreNisPoinSiswa') }}" method="POST">
+        @csrf
+
+        <div class="form-group">
+            <label for="nis">NIS</label>
+            <input type="text" name="nis" id="nis" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="tipe_poin">Tipe Poin</label><br>
+            <input type="checkbox" name="tipe_poin[]" value="positif"> Positif
+            <input type="checkbox" name="tipe_poin[]" value="negatif"> Negatif
+        </div>
+
+        <div class="form-group">
+            <label for="keterangan">Keterangan</label>
+            <input type="text" name="keterangan" id="keterangan" class="form-control" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Tambah Poin</button>
+    </form>
+</div>
+@endsection
+
+    <!-- <p class="text-center">FORMULIR INPUT POIN DENGAN NIS</p>
     <div class="container">
         <form>
             <div class="form-row">
@@ -40,7 +74,7 @@
                 <button type="button" class="btn-satu" onclick="window.location.href='{{ route('TambahNamaPoinSiswa') }}';">Kirim</button>
             </div>
         </form>
-    </div>
+    </div> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

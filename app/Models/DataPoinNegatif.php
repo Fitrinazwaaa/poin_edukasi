@@ -9,4 +9,10 @@ class DataPoinNegatif extends Model
 {
     protected $table='data_poin_negatif';
     protected $guarded=[];
+    protected $primaryKey = 'id_poin';
+
+    public function siswa()
+    {
+        return $this->belongsTo(DataSiswa::class, 'np', 'nis');
+    }
 }
