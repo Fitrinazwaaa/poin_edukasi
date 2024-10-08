@@ -31,7 +31,7 @@
                 Pemanggilan Orang Tua
                 <span class="notification-count">4</span>
             </button>
-            <button class="notification-btn">
+            <button class="notification-btn" onclick="window.location.href='{{ route('suratPerjanjian') }}'">
                 Surat Perjanjian Bermaterai
                 <span class="notification-count">1</span>
             </button>
@@ -82,8 +82,8 @@
                                     <td>{{ $siswa->nama }}</td>
                                     <td>{{ $siswa->jenis_kelamin }}</td>
                                     <td>{{ $siswa->kelas }}</td>
-                                    <td>{{ $siswa->total_poin_negatif }}</td>
-                                    <td>{{ $siswa->total_poin_positif }}</td>
+                                    <td>{{ $siswa->poin_negatif }}</td>
+                                    <td>{{ $siswa->poin_positif }}</td>
                                     <td>
                                         <button class="add-btn">View More</button>
                                     </td>

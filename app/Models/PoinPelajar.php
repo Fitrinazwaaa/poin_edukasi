@@ -7,10 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class PoinPelajar extends Model
 {
-    protected $table = 'poin_pelajar';
-
-    public function siswa()
-    {
-        return $this->belongsTo(DataSiswa::class, 'nis', 'nis');
-    }
+    protected $table = 'poin_pelajar'; // Pastikan ini sesuai dengan nama tabel di database
+    protected $guarded=[];
 }

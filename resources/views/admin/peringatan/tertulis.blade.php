@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PERINGATAN TERTULIS</title>
-    <link rel="stylesheet" href="{{ asset('css/style-teguran.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/notifikasi-peringatan.css') }}">
 </head>
 <body>
     

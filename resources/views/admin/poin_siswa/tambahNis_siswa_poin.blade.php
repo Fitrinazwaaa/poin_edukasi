@@ -35,8 +35,8 @@
         </div>
 
         <div class="form-group">
-            <label for="keterangan">Keterangan</label>
-            <input type="text" name="keterangan" id="keterangan" class="form-control" required>
+            <label for="np">np</label>
+            <input type="text" name="np" id="np" class="form-control" required>
         </div>
 
         <button type="submit" class="btn btn-primary">Tambah Poin</button>
@@ -61,8 +61,8 @@
             </div>
 
             <div class="form-row">
-                <label for="keterangan">Keterangan</label>
-                <select name="keterangan" class="form-control">
+                <label for="np">np</label>
+                <select name="np" class="form-control">
                     <option value="" disabled selected>Pilih Jenis Peraturan</option>
                     <option value="101">Senin-Selasa tidak berpakaian PSAS (baju putih-celana/rok abu), “kerudung putih” bagi perempuan</option>
                     <option value="102">Senin-Selasa tidak berkaos kaki putih</option>

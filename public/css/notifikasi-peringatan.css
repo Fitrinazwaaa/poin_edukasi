@@ -1,0 +1,94 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f3f4f6;
+    margin: 0;
+    padding: 0;
+}
+
+/* Mengatur teks judul */
+h2.text-center {
+    margin-top: 120px;
+    text-align: center;
+    color: #180853;
+    margin-bottom: 50px;
+}
+
+/* Mengatur teks judul */
+h4.text-center {
+    margin-top: -20px;
+    text-align: center;
+    color: #180853;
+    margin-bottom: 50px;
+}
+
+.card_pink {
+    background-color: #ffe0f0; /* Warna latar belakang pink muda */
+    border-radius: 10px; /* Sudut melengkung */
+    padding: 30px; /* Ruang di dalam card */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Bayangan halus */
+    max-width: 750px; /* Lebar maksimum card */
+    margin: 30px auto; /* Margin otomatis untuk sentralisasi */
+    font-family: 'Arial', sans-serif; /* Jenis font */
+    border-left: 8px solid #D30089;
+}
+
+.card_pink h3 {
+    color: #D30089; /* Warna teks judul */
+    margin: 0; /* Menghilangkan margin default */
+    margin-bottom: -20px;
+}
+
+.card_pink p {
+    color: #333; /* Warna teks */
+    margin: 5px 0;
+}
+
+.card_pink .right {
+    text-align: right; /* Mengatur teks ke kanan */
+}
+.card_pink .bottom {
+    margin-top: -25px;
+}
+
+.pink-hr {
+    border: none; /* Menghilangkan garis default */
+    height: 3px; /* Tinggi garis */
+    background-color: #D30089; /* Warna garis */
+    margin: 20px 0; /* Margin atas dan bawah untuk garis */
+}
+
+.card_blue{
+    background-color: #dce6ff; /* Warna latar belakang pink muda */
+    border-radius: 10px; /* Sudut melengkung */
+    padding: 30px; /* Ruang di dalam card */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Bayangan halus */
+    max-width: 750px; /* Lebar maksimum card */
+    margin: 30px auto; /* Margin otomatis untuk sentralisasi */
+    font-family: 'Arial', sans-serif; /* Jenis font */
+    border-left: 8px solid #0579DE;
+}
+
+.card_blue h3 {
+    color: #0579DE; /* Warna teks judul */
+    margin: 0; /* Menghilangkan margin default */
+    margin-bottom: -20px;
+} 
+
+.card_blue p {
+    color: #333; /* Warna teks */
+    margin: 5px 0;
+}
+
+.card_blue .right {
+    text-align: right; /* Mengatur teks ke kanan */
+}
+.card_blue .bottom {
+    margin-top: -25px;
+}
+
+.blue-hr {
+    border: none; /* Menghilangkan garis default */
+    height: 3px; /* Tinggi garis */
+    background-color: #0579DE; /* Warna garis */
+    margin: 20px 0; /* Margin atas dan bawah untuk garis */
+}

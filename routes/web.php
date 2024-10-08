@@ -44,6 +44,9 @@ Route::get('/siswapoin/search-form1', [PoinPelajarController::class, 'searchSisw
 Route::get('/siswapoin/create-form2', [PoinPelajarController::class, 'createFormTwo'])->name('TambahNisPoinSiswa');
 Route::post('/siswapoin/store-form2', [PoinPelajarController::class, 'storeFormTwo'])->name('StoreNisPoinSiswa');
 
+Route::get('/surat-perjanjian', [PoinPelajarController::class, 'showSuratPerjanjian'])->name('suratPerjanjian');
+
+
 
 Route::get('/notifikasi1', [user_admin_controller::class, 'notifikasi1'])->name('PemanggilanOrangTua');
 Route::get('/notifikasi2', [user_admin_controller::class, 'notifikasi2'])->name('PeringatanTertulis');

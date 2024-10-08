@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SISWA DISKOR SELAMA 6 HARI</title>
-    <link rel="stylesheet" href="{{ asset('css/style-teguran.css') }}">
+    <title>SISWA DISKOR SELAMA 3 HARI</title>
+    <link rel="stylesheet" href="{{ asset('css/notifikasi-peringatan.css') }}">
 </head>
 <body>
     
-<h2 class="text-center">SISWA DISKOR SELAMA 6 HARI</h2>
-<h4 class="text-center">Poin >= 135</h4>
+<h2 class="text-center">SISWA DISKOR SELAMA 3 HARI</h2>
+<h4 class="text-center">Poin >= 100</h4>
     <div class="card pink">
         <div class="left">
             <h3>Nazla Agustina</h3>
@@ -19,7 +19,7 @@
         <div class="right">
             <p>12 RPL 2</p>
             <br>
-            <p>Poin 135</p>
+            <p>Poin 100</p>
         </div>
     </div>
 
@@ -32,7 +32,7 @@
         <div class="right">
             <p>10 TKJT 1</p>
             <br>
-            <p>Poin 198</p>
+            <p>Poin 122</p>
         </div>
     </div>
 
@@ -45,7 +45,7 @@
         <div class="right">
             <p>12 RPL 2</p>
             <br>
-            <p>Poin 170</p>
+            <p>Poin 113</p>
         </div>
     </div>
 
@@ -58,7 +58,7 @@
         <div class="right">
             <p>10 MP 2</p>
             <br>
-            <p>Poin 164</p>
+            <p>Poin 130</p>
         </div>
     </div>
     

@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('poin_pelajar', function (Blueprint $table) {
             $table->id();
-            $table->string('nis'); // NIS siswa sebagai foreign key
+            $table->string('nis'); // NIS sebagai primary key
+            $table->string('nama'); // Nama siswa
+            $table->enum('jenis_kelamin', ['Laki-laki', 'Perempuan']); // Jenis kelamin
+            $table->string('kelas'); // Kolom gabungan kelas (tingkatan jurusan kelas)
             $table->integer('poin_positif')->default(0); // Poin positif
             $table->integer('poin_negatif')->default(0); // Poin negatif
-            $table->foreign('nis')->references('nis')->on('data_siswa')->onDelete('cascade'); // Foreign key
             $table->timestamps();
         });
     }
