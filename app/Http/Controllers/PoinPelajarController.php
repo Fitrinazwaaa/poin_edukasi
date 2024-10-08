@@ -15,9 +15,33 @@ class PoinPelajarController extends Controller
     {
         // Mengambil data siswa dari tabel poin_pelajar yang sudah menyimpan total poin positif dan negatif
         $dataSiswa = PoinPelajar::all();
+        
     
-        return view('admin.poin_siswa.SiswaPoin', compact('dataSiswa'));
-    }    
+        // Mengambil poin peringatan
+        $poinPeringatans = PoinPeringatan::whereIn('id_peringatan', range(1, 8))->get();
+    
+        // Memastikan bahwa semua poin peringatan ditemukan
+        if ($poinPeringatans->count() < 8) {
+            return redirect()->back()->with('error', 'Poin peringatan tidak ditemukan.');
+        }
+    
+        // Menghitung jumlah notifikasi untuk setiap kategori
+        $jumlahNotifikasi = [];
+        foreach ($poinPeringatans as $index => $poinPeringatan) {
+            $nextPoin = isset($poinPeringatans[$index + 1]) ? $poinPeringatans[$index + 1]->max_poin : null;
+            $maxPoin = $poinPeringatan->max_poin;
+    
+            if ($nextPoin) {
+                $jumlahNotifikasi[] = PoinPelajar::whereBetween('poin_negatif', [$maxPoin, $nextPoin])->count();
+            } else {
+                $jumlahNotifikasi[] = PoinPelajar::where('poin_negatif', '>', $maxPoin)->count();
+            }
+        }
+    
+        // Mengirim data siswa dan jumlah notifikasi ke view
+        return view('admin.poin_siswa.SiswaPoin', compact('dataSiswa', 'jumlahNotifikasi'));
+    }
+    
 
     public function poin_siswa_type()
     {
@@ -86,7 +110,7 @@ class PoinPelajarController extends Controller
         // Simpan perubahan
         $poinPelajar->save();
     
-        return redirect()->route('TambahNamaPoinSiswa')->with('success', 'Poin siswa berhasil ditambahkan.');
+        return redirect()->route('PoinSiswa')->with('success', 'Poin siswa berhasil ditambahkan.');
     }    
     
     public function createFormTwo()
@@ -137,23 +161,163 @@ class PoinPelajarController extends Controller
         // Simpan perubahan
         $poinPelajar->save();
     
-        return redirect()->route('TambahNisPoinSiswa')->with('success', 'Poin siswa berhasil ditambahkan.');
+        return redirect()->route('PoinSiswa')->with('success', 'Poin siswa berhasil ditambahkan.');
     }    
     
-    public function showSuratPerjanjian()
+    public function notifikasi1()
     {
-        // Ambil data siswa dari tabel poin_pelajar yang memiliki poin negatif >= 75
-        $dataSiswa = PoinPelajar::where('poin_negatif', '>=', 75)->get();
-        $poinPeringatan1 = PoinPeringatan::where('id_peringatan', '1')->get();
-        $poinPeringatan2 = PoinPeringatan::where('id_peringatan', '2')->get();
-        $poinPeringatan3 = PoinPeringatan::where('id_peringatan', '3')->get();
-        $poinPeringatan4 = PoinPeringatan::where('id_peringatan', '4')->get();
-        $poinPeringatan5 = PoinPeringatan::where('id_peringatan', '5')->get();
-        $poinPeringatan6 = PoinPeringatan::where('id_peringatan', '6')->get();
-        $poinPeringatan7 = PoinPeringatan::where('id_peringatan', '7')->get();
-        $poinPeringatan8 = PoinPeringatan::where('id_peringatan', '8')->get();
+        // Ambil data poin peringatan dari tabel PoinPeringatan berdasarkan ID
+        $poinPeringatan1 = PoinPeringatan::where('id_peringatan', '1')->first(); // Ambil satu data dengan first()
+        $poinPeringatan2 = PoinPeringatan::where('id_peringatan', '2')->first();
     
-        // Pass dataSiswa to the view
-        return view('admin.peringatan.bermaterai', compact('dataSiswa', 'poinPeringatan1', 'poinPeringatan2', 'poinPeringatan3', 'poinPeringatan4', 'poinPeringatan5', 'poinPeringatan6', 'poinPeringatan7', 'poinPeringatan8'));
+        // Pastikan data poin peringatan ada sebelum melanjutkan
+        if ($poinPeringatan1 && $poinPeringatan2) {
+            // Ambil data siswa dari tabel poin_pelajar yang memiliki poin negatif dalam rentang max_poin
+            $dataSiswa = PoinPelajar::whereBetween('poin_negatif', [$poinPeringatan1->max_poin, $poinPeringatan2->max_poin])->get();
+        } else {
+            // Jika poin peringatan tidak ditemukan, kembalikan error atau set data kosong
+            $dataSiswa = collect(); // Collection kosong
+        }
+    
+        // Pass dataSiswa, poinPeringatan1, dan poinPeringatan2 ke view
+        return view('admin.poin_siswa.notifikasi.notifikasi1', compact('dataSiswa', 'poinPeringatan1', 'poinPeringatan2'));
     }
+    
+    public function notifikasi2()
+    {
+        // Ambil data poin peringatan dari tabel PoinPeringatan berdasarkan ID
+        $poinPeringatan2 = PoinPeringatan::where('id_peringatan', '2')->first(); // Ambil satu data dengan first()
+        $poinPeringatan3 = PoinPeringatan::where('id_peringatan', '3')->first();
+    
+        // Pastikan data poin peringatan ada sebelum melanjutkan
+        if ($poinPeringatan2 && $poinPeringatan3) {
+            // Ambil data siswa dari tabel poin_pelajar yang memiliki poin negatif dalam rentang max_poin
+            $dataSiswa = PoinPelajar::whereBetween('poin_negatif', [$poinPeringatan2->max_poin, $poinPeringatan3->max_poin])->get();
+        } else {
+            // Jika poin peringatan tidak ditemukan, kembalikan error atau set data kosong
+            $dataSiswa = collect(); // Collection kosong
+        }
+    
+        // Pass dataSiswa, poinPeringatan2, dan poinPeringatan3 ke view
+        return view('admin.poin_siswa.notifikasi.notifikasi2', compact('dataSiswa', 'poinPeringatan2', 'poinPeringatan3'));
+    }
+    
+    public function notifikasi3()
+    {
+        // Ambil data poin peringatan dari tabel PoinPeringatan berdasarkan ID
+        $poinPeringatan3 = PoinPeringatan::where('id_peringatan', '3')->first(); // Ambil satu data dengan first()
+        $poinPeringatan4 = PoinPeringatan::where('id_peringatan', '4')->first();
+    
+        // Pastikan data poin peringatan ada sebelum melanjutkan
+        if ($poinPeringatan3 && $poinPeringatan4) {
+            // Ambil data siswa dari tabel poin_pelajar yang memiliki poin negatif dalam rentang max_poin
+            $dataSiswa = PoinPelajar::whereBetween('poin_negatif', [$poinPeringatan3->max_poin, $poinPeringatan4->max_poin])->get();
+        } else {
+            // Jika poin peringatan tidak ditemukan, kembalikan error atau set data kosong
+            $dataSiswa = collect(); // Collection kosong
+        }
+    
+        // Pass dataSiswa, poinPeringatan3, dan poinPeringatan4 ke view
+        return view('admin.poin_siswa.notifikasi.notifikasi3', compact('dataSiswa', 'poinPeringatan3', 'poinPeringatan4'));
+    }
+    
+    public function notifikasi4()
+    {
+        // Ambil data poin peringatan dari tabel PoinPeringatan berdasarkan ID
+        $poinPeringatan4 = PoinPeringatan::where('id_peringatan', '4')->first(); // Ambil satu data dengan first()
+        $poinPeringatan5 = PoinPeringatan::where('id_peringatan', '5')->first();
+    
+        // Pastikan data poin peringatan ada sebelum melanjutkan
+        if ($poinPeringatan4 && $poinPeringatan5) {
+            // Ambil data siswa dari tabel poin_pelajar yang memiliki poin negatif dalam rentang max_poin
+            $dataSiswa = PoinPelajar::whereBetween('poin_negatif', [$poinPeringatan4->max_poin, $poinPeringatan5->max_poin])->get();
+        } else {
+            // Jika poin peringatan tidak ditemukan, kembalikan error atau set data kosong
+            $dataSiswa = collect(); // Collection kosong
+        }
+    
+        // Pass dataSiswa, poinPeringatan4, dan poinPeringatan5 ke view
+        return view('admin.poin_siswa.notifikasi.notifikasi4', compact('dataSiswa', 'poinPeringatan4', 'poinPeringatan5'));
+    }
+    
+    public function notifikasi5()
+    {
+        // Ambil data poin peringatan dari tabel PoinPeringatan berdasarkan ID
+        $poinPeringatan5 = PoinPeringatan::where('id_peringatan', '5')->first(); // Ambil satu data dengan first()
+        $poinPeringatan6 = PoinPeringatan::where('id_peringatan', '6')->first();
+    
+        // Pastikan data poin peringatan ada sebelum melanjutkan
+        if ($poinPeringatan5 && $poinPeringatan6) {
+            // Ambil data siswa dari tabel poin_pelajar yang memiliki poin negatif dalam rentang max_poin
+            $dataSiswa = PoinPelajar::whereBetween('poin_negatif', [$poinPeringatan5->max_poin, $poinPeringatan6->max_poin])->get();
+        } else {
+            // Jika poin peringatan tidak ditemukan, kembalikan error atau set data kosong
+            $dataSiswa = collect(); // Collection kosong
+        }
+    
+        // Pass dataSiswa, poinPeringatan5, dan poinPeringatan6 ke view
+        return view('admin.poin_siswa.notifikasi.notifikasi5', compact('dataSiswa', 'poinPeringatan5', 'poinPeringatan6'));
+    }
+    
+    public function notifikasi6()
+    {
+        // Ambil data poin peringatan dari tabel PoinPeringatan berdasarkan ID
+        $poinPeringatan6 = PoinPeringatan::where('id_peringatan', '6')->first(); // Ambil satu data dengan first()
+        $poinPeringatan7 = PoinPeringatan::where('id_peringatan', '7')->first();
+    
+        // Pastikan data poin peringatan ada sebelum melanjutkan
+        if ($poinPeringatan6 && $poinPeringatan7) {
+            // Ambil data siswa dari tabel poin_pelajar yang memiliki poin negatif dalam rentang max_poin
+            $dataSiswa = PoinPelajar::whereBetween('poin_negatif', [$poinPeringatan6->max_poin, $poinPeringatan7->max_poin])->get();
+        } else {
+            // Jika poin peringatan tidak ditemukan, kembalikan error atau set data kosong
+            $dataSiswa = collect(); // Collection kosong
+        }
+    
+        // Pass dataSiswa, poinPeringatan6, dan poinPeringatan7 ke view
+        return view('admin.poin_siswa.notifikasi.notifikasi6', compact('dataSiswa', 'poinPeringatan6', 'poinPeringatan7'));
+    }
+    
+    public function notifikasi7()
+    {
+        // Ambil data poin peringatan dari tabel PoinPeringatan berdasarkan ID
+        $poinPeringatan7 = PoinPeringatan::where('id_peringatan', '7')->first(); // Ambil satu data dengan first()
+        $poinPeringatan8 = PoinPeringatan::where('id_peringatan', '8')->first();
+    
+        // Pastikan data poin peringatan ada sebelum melanjutkan
+        if ($poinPeringatan7 && $poinPeringatan8) {
+            // Ambil data siswa dari tabel poin_pelajar yang memiliki poin negatif dalam rentang max_poin
+            $dataSiswa = PoinPelajar::whereBetween('poin_negatif', [$poinPeringatan7->max_poin, $poinPeringatan8->max_poin])->get();
+        } else {
+            // Jika poin peringatan tidak ditemukan, kembalikan error atau set data kosong
+            $dataSiswa = collect(); // Collection kosong
+        }
+    
+        // Pass dataSiswa, poinPeringatan7, dan poinPeringatan8 ke view
+        return view('admin.poin_siswa.notifikasi.notifikasi7', compact('dataSiswa', 'poinPeringatan7', 'poinPeringatan8'));
+    }
+    
+    public function notifikasi8()
+    {
+        // Ambil data poin peringatan dari tabel PoinPeringatan berdasarkan ID
+        $poinPeringatan8 = PoinPeringatan::where('id_peringatan', '8')->first();
+        
+        // Pastikan data poin peringatan ada sebelum melanjutkan
+        if ($poinPeringatan8) {
+            // Ambil data siswa dari tabel poin_pelajar yang memiliki poin negatif >= max_poin
+            $dataSiswa = PoinPelajar::where('poin_negatif', '>=', $poinPeringatan8->max_poin)->get();
+        } else {
+            // Jika poin peringatan tidak ditemukan, kembalikan error atau set data kosong
+            $dataSiswa = collect(); // Collection kosong
+        }
+
+        // Pass dataSiswa dan poinPeringatan8 ke view
+        return view('admin.poin_siswa.notifikasi.notifikasi8', compact('dataSiswa', 'poinPeringatan8'));
+    }
+
+    public function formulir_perbaikan()
+    {
+        return view('admin/poin_siswa.notifikasi.form_perbaikan_sikap');
+    }
+
 }

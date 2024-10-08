@@ -44,18 +44,15 @@ Route::get('/siswapoin/search-form1', [PoinPelajarController::class, 'searchSisw
 Route::get('/siswapoin/create-form2', [PoinPelajarController::class, 'createFormTwo'])->name('TambahNisPoinSiswa');
 Route::post('/siswapoin/store-form2', [PoinPelajarController::class, 'storeFormTwo'])->name('StoreNisPoinSiswa');
 
-Route::get('/surat-perjanjian', [PoinPelajarController::class, 'showSuratPerjanjian'])->name('suratPerjanjian');
-
-
-
-Route::get('/notifikasi1', [user_admin_controller::class, 'notifikasi1'])->name('PemanggilanOrangTua');
-Route::get('/notifikasi2', [user_admin_controller::class, 'notifikasi2'])->name('PeringatanTertulis');
-Route::get('/notifikasi3', [user_admin_controller::class, 'notifikasi3'])->name('PeringatanTertulisOrangtua');
-Route::get('/notifikasi4', [user_admin_controller::class, 'notifikasi4'])->name('RekomendasiKesiswaan');
-Route::get('/notifikasi5', [user_admin_controller::class, 'notifikasi5'])->name('Skors3Hari');
-Route::get('/notifikasi6', [user_admin_controller::class, 'notifikasi6'])->name('Skors6Hari');
-Route::get('/notifikasi7', [user_admin_controller::class, 'notifikasi7'])->name('PerjanjianBermaterai');
-Route::get('/notifikasi8', [user_admin_controller::class, 'notifikasi8'])->name('TeguranLisan');
+Route::get('/siswapoin/pesan/1', [PoinPelajarController::class, 'notifikasi1'])->name('pesan1');
+Route::get('/siswapoin/pesan/2', [PoinPelajarController::class, 'notifikasi2'])->name('pesan2');
+Route::get('/siswapoin/pesan/3', [PoinPelajarController::class, 'notifikasi3'])->name('pesan3');
+Route::get('/siswapoin/pesan/4', [PoinPelajarController::class, 'notifikasi4'])->name('pesan4');
+Route::get('/siswapoin/pesan/5', [PoinPelajarController::class, 'notifikasi5'])->name('pesan5');
+Route::get('/siswapoin/pesan/6', [PoinPelajarController::class, 'notifikasi6'])->name('pesan6');
+Route::get('/siswapoin/pesan/7', [PoinPelajarController::class, 'notifikasi7'])->name('pesan7');
+Route::get('/siswapoin/pesan/8', [PoinPelajarController::class, 'notifikasi8'])->name('pesan8');
+Route::get('/siswapoin/pesan/perbaikan', [PoinPelajarController::class, 'formulir_perbaikan'])->name('PerbaikanSikap');
 
 Route::get('/poin', [PoinController::class, 'index'])->name('HalamanPoin');
 Route::get('/poin/create', [PoinController::class, 'create'])->name('Tambah_Poin');

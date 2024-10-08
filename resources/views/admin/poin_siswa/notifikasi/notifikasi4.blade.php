@@ -9,10 +9,10 @@
 <body>
     @extends('navbar/nav-form')
 
-    @foreach($poinPeringatan5 as $peringatan)
-        <h2 class="text-center">{{ $peringatan->judul }}</h2>
-        <h4 class="text-center">Poin Negatif {{ $peringatan->max_poin }} @foreach($poinPeringatan6 as $peringatan) - {{ $peringatan->max_poin }} @endforeach</h4>
-    @endforeach
+    @if($poinPeringatan4 && $poinPeringatan5)
+        <h2 class="text-center">{{ $poinPeringatan4->peringatan }}</h2>
+        <p class="text-center">Poin Negatif {{ $poinPeringatan4->max_poin }} - {{ $poinPeringatan5->max_poin }} </p>
+    @endif
 
     @foreach($dataSiswa as $siswa)
         @php
@@ -22,11 +22,15 @@
         @endphp
 
         <div class="{{ $cardClass }}">
-            <h3>{{ $siswa->nama }}</h3>
-            <p class="right">{{ $siswa->kelas }}</p>
+            <h4>{{ $siswa->nama }}</h4>
+            <p class="right bottom">Poin Negatif: {{ $siswa->poin_negatif }}</p>
             <hr class="{{ $hrClass }}">
             <p>{{ $siswa->nis }}</p>
-            <p class="right bottom">Poin Negatif: {{ $siswa->poin_negatif }}</p>
+            <!-- Tambahkan container untuk kelas dan tombol -->
+            <div class="class-button-container">
+                <p class="kelas">{{ $siswa->kelas }}</p>
+                <button class="perbaikan" onclick="window.location.href='{{ route('PerbaikanSikap') }}'"> Perbaikan </button>
+            </div>
         </div>
     @endforeach
 </body>

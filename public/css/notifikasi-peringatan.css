@@ -10,51 +10,16 @@ h2.text-center {
     margin-top: 120px;
     text-align: center;
     color: #180853;
-    margin-bottom: 50px;
+    margin-bottom: 27px;
 }
 
 /* Mengatur teks judul */
-h4.text-center {
+p.text-center {
     margin-top: -20px;
+    font-weight: 500;
     text-align: center;
     color: #180853;
     margin-bottom: 50px;
-}
-
-.card_pink {
-    background-color: #ffe0f0; /* Warna latar belakang pink muda */
-    border-radius: 10px; /* Sudut melengkung */
-    padding: 30px; /* Ruang di dalam card */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Bayangan halus */
-    max-width: 750px; /* Lebar maksimum card */
-    margin: 30px auto; /* Margin otomatis untuk sentralisasi */
-    font-family: 'Arial', sans-serif; /* Jenis font */
-    border-left: 8px solid #D30089;
-}
-
-.card_pink h3 {
-    color: #D30089; /* Warna teks judul */
-    margin: 0; /* Menghilangkan margin default */
-    margin-bottom: -20px;
-}
-
-.card_pink p {
-    color: #333; /* Warna teks */
-    margin: 5px 0;
-}
-
-.card_pink .right {
-    text-align: right; /* Mengatur teks ke kanan */
-}
-.card_pink .bottom {
-    margin-top: -25px;
-}
-
-.pink-hr {
-    border: none; /* Menghilangkan garis default */
-    height: 3px; /* Tinggi garis */
-    background-color: #D30089; /* Warna garis */
-    margin: 20px 0; /* Margin atas dan bawah untuk garis */
 }
 
 .card_blue{
@@ -68,27 +33,122 @@ h4.text-center {
     border-left: 8px solid #0579DE;
 }
 
-.card_blue h3 {
+.card_blue h4 {
     color: #0579DE; /* Warna teks judul */
     margin: 0; /* Menghilangkan margin default */
-    margin-bottom: -20px;
+    margin-bottom: 8px;
 } 
 
 .card_blue p {
     color: #333; /* Warna teks */
-    margin: 5px 0;
+    margin: 0;
 }
 
 .card_blue .right {
     text-align: right; /* Mengatur teks ke kanan */
 }
 .card_blue .bottom {
-    margin-top: -25px;
+    margin-top: -30px;
+    margin-bottom: -10px;
 }
 
 .blue-hr {
     border: none; /* Menghilangkan garis default */
     height: 3px; /* Tinggi garis */
     background-color: #0579DE; /* Warna garis */
-    margin: 20px 0; /* Margin atas dan bawah untuk garis */
+    margin-bottom: 10px;}
+
+.card_blue .class-button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
+
+.card_blue .kelas {
+    margin-top: 4px;
+}
+
+.card_blue .perbaikan {
+    padding: 5px 11px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    margin-top: -15px;
+    margin-right: 5px;
+    background-color: #2196F3;
+    color: white;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.card_blue .perbaikan:hover {
+    background-color: #328cd6;
+    transform: scale(1.05);
+}
+    
+.card_pink{
+    background-color: #ffe0f0; /* Warna latar belakang pink muda */
+    border-radius: 10px; /* Sudut melengkung */
+    padding: 30px; /* Ruang di dalam card */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Bayangan halus */
+    max-width: 750px; /* Lebar maksimum card */
+    margin: 30px auto; /* Margin otomatis untuk sentralisasi */
+    font-family: 'Arial', sans-serif; /* Jenis font */
+    border-left: 8px solid #D30089;
+}
+
+.card_pink h4 {
+    color: #D30089; /* Warna teks judul */
+    margin: 0; /* Menghilangkan margin default */
+    margin-bottom: 8px;
+} 
+
+.card_pink p {
+    color: #333; /* Warna teks */
+    margin: 0;
+}
+
+.card_pink .right {
+    text-align: right; /* Mengatur teks ke kanan */
+}
+.card_pink .bottom {
+    margin-top: -30px;
+    margin-bottom: -10px;
+}
+
+.pink-hr {
+    border: none; /* Menghilangkan garis default */
+    height: 3px; /* Tinggi garis */
+    background-color: #D30089; /* Warna garis */
+    margin-bottom: 10px;}
+
+.card_pink .class-button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card_pink .kelas {
+    margin-top: 4px;
+}
+
+.card_pink .perbaikan {
+    padding: 5px 11px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    margin-top: -15px;
+    margin-right: 5px;
+    background-color: #ff1baf;
+    color: white;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.card_pink .perbaikan:hover {
+    background-color: #c83093;
+    transform: scale(1.05);
+}
+    

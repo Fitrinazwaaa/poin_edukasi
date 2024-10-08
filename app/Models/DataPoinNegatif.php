@@ -10,7 +10,6 @@ class DataPoinNegatif extends Model
     protected $table='data_poin_negatif';
     protected $guarded=[];
     protected $primaryKey = 'id_poin';
-    protected $fillable = ['np', 'poin', 'kategori'];
 
 
     public function siswa()

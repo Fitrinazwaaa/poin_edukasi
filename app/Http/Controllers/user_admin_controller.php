@@ -36,41 +36,7 @@ class user_admin_controller extends Controller
         return view('admin/poin/edit_peringatan');
     }
 
-
-    public function notifikasi1()
-    {
-        return view('admin/poin_siswa/notifikasi/PemanggilanOrangTua');
-    }
-    public function notifikasi2()
-    {
-        return view('admin/poin_siswa/notifikasi/PeringatanTertulis');
-    }
-    public function notifikasi3()
-    {
-        return view('admin/poin_siswa/notifikasi/PeringatanTertulisOrangTua');
-    }
-    public function notifikasi4()
-    {
-        return view('admin/poin_siswa/notifikasi/RekomendasiKesiswaan');
-    }
-    public function notifikasi5()
-    {
-        return view('admin/poin_siswa/notifikasi/SiswaSkors3hari');
-    }
-    public function notifikasi6()
-    {
-        return view('admin/poin_siswa/notifikasi/SiswaSkors6hari');
-    }
-    public function notifikasi7()
-    {
-        return view('admin/poin_siswa/notifikasi/SuratPerjanjianBermaterai');
-    }
-    public function notifikasi8()
-    {
-        return view('admin/poin_siswa/notifikasi/TeguranLisan');
-    }
-
-
+    
     public function siswa1()
     {
         return view('admin/siswa/edit_siswa');
