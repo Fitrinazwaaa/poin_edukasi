@@ -1,0 +1,106 @@
+/* NAVBAR-START */
+
+/* Mengatur lebar navbar offcanvas saat dalam posisi start (kiri) */
+div#offcanvasDarkNavbar.offcanvas.offcanvas-start {
+    width: 270px;
+}
+
+/* Mengatur warna latar belakang navbar offcanvas */
+.offcanvas.offcanvas-start {
+    background-color: #388DD8;
+}
+
+/* Mengatur warna latar belakang navbar bagian atas */
+.navbar {
+    background-color: #388DD8;
+    position: fixed;
+    height: 72px;
+}
+
+/* Mengatur warna teks judul navbar menjadi putih */
+.offcanvas-title {
+    color: white;
+}
+
+/* Memberi padding di sebelah kiri setiap item dalam navbar */
+li.nav-item {
+    padding-left: 20px;
+}
+
+/* Mengatur warna garis pemisah dalam menu navbar menjadi putih dan tanpa margin */
+ul hr {
+    color: white;
+    margin: 0;
+}
+
+/* Mengatur padding tautan navbar */
+a.nav-link {
+    padding:15px 0;
+}
+
+/* Mengubah tampilan item navbar saat di-hover dengan menambahkan bayangan dan mengubah warna latar belakang */
+.offcanvas ul li:hover {
+    box-shadow: 0 0.5px  5px rgba(0, 0, 0, 0.192);
+  background: #1676ca;
+  border-style: solid;
+  border-color: #ffffff;
+  border-width: 5px;
+  border-right: black;
+  border-top: black;
+  border-bottom: black;
+}
+
+/* Mengatur warna tautan navbar menjadi putih saat di-hover */
+.offcanvas ul li .nav-link:hover {
+    color: white;
+}
+
+div.satu{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+
+h5.offcanvas-title{
+    margin-left: 20px;
+}
+
+/* Menghapus padding default pada body offcanvas */
+div.offcanvas-body {
+    padding-top: 0;
+}
+
+/* Menambahkan padding bawah pada header offcanvas */
+div.offcanvas-header {
+    padding-bottom: 10px;
+}
+
+/* Mengatur warna teks di navbar kanan sama dengan 'Pengaturan Akun' */
+.navbar-nav .nav-link {
+    color: white;  /* Warna teks putih */
+    font-size: 18px; /* Ukuran teks */
+    font-weight: 400; /* Ketebalan teks */
+    margin-left: 35px; /* Jarak antara tiap item */
+    border-bottom: 3px solid transparent; /* Garis bawah transparan untuk menjaga layout */
+    padding-bottom: 5px; /* Jarak antara teks dan garis */
+}
+
+/* Mengatur hover untuk teks di bagian kanan */
+.navbar-nav .nav-link:hover {
+    color: #030303; /* Menjadi warna hitam saat di-hover */
+    text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5); /* Efek shadow */
+}
+
+
+
+/* Mengatur garis hitam di bawah teks ketika item aktif atau diklik */
+    .nav-link.active {
+        color: black; /* Ubah warna teks menjadi hitam untuk link aktif */
+        font-weight: bold; /* Tetap tebal */
+    }
+
+
+
+
+/* NAVBAR-END */

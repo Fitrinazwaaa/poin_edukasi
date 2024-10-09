@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="{{ asset('css/navbar/nav-form.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/navbar/nav-utama.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
@@ -134,13 +134,27 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation" style="margin-left:5%;">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <h5 class="offcanvas-title" style="margin-left:5%;">Bimbingan Konseling</h5>
-            <form action="" class="search-bar" style="margin-right:3%;">
-                <input type="search" name="search" pattern=".*\S.*" required>
-                <button class="search-btn" type="submit">
-                    <span>Search</span>
-                </button>
-            </form>
+            <h5 class="offcanvas-title" style="margin-left:-40%;">Pengaturan Akun</h5>
+            <!-- Bagian kanan navbar -->
+            <div class="d-flex">
+                    <h5 class="navbar-nav flex-row" style="margin-left:-20%; list-style-type: none;">
+                        <li class="nav-item" style="margin-right: 20px;">
+                            <a class="nav-link {{ request()->is('admin') ? 'active' : '' }}" href="{{ route('AkunBK') }}">ADMIN</a>
+                        </li>
+                        <li class="nav-item" style="margin-right: 20px;">
+                            <a class="nav-link {{ request()->is('kesiswaan') ? 'active' : '' }}" href="{{ route('AkunKesiswaan') }}">USER 1</a>
+                        </li>
+                        <li class="nav-item" style="margin-right: 20px;">
+                            <a class="nav-link {{ request()->is('osis') ? 'active' : '' }}" href="{{ route('AkunOsis') }}">USER 2</a>
+                        </li>
+                        <li class="nav-item" style="margin-right: 20px;">
+                            <a class="nav-link {{ request()->is('guru') ? 'active' : '' }}" href="{{ route('AkunGuru') }}">USER EDIT</a> <!-- Tambah link guru -->
+                        </li>
+                </h5>
+                </div>
+            </div>
+        </div>
+
             <div data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
                 <div class="offcanvas offcanvas-start" tabindex="-1" data-bs-backdrop="false" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
                     <div class="offcanvas-header">

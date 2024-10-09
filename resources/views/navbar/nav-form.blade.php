@@ -150,7 +150,11 @@
                         </li>
                         <hr>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="{{ route('AkunBK') }}">Pengaturan Akun</a>
+                            <a class="nav-link" aria-current="page" href="{{ route('kelas') }}">Pengaturan</a>
+                        </li>
+                        <hr>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{{ route('AkunBK') }}">Akun</a>
                         </li>
                         <hr>
                         <li class="nav-item">

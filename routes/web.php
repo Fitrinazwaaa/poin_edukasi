@@ -1,10 +1,12 @@
 <?php
 use App\Http\Controllers\Admin_Controller;
+use App\Http\Controllers\DataKelasController;
 use App\Http\Controllers\Koneksi_Controller;
 use App\Http\Controllers\user_admin_controller;
 use App\Http\Controllers\DataSiswaController;
 use App\Http\Controllers\PoinController;
 use App\Http\Controllers\PoinPelajarController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Nette\Schema\Schema;
 
@@ -28,7 +30,6 @@ Route::middleware(['auth'])->group(function () {
 
 // USER-ADMIN
 Route::get('/laporan_poin_siswa', [user_admin_controller::class, 'laporan1'])->name('LaporanPoinSiswa');
-
 Route::get('/akun_bk', [user_admin_controller::class, 'pengaturan_akun1'])->name('AkunBK');
 Route::get('/akun_guru', [user_admin_controller::class, 'pengaturan_akun2'])->name('AkunGuru');
 Route::get('/akun_kesiswaan', [user_admin_controller::class, 'pengaturan_akun3'])->name('AkunKesiswaan');
@@ -69,3 +70,21 @@ Route::get('/siswa/edit/{id}', [DataSiswaController::class, 'edit'])->name('Sisw
 Route::PUT('/siswa/update/{id}', [DataSiswaController::class, 'update'])->name('SiswaUpdate');
 Route::post('/siswa/hapus-multiple', [DataSiswaController::class, 'destroyMultiple'])->name('SiswaHapusMultiple');
 
+
+Route::get('/kelas', [DataKelasController::class, 'index'])->name('kelas');
+Route::get('/kelas/create', [DataKelasController::class, 'create'])->name('TambahKelas');
+Route::PUT('/kelas/store', [DataKelasController::class, 'store'])->name('KelasStore');
+Route::post('/kelas/hapus-multiple', [DataKelasController::class, 'destroyMultiple'])->name('KelasHapusMultiple');
+Route::delete('/kelas/hapus', [DataKelasController::class, 'destroy'])->name('KelasHapusSatu');
+
+Route::get('/user-bk', [UserController::class, 'indexbk'])->name('AkunBK');
+Route::put('/user-bk/{id}', [UserController::class, 'update'])->name('UserUpdate');
+
+Route::get('/user/guru', [UserController::class, 'indexguru'])->name('AkunGuru');
+Route::put('/user/guru/{id}', [UserController::class, 'update'])->name('GuruUpdate'); 
+
+Route::get('/user/osis', [UserController::class, 'indexosis'])->name('AkunOsis');
+Route::put('/user/osis/{id}', [UserController::class, 'update'])->name('OsisUpdate');
+
+Route::get('/user/kesiswaan', [UserController::class, 'indexkesiswaan'])->name('AkunKesiswaan');
+Route::put('/user/kesiswaan/{id}', [UserController::class, 'update'])->name('KesiswaanUpdate');

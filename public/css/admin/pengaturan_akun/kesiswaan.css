@@ -1,0 +1,99 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #B6DCFD;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    flex-direction: column; /* Atur konten ke kolom */
+    align-items: center; /* Atur konten ke tengah */
+    justify-content: center; /* Pusatkan konten secara vertikal */
+    width: 800px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.form-container {
+    padding: 20px;
+    text-align: center;
+}
+
+h2 {
+    margin-bottom: 10px;
+    letter-spacing: 3px;
+}
+
+h3 {
+    margin: 30px 0 10px 0;
+}
+
+.profile-icon {
+    margin-bottom: 20px; /* Sesuaikan margin jika perlu */
+}
+
+.profile-text {
+    margin-top: -10px; /* Sesuaikan margin jika perlu */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Pusatkan teks di dalam kolom */
+}
+
+hr {
+    border: 0;
+    margin: 10px 0;
+    width: 100%;
+    border-top: 1px solid #388DD8;
+}
+
+label {
+    display: block;
+    text-align: left;
+    margin: 30px 0 5px 0;
+}
+
+input {
+    width: 60%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 0.5px solid #1e90ff;
+    border-radius: 5px;
+}
+
+button.btn {
+    width: 25%;
+    padding: 10px;
+    background-color: #1e90ff;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+button.btn:hover {
+    background-color: #1c86ee;
+}
+
+.secure-info {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    color: #555;
+    width: 100%; /* Pastikan elemen membentang penuh */
+    text-align: center; /* Pusatkan teks dalam elemen */
+    margin-top: 20px; /* Beri jarak atas bawah */
+}
