@@ -30,7 +30,7 @@
             </div>
 
             <div class="form-row">
-                <label for="np">np</label>
+                <label for="np">Nama Pelanggaran</label>
                 <input type="text" name="np" id="np" class="form-control" required>
             </div>
 
