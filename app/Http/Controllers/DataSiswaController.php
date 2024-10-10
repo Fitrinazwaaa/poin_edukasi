@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DataKelas;
 use App\Models\DataSiswa; // Menggunakan model DataSiswa
+use DB;
 use Illuminate\Http\Request;
 
 class DataSiswaController extends Controller
@@ -31,17 +33,26 @@ class DataSiswaController extends Controller
      */
     public function create()
     {
-        return view('admin.siswa.tambah_siswa');
+        $tahun_angkatan = DataKelas::select('tahun_angkatan')->distinct()->get(); 
+        $data_kelas = DataKelas::all(); // Mengambil semua data dari tabel data_kelas
+        return view('admin.siswa.tambah_siswa', compact('tahun_angkatan', 'data_kelas'));
     }
+    
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        DataSiswa::create($request->all());
-        return redirect()->route('Siswa');
+        try {
+            DataSiswa::create($request->all());
+            return redirect()->route('Siswa')->with('success', 'Data siswa berhasil disimpan.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Gagal menyimpan data, harap masukkan kembali');
+        }
     }
+    
+    
     
 
     /**
@@ -83,17 +94,31 @@ class DataSiswaController extends Controller
      */
     public function destroyMultiple(Request $request)
     {
-        // Validate the request to ensure at least one NIS is provided
+        // Validasi input
         $request->validate([
-            'nis' => 'required|array',
-            'nis.*' => 'exists:data_siswa,nis', // Ensure each NIS exists in the database
+            'hapus' => 'required|array|min:1',
+            'hapus.*' => 'exists:data_siswa,nis', // pastikan nis yang dipilih valid
         ]);
     
-        // Delete the students with the specified NIS
-        DataSiswa::whereIn('nis', $request->nis)->delete();
+        // Hapus entri yang dipilih berdasarkan nis
+        DataSiswa::whereIn('nis', $request->hapus)->delete();
     
         return redirect()->route('Siswa')->with('success', 'Siswa yang dipilih berhasil dihapus.');
     }
     
 
+    public function getJurusan($tahun_angkatan)
+    {
+        $jurusan = DB::table('data_kelas')
+                     ->where('tahun_angkatan', $tahun_angkatan)
+                     ->get(['tahun_angkatan', 'jurusan', 'jurusan_ke']); // mengambil jurusan dan jurusan_ke
+    
+        return response()->json($jurusan);
+    }
+    
+    public function getJurusanKe($jurusan)
+    {
+        $data = DB::table('data_kelas')->where('jurusan', $jurusan)->get(['jurusan_ke']);
+        return response()->json($data);
+    }
 }

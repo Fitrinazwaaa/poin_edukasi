@@ -69,6 +69,8 @@ Route::PUT('/siswa/store', [DataSiswaController::class, 'store'])->name('SiswaSt
 Route::get('/siswa/edit/{id}', [DataSiswaController::class, 'edit'])->name('SiswaEdit');
 Route::PUT('/siswa/update/{id}', [DataSiswaController::class, 'update'])->name('SiswaUpdate');
 Route::post('/siswa/hapus-multiple', [DataSiswaController::class, 'destroyMultiple'])->name('SiswaHapusMultiple');
+Route::get('/get-jurusan/{tahun_angkatan}', [DataSiswaController::class, 'getJurusan']);
+Route::get('/get-jurusan-ke/{jurusan}', [DataSiswaController::class, 'getJurusanKe']);
 
 
 Route::get('/kelas', [DataKelasController::class, 'index'])->name('kelas');
@@ -79,12 +81,9 @@ Route::delete('/kelas/hapus', [DataKelasController::class, 'destroy'])->name('Ke
 
 Route::get('/user-bk', [UserController::class, 'indexbk'])->name('AkunBK');
 Route::put('/user-bk/{id}', [UserController::class, 'update'])->name('UserUpdate');
-
 Route::get('/user/guru', [UserController::class, 'indexguru'])->name('AkunGuru');
 Route::put('/user/guru/{id}', [UserController::class, 'update'])->name('GuruUpdate'); 
-
 Route::get('/user/osis', [UserController::class, 'indexosis'])->name('AkunOsis');
 Route::put('/user/osis/{id}', [UserController::class, 'update'])->name('OsisUpdate');
-
 Route::get('/user/kesiswaan', [UserController::class, 'indexkesiswaan'])->name('AkunKesiswaan');
 Route::put('/user/kesiswaan/{id}', [UserController::class, 'update'])->name('KesiswaanUpdate');

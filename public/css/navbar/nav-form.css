@@ -69,6 +69,7 @@ h5.offcanvas-title{
 /* Menghapus padding default pada body offcanvas */
 div.offcanvas-body {
     padding-top: 0;
+    text-align: left !important;
 }
 
 /* Menambahkan padding bawah pada header offcanvas */

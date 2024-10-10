@@ -131,40 +131,40 @@
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                     </div>
                     <div class="offcanvas-body">
-                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                        <hr>
-                        <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{{ route('Siswa') }}">Data Siswa</a>
-                        </li>
-                        <hr>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="{{ route('PoinSiswa') }}">Poin Siswa</a>
-                        </li>
-                        <hr>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="{{ route('HalamanPoin') }}">Keterangan Dan Jenis Poin</a>
-                        </li>
-                        <hr>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="{{ route('LaporanPoinSiswa') }}">Laporan Akhir Semester</a>
-                        </li>
-                        <hr>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="{{ route('kelas') }}">Pengaturan</a>
-                        </li>
-                        <hr>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="{{ route('AkunBK') }}">Akun</a>
-                        </li>
-                        <hr>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/logout">Keluar Akun</a>
-                        </li>
-                        <hr>
+                        <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
+                            <hr>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="{{ route('Siswa') }}">Data Siswa</a>
+                            </li>
+                            <hr>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="{{ route('PoinSiswa') }}">Poin Siswa</a>
+                            </li>
+                            <hr>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="{{ route('HalamanPoin') }}">Keterangan Dan Jenis Poin</a>
+                            </li>
+                            <hr>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="{{ route('LaporanPoinSiswa') }}">Laporan Akhir Semester</a>
+                            </li>
+                            <hr>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="{{ route('kelas') }}">Pengaturan</a>
+                            </li>
+                            <hr>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="{{ route('AkunBK') }}">Akun</a>
+                            </li>
+                            <hr>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/logout">Keluar Akun</a>
+                            </li>
+                            <hr>
 
-                    </ul>
+                        </ul>
+                    </div>
                 </div>
-            </div>
             </div>
         </div>
     </nav>

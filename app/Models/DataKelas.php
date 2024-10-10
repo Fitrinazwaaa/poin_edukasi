@@ -8,6 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class DataKelas extends Model
 {
     protected $table='data_kelas';
-    protected $primaryKey = 'angkatan_tahun';
     protected $guarded=[];
 }

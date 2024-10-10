@@ -54,133 +54,101 @@
                 </button>
             </div>
         </div>
-        @foreach ($siswaByTahun as $tahun_angkatan => $siswa)
-        <div class="tabel">
-            <input type="checkbox" id="dropdown{{ $tahun_angkatan }}">
-            <label class="btn-toggle" for="dropdown{{ $tahun_angkatan }}">
-                ANGKATAN TAHUN {{ $tahun_angkatan }}
-                <span class="float-end" style="font-weight: 500; margin-right: 30px">Jumlah Siswa: {{ count($siswa) }}</span>
-            </label>
-            <div class="collapse-content" id="content{{ $tahun_angkatan }}">
-                <div class="card card-body">
-                    <div class="table-wrapper">
-                        <div class="table">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th>NIS</th>
-                                        <th>Nama</th>
-                                        <th>Jenis<br>Kelamin</th>
-                                        <th>Kelas</th>
-                                        <th>Angkatan (Tahun)</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="studentTable{{ $tahun_angkatan }}">
-                                    @foreach ($siswa as $item)
-                                    <tr>
-                                        <td><input type="checkbox" name="hapus[]" value="{{ $item->nis }}"></td>
-                                        <td>{{ $item->nis }}</td>
-                                        <td>{{ $item->nama }}</td>
-                                        <td>{{ $item->jenis_kelamin }}</td>
-                                        <td>{{ $item->kelas }}</td>
-                                        <td>{{ $item->tahun_angkatan }}</td>
-                                        <td>
-                                            <button class="icon-btn edit-btn" onclick="window.location.href='{{ route('SiswaEdit', $item->nis) }}';">
-                                                <i class="fas fa-edit"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+
+@foreach ($siswaByTahun as $tahun_angkatan => $siswa)
+    <div class="tabel">
+        <input type="checkbox" id="dropdown{{ $tahun_angkatan }}">
+        <label class="btn-toggle" for="dropdown{{ $tahun_angkatan }}">
+            ANGKATAN TAHUN {{ $tahun_angkatan }}
+            <span class="float-end" style="font-weight: 500; margin-right: 30px">Jumlah Siswa: {{ count($siswa) }}</span>
+        </label>
+        <div class="collapse-content" id="content{{ $tahun_angkatan }}">
+            <div class="card card-body">
+                <div class="table-wrapper">
+                    <div class="table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th><input type="checkbox" id="select_all{{ $tahun_angkatan }}" class="select_all"></th>
+                                    <th>NIS</th>
+                                    <th>Nama</th>
+                                    <th>Jenis<br>Kelamin</th>
+                                    <th>Kelas</th>
+                                    <th>Angkatan (Tahun)</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="studentTable{{ $tahun_angkatan }}">
+                                @foreach ($siswa as $item)
+                                <tr>
+                                    <td><input type="checkbox" name="hapus[]" class="checkbox_ids{{ $tahun_angkatan }}" value="{{ $item->nis }}"></td>
+                                    <td>{{ $item->nis }}</td>
+                                    <td style="text-align: left;">{{ $item->nama }}</td>
+                                    <td>{{ $item->jenis_kelamin }}</td>
+                                    <td>{{ $item->tingkatan}} {{ $item->jurusan}} {{ $item->jurusan_ke}}</td>
+                                    <td>{{ $item->tahun_angkatan }}</td>
+                                    <td>
+                                        <button class="icon-btn edit-btn" onclick="window.location.href='{{ route('SiswaEdit', $item->nis) }}';">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
-        @endforeach        
+    </div>
+@endforeach
     </div>
     
-    <script>
-        function deleteSelected() {
-            const checkedBoxes = document.querySelectorAll('input[name="hapus[]"]:checked');
-            if (checkedBoxes.length === 0) {
-                alert('Tidak ada siswa yang dipilih untuk dihapus.');
-                return;
-            }
-
-            const selectedValues = Array.from(checkedBoxes).map(cb => cb.value);
-            console.log('Siswa yang dipilih untuk dihapus:', selectedValues);
-
-            // Show modal for confirmation
-            const confirmModal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'));
-            confirmModal.show();
-
-            // Attach event listener to the delete button inside the modal
-            document.getElementById('confirmDeleteBtn').onclick = function() {
-                const deleteForm = document.getElementById('deleteForm');
-                checkedBoxes.forEach(cb => {
-                    const input = document.createElement('input');
-                    input.type = 'hidden';
-                    input.name = 'nis[]'; // Ensure this matches the expected array in the controller
-                    input.value = cb.value;
-                    deleteForm.appendChild(input);
-                });
-                deleteForm.submit();
-            };
-        }
-
-        function searchStudents() {
-    console.log("Tombol search dipanggil");
-    const searchInput = document.getElementById('searchInput').value.toLowerCase();
-    const tables = document.querySelectorAll('.table');
-
-    tables.forEach(table => {
-        const rows = table.querySelectorAll('tbody tr');
-        let foundVisible = false; // Track if any rows are visible
-
-        rows.forEach(row => {
-            const nis = row.cells[1].innerText.toLowerCase();
-            const nama = row.cells[2].innerText.toLowerCase();
-
-            if (nis.includes(searchInput) || nama.includes(searchInput)) {
-                row.style.display = ''; // Show row
-                foundVisible = true; // At least one row is visible
-            } else {
-                row.style.display = 'none'; // Hide row
-            }
+<script>
+// Fungsi untuk memilih semua checkbox di tabel sesuai dengan angkatan
+document.querySelectorAll('.select_all').forEach(function(selectAllCheckbox) {
+    selectAllCheckbox.addEventListener('change', function() {
+        // Ambil angkatan berdasarkan id checkbox "Select All"
+        const tahunAngkatan = this.id.replace('select_all', '');
+        
+        // Cari semua checkbox kelas di tabel yang relevan
+        let checkboxes = document.querySelectorAll(`.checkbox_ids${tahunAngkatan}`);
+        
+        // Ubah status checkbox sesuai dengan checkbox "Select All"
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = this.checked;
         });
-
-        // Show or hide the entire table based on whether any rows are visible
-        if (foundVisible) {
-            table.style.display = ''; // Show the table
-        } else {
-            table.style.display = 'none'; // Hide the table
-        }
     });
+});
 
-    // Check if any tables are visible
-    const anyTableVisible = Array.from(tables).some(table => table.style.display !== 'none');
-    // Show all tables if at least one match was found
-    if (anyTableVisible) {
-        tables.forEach(table => table.style.display = ''); // Show all tables
-    } else {
-        tables.forEach(table => table.style.display = 'none'); // Hide all tables
+function deleteSelected() {
+    const checkedBoxes = document.querySelectorAll('input[name="hapus[]"]:checked');
+    if (checkedBoxes.length === 0) {
+        alert('Tidak ada Siswa yang dipilih untuk dihapus.');
+        return;
     }
+
+    const selectedValues = Array.from(checkedBoxes).map(cb => cb.value);
+    console.log('Siswa yang dipilih untuk dihapus:', selectedValues);
+
+    // Tampilkan modal konfirmasi
+    const confirmModal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'));
+    confirmModal.show();
+
+    // Lampirkan event listener untuk tombol hapus di modal
+    document.getElementById('confirmDeleteBtn').onclick = function() {
+        const deleteForm = document.getElementById('deleteForm');
+        selectedValues.forEach(value => {
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'hapus[]'; // Pastikan sesuai dengan input checkbox yang ingin dihapus
+            input.value = value;
+            deleteForm.appendChild(input);
+        });
+        deleteForm.submit(); // Kirim form
+    };
 }
 
-        document.querySelectorAll('input[type="checkbox"]').forEach(function(checkbox) {
-            checkbox.addEventListener('change', function() {
-                if (this.checked) {
-                    const content = this.nextElementSibling;
-                    setTimeout(function() {
-                        content.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }, 300);  // Delay untuk menunggu animasi dropdown selesai
-                }
-            });
-        });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

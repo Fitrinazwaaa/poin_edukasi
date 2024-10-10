@@ -11,14 +11,6 @@
 <body>
     @extends('navbar/nav-form')
 
-    <!-- Search Bar -->
-    <div class="container mt-3">
-        <div class="input-group">
-            <input type="text" class="form-control" id="searchInput" placeholder="Cari siswa berdasarkan angkatan_tahun atau tingkatan" aria-label="Search" onkeyup="searchStudents()">
-            <button class="btn btn-outline-secondary" type="button" onclick="searchStudents()">Cari</button>
-        </div>
-    </div>
-
     <!-- Confirmation Modal -->
     <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -91,86 +83,7 @@
         </div>
         @endforeach
     </div>
-    
-    <script>
-        function deleteSelected() {
-            const checkedBoxes = document.querySelectorAll('input[name="hapus[]"]:checked');
-            if (checkedBoxes.length === 0) {
-                alert('Tidak ada jurusan yang dipilih untuk dihapus.');
-                return;
-            }
 
-            const selectedValues = Array.from(checkedBoxes).map(cb => cb.value);
-            console.log('jurusan yang dipilih untuk dihapus:', selectedValues);
-
-            // Show modal for confirmation
-            const confirmModal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'));
-            confirmModal.show();
-
-            // Attach event listener to the delete button inside the modal
-            document.getElementById('confirmDeleteBtn').onclick = function() {
-                const deleteForm = document.getElementById('deleteForm');
-                checkedBoxes.forEach(cb => {
-                    const input = document.createElement('input');
-                    input.type = 'hidden';
-                    input.name = 'angkatan_tahun[]'; // Ensure this matches the expected array in the controller
-                    input.value = cb.value;
-                    deleteForm.appendChild(input);
-                });
-                deleteForm.submit();
-            };
-        }
-
-        function searchStudents() {
-    console.log("Tombol search dipanggil");
-    const searchInput = document.getElementById('searchInput').value.toLowerCase();
-    const tables = document.querySelectorAll('.table');
-
-    tables.forEach(table => {
-        const rows = table.querySelectorAll('tbody tr');
-        let foundVisible = false; // Track if any rows are visible
-
-        rows.forEach(row => {
-            const angkatan_tahun = row.cells[1].innerText.toLowerCase();
-            const tingkatan = row.cells[2].innerText.toLowerCase();
-
-            if (angkatan_tahun.includes(searchInput) || tingkatan.includes(searchInput)) {
-                row.style.display = ''; // Show row
-                foundVisible = true; // At least one row is visible
-            } else {
-                row.style.display = 'none'; // Hide row
-            }
-        });
-
-        // Show or hide the entire table based on whether any rows are visible
-        if (foundVisible) {
-            table.style.display = ''; // Show the table
-        } else {
-            table.style.display = 'none'; // Hide the table
-        }
-    });
-
-    // Check if any tables are visible
-    const anyTableVisible = Array.from(tables).some(table => table.style.display !== 'none');
-    // Show all tables if at least one match was found
-    if (anyTableVisible) {
-        tables.forEach(table => table.style.display = ''); // Show all tables
-    } else {
-        tables.forEach(table => table.style.display = 'none'); // Hide all tables
-    }
-}
-
-        document.querySelectorAll('input[type="checkbox"]').forEach(function(checkbox) {
-            checkbox.addEventListener('change', function() {
-                if (this.checked) {
-                    const content = this.nextElementSibling;
-                    setTimeout(function() {
-                        content.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }, 300);  // Delay untuk menunggu animasi dropdown selesai
-                }
-            });
-        });
-    </script>
 
 <script>
 // Fungsi untuk memilih semua checkbox di tabel sesuai dengan angkatan

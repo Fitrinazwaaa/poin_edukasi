@@ -12,7 +12,7 @@
     <div class="hero">
         <div class="judul-awal">
             <p class="judul1">TABEL PEROLEHAN POIN NEGATIF & POIN POSITIF SISWA SMKN 1 KAWALI</p>
-            <p class="judul2">PERIODE 2022-2024<p>
+            <p class="judul2">PERIODE 2022-2024</p>
         <div>
     <div class="button-container">
             @foreach ($jumlahNotifikasi as $index => $jumlah)
@@ -53,38 +53,39 @@
         <div class="tambah_dan_hapus">
             <button class="tambah" onclick="window.location.href='{{ route('TipePoinSiswa') }}';"><i class="fas fa-plus"></i>Tambahkan</button>
         </div>
-            <div class="table-wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>NO</th>
-                            <th>NIS</th>
-                            <th>NAMA</th>
-                            <th>JENIS <br> KELAMIN</th>
-                            <th>KELAS</th>
-                            <th>NEGATIF</th>
-                            <th>POSITIF</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($dataSiswa as $siswa)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $siswa->nis }}</td>
-                            <td>{{ $siswa->nama }}</td>
-                            <td>{{ $siswa->jenis_kelamin }}</td>
-                            <td>{{ $siswa->kelas }}</td>
-                            <td>{{ $siswa->poin_negatif }}</td>
-                            <td>{{ $siswa->poin_positif }}</td>
-                            <td>
-                                <button class="add-btn">View More</button>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+        
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>NO</th>
+                        <th>NIS</th>
+                        <th>NAMA</th>
+                        <th>JENIS <br> KELAMIN</th>
+                        <th>KELAS</th>
+                        <th>NEGATIF</th>
+                        <th>POSITIF</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($dataSiswa as $siswa)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $siswa->nis }}</td>
+                        <td style="text-align: left;">{{ $siswa->nama }}</td>
+                        <td>{{ $siswa->jenis_kelamin }}</td>
+                        <td>{{ $siswa->kelas }}</td>
+                        <td>{{ $siswa->poin_negatif }}</td>
+                        <td>{{ $siswa->poin_positif }}</td>
+                        <td>
+                            <button class="add-btn">View More</button>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>

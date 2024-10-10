@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('data_kelas', function (Blueprint $table) {
             $table->id();
-            $table->string('tahun_angkatan'); 
+            $table->integer('tahun_angkatan'); 
             $table->string('jurusan'); 
             $table->integer('jurusan_ke');
             $table->timestamps(); // Waktu pembuatan dan update data
