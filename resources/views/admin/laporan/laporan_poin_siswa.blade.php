@@ -8,6 +8,7 @@
 </head>
 <body>
     @extends('navbar/nav-form')
+
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -16,154 +17,69 @@
                 <th>NAMA</th>
                 <th>JENIS KELAMIN</th>
                 <th>KELAS</th>
-                <th>JURUSAN</th>
                 <th>POINT</th>
                 <th>KETERANGAN</th>
                 <th>WAKTU</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td rowspan="2">1</td>
-                <td rowspan="2">222310923</td>
-                <td rowspan="2">ALINDA EKA YUNIARTI</td>
-                <td  rowspan="2"><div class="gender-box-wrapper">
-                <div class="gender-box female">P</div></td>
-                <td rowspan="2">RPL 3</td>
-                <td rowspan="2">REKAYASA PERANGKAT LUNAK</td>
-                <td>POSITIF : 10</td>
-                <td>
-                    <ul>
-                        <li>ranking 1 di kelas</li>
-                    </ul>
-                </td>
-                <td>
-                    <ul>
-                        <li>20-08-2023</li>
-                    </ul>
-                </td>
-            </tr>
-            <tr>
-                <td>Negatif</td>
-                <td>
-                    <ul>
-                        <li>kaos kaki tidak sesuai hari</li>
-                        <li>memakai make up</li>
-                    </ul>
-                </td>
-                <td>
-                    <ul>
-                        <li>22-09-2023</li>
-                        <li>11-04-2023</li>
-                    </ul>
-                </td>
-            </tr>
-            <tr>
-                <td rowspan="2">1</td>
-                <td rowspan="2">222310923</td>
-                <td rowspan="2">ALINDA EKA YUNIARTI</td>
-                <td rowspan="2"><div class="gender-box male">L</div></td>
-                <td rowspan="2">RPL 3</td>
-                <td rowspan="2">REKAYASA PERANGKAT LUNAK</td>
-                <td>POSITIF : 10</td>
-                <td>
-                    <ul>
-                        <li>ranking 1 di kelas</li>
-                    </ul>
-                </td>
-                <td>
-                    <ul>
-                        <li>20-08-2023</li>
-                    </ul>
-                </td>
-            </tr>
-            <tr>
-                <td>Negatif</td>
-                <td>
-                    <ul>
-                        <li>kaos kaki tidak sesuai hari</li>
-                        <li>memakai make up</li>
-                    </ul>
-                </td>
-                <td>
-                    <ul>
-                        <li>22-09-2023</li>
-                        <li>11-04-2023</li>
-                    </ul>
-                </td>
-            </tr>
-            <tr>
-                <td rowspan="2">1</td>
-                <td rowspan="2">222310923</td>
-                <td rowspan="2">ALINDA EKA YUNIARTI</td>
-                <td  rowspan="2"><div class="gender-box-wrapper">
-                <div class="gender-box female">P</div></td>
-                <td rowspan="2">RPL 3</td>
-                <td rowspan="2">REKAYASA PERANGKAT LUNAK</td>
-                <td>POSITIF : 10</td>
-                <td>
-                    <ul>
-                        <li>ranking 1 di kelas</li>
-                    </ul>
-                </td>
-                <td>
-                    <ul>
-                        <li>20-08-2023</li>
-                    </ul>
-                </td>
-            </tr>
-            <tr>
-                <td>Negatif</td>
-                <td>
-                    <ul>
-                        <li>kaos kaki tidak sesuai hari</li>
-                        <li>memakai make up</li>
-                    </ul>
-                </td>
-                <td>
-                    <ul>
-                        <li>22-09-2023</li>
-                        <li>11-04-2023</li>
-                    </ul>
-                </td>
-            </tr>
-            <tr>
-                <td rowspan="2">1</td>
-                <td rowspan="2">222310923</td>
-                <td rowspan="2">ALINDA EKA YUNIARTI</td>
-                <td rowspan="2"><div class="gender-box male">L</div></td>
-                <td rowspan="2">RPL 3</td>
-                <td rowspan="2">REKAYASA PERANGKAT LUNAK</td>
-                <td>POSITIF : 10</td>
-                <td>
-                    <ul>
-                        <li>ranking 1 di kelas</li>
-                    </ul>
-                </td>
-                <td>
-                    <ul>
-                        <li>20-08-2023</li>
-                    </ul>
-                </td>
-            </tr>
-            <tr>
-                <td>Negatif</td>
-                <td>
-                    <ul>
-                        <li>kaos kaki tidak sesuai hari</li>
-                        <li>memakai make up</li>
-                    </ul>
-                </td>
-                <td>
-                    <ul>
-                        <li>22-09-2023</li>
-                        <li>11-04-2023</li>
-                    </ul>
-                </td>
-            </tr>
-        </tbody>
+    @if($poinPelajar && count($poinPelajar) > 0)
+        @foreach($poinPelajar->groupBy('nis') as $key => $groupedPoin)
+        @php
+            $poinPertama = $groupedPoin->first();
+            $poinPositif = $groupedPoin->where('poin_positif', '>', 0);
+            $poinNegatif = $groupedPoin->where('poin_negatif', '>', 0);
+        @endphp
+        <tr>
+            <td>{{ $loop->iteration }}</td>
+            <td style="text-align:center">{{ $poinPertama->nis }}</td>
+            <td>{{ $poinPertama->nama }}</td>
+            <td style="text-align:center">{{ $poinPertama->jenis_kelamin}}</td>
+            <td style="text-align:center">{{ $poinPertama->tingkatan }} {{ $poinPertama->jurusan }} {{ $poinPertama->jurusan_ke }}</td>
+            <td>
+                @if($poinPositif->count() > 0)
+                    Positif: {{ $poinPositif->sum('poin_positif') }}
+                @endif
+                @if($poinNegatif->count() > 0)
+                    <br>Negatif: {{ $poinNegatif->sum('poin_negatif') }}
+                @endif
+            </td>
+            <td>
+                Positif: 
+                <ol>
+                    @foreach($poinPositif as $positif)
+                    <li>{{ $positif->nama_poin_positif }}</li>
+                    @endforeach
+                </ol>
+                Negatif: 
+                <ol>
+                    @foreach($poinNegatif as $negatif)
+                    <li>{{ $negatif->nama_poin_negatif }}</li>
+                    @endforeach
+                </ol>
+            </td>
+            <td>
+                Positif: 
+                <ol>
+                    @foreach($poinPositif as $positif)
+                    <li>{{ $positif->created_at->format('d-m-Y') }}</li>
+                    @endforeach
+                </ol>
+                Negatif: 
+                <ol>
+                    @foreach($poinNegatif as $negatif)
+                    <li>{{ $negatif->created_at->format('d-m-Y') }}</li>
+                    @endforeach
+                </ol>
+            </td>
+        </tr>
+        @endforeach
+    @else
+        <tr>
+            <td colspan="9">Tidak ada data poin pelajar.</td>
+        </tr>
+    @endif
+    </tbody>
     </table>
-</div>
-
 </body>
 </html>

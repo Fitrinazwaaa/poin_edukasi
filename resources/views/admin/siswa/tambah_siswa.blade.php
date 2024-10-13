@@ -89,7 +89,7 @@ $('#tahun_angkatan').on('change', function() {
     
     if (tahunAngkatan) {
         $.ajax({
-            url: '/get-jurusan/' + tahunAngkatan,
+            url: '/get-jurusan-datasiswa/' + tahunAngkatan,  // Sesuaikan dengan fungsi baru
             type: 'GET',
             success: function(data) {
                 $('#jurusan').empty();
@@ -99,23 +99,27 @@ $('#tahun_angkatan').on('change', function() {
 
                 var jurusanSet = new Set();
                 $.each(data, function(index, jurusan) {
-                    // Tambah jurusan ke dropdown jika belum ada
                     if (!jurusanSet.has(jurusan.jurusan)) {
                         $('#jurusan').append('<option value="'+ jurusan.jurusan +'">'+ jurusan.jurusan +'</option>');
                         jurusanSet.add(jurusan.jurusan);
                     }
                 });
+            },
+            error: function(xhr, status, error) {
+                console.log("Error: " + error);
             }
         });
     }
 });
+
+
 
 $('#jurusan').on('change', function() {
     var jurusan = $(this).val();
     
     if (jurusan) {
         $.ajax({
-            url: '/get-jurusan-ke/' + jurusan,
+            url: '/get-jurusan-ke-datasiswa/' + jurusan,  // Sesuaikan dengan fungsi baru
             type: 'GET',
             success: function(data) {
                 $('#jurusan_ke').empty();
@@ -128,6 +132,7 @@ $('#jurusan').on('change', function() {
         });
     }
 });
+
 
    </script>
 </body>

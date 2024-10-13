@@ -12,10 +12,10 @@ return new class extends Migration
     public function up()
 {
     Schema::create('data_poin_positif', function (Blueprint $table) {
-        $table->id('id_poin');
-        $table->string('np');
-        $table->integer('poin');
-        $table->string('kategori');  // Mengubah kategori menjadi string untuk konsistensi
+        $table->id('id_poin_positif');
+        $table->string('nama_poin'); // Nama poin positif
+        $table->integer('poin'); // Jumlah poin positif
+        $table->string('kategori_poin'); // Kategori poin positif
         $table->timestamps();
     });
 }

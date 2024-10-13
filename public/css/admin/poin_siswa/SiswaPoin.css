@@ -76,6 +76,14 @@
     transform: scale(1.05);
 }
 
+/* Container untuk tombol tambah dan hapus */
+.tambah_dan_hapus {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    gap: 10px; /* Mengatur jarak antara tombol */
+  }
+  
 /* Add Button */
 .tambah {
     display: flex;
@@ -97,6 +105,28 @@
   
   .tambah:hover {
     background-color: #dada5d;
+    transform: scale(1.05);
+  }
+
+  /* Delete Button */
+.icon-btn.delete-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    gap: 8px;
+    font-size: 13px;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    background-color: #f44336;
+    color: white;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  }
+  
+  .icon-btn.delete-btn:hover {
+    background-color: #cd3f35;
     transform: scale(1.05);
   }
 

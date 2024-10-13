@@ -67,8 +67,8 @@
                             <tr>
                                 <td><input type="checkbox" name="ids_negatif[]" class="checkbox_negatif_ids" value="{{ $poin->id_poin }}"></td>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $poin->np }}</td>
-                                <td>{{ $poin->kategori }}</td>
+                                <td>{{ $poin->nama_poin }}</td>
+                                <td>{{ $poin->kategori_poin }}</td>
                                 <td>{{ $poin->poin }}</td>
                             </tr>
                             @endforeach
@@ -96,8 +96,8 @@
                             <tr>
                                 <td><input type="checkbox" name="ids_positif[]" class="checkbox_positif_ids" value="{{ $poin->id_poin }}"></td>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $poin->np }}</td>
-                                <td>{{ $poin->kategori }}</td>
+                                <td>{{ $poin->nama_poin}}</td>
+                                <td>{{ $poin->kategori_poin}}</td>
                                 <td>{{ $poin->poin }}</td>
                             </tr>
                             @endforeach

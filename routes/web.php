@@ -29,7 +29,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // USER-ADMIN
-Route::get('/laporan_poin_siswa', [user_admin_controller::class, 'laporan1'])->name('LaporanPoinSiswa');
+// Route::get('/laporan_poin_siswa', [user_admin_controller::class, 'laporan1'])->name('LaporanPoinSiswa');
 Route::get('/akun_bk', [user_admin_controller::class, 'pengaturan_akun1'])->name('AkunBK');
 Route::get('/akun_guru', [user_admin_controller::class, 'pengaturan_akun2'])->name('AkunGuru');
 Route::get('/akun_kesiswaan', [user_admin_controller::class, 'pengaturan_akun3'])->name('AkunKesiswaan');
@@ -40,10 +40,21 @@ Route::get('/poin/ubah', [user_admin_controller::class, 'edit']);
 Route::get('/siswapoin', [PoinPelajarController::class, 'index'])->name('PoinSiswa');
 Route::get('/siswapoin/type', [PoinPelajarController::class, 'poin_siswa_type'])->name('TipePoinSiswa');
 Route::get('/siswapoin/create-form1', [PoinPelajarController::class, 'createFormOne'])->name('TambahNamaPoinSiswa');
-Route::post('/siswapoin/store-form1', [PoinPelajarController::class, 'storeFormOne'])->name('StoreNamaPoinSiswa');
+Route::PUT('/siswapoin/store-form1', [PoinPelajarController::class, 'storeFormOne'])->name('StoreNamaPoinSiswa');
 Route::get('/siswapoin/search-form1', [PoinPelajarController::class, 'searchSiswa'])->name('SearchNamaPoinSiswa');
 Route::get('/siswapoin/create-form2', [PoinPelajarController::class, 'createFormTwo'])->name('TambahNisPoinSiswa');
 Route::post('/siswapoin/store-form2', [PoinPelajarController::class, 'storeFormTwo'])->name('StoreNisPoinSiswa');
+Route::post('/poin-siswa/hapus-semua', [PoinPelajarController::class, 'hapusSemua'])->name('hapusSemuaPoinSiswa');
+
+Route::get('/get-kelas-by-nis', [PoinPelajarController::class, 'getKelasByNis'])->name('GetKelasByNis');
+Route::get('/search-kelas-poin-siswa', [PoinPelajarController::class, 'searchKelas'])->name('SearchKelasPoinSiswa');
+
+Route::get('/get-jurusan/{tingkatan}', [PoinPelajarController::class, 'getJurusan']);
+Route::get('/get-jurusan-ke/{jurusan}', [PoinPelajarController::class, 'getJurusanKe']);
+Route::get('/search-nama-poin-siswa', [PoinPelajarController::class, 'searchNamaPoinSiswa'])->name('SearchNamaPoinSiswa');
+Route::get('/get-nama-poin/{tipe}', [PoinPelajarController::class, 'getNamaPoin']);
+
+
 
 Route::get('/siswapoin/pesan/1', [PoinPelajarController::class, 'notifikasi1'])->name('pesan1');
 Route::get('/siswapoin/pesan/2', [PoinPelajarController::class, 'notifikasi2'])->name('pesan2');
@@ -63,14 +74,18 @@ Route::PUT('/poin/update/{id}', [PoinController::class, 'update'])->name('poinUp
 Route::delete('/poin/hapus-multiple', [PoinController::class, 'destroy'])->name('PoinHapusMultiple');
 
 
+
 Route::get('/siswa', [DataSiswaController::class, 'index'])->name('Siswa');
 Route::get('/siswa/create', [DataSiswaController::class, 'create'])->name('TambahSiswa');
 Route::PUT('/siswa/store', [DataSiswaController::class, 'store'])->name('SiswaStore');
 Route::get('/siswa/edit/{id}', [DataSiswaController::class, 'edit'])->name('SiswaEdit');
 Route::PUT('/siswa/update/{id}', [DataSiswaController::class, 'update'])->name('SiswaUpdate');
 Route::post('/siswa/hapus-multiple', [DataSiswaController::class, 'destroyMultiple'])->name('SiswaHapusMultiple');
-Route::get('/get-jurusan/{tahun_angkatan}', [DataSiswaController::class, 'getJurusan']);
-Route::get('/get-jurusan-ke/{jurusan}', [DataSiswaController::class, 'getJurusanKe']);
+Route::get('/get-jurusan-datasiswa/{tahun_angkatan}', [DataSiswaController::class, 'getJurusanDataSiswa']);
+Route::get('/get-jurusan-ke-datasiswa/{jurusan}', [DataSiswaController::class, 'getJurusanKeDataSiswa']);
+
+
+
 
 
 Route::get('/kelas', [DataKelasController::class, 'index'])->name('kelas');
@@ -87,3 +102,7 @@ Route::get('/user/osis', [UserController::class, 'indexosis'])->name('AkunOsis')
 Route::put('/user/osis/{id}', [UserController::class, 'update'])->name('OsisUpdate');
 Route::get('/user/kesiswaan', [UserController::class, 'indexkesiswaan'])->name('AkunKesiswaan');
 Route::put('/user/kesiswaan/{id}', [UserController::class, 'update'])->name('KesiswaanUpdate');
+
+use App\Http\Controllers\LaporanController;
+
+Route::get('/laporan', [LaporanController::class, 'index'])->name('LaporanPoinSiswa');

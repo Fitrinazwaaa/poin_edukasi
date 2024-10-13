@@ -44,6 +44,17 @@ class DataSiswaController extends Controller
      */
     public function store(Request $request)
     {
+        // Tambahkan validasi
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'nis' => 'required|integer|unique:data_siswa,nis',
+            'jenis_kelamin' => 'required',
+            'tahun_angkatan' => 'required',
+            'tingkatan' => 'required',
+            'jurusan' => 'required',
+            'jurusan_ke' => 'required',
+        ]);
+    
         try {
             DataSiswa::create($request->all());
             return redirect()->route('Siswa')->with('success', 'Data siswa berhasil disimpan.');
@@ -51,6 +62,7 @@ class DataSiswaController extends Controller
             return redirect()->back()->with('error', 'Gagal menyimpan data, harap masukkan kembali');
         }
     }
+    
     
     
     
@@ -107,7 +119,7 @@ class DataSiswaController extends Controller
     }
     
 
-    public function getJurusan($tahun_angkatan)
+    public function getJurusanDataSiswa($tahun_angkatan)
     {
         $jurusan = DB::table('data_kelas')
                      ->where('tahun_angkatan', $tahun_angkatan)
@@ -116,7 +128,7 @@ class DataSiswaController extends Controller
         return response()->json($jurusan);
     }
     
-    public function getJurusanKe($jurusan)
+    public function getJurusanKeDataSiswa($jurusan)
     {
         $data = DB::table('data_kelas')->where('jurusan', $jurusan)->get(['jurusan_ke']);
         return response()->json($data);

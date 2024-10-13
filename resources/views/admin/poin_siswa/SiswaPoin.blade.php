@@ -9,7 +9,6 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet"></head>
 <body>
     @extends('navbar/nav-form')
-    <div class="hero">
         <div class="judul-awal">
             <p class="judul1">TABEL PEROLEHAN POIN NEGATIF & POIN POSITIF SISWA SMKN 1 KAWALI</p>
             <p class="judul2">PERIODE 2022-2024</p>
@@ -51,7 +50,11 @@
         </div>
 
         <div class="tambah_dan_hapus">
-            <button class="tambah" onclick="window.location.href='{{ route('TipePoinSiswa') }}';"><i class="fas fa-plus"></i>Tambahkan</button>
+            <form action="{{ route('hapusSemuaPoinSiswa') }}" method="POST" style="display: inline;">
+                @csrf
+                <button type="submit" class="icon-btn delete-btn"><i class="fas fa-trash"></i> Hapus Semua</button>
+            </form>
+            <button class="tambah" onclick="window.location.href='{{ route('TambahNamaPoinSiswa') }}';"><i class="fas fa-plus"></i>Tambahkan</button>
         </div>
         
         <div class="table-wrapper">
@@ -75,9 +78,9 @@
                         <td>{{ $siswa->nis }}</td>
                         <td style="text-align: left;">{{ $siswa->nama }}</td>
                         <td>{{ $siswa->jenis_kelamin }}</td>
-                        <td>{{ $siswa->kelas }}</td>
-                        <td>{{ $siswa->poin_negatif }}</td>
-                        <td>{{ $siswa->poin_positif }}</td>
+                        <td>{{ $siswa->tingkatan}} {{ $siswa->jurusan}} {{ $siswa->jurusan_ke}}</td>
+                        <td>{{ $siswa->poin_negatif_akhir > 0 ? $siswa->poin_negatif_akhir : 0 }}</td>
+                        <td>{{ $siswa->poin_positif_akhir > 0 ? $siswa->poin_positif_akhir : 0 }}</td>
                         <td>
                             <button class="add-btn">View More</button>
                         </td>

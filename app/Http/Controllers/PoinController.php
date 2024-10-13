@@ -15,10 +15,10 @@ class PoinController extends Controller
     // ////////
     public function index()
     {
-        $poinNegatif = DataPoinNegatif::orderBy('kategori', 'asc')->get();
+        $poinNegatif = DataPoinNegatif::orderBy('kategori_poin', 'asc')->get();
     
         // Mengambil dan mengurutkan data poin positif berdasarkan kategori
-        $poinPositif = DataPoinPositif::orderBy('kategori', 'asc')->get();
+        $poinPositif = DataPoinPositif::orderBy('kategori_poin', 'asc')->get();
         $poinPeringatan = PoinPeringatan::all(); 
         return view('admin.poin.halaman_poin', compact('poinPositif', 'poinNegatif', 'poinPeringatan')); // Mengirim kedua variabel
     }
@@ -49,20 +49,20 @@ class PoinController extends Controller
         if ($request->input('type') == 'positive') {
             // Simpan ke tabel data_poin_positif
             DB::table('data_poin_positif')->insert([
-                'np' => $validatedData['np'],
-                'id_poin' => $validatedData['id_poin'],
+                'nama_poin' => $validatedData['np'],
+                'id_poin_positif' => $validatedData['id_poin'],
                 'poin' => $validatedData['poin'],
-                'kategori' => $validatedData['kategori'],
+                'kategori_poin' => $validatedData['kategori'],
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
         } elseif ($request->input('type') == 'negative') {
             // Simpan ke tabel data_poin_negatif
             DB::table('data_poin_negatif')->insert([
-                'np' => $validatedData['np'],
-                'id_poin' => $validatedData['id_poin'],
+                'nama_poin' => $validatedData['np'],
+                'id_poin_negatif' => $validatedData['id_poin'],
                 'poin' => $validatedData['poin'],
-                'kategori' => $validatedData['kategori'],
+                'kategori_poin' => $validatedData['kategori'],
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
