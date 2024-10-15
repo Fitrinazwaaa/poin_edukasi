@@ -82,7 +82,7 @@
                         <td>{{ $siswa->poin_negatif_akhir > 0 ? $siswa->poin_negatif_akhir : 0 }}</td>
                         <td>{{ $siswa->poin_positif_akhir > 0 ? $siswa->poin_positif_akhir : 0 }}</td>
                         <td>
-                            <button class="add-btn">View More</button>
+                            <button class="add-btn" onclick="window.location.href='{{ route('viewSiswaDetail', ['nis' => $siswa->nis]) }}';">View More</button>
                         </td>
                     </tr>
                     @endforeach

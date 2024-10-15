@@ -23,5 +23,6 @@ class PoinPelajar extends Model
         'keterangan_negatif' => 'array',
         'tanggal_negatif' => 'array',
     ];
+    
 }
 

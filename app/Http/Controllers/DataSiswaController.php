@@ -22,21 +22,14 @@ class DataSiswaController extends Controller
             // Asumsikan tahun angkatan disimpan dalam kolom 'tahun_angkatan'
             return $item->tahun_angkatan;
         });
-    
-        // Mengirim data ke view
-        return view('admin.siswa.siswa', compact('siswaByTahun'));
-    }
-    
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
         $tahun_angkatan = DataKelas::select('tahun_angkatan')->distinct()->get(); 
         $data_kelas = DataKelas::all(); // Mengambil semua data dari tabel data_kelas
-        return view('admin.siswa.tambah_siswa', compact('tahun_angkatan', 'data_kelas'));
+    
+        // Mengirim data ke view
+        return view('admin.siswa.siswa', compact('siswaByTahun', 'tahun_angkatan', 'data_kelas'));
     }
+    
     
 
     /**
@@ -57,7 +50,7 @@ class DataSiswaController extends Controller
     
         try {
             DataSiswa::create($request->all());
-            return redirect()->route('Siswa')->with('success', 'Data siswa berhasil disimpan.');
+            return redirect()->with('success', 'Data siswa berhasil disimpan.');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Gagal menyimpan data, harap masukkan kembali');
         }
@@ -94,7 +87,9 @@ class DataSiswaController extends Controller
                 'nis'               => $request->input('nis'),
                 'nama'              => $request->input('nama'),
                 'jenis_kelamin'     => $request->input('jenis_kelamin'),
-                'kelas'             => $request->input('kelas'),
+                'tingkatan'             => $request->input('tingkatan'),
+                'jurusan'             => $request->input('jurusan'),
+                'jurusan_ke'             => $request->input('jurusan_ke'),
                 'tahun_angkatan'    => $request->input('tahun_angkatan'), // Perbaiki penamaan ini
             ]);
     

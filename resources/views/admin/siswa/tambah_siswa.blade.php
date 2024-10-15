@@ -84,56 +84,54 @@
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
    <script type="text/javascript">
-$('#tahun_angkatan').on('change', function() {
-    var tahunAngkatan = $(this).val();
-    
-    if (tahunAngkatan) {
-        $.ajax({
-            url: '/get-jurusan-datasiswa/' + tahunAngkatan,  // Sesuaikan dengan fungsi baru
-            type: 'GET',
-            success: function(data) {
-                $('#jurusan').empty();
-                $('#jurusan').append('<option value="" disabled selected>Pilih Jurusan</option>');
-                $('#jurusan_ke').empty();
-                $('#jurusan_ke').append('<option value="" disabled selected>Pilih Jurusan ke</option>');
+        $('#tahun_angkatan').on('change', function() {
+            var tahunAngkatan = $(this).val();
+            
+            if (tahunAngkatan) {
+                $.ajax({
+                    url: '/get-jurusan-datasiswa/' + tahunAngkatan,  // Sesuaikan dengan fungsi baru
+                    type: 'GET',
+                    success: function(data) {
+                        $('#jurusan').empty();
+                        $('#jurusan').append('<option value="" disabled selected>Pilih Jurusan</option>');
+                        $('#jurusan_ke').empty();
+                        $('#jurusan_ke').append('<option value="" disabled selected>Pilih Jurusan ke</option>');
 
-                var jurusanSet = new Set();
-                $.each(data, function(index, jurusan) {
-                    if (!jurusanSet.has(jurusan.jurusan)) {
-                        $('#jurusan').append('<option value="'+ jurusan.jurusan +'">'+ jurusan.jurusan +'</option>');
-                        jurusanSet.add(jurusan.jurusan);
+                        var jurusanSet = new Set();
+                        $.each(data, function(index, jurusan) {
+                            if (!jurusanSet.has(jurusan.jurusan)) {
+                                $('#jurusan').append('<option value="'+ jurusan.jurusan +'">'+ jurusan.jurusan +'</option>');
+                                jurusanSet.add(jurusan.jurusan);
+                            }
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        console.log("Error: " + error);
                     }
                 });
-            },
-            error: function(xhr, status, error) {
-                console.log("Error: " + error);
             }
         });
-    }
-});
 
 
 
-$('#jurusan').on('change', function() {
-    var jurusan = $(this).val();
-    
-    if (jurusan) {
-        $.ajax({
-            url: '/get-jurusan-ke-datasiswa/' + jurusan,  // Sesuaikan dengan fungsi baru
-            type: 'GET',
-            success: function(data) {
-                $('#jurusan_ke').empty();
-                $('#jurusan_ke').append('<option value="" disabled selected>Pilih Jurusan ke</option>');
+        $('#jurusan').on('change', function() {
+            var jurusan = $(this).val();
+            
+            if (jurusan) {
+                $.ajax({
+                    url: '/get-jurusan-ke-datasiswa/' + jurusan,  // Sesuaikan dengan fungsi baru
+                    type: 'GET',
+                    success: function(data) {
+                        $('#jurusan_ke').empty();
+                        $('#jurusan_ke').append('<option value="" disabled selected>Pilih Jurusan ke</option>');
 
-                $.each(data, function(index, jurusanKe) {
-                    $('#jurusan_ke').append('<option value="'+ jurusanKe.jurusan_ke +'">'+ jurusanKe.jurusan_ke +'</option>');
+                        $.each(data, function(index, jurusanKe) {
+                            $('#jurusan_ke').append('<option value="'+ jurusanKe.jurusan_ke +'">'+ jurusanKe.jurusan_ke +'</option>');
+                        });
+                    }
                 });
             }
         });
-    }
-});
-
-
    </script>
 </body>
 </html>

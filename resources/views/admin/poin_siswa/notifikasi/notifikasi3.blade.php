@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SISWA DAN ORANG TUA MEMBUAT SURAT PERJANTIAN BERMATRAI</title>
+    <title>Notifikasi 3</title>
     <link rel="stylesheet" href="{{ asset('css/notifikasi-peringatan.css') }}">
 </head>
 <body>
@@ -11,7 +11,7 @@
 
     @if($poinPeringatan3 && $poinPeringatan4)
         <h2 class="text-center">{{ $poinPeringatan3->peringatan }}</h2>
-        <p class="text-center">Poin Negatif {{ $poinPeringatan3->max_poin }} - {{ $poinPeringatan4->max_poin }} </p>
+        <p class="text-center">Poin Negatif {{ $poinPeringatan3->max_poin }} - {{ $poinPeringatan4->max_poin }}</p>
     @endif
 
     @foreach($dataSiswa as $siswa)
@@ -21,16 +21,17 @@
             $hrClass = $siswa->jenis_kelamin === 'Perempuan' ? 'pink-hr' : 'blue-hr';
         @endphp
 
-            <div class="{{ $cardClass }}">
+        <div class="{{ $cardClass }}">
             <h4>{{ $siswa->nama }}</h4>
-            <p class="right bottom">Poin Negatif: {{ $siswa->poin_negatif }}</p>
+            <p class="right bottom">Poin Negatif: {{ $siswa->jumlah_negatif }}</p>
             <hr class="{{ $hrClass }}">
             <p>{{ $siswa->nis }}</p>
             <!-- Tambahkan container untuk kelas dan tombol -->
             <div class="class-button-container">
-                <p class="kelas">{{ $siswa->kelas }}</p>
-                <button class="perbaikan" onclick="window.location.href='{{ route('PerbaikanSikap') }}'"> Perbaikan </button>
-            </div>
+                <p class="kelas">{{ $siswa->tingkatan}} {{ $siswa->jurusan}} {{ $siswa->jurusan_ke}}</p>
+
+                <button class="perbaikan" onclick="window.location.href='{{ route('CreatePerbaikan', ['nis' => $siswa->nis]) }}'">Perbaikan</button>
+                </div>
         </div>
     @endforeach
 </body>

@@ -1,0 +1,158 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #B6DCFD;
+}
+
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white; 
+    padding: 10px 20px;
+    border-bottom: 2px solid #388DD8;
+}
+
+.back-button span {
+    font-size: 24px;
+    cursor: pointer;
+    color: black;
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+    margin-left: -500px;
+}
+
+.profile-image img {
+    width: 40px;
+    height: 40px;
+    border-radius: 20%;
+}
+
+.profile-details {
+    margin-left: 10px;
+}
+
+.profile-id {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.profile-name {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.profile-meta {
+    text-align: right;
+}
+
+.profile-gender, .profile-class {
+    font-size: 14px;
+}
+
+.profile-class {
+    font-weight: bold;
+}
+
+/* Container untuk tabel */
+.container {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px;
+}
+
+td, tr {
+    text-align: center;
+}
+
+.table-section {
+    width: 45%;
+    background-color: white;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px -6px #333;
+    overflow-x: auto;
+}
+
+.table-section h3 {
+    text-align: center;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #388DD8;
+}
+
+.table-wrapper {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.table thead th {
+    background-color: #388DD8;
+    color: white;
+    padding: 8px;
+    font-size: 14px;
+}
+
+.table tbody td {
+    border: 1px solid #ADD8E6;
+    padding: 8px;
+    font-size: 14px;
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.table-wrapper::-webkit-scrollbar {
+    width: 8px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+    background-color: #388DD8;
+    border-radius: 8px;
+}
+
+.table-wrapper::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+}
+
+.delete-icon {
+    cursor: pointer;
+    color: red;
+    font-size: 18px;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+.table-wrapper {
+    max-height: 300px; /* Sesuaikan tinggi sesuai kebutuhan */
+    overflow-y: auto; /* Mengaktifkan scrolling vertikal */
+    overflow-x: auto; /* Scroll horizontal jika tabel terlalu lebar */
+}
+
+.table-wrapper::-webkit-scrollbar {
+    width: 8px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+    background-color: #388DD8;
+    border-radius: 8px;
+}
+
+.table-wrapper::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+}

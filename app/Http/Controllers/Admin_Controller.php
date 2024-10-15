@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DataKelas;
 use App\Models\PoinPelajar;
 use App\Models\PoinPeringatan;
 use Illuminate\Support\Facades\Auth;
@@ -13,10 +14,6 @@ class Admin_Controller extends Controller
 {
     public function index()
     {
-        return view('main');
-    }
-    public function admin()
-    {
         // Mengambil semua data siswa
         $siswa = DataSiswa::all();
     
@@ -25,9 +22,12 @@ class Admin_Controller extends Controller
             // Asumsikan tahun angkatan disimpan dalam kolom 'tahun_angkatan'
             return $item->tahun_angkatan;
         });
+
+        $tahun_angkatan = DataKelas::select('tahun_angkatan')->distinct()->get(); 
+        $data_kelas = DataKelas::all(); // Mengambil semua data dari tabel data_kelas
     
         // Mengirim data ke view
-        return view('admin.siswa.siswa', compact('siswaByTahun'));
+        return view('admin.siswa.siswa', compact('siswaByTahun', 'tahun_angkatan', 'data_kelas'));
     }
     public function user1()
     {

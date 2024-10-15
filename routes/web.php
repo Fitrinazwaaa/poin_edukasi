@@ -15,36 +15,36 @@ Route::middleware(['guest'])->group(function () {
     Route::get('/', [Koneksi_Controller::class, 'index'])->name('login');
     Route::post('/', [Koneksi_Controller::class, 'login']);
 });
-
-Route::get('/home', function () { return redirect('/role'); });
+Route::get('/home', function () { return redirect('/admin'); });
 
 // PUSAT ADMIN
 Route::middleware(['auth'])->group(function () {
-    Route::get('/role', [Admin_Controller::class, 'index']);
-    Route::get('/role/admin', [Admin_Controller::class, 'admin'])->name('BKPage');
-    Route::get('/role/user_kesiswaan', [Admin_Controller::class, 'user1'])->name('KesiswaanPage');
-    Route::get('/role/user_osis', [Admin_Controller::class, 'user2'])->name('OsisPage');
-    Route::get('/role/user_edit', [Admin_Controller::class, 'user_edit'])->name('GuruPage');
+    Route::get('/admin', [Admin_Controller::class, 'index'])->name('BKPage');
+    Route::get('/user_kesiswaan', [Admin_Controller::class, 'user1'])->name('KesiswaanPage');
+    Route::get('/user_osis', [Admin_Controller::class, 'user2'])->name('OsisPage');
+    Route::get('/user_edit', [Admin_Controller::class, 'user_edit'])->name('GuruPage');
     Route::get('/logout', [Koneksi_Controller::class, 'logout']);
 });
 
 // USER-ADMIN
-// Route::get('/laporan_poin_siswa', [user_admin_controller::class, 'laporan1'])->name('LaporanPoinSiswa');
 Route::get('/akun_bk', [user_admin_controller::class, 'pengaturan_akun1'])->name('AkunBK');
 Route::get('/akun_guru', [user_admin_controller::class, 'pengaturan_akun2'])->name('AkunGuru');
 Route::get('/akun_kesiswaan', [user_admin_controller::class, 'pengaturan_akun3'])->name('AkunKesiswaan');
 Route::get('/akun_osis', [user_admin_controller::class, 'pengaturan_akun4'])->name('AkunOsis');
-
 Route::get('/poin/ubah', [user_admin_controller::class, 'edit']);
 
+
 Route::get('/siswapoin', [PoinPelajarController::class, 'index'])->name('PoinSiswa');
+Route::get('/siswapoin/view/{nis}', [PoinPelajarController::class, 'viewSiswaDetail'])->name('viewSiswaDetail');
 Route::get('/siswapoin/type', [PoinPelajarController::class, 'poin_siswa_type'])->name('TipePoinSiswa');
 Route::get('/siswapoin/create-form1', [PoinPelajarController::class, 'createFormOne'])->name('TambahNamaPoinSiswa');
 Route::PUT('/siswapoin/store-form1', [PoinPelajarController::class, 'storeFormOne'])->name('StoreNamaPoinSiswa');
+Route::get('/siswapoin/perbaikan/{nis}', [PoinPelajarController::class, 'createPerbaikan'])->name('CreatePerbaikan');
+Route::PUT('/siswapoin/store-perbaikan', [PoinPelajarController::class, 'storePerbaikan'])->name('StorePerbaikan');
 Route::get('/siswapoin/search-form1', [PoinPelajarController::class, 'searchSiswa'])->name('SearchNamaPoinSiswa');
-Route::get('/siswapoin/create-form2', [PoinPelajarController::class, 'createFormTwo'])->name('TambahNisPoinSiswa');
-Route::post('/siswapoin/store-form2', [PoinPelajarController::class, 'storeFormTwo'])->name('StoreNisPoinSiswa');
 Route::post('/poin-siswa/hapus-semua', [PoinPelajarController::class, 'hapusSemua'])->name('hapusSemuaPoinSiswa');
+Route::post('siswapoin/delete-positif', [PoinPelajarController::class, 'deletePoinPositif'])->name('deletePoinPositif');
+Route::post('siswapoin/delete-negatif', [PoinPelajarController::class, 'deletePoinNegatif'])->name('deletePoinNegatif');
 
 Route::get('/get-kelas-by-nis', [PoinPelajarController::class, 'getKelasByNis'])->name('GetKelasByNis');
 Route::get('/search-kelas-poin-siswa', [PoinPelajarController::class, 'searchKelas'])->name('SearchKelasPoinSiswa');

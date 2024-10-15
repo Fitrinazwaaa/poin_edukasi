@@ -22,12 +22,12 @@ class DataKelasController extends Controller
         });
     
         // Mengirim data ke view
-        return view('admin.kelas.halaman_kelas', compact('kelasByTahun'));
+        return view('admin.pengaturan.kelas.halaman_kelas', compact('kelasByTahun'));
     }
 
     public function create()
     {
-        return view('admin.kelas.tambah_kelas');
+        return view('admin.pengaturan.kelas.tambah_kelas');
     }
 
     /**

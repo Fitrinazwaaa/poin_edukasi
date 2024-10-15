@@ -13,25 +13,25 @@ class UserController extends Controller
     {
         // Ambil semua data user dari database
         $datauser = DataUser::all();
-        return view('admin.pengaturan_akun.bk', compact('datauser'));
+        return view('admin.pengaturan.akun.bk', compact('datauser'));
     }
     public function indexguru()
     {
         // Ambil semua data user dari database
         $datauser = DataUser::all();
-        return view('admin.pengaturan_akun.guru', compact('datauser'));
+        return view('admin.pengaturan.akun.guru', compact('datauser'));
     }
     public function indexosis()
     {
         // Ambil semua data user dari database
         $datauser = DataUser::all();
-        return view('admin.pengaturan_akun.osis', compact('datauser'));
+        return view('admin.pengaturan.akun.osis', compact('datauser'));
     }
     public function indexkesiswaan()
     {
         // Ambil semua data user dari database
         $datauser = DataUser::all();
-        return view('admin.pengaturan_akun.kesiswaan', compact('datauser'));
+        return view('admin.pengaturan.akun.kesiswaan', compact('datauser'));
     }
 
 

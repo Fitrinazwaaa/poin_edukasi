@@ -21,15 +21,15 @@
             $hrClass = $siswa->jenis_kelamin === 'Perempuan' ? 'pink-hr' : 'blue-hr';
         @endphp
 
-        <div class="{{ $cardClass }}">
+    <div class="{{ $cardClass }}">
             <h4>{{ $siswa->nama }}</h4>
-            <p class="right bottom">Poin Negatif: {{ $siswa->poin_negatif }}</p>
+            <p class="right bottom">Poin Negatif: {{ $siswa->jumlah_negatif }}</p>
             <hr class="{{ $hrClass }}">
             <p>{{ $siswa->nis }}</p>
             <!-- Tambahkan container untuk kelas dan tombol -->
             <div class="class-button-container">
                 <p class="kelas">{{ $siswa->kelas }}</p>
-                <button class="perbaikan" onclick="window.location.href='{{ route('PerbaikanSikap') }}'"> Perbaikan </button>
+                <button class="perbaikan" onclick="window.location.href='{{ route('CreatePerbaikan', ['nis' => $siswa->nis]) }}'">Perbaikan</button>
             </div>
         </div>
     @endforeach
