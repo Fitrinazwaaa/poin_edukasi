@@ -12,17 +12,16 @@ class PoinPelajar extends Model
     protected $table = 'poin_pelajar';
 
     // Tentukan kolom yang dapat diisi
-    protected $fillable = [
-        'nis', 'nama', 'jenis_kelamin', 'kelas', 'jurusan',
-        'positif_poin', 'negatif_poin', 'keterangan_positif',
-        'keterangan_negatif', 'tanggal_positif', 'tanggal_negatif'
-    ];
+    protected $fillable = ['nis', 'nama', 'jenis_kelamin', 'tingkatan', 'jurusan', 'jurusan_ke', 'poin_positif', 'poin_negatif', 'nama_poin_positif','nama_poin_negatif', 'tanggal_positif', 'tanggal_negatif'];
 
     // Jika 'keterangan_negatif' dan 'tanggal_negatif' adalah array
     protected $casts = [
-        'keterangan_negatif' => 'array',
+        'nama_poin_negatif' => 'array',
         'tanggal_negatif' => 'array',
     ];
-    
+    public function siswa()
+    {
+        return $this->belongsTo(DataSiswa::class, 'nis', 'nis');
+    }   
 }
 

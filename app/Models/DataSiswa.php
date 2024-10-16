@@ -18,6 +18,12 @@ class DataSiswa extends Model
         return $this->hasOne(PoinPelajar::class, 'nis', 'nis');
     }
 
+        public function poinPelajar()
+    {
+        return $this->hasOne(PoinPelajar::class, 'nis', 'nis');
+    }
+
+
     // Relasi ke PoinPositif
     public function poinPositif()
     {

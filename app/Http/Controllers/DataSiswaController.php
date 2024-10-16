@@ -82,18 +82,16 @@ class DataSiswaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $data = DataSiswa::where('nis', $id)
-            ->update([
-                'nis'               => $request->input('nis'),
-                'nama'              => $request->input('nama'),
-                'jenis_kelamin'     => $request->input('jenis_kelamin'),
-                'tingkatan'             => $request->input('tingkatan'),
-                'jurusan'             => $request->input('jurusan'),
-                'jurusan_ke'             => $request->input('jurusan_ke'),
-                'tahun_angkatan'    => $request->input('tahun_angkatan'), // Perbaiki penamaan ini
-            ]);
-    
-        return redirect()->route('Siswa');
+        // Update data siswa
+        $dataSiswa = DataSiswa::where('nis', $id)->firstOrFail();
+        $dataSiswa->update($request->only(['nis', 'nama', 'tingkatan', 'jurusan', 'jurusan_ke', 'jenis_kelamin', 'tahun_angkatan']));
+
+        // Update data poin pelajar terkait jika ada
+        if ($dataSiswa->poinPelajar) {
+            $dataSiswa->poinPelajar->update($request->only(['nis', 'nama', 'tingkatan', 'jurusan', 'jurusan_ke', 'jenis_kelamin', 'tahun_angkatan']));
+        }
+
+        return redirect()->route('Siswa')->with('success', 'Data siswa dan poin pelajar berhasil diperbarui.');
     }
     
     /**

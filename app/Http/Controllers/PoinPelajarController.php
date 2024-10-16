@@ -9,6 +9,7 @@ use App\Models\PoinPelajar;
 use App\Models\PoinPeringatan;
 use DB;
 use Illuminate\Http\Request;
+use Log;
 
 class PoinPelajarController extends Controller
 {
@@ -314,9 +315,6 @@ public function deletePoinNegatif(Request $request)
     return response()->json(['success' => "Poin negatif berhasil dihapus."]);
 }
 
-    
-    
-
     public function hapusSemua(Request $request)
     {
         // Menghapus semua data poin siswa
@@ -324,6 +322,63 @@ public function deletePoinNegatif(Request $request)
     
         return redirect()->back()->with('success', 'Semua data poin siswa berhasil dihapus.');
     }
+
+    public function update(Request $request, string $id)
+    {
+        // Validasi input
+        $request->validate([
+            'nis'           => 'required|string',
+            'nama'          => 'required|string|max:255',
+            'tingkatan'     => 'required|integer',
+            'jurusan'       => 'required|string|max:255',
+            'jurusan_ke'    => 'required|integer',
+            'jenis_kelamin' => 'required|string|in:Laki-laki,Perempuan',
+            'tahun_angkatan'=> 'required|integer',
+        ]);
+    
+        // Update data di tabel data_siswa
+        $dataSiswa = DataSiswa::where('nis', $id)->firstOrFail();
+        $dataSiswa->update([
+            'nis'               => $request->input('nis'),
+            'nama'              => $request->input('nama'),
+            'tingkatan'         => $request->input('tingkatan'),
+            'jurusan'           => $request->input('jurusan'),
+            'jurusan_ke'        => $request->input('jurusan_ke'),
+            'jenis_kelamin'     => $request->input('jenis_kelamin'),
+            'tahun_angkatan'    => $request->input('tahun_angkatan'),
+        ]);
+    
+        // Logging untuk memeriksa nilai input
+        Log::info('Data siswa yang diupdate:', [
+            'nis' => $request->input('nis'),
+            'tingkatan' => $request->input('tingkatan'),
+            'jurusan_ke' => $request->input('jurusan_ke'),
+            'tahun_angkatan' => $request->input('tahun_angkatan'),
+        ]);
+    
+        // Cari data poin pelajar berdasarkan NIS
+        $dataPoinPelajar = PoinPelajar::where('nis', $id)->first();
+    
+        // Pastikan data poin pelajar ditemukan sebelum update
+        if ($dataPoinPelajar) {
+            $dataPoinPelajar->update([
+                'nis'               => $request->input('nis'),
+                'nama'              => $request->input('nama'),
+                'tingkatan'         => (int) $request->input('tingkatan'), // casting integer
+                'jurusan'           => $request->input('jurusan'),
+                'jurusan_ke'        => (int) $request->input('jurusan_ke'), // casting integer
+                'jenis_kelamin'     => $request->input('jenis_kelamin'),
+                'tahun_angkatan'    => (int) $request->input('tahun_angkatan'), // casting integer
+            ]);
+        } else {
+            Log::error('Data poin pelajar tidak ditemukan untuk NIS: ' . $id);
+        }
+    
+        return redirect()->route('Siswa')->with('success', 'Data siswa dan poin pelajar berhasil diperbarui.');
+    }
+    
+
+
     
         public function notifikasi1()
     {
