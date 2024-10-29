@@ -7,9 +7,9 @@
     <link rel="stylesheet" href="{{ asset('css/notifikasi-peringatan.css') }}">
 </head>
 <body>
-    @extends('navbar/nav-form')
+@extends('navbar/nav-notifikasi')
 
-    <h2 class="text-center">{{ $poinPeringatan8->peringatan }}</h2>
+    <h5 class="text-center">{{ $poinPeringatan8->peringatan }}</h5>
     <p class="text-center">Poin Negatif >{{ $poinPeringatan8->max_poin }}</p>
 
     @foreach($dataSiswa as $siswa)

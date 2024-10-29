@@ -9,7 +9,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 </head>
 <body class="body">
-    @extends('navbar/nav-form')
+    @extends('navbar/nav-PoinSiswa')
 
     @section('content')
     <p class="text-center">FORMULIR INPUT POIN DENGAN DATA DIRI</p>

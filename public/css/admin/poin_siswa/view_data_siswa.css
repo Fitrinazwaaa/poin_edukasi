@@ -1,12 +1,14 @@
 * {
     margin: 0;
-    padding: 0;
+    padding : 0;
     box-sizing: border-box;
     font-family: Arial, sans-serif;
 }
 
 body {
     background-color: #B6DCFD;
+    padding-top: 80px;
+
 }
 
 .profile-header {
@@ -156,3 +158,41 @@ td, tr {
 .table-wrapper::-webkit-scrollbar-track {
     background-color: #f1f1f1;
 }
+
+.judul {
+    display: flex;
+    justify-content: left;
+    margin-bottom: -50px;
+    margin-top: 10px;
+}
+/* Container untuk tombol tambah dan hapus */
+.hapus {
+    display: flex;
+    justify-content: right;
+    align-items: right;
+    gap: 10px; /* Mengatur jarak antara tombol */
+  }
+
+
+/* Delete Button */
+.delete-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 12px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    background-color: #f44336;
+    color: white;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  }
+  
+  .delete-icon:hover {
+    background-color: #cd3f35;
+    transform: scale(1.05);
+  }

@@ -71,28 +71,71 @@ class DataSiswaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($nis)
     {
-        $data=DataSiswa::where('nis', $id)->firstorfail();
-        return view('admin.siswa.edit_siswa', compact('data'));
+        // Ambil data siswa berdasarkan NIS
+        $data = DataSiswa::where('nis', $nis)->first();
+    
+        // Ambil daftar tahun angkatan dari database dengan pluck
+        $tahun_angkatan = DB::table('data_kelas')->distinct()->pluck('tahun_angkatan');
+        $jurusan = DB::table('data_kelas')->distinct()->pluck('jurusan');
+        $jurusan_ke = DB::table('data_kelas')->distinct()->pluck('jurusan_ke');
+    
+        return view('admin.siswa.edit_siswa', [
+            'data' => $data,
+            'tahun_angkatan' => $tahun_angkatan,
+            'jurusan' => $jurusan,
+            'jurusan_ke' => $jurusan_ke,
+        ]);
     }
+    
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
-        // Update data siswa
+        // Validasi input data
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'nis' => 'required|integer|unique:data_siswa,nis,' . $id . ',nis', // Memastikan NIS unik kecuali untuk siswa yang sedang diedit
+            'jenis_kelamin' => 'required',
+            'tahun_angkatan' => 'required',
+            'tingkatan' => 'required',
+            'jurusan' => 'required',
+            'jurusan_ke' => 'required',
+        ]);
+    
+        // Ambil data siswa berdasarkan NIS yang diberikan
         $dataSiswa = DataSiswa::where('nis', $id)->firstOrFail();
-        $dataSiswa->update($request->only(['nis', 'nama', 'tingkatan', 'jurusan', 'jurusan_ke', 'jenis_kelamin', 'tahun_angkatan']));
-
-        // Update data poin pelajar terkait jika ada
-        if ($dataSiswa->poinPelajar) {
-            $dataSiswa->poinPelajar->update($request->only(['nis', 'nama', 'tingkatan', 'jurusan', 'jurusan_ke', 'jenis_kelamin', 'tahun_angkatan']));
-        }
-
-        return redirect()->route('Siswa')->with('success', 'Data siswa dan poin pelajar berhasil diperbarui.');
+    
+        // Update data siswa dengan data yang diterima dari form
+        $dataSiswa->update($request->only([
+            'nis', 
+            'nama', 
+            'tingkatan', 
+            'jurusan', 
+            'jurusan_ke', 
+            'jenis_kelamin', 
+            'tahun_angkatan'
+        ]));
+    
+        // Update semua data di poin_pelajar yang memiliki nis yang sama
+        $dataSiswa->poinPelajar()->update($request->only([
+            'nis', 
+            'nama', 
+            'tingkatan', 
+            'jurusan', 
+            'jurusan_ke', 
+            'jenis_kelamin', 
+            'tahun_angkatan'
+        ]));
+    
+        // Redirect kembali dengan pesan sukses
+        return redirect()->route('Siswa')->with('success', 'Data siswa dan semua poin pelajar berhasil diperbarui.');
     }
+    
+    
     
     /**
      * Remove the specified resource from storage.
@@ -117,13 +160,20 @@ class DataSiswaController extends Controller
         $jurusan = DB::table('data_kelas')
                      ->where('tahun_angkatan', $tahun_angkatan)
                      ->get(['tahun_angkatan', 'jurusan', 'jurusan_ke']); // mengambil jurusan dan jurusan_ke
-    
+        
         return response()->json($jurusan);
     }
     
-    public function getJurusanKeDataSiswa($jurusan)
+    
+    public function getJurusanKeDataSiswa($tahun_angkatan, $jurusan)
     {
-        $data = DB::table('data_kelas')->where('jurusan', $jurusan)->get(['jurusan_ke']);
+        // Ambil data jurusan_ke yang unik berdasarkan tahun angkatan dan jurusan
+        $data = DB::table('data_kelas')
+                  ->where('tahun_angkatan', $tahun_angkatan)
+                  ->where('jurusan', $jurusan)
+                  ->distinct()  // Untuk menghindari duplikasi
+                  ->get(['jurusan_ke']);
+                  
         return response()->json($data);
-    }
+    }    
 }

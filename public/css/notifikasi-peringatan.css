@@ -2,13 +2,12 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f3f4f6;
     margin: 0;
-    padding: 0;
+    padding-top: 80px;
     overflow-x: hidden;
 }
 
 /* Mengatur teks judul */
-h2.text-center {
-    margin-top: 120px;
+h5.text-center {
     text-align: center;
     color: #180853;
     margin-bottom: 27px;
@@ -16,8 +15,9 @@ h2.text-center {
 
 /* Mengatur teks judul */
 p.text-center {
-    margin-top: -20px;
-    font-weight: 500;
+    margin-top: -25px;
+    font-weight: 400;
+    font-size: 12px;
     text-align: center;
     color: #180853;
     margin-bottom: 50px;
@@ -153,3 +153,101 @@ p.text-center {
     transform: scale(1.05);
 }
     
+
+
+
+/* Form Group */
+.form-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  
+  /* Label */
+  .form-row label {
+    width: 120px;
+    font-size: 14px;
+    color: #333;
+    margin-right: 10px;
+  }
+  
+  
+  /* Input dan Select Field */
+  .form-control {
+    flex: 1;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Radio Button */
+  .form-row div {
+    display: flex;
+    justify-content: start;
+  }
+  
+  
+  .form-row div label {
+    font-size: 14px;
+    color: #333;
+  }
+  
+  /* Tombol Submit dan Kembali */
+  .button-group {
+    display: flex;
+    justify-content: flex-end; /* Menyusun elemen ke kanan */
+    gap: 10px; /* Memberi jarak antar tombol */
+  }
+  
+  button {
+    padding: 4px 20px 6px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button.btn-satu {
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 3px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  button.btn-satu:hover{
+    background-color: #2f9232;
+    transform: scale(1.05);
+    color: white;
+  }
+  
+  button.btn-dua {
+    background-color: #438BC9;
+    color: white;
+    border-radius: 3px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  button.btn-dua:hover{
+    background-color: #336fa3; 
+    transform: scale(1.05);  
+    color: white;
+  }
+  
+  .keterangan {
+    display: flex; /* Mengatur dropdown pada satu baris */
+    gap: 10px; /* Jarak antara dropdown */
+  }
+  
+  select.kategori-satu,
+  select.kategori-dua {
+    margin-left: 60px;
+    border: 1px solid #ccc;
+    width: 450px; /* Lebar dropdown */
+    border-radius: 4px;
+    font-size: 14px;
+    padding: 8px 10px; /* Padding dalam dropdown */
+    box-sizing: border-box; /* Agar padding dan border dihitung dalam lebar elemen */
+  }

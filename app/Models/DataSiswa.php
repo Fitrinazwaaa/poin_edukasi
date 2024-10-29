@@ -18,9 +18,10 @@ class DataSiswa extends Model
         return $this->hasOne(PoinPelajar::class, 'nis', 'nis');
     }
 
-        public function poinPelajar()
+    // Definisikan relasi ke PoinPelajar
+    public function poinPelajar()
     {
-        return $this->hasOne(PoinPelajar::class, 'nis', 'nis');
+        return $this->hasMany(PoinPelajar::class, 'nis', 'nis');
     }
 
 

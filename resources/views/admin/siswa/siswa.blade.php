@@ -9,15 +9,9 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    @extends('navbar/nav-form')
+    @extends('navbar/nav-siswa')
 
-    <!-- Search Bar -->
-    <div class="container mt-3">
-        <div class="input-group">
-            <input type="text" class="form-control" id="searchInput" placeholder="Cari siswa berdasarkan NIS atau Nama" aria-label="Search" onkeyup="searchStudents()">
-            <button class="btn btn-outline-secondary" type="button" onclick="searchStudents()">Cari</button>
-        </div>
-    </div>
+
 
     <!-- Confirmation Modal -->
     <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
@@ -41,8 +35,16 @@
     <div class="hero">
         <div class="judul_dan_tombol">
             <div class="judul-awal">
-                <p class="judul1">TABEL SISWA SMK N 1 KAWALI</p>
-                <p class="judul2">PERIODE 2022-2024</p>
+                <!-- Search Bar -->
+                <div class="container mt-7">
+                    <div class="input-group position-relative">
+                        <input type="text" class="form-control" id="searchInput" placeholder="Cari siswa berdasarkan NIS atau Nama" aria-label="Search">
+                        <button class="btn btn-outline-secondary" type="button" onclick="searchStudents()">Cari</button>
+                        <span class="clear-input position-absolute" onclick="clearSearch()" style="right: 60px; top: 8px; display: none; cursor: pointer;">
+                            <i class="fas fa-times" style="font-size: 18px; color: #dc3545;"></i>
+                        </span>
+                    </div>
+                </div>
             </div>
             <div class="tambah_dan_hapus">
                 <form id="deleteForm" action="{{ route('SiswaHapusMultiple') }}" method="POST" style="display: inline;">
@@ -127,54 +129,70 @@
             </div>
         </div>
 
-@foreach ($siswaByTahun as $tahun_angkatan => $siswa)
-    <div class="tabel">
-        <input type="checkbox" id="dropdown{{ $tahun_angkatan }}">
-        <label class="btn-toggle" for="dropdown{{ $tahun_angkatan }}">
-            ANGKATAN TAHUN {{ $tahun_angkatan }}
-            <span class="float-end" style="font-weight: 500; margin-right: 30px">Jumlah Siswa: {{ count($siswa) }}</span>
-        </label>
-        <div class="collapse-content" id="content{{ $tahun_angkatan }}">
-            <div class="card card-body">
-                <div class="table-wrapper">
-                    <div class="table">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th><input type="checkbox" id="select_all{{ $tahun_angkatan }}" class="select_all"></th>
-                                    <th>NIS</th>
-                                    <th>Nama</th>
-                                    <th>Jenis<br>Kelamin</th>
-                                    <th>Kelas</th>
-                                    <th>Angkatan (Tahun)</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody id="studentTable{{ $tahun_angkatan }}">
-                                @foreach ($siswa as $item)
-                                <tr>
-                                    <td><input type="checkbox" name="hapus[]" class="checkbox_ids{{ $tahun_angkatan }}" value="{{ $item->nis }}"></td>
-                                    <td>{{ $item->nis }}</td>
-                                    <td style="text-align: left;">{{ $item->nama }}</td>
-                                    <td>{{ $item->jenis_kelamin }}</td>
-                                    <td>{{ $item->tingkatan}} {{ $item->jurusan}} {{ $item->jurusan_ke}}</td>
-                                    <td>{{ $item->tahun_angkatan }}</td>
-                                    <td>
-                                        <button class="icon-btn edit-btn" onclick="window.location.href='{{ route('SiswaEdit', $item->nis) }}';">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+        @foreach ($siswaByTahun as $tahun_angkatan => $siswa)
+            <div class="tabel" data-tahun-angkatan="{{ $tahun_angkatan }}">
+                <input type="checkbox" id="dropdown{{ $tahun_angkatan }}">
+                <label class="btn-toggle" for="dropdown{{ $tahun_angkatan }}">
+                    ANGKATAN TAHUN {{ $tahun_angkatan }}
+                    <span class="float-end" style="font-weight: 500; margin-right: 30px">Jumlah Siswa: {{ count($siswa) }}</span>
+                </label>
+                <div class="collapse-content" id="content{{ $tahun_angkatan }}">
+                    <div class="card card-body">
+                        <div class="table-wrapper">
+                            <div class="table">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th><input type="checkbox" id="select_all{{ $tahun_angkatan }}" class="select_all"></th>
+                                            <th>NIS</th>
+                                            <th>Nama</th>
+                                            <th>Jenis<br>Kelamin</th>
+                                            <th>Kelas</th>
+                                            <th>Angkatan (Tahun)</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="studentTable{{ $tahun_angkatan }}">
+                                        @foreach ($siswa as $item)
+                                        <tr data-nis="{{ $item->nis }}" data-nama="{{ $item->nama }}">
+                                            <td><input type="checkbox" name="hapus[]" class="checkbox_ids{{ $tahun_angkatan }}" value="{{ $item->nis }}"></td>
+                                            <td>{{ $item->nis }}</td>
+                                            <td style="text-align: left;">{{ $item->nama }}</td>
+                                            <td>{{ $item->jenis_kelamin }}</td>
+                                            <td>{{ $item->tingkatan}} {{ $item->jurusan}} {{ $item->jurusan_ke}}</td>
+                                            <td>{{ $item->tahun_angkatan }}</td>
+                                            <td>
+                                                <button class="icon-btn edit-btn" onclick="window.location.href='{{ route('SiswaEdit', $item->nis) }}';">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        @endforeach
     </div>
-@endforeach
-    </div>
+
+    <script type="text/javascript">
+    document.querySelectorAll('.btn-toggle').forEach(button => {
+        button.addEventListener('click', function() {
+            var targetId = this.getAttribute('for'); // ambil ID dari label yang diklik
+            var targetContent = document.getElementById('content' + targetId.replace('dropdown', '')); // sesuaikan ID untuk target content
+
+            if (targetContent && !targetContent.classList.contains('show')) { // cek jika collapse content tidak sedang ditampilkan
+                setTimeout(function() {
+                    targetContent.scrollIntoView({ behavior: 'smooth', block: 'start' }); // scroll dengan smooth
+                }, 400); // delay untuk menunggu animasi collapse
+            }
+        });
+    });
+</script>
+
     
 <script>
 // Fungsi untuk memilih semua checkbox di tabel sesuai dengan angkatan
@@ -256,27 +274,92 @@ function deleteSelected() {
             }
         });
 
-
-
         $('#jurusan').on('change', function() {
-            var jurusan = $(this).val();
-            
-            if (jurusan) {
-                $.ajax({
-                    url: '/get-jurusan-ke-datasiswa/' + jurusan,  // Sesuaikan dengan fungsi baru
-                    type: 'GET',
-                    success: function(data) {
-                        $('#jurusan_ke').empty();
-                        $('#jurusan_ke').append('<option value="" disabled selected>Pilih Jurusan ke</option>');
+    var jurusan = $(this).val();
+    var tahunAngkatan = $('#tahun_angkatan').val(); // Ambil tahun angkatan yang dipilih
 
-                        $.each(data, function(index, jurusanKe) {
-                            $('#jurusan_ke').append('<option value="'+ jurusanKe.jurusan_ke +'">'+ jurusanKe.jurusan_ke +'</option>');
-                        });
-                    }
+    if (jurusan && tahunAngkatan) {
+        $.ajax({
+            url: '/get-jurusan-ke-datasiswa/' + tahunAngkatan + '/' + jurusan, // URL diubah untuk mencocokkan tahun angkatan dan jurusan
+            type: 'GET',
+            success: function(data) {
+                $('#jurusan_ke').empty();
+                $('#jurusan_ke').append('<option value="" disabled selected>Pilih Jurusan ke</option>');
+
+                $.each(data, function(index, jurusanKe) {
+                    $('#jurusan_ke').append('<option value="'+ jurusanKe.jurusan_ke +'">'+ jurusanKe.jurusan_ke +'</option>');
                 });
+
+                $('#jurusan_ke').prop('disabled', false); // Aktifkan dropdown 'jurusan ke'
+            },
+            error: function(xhr, status, error) {
+                console.log("Error: " + error);
             }
         });
+    }
+});
    </script>
+   <!-- Script Pencarian -->
+   <script>
+// Fungsi untuk menghapus input pencarian
+function clearSearch() {
+    document.getElementById("searchInput").value = ""; // Hapus nilai input
+    document.querySelector(".clear-input").style.display = "none"; // Sembunyikan ikon
+    searchStudents(); // Panggil fungsi pencarian untuk menyembunyikan semua siswa
+}
+
+// Pastikan fungsi ini diatur di luar fungsi lain
+document.getElementById("searchInput").addEventListener("input", function() {
+    const clearInput = document.querySelector(".clear-input");
+    clearInput.style.display = this.value ? "block" : "none"; // Sembunyikan atau tampilkan ikon
+});
+
+
+    function searchStudents() {
+        const searchInput = document.getElementById("searchInput").value.toLowerCase();
+        const tables = document.querySelectorAll(".tabel");
+
+        let found = false;
+        tables.forEach(table => {
+            const tahunAngkatan = table.getAttribute("data-tahun-angkatan");
+            const rows = table.querySelectorAll(`#studentTable${tahunAngkatan} tr`);
+
+            let matchFound = false;
+            rows.forEach(row => {
+                const nis = row.getAttribute("data-nis").toLowerCase();
+                const nama = row.getAttribute("data-nama").toLowerCase();
+
+                if (nis.includes(searchInput) || nama.includes(searchInput)) {
+                    row.style.display = "";
+                    matchFound = true;
+                    found = true;
+                } else {
+                    row.style.display = "none";
+                }
+            });
+
+            // Jika ada kecocokan di tabel ini, aktifkan dropdown dan buka isi tabel
+            const collapseContent = document.getElementById(`content${tahunAngkatan}`);
+            if (matchFound) {
+                collapseContent.classList.add("show"); // Tampilkan isi tabel
+                document.getElementById(`dropdown${tahunAngkatan}`).checked = true; // Otomatis aktifkan dropdown
+            } else {
+                collapseContent.classList.remove("show"); // Sembunyikan isi tabel jika tidak ada kecocokan
+                document.getElementById(`dropdown${tahunAngkatan}`).checked = false; // Nonaktifkan dropdown
+            }
+        });
+
+        if (!found) {
+            alert("Data tidak ditemukan.");
+        }
+    }
+</script>
+
+
+
+    <!-- Bootstrap & jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </body>
 </html>

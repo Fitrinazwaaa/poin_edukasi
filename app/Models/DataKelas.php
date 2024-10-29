@@ -9,4 +9,5 @@ class DataKelas extends Model
 {
     protected $table='data_kelas';
     protected $guarded=[];
+    protected $fillable = ['tahun_angkatan', 'jurusan', 'jurusan_ke'];
 }

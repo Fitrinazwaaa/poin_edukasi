@@ -7,10 +7,10 @@
     <link rel="stylesheet" href="{{ asset('css/notifikasi-peringatan.css') }}">
 </head>
 <body>
-    @extends('navbar/nav-form')
+@extends('navbar/nav-notifikasi')
 
     @if($poinPeringatan1 && $poinPeringatan2)
-        <h2 class="text-center">{{ $poinPeringatan1->peringatan }}</h2>
+        <h5 class="text-center">{{ $poinPeringatan1->peringatan }}</h5>
         <p class="text-center">Poin Negatif {{ $poinPeringatan1->max_poin }} - {{ $poinPeringatan2->max_poin }} </p>
     @endif
 

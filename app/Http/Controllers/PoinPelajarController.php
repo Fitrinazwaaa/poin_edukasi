@@ -15,6 +15,14 @@ class PoinPelajarController extends Controller
 {
     public function index()
     {
+        $poinPeringatan1 = PoinPeringatan::where('id_peringatan', '1')->first(); // Ambil satu data dengan first()
+        $poinPeringatan2 = PoinPeringatan::where('id_peringatan', '2')->first(); // Ambil satu data dengan first()
+        $poinPeringatan3 = PoinPeringatan::where('id_peringatan', '3')->first(); // Ambil satu data dengan first()
+        $poinPeringatan4 = PoinPeringatan::where('id_peringatan', '4')->first(); // Ambil satu data dengan first()
+        $poinPeringatan5 = PoinPeringatan::where('id_peringatan', '5')->first(); // Ambil satu data dengan first()
+        $poinPeringatan6 = PoinPeringatan::where('id_peringatan', '6')->first(); // Ambil satu data dengan first()
+        $poinPeringatan7 = PoinPeringatan::where('id_peringatan', '7')->first(); // Ambil satu data dengan first()
+        $poinPeringatan8 = PoinPeringatan::where('id_peringatan', '8')->first(); // Ambil satu data dengan first()
         // Mengelompokkan data siswa berdasarkan NIS dan menghitung total poin positif dan negatif
         $dataSiswa = PoinPelajar::select(
             'nis', 
@@ -57,6 +65,9 @@ class PoinPelajarController extends Controller
             return redirect()->back()->with('error', 'Poin peringatan tidak ditemukan.');
         }
 
+        $tingkatanList = DB::table('data_siswa')->distinct()->pluck('tingkatan');
+
+
         // Menghitung jumlah notifikasi untuk setiap kategori berdasarkan NIS
         $jumlahNotifikasi = [];
         foreach ($poinPeringatans as $index => $poinPeringatan) {
@@ -80,7 +91,7 @@ class PoinPelajarController extends Controller
         }
 
         // Mengirim data siswa dan jumlah notifikasi ke view
-        return view('admin.poin_siswa.SiswaPoin', compact('dataSiswa', 'jumlahNotifikasi'));
+        return view('admin.poin_siswa.SiswaPoin', compact('dataSiswa', 'jumlahNotifikasi', 'tingkatanList', 'poinPeringatan1', 'poinPeringatan2', 'poinPeringatan3', 'poinPeringatan4', 'poinPeringatan5', 'poinPeringatan6', 'poinPeringatan7', 'poinPeringatan8'));
     }
 
     
@@ -291,6 +302,12 @@ class PoinPelajarController extends Controller
         // Ambil data siswa berdasarkan NIS
         $siswa = PoinPelajar::where('nis', $nis)->first();
     
+        // Cek apakah data siswa ada
+        if (!$siswa) {
+            // Jika siswa tidak ditemukan, redirect kembali dengan pesan
+            return redirect()->route('PoinSiswa')->with('error', 'Data siswa tidak ditemukan');
+        }
+    
         // Ambil semua data poin positif dan negatif dari siswa tersebut
         $poinPositif = PoinPelajar::where('nis', $nis)->whereNotNull('nama_poin_positif')->get();
         $poinNegatif = PoinPelajar::where('nis', $nis)->whereNotNull('nama_poin_negatif')->get();
@@ -302,6 +319,7 @@ class PoinPelajarController extends Controller
             'poinNegatif' => $poinNegatif
         ]);
     }
+    
     
     public function deletePoinPositif(Request $request)
 {
@@ -376,10 +394,7 @@ public function deletePoinNegatif(Request $request)
     
         return redirect()->route('Siswa')->with('success', 'Data siswa dan poin pelajar berhasil diperbarui.');
     }
-    
 
-
-    
         public function notifikasi1()
     {
         // Ambil data poin peringatan dari tabel PoinPeringatan berdasarkan ID

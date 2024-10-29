@@ -1,0 +1,73 @@
+        /* Navbar Custom Styling */
+        .navbar-custom {
+            padding: 0 50px;
+            background-color: #388DD8;
+            border-bottom: 2px solid white;
+            height: 72px;
+        }
+
+        /* Back Button Styling */
+        .back-button button {
+            color: white;
+            background: #388DD8; /* Warna gradien */
+            border: none;
+            border-radius: 50%;
+            padding: 2px 0;
+            transition: all 0.3s ease;
+        }
+
+        /* Icon Styling */
+        .back-button .bi-arrow-left {
+            font-size: 20px;
+        }
+
+        /* Hover effect on back button */
+        .back-button button:hover {
+            background: #388DD8; /* Gradien terbalik saat hover */
+            transform: scale(1.1); /* Sedikit pembesaran untuk efek */
+        }
+
+        /* Profile Info Styling */
+        .profile-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .profile-image img {
+            width: 40px;
+            height: 40px;
+            border-radius: 20%;
+        }
+
+        .profile-details {
+            margin-left: 10px;
+            color: white;
+        }
+
+        .profile-id {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .profile-name {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .profile-meta {
+            text-align: right;
+            color: white;
+        }
+
+        .profile-gender, .profile-class {
+            font-size: 14px;
+        }
+
+        .profile-class {
+            font-weight: bold;
+        }
+
+        /* Ensure content is not overlapped by navbar */
+        .content {
+            margin-top: 80px;
+        }

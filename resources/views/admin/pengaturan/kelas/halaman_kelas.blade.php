@@ -23,8 +23,8 @@
                     <p style="font-size: 13px;">Anda yakin ingin menghapus siswa yang dipilih?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                    <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Hapus</button>
+                    <button type="button" class="btn btn-dua" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-satu" id="confirmDeleteBtn">Hapus</button>
                 </div>
             </div>
         </div>
@@ -40,10 +40,51 @@
                     @csrf
                     <button type="button" class="icon-btn delete-btn" onclick="deleteSelected();"><i class="fas fa-trash-alt"></i></button>
                 </form>
-                <button class="tambah" onclick="window.location.href='{{ route('TambahKelas') }}';">
+                <button class="tambah" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     <i class="fas fa-plus"></i> Tambahkan
                 </button>
             </div>
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+
+                        <div class="modal-header" style="background-color: #e7f4ff;">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel" >TAMBAH DATA SISWA</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+
+                        <div class="modal-body" style="background-color: #e7f4ff;">
+                            <div class="container">
+                            <form method="POST" action="{{ route('KelasStore') }}">
+                @csrf
+                @method('PUT')
+                <div class="form-row">
+                    <label for="tahun_angkatan">Tahun Angkatan</label>
+                    <input type="text" name="tahun_angkatan" class="form-control" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="jurusan">Jurusan</label>
+                    <input type="text" name="jurusan" class="form-control" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="jurusan_ke">Jumlah Kelas</label>
+                    <input type="number" name="jurusan_ke" class="form-control" required min="1">
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="btn-dua" onclick="window.location.href='{{ route('kelas') }}';">Kembali</button>
+                    <button type="submit" class="btn-satu">Kirim</button>
+                </div>
+            </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         </div>
         @foreach ($kelasByTahun as $tahun_angkatan => $Kelas)
         <div class="tabel">

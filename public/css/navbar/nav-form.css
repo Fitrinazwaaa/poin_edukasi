@@ -78,3 +78,55 @@ div.offcanvas-header {
 }
 
 /* NAVBAR-END */
+
+
+
+
+         /* Navbar Custom Styling */
+         .navbar-custom {
+            padding: 0 50px;
+            background-color: #388DD8;
+            border-bottom: 2px solid white;
+            height: 72px;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Back Button Styling */
+        .back-button {
+            display: flex;
+            align-items: center;
+        }
+
+        .back-button button {
+            color: white;
+            background: #388DD8;
+            border: none;
+            border-radius: 50%;
+            padding: 5px 10px;
+            transition: all 0.3s ease;
+            font-weight: bold; /* Set bold to match h5 */
+        }
+
+        /* Icon Styling */
+        .back-button .bi-arrow-left {
+            font-size: 20px;
+        }
+
+        /* Hover effect on back button */
+        .back-button button:hover {
+            background: #388DD8;
+            transform: scale(1.1);
+        }
+
+        /* Teks H5 di sebelah kanan tombol back */
+        .navbar-custom h5 {
+            color: white;
+            margin-left: 15px;
+            margin-bottom: 0;
+        }
+
+        /* Ensure content is not overlapped by navbar */
+        .content {
+            margin-top: 80px;
+        }

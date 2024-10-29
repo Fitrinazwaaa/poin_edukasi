@@ -17,26 +17,14 @@ body {
   display: flex;
   justify-content: space-between; /* Membuat jarak antara judul dan tombol */
   align-items: center; /* Menyelaraskan elemen secara vertikal */
-  margin: 20px 21px -9px 21px; /* Memberikan jarak atas-bawah */
+  margin: 20px 21px 2px 21px; /* Memberikan jarak atas-bawah */
 }
 
 /* Judul-judul */
 .judul-awal {
   display: flex;
   flex-direction: column; /* Membuat judul 1 dan judul 2 dalam satu kolom */
-}
-
-.judul1 {
-  color: #000000;
-  font-size: 22px;
-  font-weight: 700;
-  margin-bottom: 10px;
-}
-
-.judul2 {
-  color: #000000;
-  font-size: 13px;
-  font-weight: 400;
+  width: 1000px;
 }
 
 /* Container untuk tombol tambah dan hapus */
@@ -364,4 +352,14 @@ select.kategori-dua {
   font-size: 14px;
   padding: 8px 10px; /* Padding dalam dropdown */
   box-sizing: border-box; /* Agar padding dan border dihitung dalam lebar elemen */
+}
+
+
+
+.clear-input {
+  transition: color 0.3s ease;
+}
+
+.clear-input:hover {
+  color: #ff6b6b; /* Warna saat hover */
 }
