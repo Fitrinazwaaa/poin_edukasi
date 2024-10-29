@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DataKelas;
 use App\Models\PoinPelajar;
 use App\Models\PoinPeringatan;
+use DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\DataSiswa; // Menggunakan model DataSiswa
@@ -31,41 +32,99 @@ class Admin_Controller extends Controller
     }
     public function user1()
     {
-        return view('admin/laporan/laporan_poin_siswa');
+        // Ambil data dari tabel poin_pelajar
+        $poinPelajar = PoinPelajar::all();
+
+        // Kirim data ke view
+        return view('admin.laporan.laporan_poin_siswa', ['poinPelajar' => $poinPelajar]);
     }
     public function user2()
     {
-        return view('admin/laporan/laporan_poin_siswa');
+        // Ambil data dari tabel poin_pelajar
+        $poinPelajar = PoinPelajar::all();
+
+        // Kirim data ke view
+        return view('admin.laporan.laporan_poin_siswa', ['poinPelajar' => $poinPelajar]);
     }
     public function user_edit()
     {
-        // Mengambil data siswa dari tabel poin_pelajar yang sudah menyimpan total poin positif dan negatif
-        $dataSiswa = PoinPelajar::all();
-        
-    
+        $poinPeringatan1 = PoinPeringatan::where('id_peringatan', '1')->first(); // Ambil satu data dengan first()
+        $poinPeringatan2 = PoinPeringatan::where('id_peringatan', '2')->first(); // Ambil satu data dengan first()
+        $poinPeringatan3 = PoinPeringatan::where('id_peringatan', '3')->first(); // Ambil satu data dengan first()
+        $poinPeringatan4 = PoinPeringatan::where('id_peringatan', '4')->first(); // Ambil satu data dengan first()
+        $poinPeringatan5 = PoinPeringatan::where('id_peringatan', '5')->first(); // Ambil satu data dengan first()
+        $poinPeringatan6 = PoinPeringatan::where('id_peringatan', '6')->first(); // Ambil satu data dengan first()
+        $poinPeringatan7 = PoinPeringatan::where('id_peringatan', '7')->first(); // Ambil satu data dengan first()
+        $poinPeringatan8 = PoinPeringatan::where('id_peringatan', '8')->first(); // Ambil satu data dengan first()
+        // Mengelompokkan data siswa berdasarkan NIS dan menghitung total poin positif dan negatif
+        $dataSiswa = PoinPelajar::select(
+            'nis', 
+            'nama', 
+            'jenis_kelamin', 
+            'tingkatan', 
+            'jurusan', 
+            'jurusan_ke',
+            DB::raw('SUM(poin_positif) as jumlah_positif'), // Menghitung total poin positif
+            DB::raw('SUM(poin_negatif) as jumlah_negatif')  // Menghitung total poin negatif
+        )
+        ->groupBy('nis', 'nama', 'jenis_kelamin', 'tingkatan', 'jurusan', 'jurusan_ke')
+        ->get();
+
+        // Perhitungan sisa poin positif dan negatif
+        foreach ($dataSiswa as $siswa) {
+            if ($siswa->jumlah_positif > $siswa->jumlah_negatif) {
+                // Jika poin positif lebih besar, sisa poin positif
+                $siswa->poin_positif_akhir = $siswa->jumlah_positif - $siswa->jumlah_negatif;
+                $siswa->poin_negatif_akhir = 0;
+            } else {
+                // Jika poin negatif lebih besar atau sama, sisa poin negatif
+                $siswa->poin_negatif_akhir = $siswa->jumlah_negatif - $siswa->jumlah_positif;
+                $siswa->poin_positif_akhir = 0;
+            }
+
+            // Update kolom jumlah_positif dan jumlah_negatif
+            PoinPelajar::where('nis', $siswa->nis)
+                ->update([
+                    'jumlah_positif' => $siswa->poin_positif_akhir,
+                    'jumlah_negatif' => $siswa->poin_negatif_akhir
+                ]);
+        }
+
         // Mengambil poin peringatan
         $poinPeringatans = PoinPeringatan::whereIn('id_peringatan', range(1, 8))->get();
-    
+
         // Memastikan bahwa semua poin peringatan ditemukan
         if ($poinPeringatans->count() < 8) {
             return redirect()->back()->with('error', 'Poin peringatan tidak ditemukan.');
         }
-    
-        // Menghitung jumlah notifikasi untuk setiap kategori
+
+        $tingkatanList = DB::table('data_siswa')->distinct()->pluck('tingkatan');
+
+
+        // Menghitung jumlah notifikasi untuk setiap kategori berdasarkan NIS
         $jumlahNotifikasi = [];
         foreach ($poinPeringatans as $index => $poinPeringatan) {
             $nextPoin = isset($poinPeringatans[$index + 1]) ? $poinPeringatans[$index + 1]->max_poin : null;
             $maxPoin = $poinPeringatan->max_poin;
-    
+
             if ($nextPoin) {
-                $jumlahNotifikasi[] = PoinPelajar::whereBetween('poin_negatif', [$maxPoin, $nextPoin])->count();
+                // Menghitung jumlah siswa unik (berdasarkan NIS) dengan poin negatif antara maxPoin dan nextPoin
+                $jumlahNotifikasi[] = PoinPelajar::select('nis')
+                                                ->where('jumlah_negatif', '>', $maxPoin)
+                                                ->where('jumlah_negatif', '<=', $nextPoin)
+                                                ->groupBy('nis') // Hanya hitung siswa unik berdasarkan NIS
+                                                ->get()->count();
             } else {
-                $jumlahNotifikasi[] = PoinPelajar::where('poin_negatif', '>', $maxPoin)->count();
+                // Menghitung siswa yang memiliki poin negatif lebih dari maxPoin pada poin peringatan terakhir
+                $jumlahNotifikasi[] = PoinPelajar::select('nis')
+                                                ->where('jumlah_negatif', '>', $maxPoin)
+                                                ->groupBy('nis') // Hanya hitung siswa unik berdasarkan NIS
+                                                ->get()->count();
             }
         }
-    
+
         // Mengirim data siswa dan jumlah notifikasi ke view
-        return view('admin.poin_siswa.SiswaPoin', compact('dataSiswa', 'jumlahNotifikasi'));
+        return view('admin.poin_siswa.SiswaPoin', compact('dataSiswa', 'jumlahNotifikasi', 'tingkatanList', 'poinPeringatan1', 'poinPeringatan2', 'poinPeringatan3', 'poinPeringatan4', 'poinPeringatan5', 'poinPeringatan6', 'poinPeringatan7', 'poinPeringatan8'));
     }
     
 }
