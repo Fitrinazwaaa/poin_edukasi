@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DataKelas;
 use App\Models\DataSiswa; // Menggunakan model DataSiswa
+use App\Models\PoinPelajar;
 use DB;
 use Illuminate\Http\Request;
 
@@ -135,24 +136,27 @@ class DataSiswaController extends Controller
         return redirect()->route('Siswa')->with('success', 'Data siswa dan semua poin pelajar berhasil diperbarui.');
     }
     
-    
-    
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroyMultiple(Request $request)
-    {
-        // Validasi input
-        $request->validate([
-            'hapus' => 'required|array|min:1',
-            'hapus.*' => 'exists:data_siswa,nis', // pastikan nis yang dipilih valid
-        ]);
-    
-        // Hapus entri yang dipilih berdasarkan nis
-        DataSiswa::whereIn('nis', $request->hapus)->delete();
-    
-        return redirect()->route('Siswa')->with('success', 'Siswa yang dipilih berhasil dihapus.');
-    }
+
+/**
+ * Remove the specified resource from storage.
+ */
+public function destroyMultiple(Request $request)
+{
+    // Validasi input
+    $request->validate([
+        'hapus' => 'required|array|min:1',
+        'hapus.*' => 'exists:data_siswa,nis', // pastikan nis yang dipilih valid
+    ]);
+
+    // Hapus data poin pelajar dengan NIS yang sesuai
+    PoinPelajar::whereIn('nis', $request->hapus)->delete();
+
+    // Hapus entri siswa berdasarkan NIS yang dipilih
+    DataSiswa::whereIn('nis', $request->hapus)->delete();
+
+    return redirect()->route('Siswa')->with('success', 'Siswa yang dipilih beserta data poin berhasil dihapus.');
+}
+
     
 
     public function getJurusanDataSiswa($tahun_angkatan)
