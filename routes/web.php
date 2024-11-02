@@ -71,7 +71,7 @@ Route::get('/poin/create', [PoinController::class, 'create'])->name('Tambah_Poin
 Route::post('/poin/store', [PoinController::class, 'store'])->name('submitPoin');
 Route::get('/poin/edit/{id}', [PoinController::class, 'edit'])->name('poinEdit');
 Route::PUT('/poin/update/{id}', [PoinController::class, 'update'])->name('poinUpdate');
-Route::delete('/poin/hapus-multiple', [PoinController::class, 'destroy'])->name('PoinHapusMultiple');
+Route::delete('/poin/delete', [PoinController::class, 'destroy'])->name('PoinHapusMultiple');
 
 Route::get('/siswa', [DataSiswaController::class, 'index'])->name('Siswa');
 Route::PUT('/siswa/store', [DataSiswaController::class, 'store'])->name('SiswaStore');

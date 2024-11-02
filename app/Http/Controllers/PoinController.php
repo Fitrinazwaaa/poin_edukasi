@@ -8,11 +8,8 @@ use Illuminate\Support\Facades\DB;
  use App\Models\DataPoinNegatif;
  use App\Models\PoinPeringatan;
 
-
-
 class PoinController extends Controller
 {
-    // ////////
     public function index()
     {
         $poinNegatif = DataPoinNegatif::orderBy('kategori_poin', 'asc')->get();
@@ -23,15 +20,10 @@ class PoinController extends Controller
         return view('admin.poin.halaman_poin', compact('poinPositif', 'poinNegatif', 'poinPeringatan')); // Mengirim kedua variabel
     }
 
-
-
-    // ///////////
     public function create()
     {
         return view('admin/poin/tambah_poin');
     }
-
-
 
     public function store(Request $request)
     {
@@ -69,9 +61,6 @@ class PoinController extends Controller
         return redirect()->route('HalamanPoin');
     }
 
-
-
-    // ////////
     public function edit(string $id)
     {
         $poinPeringatan = PoinPeringatan::findOrFail($id);
@@ -91,30 +80,19 @@ class PoinController extends Controller
     
         return redirect()->route('HalamanPoin');
     }
-    
 
-
-
-    // /////////
     public function destroy(Request $request)
     {
-        dd($request->all()); // Tambahkan ini untuk melihat semua data yang dikirimkan form
-    
-        $ids_negatif = $request->input('ids_negatif');
-        $ids_positif = $request->input('ids_positif');
-    
-        if (!empty($ids_negatif)) {
-            DataPoinNegatif::whereIn('id_poin', $ids_negatif)->delete();
+        // Hapus data berdasarkan pilihan checkbox negatif
+        if ($request->has('ids_negatif')) {
+            DataPoinNegatif::whereIn('id_poin_negatif', $request->ids_negatif)->delete();
         }
     
-        if (!empty($ids_positif)) {
-            DataPoinPositif::whereIn('id_poin', $ids_positif)->delete();
+        // Hapus data berdasarkan pilihan checkbox positif
+        if ($request->has('ids_positif')) {
+            DataPoinPositif::whereIn('id_poin_positif', $request->ids_positif)->delete();
         }
     
-        session(['active_table' => 'positif']);
-    
-        return redirect()->back()->with('success', 'Poin yang dipilih berhasil dihapus.');
+        return redirect()->route('HalamanPoin')->with('success', 'Data berhasil dihapus');
     }
-    
-    
 }
