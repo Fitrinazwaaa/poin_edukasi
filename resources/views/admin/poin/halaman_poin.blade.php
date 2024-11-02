@@ -32,8 +32,8 @@
     {{-- TABLE --}}
     <div class="tabel">
         <form id="deleteForm" action="{{ route('PoinHapusMultiple') }}" method="POST">
-            @csrf
-            @method('DELETE')
+        @csrf
+        @method('DELETE')
             <div class="tipe-poin">
                 <div class="tipe">
                     <a href="javascript:void(0)" id="negatif-link" class="active" onclick="showTable('negatif')">Negatif</a>

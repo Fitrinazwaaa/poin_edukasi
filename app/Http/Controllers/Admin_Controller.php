@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\DataKelas;
+use App\Models\DataPoinNegatif;
+use App\Models\DataPoinPositif;
 use App\Models\PoinPelajar;
 use App\Models\PoinPeringatan;
 use DB;
@@ -126,5 +128,57 @@ class Admin_Controller extends Controller
         // Mengirim data siswa dan jumlah notifikasi ke view
         return view('admin.poin_siswa.SiswaPoin', compact('dataSiswa', 'jumlahNotifikasi', 'tingkatanList', 'poinPeringatan1', 'poinPeringatan2', 'poinPeringatan3', 'poinPeringatan4', 'poinPeringatan5', 'poinPeringatan6', 'poinPeringatan7', 'poinPeringatan8'));
     }
+
     
+    public function getJurusan($tingkatan)
+    {
+        // Mengambil jurusan yang unik berdasarkan tingkatan
+        $jurusan = DB::table('data_siswa')
+        ->where('tingkatan', $tingkatan)
+        ->distinct()
+        ->pluck('jurusan'); // Hanya mengambil jurusan yang unik
+        
+        return response()->json($jurusan);
+    }
+    
+    public function getJurusanKe($jurusan)
+    {
+        // Mengambil jurusan_ke yang unik berdasarkan jurusan
+        $jurusanKeList = DB::table('data_siswa')
+        ->where('jurusan', $jurusan)
+                         ->distinct()
+                         ->pluck('jurusan_ke'); // Mengambil jurusan_ke yang unik
+        
+                         // Mengembalikan hasil dalam bentuk array objek agar dapat digunakan di dropdown
+                         $result = $jurusanKeList->map(function ($jurusanKe) {
+                             return ['jurusan_ke' => $jurusanKe];
+        });
+        
+        return response()->json($result);
+    }
+    
+    public function searchNamaPoinSiswa(Request $request)
+    {
+        $siswaList = DataSiswa::where('tingkatan', $request->tingkatan)
+        ->where('jurusan', $request->jurusan)
+        ->where('jurusan_ke', $request->jurusan_ke)
+        ->get(['nis', 'nama']); // Mendapatkan nis dan nama siswa
+        
+        return response()->json($siswaList);
+    }
+    
+    public function getNamaPoin($tipe)
+    {
+        if ($tipe == 'positif') {
+            // Ambil data dari tabel poin positif
+            $poinList = DataPoinPositif::all(['id_poin_positif as id', 'nama_poin as nama_poin']);
+        } elseif ($tipe == 'negatif') {
+            // Ambil data dari tabel poin negatif
+            $poinList = DataPoinNegatif::all(['id_poin_negatif as id', 'nama_poin as nama_poin']);
+        } else {
+            return response()->json([], 400); // Bad Request jika tipe tidak valid
+        }
+        
+        return response()->json($poinList); // Kembalikan data dalam format JSON
+    }
 }

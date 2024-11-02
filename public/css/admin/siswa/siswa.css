@@ -363,3 +363,40 @@ select.kategori-dua {
 .clear-input:hover {
   color: #ff6b6b; /* Warna saat hover */
 }
+
+/* Style untuk dropdown */
+.dropdown-menu {
+  width: 100%; /* Atur lebar sesuai kebutuhan */
+  max-width: 500px; /* Batas maksimal lebar */
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #333;
+}
+
+.dropdown-item i {
+  font-size: 16px;
+}
+
+.upload-excel .form-control {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.upload-excel .btn-primary {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.dropdown-menu li {
+  margin-bottom: 10px;
+}
+
+.dropdown-menu li:last-child {
+  margin-bottom: 0;
+}

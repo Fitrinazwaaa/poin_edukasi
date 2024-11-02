@@ -167,29 +167,42 @@ class PoinPelajarController extends Controller
             'nama_poin' => 'required|string',
         ]);
     
+        $userRole = auth()->user()->role; // Mengambil role pengguna saat ini
+        $isGuruRole = $userRole == 'user_edit'; // 'Guru' role untuk user yang hanya bisa input poin negatif satu kali
+    
         // Ambil data siswa dari tabel data_siswa berdasarkan input
         $siswa = DataSiswa::where('nama', $request->nama)
                           ->where('tingkatan', $request->tingkatan)
                           ->where('jurusan', $request->jurusan)
                           ->where('jurusan_ke', $request->jurusan_ke)
                           ->first();
-        
+    
         // Cek apakah data siswa ditemukan
         if (!$siswa) {
             return redirect()->back()->with('error', 'Siswa tidak ditemukan.');
         }
     
         // Ambil data poin dari tabel poin yang sesuai dengan tipe poin
-        $poin = null;
-        if ($request->tipe_poin === 'negatif') {
-            $poin = DataPoinNegatif::where('nama_poin', $request->nama_poin)->first();
-        } else if ($request->tipe_poin === 'positif') {
-            $poin = DataPoinPositif::where('nama_poin', $request->nama_poin)->first();
-        }
+        $poin = $request->tipe_poin === 'negatif'
+            ? DataPoinNegatif::where('nama_poin', $request->nama_poin)->first()
+            : DataPoinPositif::where('nama_poin', $request->nama_poin)->first();
     
         // Cek apakah poin ditemukan
         if (!$poin) {
             return redirect()->back()->with('error', 'Poin yang dipilih tidak ditemukan.');
+        }
+    
+        // Cek input poin negatif yang sama di hari yang sama untuk role Guru
+        if ($isGuruRole && $request->tipe_poin === 'negatif') {
+            $today = now()->startOfDay();
+            $alreadyExists = PoinPelajar::where('nis', $siswa->nis)
+                ->where('nama_poin_negatif', $request->nama_poin)
+                ->where('created_at', '>=', $today) // Filter poin negatif yang dibuat hari ini
+                ->exists();
+    
+            if ($alreadyExists) {
+                return redirect()->back()->with('error', 'Anda hanya dapat menginput poin negatif ini satu kali dalam sehari.');
+            }
         }
     
         // Buat entri baru di tabel poin_pelajar
@@ -218,9 +231,9 @@ class PoinPelajarController extends Controller
         // Simpan data ke tabel poin_pelajar
         $poinPelajar->save();
     
-        // Redirect ke halaman dengan pesan sukses
         return redirect()->route('PoinSiswa')->with('success', 'Poin berhasil ditambahkan.');
     }
+    
     public function createPerbaikan(string $id)
     {
         $tingkatanList = DB::table('data_siswa')->distinct()->pluck('tingkatan');

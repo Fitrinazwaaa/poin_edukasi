@@ -1,3 +1,6 @@
+@extends('navbar/nav-Laporan')
+
+@section('content')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,79 +10,110 @@
     <link rel="stylesheet" href="{{ asset('css/admin/laporan/laporan_poin_siswa.css') }}">
 </head>
 <body>
-    @extends('navbar/nav-Laporan')
+    <h1>Laporan Poin Siswa</h1>
+    <div class="button-container">
+        <a href="{{ route('laporan.poin.siswa.downloadPdf') }}" class="btn btn-primary">Unduh PDF</a>
+        <a href="{{ route('laporan.poin.siswa.exportExcel') }}" class="btn btn-primary">Unduh Excel</a>
+    </div>
 
     <table class="table table-bordered">
-        <thead>
+        @if($poinPelajar && count($poinPelajar) > 0)
+            <thead>
+                <tr>
+                    <th>NO</th>
+                    <th>NIS</th>
+                    <th>NAMA</th>
+                    <th>JENIS KELAMIN</th>
+                    <th>KELAS</th>
+                    <th>TOTAL<br>POIN</th>
+                    <th>KETERANGAN</th>
+                    <th style="width:114px;">WAKTU</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach($poinPelajar as $key => $groupedPoin)
+                @php
+                    $poinPertama = $groupedPoin->first(); // Mengambil item pertama dari grup
+                    $poinPositif = $groupedPoin->where('poin_positif', '>', 0);
+                    $poinNegatif = $groupedPoin->where('poin_negatif', '>', 0);
+                @endphp
+                <tr>
+                    <td rowspan="2">{{ $loop->iteration }}</td>
+                    <td rowspan="2">{{ $poinPertama->nis }}</td>
+                    <td rowspan="2" class="left-align">{{ $poinPertama->nama }}</td>
+                    <td rowspan="2">{{ $poinPertama->jenis_kelamin }}</td>
+                    <td rowspan="2">{{ $poinPertama->tingkatan }} {{ $poinPertama->jurusan }} {{ $poinPertama->jurusan_ke }}</td>
+                    <td>
+                        @if($poinPositif->count() > 0)
+                            Positif
+                            <br>{{ $poinPositif->sum('poin_positif') }}
+                        @else
+                            -
+                        @endif
+                    </td>
+                    <td>
+                        <ol>
+                            @if($poinPositif->count() > 0)
+                                @foreach($poinPositif as $positif)
+                                    <li>{{ $positif->nama_poin_positif }}</li>
+                                @endforeach
+                            @else
+                                -
+                            @endif
+                        </ol>
+                    </td>
+                    <td>
+                        <ol>
+                            @if($poinPositif->count() > 0)
+                                @foreach($poinPositif as $positif)
+                                    <li>{{ $positif->created_at->format('d-m-Y') }}</li>
+                                @endforeach
+                            @else
+                                -
+                            @endif
+                        </ol>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @if($poinNegatif->count() > 0)
+                            Negatif
+                            <br>{{ $poinNegatif->sum('poin_negatif') }}
+                        @else
+                            -
+                        @endif
+                    </td>
+                    <td>
+                        <ol>
+                            @if($poinNegatif->count() > 0)
+                                @foreach($poinNegatif as $negatif)
+                                    <li>{{ $negatif->nama_poin_negatif }}</li>
+                                @endforeach
+                            @else
+                                -
+                            @endif
+                        </ol>
+                    </td>
+                    <td>
+                        <ol>
+                            @if($poinNegatif->count() > 0)
+                                @foreach($poinNegatif as $negatif)
+                                    <li>{{ $negatif->created_at->format('d-m-Y') }}</li>
+                                @endforeach
+                            @else
+                                -
+                            @endif
+                        </ol>
+                    </td>
+                </tr>
+            @endforeach
+            </tbody>
+        @else
             <tr>
-                <th>NO</th>
-                <th>NIS</th>
-                <th>NAMA</th>
-                <th>JENIS KELAMIN</th>
-                <th>KELAS</th>
-                <th>POINT</th>
-                <th>KETERANGAN</th>
-                <th>WAKTU</th>
+                <td colspan="8" style="text-align:center; color: #888;">Tidak ada data poin pelajar.</td>
             </tr>
-        </thead>
-        <tbody>
-    @if($poinPelajar && count($poinPelajar) > 0)
-        @foreach($poinPelajar->groupBy('nis') as $key => $groupedPoin)
-        @php
-            $poinPertama = $groupedPoin->first();
-            $poinPositif = $groupedPoin->where('poin_positif', '>', 0);
-            $poinNegatif = $groupedPoin->where('poin_negatif', '>', 0);
-        @endphp
-        <tr>
-            <td>{{ $loop->iteration }}</td>
-            <td style="text-align:center">{{ $poinPertama->nis }}</td>
-            <td>{{ $poinPertama->nama }}</td>
-            <td style="text-align:center">{{ $poinPertama->jenis_kelamin}}</td>
-            <td style="text-align:center">{{ $poinPertama->tingkatan }} {{ $poinPertama->jurusan }} {{ $poinPertama->jurusan_ke }}</td>
-            <td>
-                @if($poinPositif->count() > 0)
-                    Positif: {{ $poinPositif->sum('poin_positif') }}
-                @endif
-                @if($poinNegatif->count() > 0)
-                    <br>Negatif: {{ $poinNegatif->sum('poin_negatif') }}
-                @endif
-            </td>
-            <td>
-                Positif: 
-                <ol>
-                    @foreach($poinPositif as $positif)
-                    <li>{{ $positif->nama_poin_positif }}</li>
-                    @endforeach
-                </ol>
-                Negatif: 
-                <ol>
-                    @foreach($poinNegatif as $negatif)
-                    <li>{{ $negatif->nama_poin_negatif }}</li>
-                    @endforeach
-                </ol>
-            </td>
-            <td>
-                Positif: 
-                <ol>
-                    @foreach($poinPositif as $positif)
-                    <li>{{ $positif->created_at->format('d-m-Y') }}</li>
-                    @endforeach
-                </ol>
-                Negatif: 
-                <ol>
-                    @foreach($poinNegatif as $negatif)
-                    <li>{{ $negatif->created_at->format('d-m-Y') }}</li>
-                    @endforeach
-                </ol>
-            </td>
-        </tr>
-        @endforeach
-    @else
-        <tr>
-            <td colspan="9">Tidak ada data poin pelajar.</td>
-        </tr>
-    @endif
-    </tbody>
+        @endif
     </table>
 </body>
-</html>
+</html>  
+@endsection

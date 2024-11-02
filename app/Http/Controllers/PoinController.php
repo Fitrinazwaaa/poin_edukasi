@@ -33,7 +33,6 @@ class PoinController extends Controller
 
 
 
-    // ////////////
     public function store(Request $request)
     {
         // Validasi input
@@ -99,20 +98,23 @@ class PoinController extends Controller
     // /////////
     public function destroy(Request $request)
     {
-        $ids_negatif = $request->input('ids_negatif'); // ambil id dari checkbox negatif
-        $ids_positif = $request->input('ids_positif'); // ambil id dari checkbox positif
-
+        dd($request->all()); // Tambahkan ini untuk melihat semua data yang dikirimkan form
+    
+        $ids_negatif = $request->input('ids_negatif');
+        $ids_positif = $request->input('ids_positif');
+    
         if (!empty($ids_negatif)) {
-            DataPoinNegatif::whereIn('id_poin', $ids_negatif)->delete(); // Hapus poin negatif yang dipilih
+            DataPoinNegatif::whereIn('id_poin', $ids_negatif)->delete();
         }
-
+    
         if (!empty($ids_positif)) {
-            DataPoinPositif::whereIn('id_poin', $ids_positif)->delete(); // Hapus poin positif yang dipilih
+            DataPoinPositif::whereIn('id_poin', $ids_positif)->delete();
         }
-
-        // Set session untuk menentukan tabel yang aktif
-        session(['active_table' => 'positif']); // Misalnya, kita ingin kembali ke tabel positif
-
+    
+        session(['active_table' => 'positif']);
+    
         return redirect()->back()->with('success', 'Poin yang dipilih berhasil dihapus.');
     }
+    
+    
 }

@@ -80,6 +80,9 @@ Route::PUT('/siswa/update/{id}', [DataSiswaController::class, 'update'])->name('
 Route::post('/siswa/hapus-multiple', [DataSiswaController::class, 'destroyMultiple'])->name('SiswaHapusMultiple');
 Route::get('/get-jurusan-datasiswa/{tahun_angkatan}', [DataSiswaController::class, 'getJurusanDataSiswa']);
 Route::get('/get-jurusan-ke-datasiswa/{tahun_angkatan}/{jurusan}', [DataSiswaController::class, 'getJurusanKeDataSiswa']);
+Route::get('/export-siswa', [DataSiswaController::class, 'exportSiswa'])->name('SiswaExport');
+Route::post('/siswa/import', [DataSiswaController::class, 'import'])->name('siswa.import');
+Route::post('/siswa/replace/{nis}', [DataSiswaController::class, 'replace'])->name('siswa.replace');
 
 
 Route::get('/kelas', [DataKelasController::class, 'index'])->name('kelas');
@@ -100,3 +103,6 @@ Route::put('/user/kesiswaan/{id}', [UserController::class, 'update'])->name('Kes
 use App\Http\Controllers\LaporanController;
 
 Route::get('/laporan', [LaporanController::class, 'index'])->name('LaporanPoinSiswa');
+Route::get('/laporan-poin-siswa/download-pdf', [LaporanController::class, 'downloadPdf'])->name('laporan.poin.siswa.downloadPdf');
+Route::get('/laporan/poin-siswa/export-excel', [LaporanController::class, 'downloadExcel'])->name('laporan.poin.siswa.exportExcel');
+

@@ -1,15 +1,98 @@
-  /* Global Styles */
-  body {
-    font-family: Arial, sans-serif;
-    padding-top: 140px;
-    overflow-y: auto; /* Mengizinkan scroll bar vertikal jika konten melebihi tinggi maksimum */
-    overflow-x: hidden; /* Menghilangkan scroll bar horizontal */
-}
+    /* Global Styling */
+    body {
+        font-size: 14px;
+        background-color: #f4f4f9;
+        margin: 0;
+        padding: 20px;
+    }
 
-thead{
-    text-align: center;
-    font-size: 15px;
-}
-td{
-    font-size: 13px;
-}
+    h1 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+        font-size: 24px;
+        letter-spacing: 1px;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: center;
+        gap: 20px; /* Adjust spacing between buttons */
+        margin-bottom: 20px; /* Space below buttons */
+    }
+
+    .btn-primary {
+        padding: 10px 20px;
+        background-color: #388DD8;
+        color: #fff;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.3s;
+    }
+    .btn-primary:hover {
+        background-color: #45a049;
+    }
+
+    /* Table Styling */
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: #fff;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+        margin-bottom: 20px;
+    }
+
+    .table th, .table td {
+        padding: 12px 15px;
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+        font-size: 13px;
+    }
+
+    .table th {
+        background-color: #388DD8;
+        color: #fff;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        vertical-align: middle; /* Center text vertically */
+        height: 50px; /* Optional: set a height to enhance vertical alignment */
+    }
+
+    .table tbody tr:nth-child(even) {
+        background-color: #388DD8;
+    }
+
+    .table tbody tr:hover {
+        background-color: #388DD8;
+        transition: background-color 0.2s;
+    }
+
+    .left-align {
+        text-align: left;
+        padding-left: 15px;
+    }
+
+    /* Ordered List Styling */
+    ol {
+        padding-left: 15px;
+        margin: 0;
+        text-align: left;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .table, .table th, .table td {
+            font-size: 12px;
+            padding: 8px;
+        }
+        .btn-primary {
+            width: 100%;
+            font-size: 14px;
+        }
+    }

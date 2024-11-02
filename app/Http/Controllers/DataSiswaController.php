@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\SiswaImport;
 use App\Models\DataKelas;
 use App\Models\DataSiswa; // Menggunakan model DataSiswa
 use App\Models\PoinPelajar;
 use DB;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\SiswaExport;
+use Session;
 
 class DataSiswaController extends Controller
 {
@@ -179,5 +183,47 @@ public function destroyMultiple(Request $request)
                   ->get(['jurusan_ke']);
                   
         return response()->json($data);
+    }    
+
+    public function exportSiswa()
+    {
+        return Excel::download(new SiswaExport, 'data_siswa.xlsx');
+    }
+
+    public function import(Request $request)
+    {
+        Excel::import(new SiswaImport, $request->file('file'));
+    
+        // Cek apakah ada pesan untuk mengganti data
+        if (Session::has('replace')) {
+            $replaceData = Session::get('replace');
+            return redirect()->back()->with('warning', "Data dengan NIS {$replaceData['nis']} dan nama {$replaceData['nama']} sudah ada. Apakah Anda ingin mengganti data tersebut?");
+        }
+    
+        return redirect()->back()->with('success', 'Data siswa berhasil diimpor!');
+    }
+
+    public function replace(Request $request, $nis)
+    {
+        // Validasi input
+        $validatedData = $request->validate([
+            'nama' => 'required|string|max:255',
+            'tingkatan' => 'required|integer',
+            'jurusan' => 'required|string|max:255',
+            'jurusan_ke' => 'required|integer',
+            'jenis_kelamin' => 'required|string|max:10',
+            'tahun_angkatan' => 'required|integer',
+        ]);
+    
+        // Cari data berdasarkan NIS
+        $data = DataSiswa::where('nis', $nis)->first();
+    
+        if ($data) {
+            // Lakukan update
+            $data->update($validatedData);
+            return redirect()->route('siswa.index')->with('success', 'Data berhasil diperbarui!');
+        }
+    
+        return redirect()->route('siswa.index')->with('error', 'Data tidak ditemukan!');
     }    
 }
