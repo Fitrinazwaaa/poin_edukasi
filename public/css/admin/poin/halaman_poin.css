@@ -6,6 +6,11 @@ body {
   overflow-x: hidden;
 }
 
+.dropdown-menu {
+  z-index: 1050; /* Pastikan ini lebih tinggi dari elemen lain */
+    display: none; /* Pastikan ini tidak ada */
+}
+
 .tambah {
   display: flex;
   align-items: center; /* Menyelaraskan konten secara vertikal */
@@ -305,18 +310,3 @@ button.btn-dua:hover{
   color: white;
 }
 
-.keterangan {
-  display: flex; /* Mengatur dropdown pada satu baris */
-  gap: 10px; /* Jarak antara dropdown */
-}
-
-select.kategori-satu,
-select.kategori-dua {
-  margin-left: 60px;
-  border: 1px solid #ccc;
-  width: 450px; /* Lebar dropdown */
-  border-radius: 4px;
-  font-size: 14px;
-  padding: 8px 10px; /* Padding dalam dropdown */
-  box-sizing: border-box; /* Agar padding dan border dihitung dalam lebar elemen */
-}

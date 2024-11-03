@@ -2,11 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+ use App\Exports\PoinExportGabungan;
+ use App\Imports\PoinImport;
+ use App\Imports\PoinImportGabungan;
+ use App\Imports\PoinImportNegatif;
+ use App\Imports\PoinImportPositif;
+ use App\Exports\PoinExportNegatif;
+ use App\Exports\PoinExportPositif;
+ use Barryvdh\DomPDF\Facade\Pdf;
+ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
  use App\Models\DataPoinPositif;
  use App\Models\DataPoinNegatif;
  use App\Models\PoinPeringatan;
+ use Maatwebsite\Excel\Facades\Excel;
 
 class PoinController extends Controller
 {
@@ -95,4 +104,41 @@ class PoinController extends Controller
     
         return redirect()->route('HalamanPoin')->with('success', 'Data berhasil dihapus');
     }
+    
+    public function importExcel(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,csv,xls',
+        ]);
+
+        // Mengimpor file yang diunggah
+        Excel::import(new PoinImportGabungan, $request->file('file'));
+
+        return redirect()->back()->with('success', 'Data Poin berhasil diimpor.');
+    }
+    
+    
+    public function exportGabungan()
+    {
+        return Excel::download(new PoinExportGabungan, 'poin_positif_dan_negatif.xlsx');
+    }
+
+    public function exportPDF()
+    {
+        
+        // Ambil data dari model Anda
+        $dataPoinPositif = DataPoinPositif::all(); // Data poin positif
+        $dataPoinNegatif = DataPoinNegatif::all(); // Data poin negatif
+    
+        // Buat instance PDF dan load view
+        $pdf = PDF::loadView('admin.poin.poin_pdf', [
+            'dataPoinPositif' => $dataPoinPositif,
+            'dataPoinNegatif' => $dataPoinNegatif,
+        ]);
+    
+        // Kembalikan file PDF untuk diunduh
+        return $pdf->download('poin.pdf');
+    }
+    
+    
 }

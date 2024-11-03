@@ -11,22 +11,22 @@
 <body>
     @extends('navbar/nav-siswa')
     @if(session('warning'))
-    <div class="alert alert-warning">
-        {{ session('warning') }}
-        <form action="{{ route('siswa.replace', session('replace')['nis']) }}" method="POST">
-            @csrf
-            <input type="hidden" name="nama" value="{{ session('replace')['nama'] }}">
-            <input type="hidden" name="tingkatan" value="{{ old('tingkatan') }}">
-            <input type="hidden" name="jurusan" value="{{ old('jurusan') }}">
-            <input type="hidden" name="jurusan_ke" value="{{ old('jurusan_ke') }}">
-            <input type="hidden" name="jenis_kelamin" value="{{ old('jenis_kelamin') }}">
-            <input type="hidden" name="tahun_angkatan" value="{{ old('tahun_angkatan') }}">
-            
-            <button type="submit" class="btn btn-danger">Ganti Data</button>
-            <button type="button" class="btn btn-secondary" onclick="window.history.back()">Batal</button>
-        </form>
-    </div>
-@endif
+        <div class="alert alert-warning">
+            {{ session('warning') }}
+            <form action="{{ route('siswa.replace', session('replace')['nis']) }}" method="POST">
+                @csrf
+                <input type="hidden" name="nama" value="{{ session('replace')['nama'] }}">
+                <input type="hidden" name="tingkatan" value="{{ old('tingkatan') }}">
+                <input type="hidden" name="jurusan" value="{{ old('jurusan') }}">
+                <input type="hidden" name="jurusan_ke" value="{{ old('jurusan_ke') }}">
+                <input type="hidden" name="jenis_kelamin" value="{{ old('jenis_kelamin') }}">
+                <input type="hidden" name="tahun_angkatan" value="{{ old('tahun_angkatan') }}">
+                
+                <button type="submit" class="btn btn-danger">Ganti Data</button>
+                <button type="button" class="btn btn-secondary" onclick="window.history.back()">Batal</button>
+            </form>
+        </div>
+    @endif
 
     <!-- Confirmation Modal -->
     <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
@@ -72,32 +72,31 @@
                 </button>
             </div>
 
-<!-- Tombol Titik Tiga -->
-<div class="dropdown">
-    <button class="btn btn-light" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" style="border: none;">
-        <i class="fas fa-ellipsis-v"></i>
-    </button>
-    <!-- Menu Dropdown -->
-    <ul class="dropdown-menu p-3 shadow-lg" aria-labelledby="dropdownMenuButton" style="width: 400px; border-radius: 8px;">
-        <li class="mb-3">
-            <div class="upload-excel">
-                <form action="{{ route('siswa.import') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <div class="input-group">
-                        <input type="file" name="file" class="form-control" accept=".xls,.xlsx" style="border-top-right-radius: 0; border-bottom-right-radius: 0;">
-                        <button type="submit" class="btn btn-primary" style="border-top-left-radius: 0; border-bottom-left-radius: 0;">Impor Excel</button>
-                    </div>
-                </form>
+            <!-- Tombol Titik Tiga -->
+            <div class="dropdown">
+                <button class="btn btn-light" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" style="border: none;">
+                    <i class="fas fa-ellipsis-v"></i>
+                </button>
+                <!-- Menu Dropdown -->
+                <ul class="dropdown-menu p-3 shadow-lg" aria-labelledby="dropdownMenuButton" style="width: 400px; border-radius: 8px;">
+                    <li class="mb-3">
+                        <div class="upload-excel">
+                            <form action="{{ route('siswa.import') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                <div class="input-group">
+                                    <input type="file" name="file" class="form-control" accept=".xls,.xlsx" style="border-top-right-radius: 0; border-bottom-right-radius: 0;">
+                                    <button type="submit" class="btn btn-primary" style="border-top-left-radius: 0; border-bottom-left-radius: 0;">Impor Excel</button>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="{{ route('SiswaExport') }}">
+                            <i class="fas fa-file-excel me-2 text-success"></i> Export Excel
+                        </a>
+                    </li>
+                </ul>
             </div>
-        </li>
-        <li>
-            <a class="dropdown-item d-flex align-items-center" href="{{ route('SiswaExport') }}">
-                <i class="fas fa-file-excel me-2 text-success"></i> Export Excel
-            </a>
-        </li>
-    </ul>
-</div>
-
 
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-xl">

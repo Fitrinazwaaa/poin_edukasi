@@ -72,6 +72,12 @@ Route::post('/poin/store', [PoinController::class, 'store'])->name('submitPoin')
 Route::get('/poin/edit/{id}', [PoinController::class, 'edit'])->name('poinEdit');
 Route::PUT('/poin/update/{id}', [PoinController::class, 'update'])->name('poinUpdate');
 Route::delete('/poin/delete', [PoinController::class, 'destroy'])->name('PoinHapusMultiple');
+// Rute untuk impor Excel
+Route::post('/poin/import-excel', [PoinController::class, 'importExcel'])->name('importExcel');
+// Rute untuk ekspor Excel
+Route::get('/poin/export-excel', [PoinController::class, 'exportGabungan'])->name('exportGabungan');
+// Rute untuk ekspor PDF
+Route::get('/poin/export-pdf', [PoinController::class, 'exportPDF'])->name('exportPDF');
 
 Route::get('/siswa', [DataSiswaController::class, 'index'])->name('Siswa');
 Route::PUT('/siswa/store', [DataSiswaController::class, 'store'])->name('SiswaStore');

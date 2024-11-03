@@ -6,6 +6,15 @@
     <title>Document</title>
     <link rel="stylesheet" href="{{ asset('css/navbar/nav-form.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        /* Add custom styles here */
+        .navbar {
+            z-index: 1030; /* Ensure navbar is above other elements */
+        }
+        .offcanvas {
+            z-index: 1050; /* Ensure offcanvas is above the navbar */
+        }
+    </style>
 </head>
 <body>
     @if (Auth::user()->role == 'user_edit')
@@ -171,13 +180,7 @@
     {{-- NAVBAR - END --}}
     @endif
 
-        <!-- Main content -->
-        <div class="content">
-        @yield('content')
-    </div>
-
-    <!-- Tambahkan JavaScript -->
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybY8vUPg2UODf0p5c1bS1VRSMXh0ZW5eP8EMD/SN7pC38j0r1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-+ojg32upP8KXy0jK12KV9JAF1Q0CMLuIm/XOZ1PbiRTQG0mGlv7+WZy4uK4c20h3" crossorigin="anonymous"></script>
 </body>
 </html>

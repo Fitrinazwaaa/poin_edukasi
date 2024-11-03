@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="{{ asset('css/admin/poin/halaman_poin.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -109,7 +111,6 @@
     <!-- FORMULIR TAMBAH DATA END -->
 
 
-    {{-- TABLE POSITIF DAN NEGATIF START--}}
     <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -128,25 +129,59 @@
         </div>
     </div>
 
+
+
+
+    {{-- TABLE POSITIF DAN NEGATIF START--}}
     <div class="tabel">
-        <form id="deleteForm" action="{{ route('PoinHapusMultiple') }}" method="POST">
-            @csrf
-            @method('DELETE')
-            <div class="tipe-poin">
-                <div class="tipe">
-                    <a href="javascript:void(0)" id="negatif-link" class="active" onclick="showTable('negatif')">Negatif</a>
-                    <a href="javascript:void(0)" id="positif-link" onclick="showTable('positif')">Positif</a>
-                </div>
-                <div class="tambah_dan_hapus"> 
-                    <button type="button" class="icon-btn delete-btn" id="deleteAllSelectedRecord">
-                        <i class="fas fa-trash-alt"></i>
+        <div class="tipe-poin">
+            <div class="tipe">
+                <a href="javascript:void(0)" id="negatif-link" class="active" onclick="showTable('negatif')">Negatif</a>
+                <a href="javascript:void(0)" id="positif-link" onclick="showTable('positif')">Positif</a>
+            </div>
+            <div class="tambah_dan_hapus" style="margin-left: -40px;"> 
+                <button type="button" class="icon-btn delete-btn" id="deleteAllSelectedRecord">
+                    <i class="fas fa-trash-alt"></i>
                     </button>
-                    <a href="{{ route('Tambah_Poin') }}" class="btn btn-primary" style="padding: 10px 20px; font-size:14px;" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <a href="{{ route('importExcel') }}" class="btn btn-primary" style="padding: 10px 20px; font-size:14px;" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         <i class="fas fa-plus" style="margin-right: 10px;"></i>Tambah Poin
                     </a>
                 </div>
-            </div>
+                <!-- TOMBOL TITIK TIGA -->
+                <div class="dropdown" style="margin-left:10px;">
+                    <button class="btn btn-light" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" style="border: none;">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </button>
+                    <ul class="dropdown-menu p-3 shadow-lg" aria-labelledby="dropdownMenuButton" style="width: 400px; border-radius: 8px;">
+                        <li class="mb-3">
+                            <div class="upload-excel">
+                                <form action="{{ route('importExcel') }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="input-group">
+                                        <input type="file" name="file" class="form-control" accept=".xls,.xlsx" required>
+                                        <button type="submit" class="btn btn-primary">Impor Excel</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="{{ route('exportGabungan') }}">
+                                <i class="fas fa-file-excel me-2 text-success"></i> Export Excel
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="{{ route('exportPDF') }}">
+                                <i class="fas fa-file-pdf me-2 text-danger"></i> Export PDF
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div> 
 
+
+            <form id="deleteForm" action="{{ route('PoinHapusMultiple') }}" method="POST">
+                @csrf
+                @method('DELETE')
             <div id="negatif-table" style="display: none;">
                 <div class="scroll-container">
                     <div class="table-wrapper1 scrollable-table1">
@@ -228,7 +263,7 @@
                     showTable('negatif'); // Tampilkan tabel negatif secara default
                 });
             </script>
-            
+
             <script>
                 // Memilih semua checkbox di tabel negatif
                 document.getElementById('select_all_negatif').addEventListener('change', function() {
@@ -298,6 +333,10 @@
         </div>
     </div>
     <!-- TABEL PERINGATAN END -->
+     <!-- JS Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
