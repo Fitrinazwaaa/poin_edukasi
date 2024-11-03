@@ -45,6 +45,10 @@
             padding-left: 15px;
             margin: 0;
         }
+        img {
+            width: 50px; /* Adjust width as necessary */
+            height: auto; /* Maintain aspect ratio */
+        }
     </style>
 </head>
 <body>
@@ -62,7 +66,8 @@
                     <th>KELAS</th>
                     <th>POIN</th>
                     <th>KETERANGAN</th>
-                    <th style="width:65px;">WAKTU</th>
+                    <th>FOTO</th>
+                    <th style="width: 65px;">WAKTU</th>
                 </tr>
             </thead>
             <tbody>
@@ -82,7 +87,7 @@
                             @if($poinPositif->count() > 0)
                                 Positif: {{ $poinPositif->sum('poin_positif') }}
                             @else
-                                -
+                                - 
                             @endif
                         </td>
                         <td class="left-align">
@@ -92,9 +97,12 @@
                                         <li>{{ $positif->nama_poin_positif }}</li>
                                     @endforeach
                                 @else
-                                    -
+                                    - 
                                 @endif
                             </ol>
+                        </td>
+                        <td>
+                            - 
                         </td>
                         <td class="left-align">
                             <ol>
@@ -103,7 +111,7 @@
                                         <li>{{ $positif->created_at->format('d-m-Y') }}</li>
                                     @endforeach
                                 @else
-                                    -
+                                    - 
                                 @endif
                             </ol>
                         </td>
@@ -113,7 +121,7 @@
                             @if($poinNegatif->count() > 0)
                                 Negatif: {{ $poinNegatif->sum('poin_negatif') }}
                             @else
-                                -
+                                - 
                             @endif
                         </td>
                         <td class="left-align">
@@ -123,7 +131,16 @@
                                         <li>{{ $negatif->nama_poin_negatif }}</li>
                                     @endforeach
                                 @else
-                                    -
+                                    - 
+                                @endif
+                            </ol>
+                        </td>
+                        <td>
+                            <ol>
+                                @if($poinPertama->foto) <!-- Check if the photo exists -->
+                                    <li><img src="{{ asset($poinPertama->foto) }}" alt="{{ $poinPertama->nama }}'s photo"></li>
+                                @else
+                                    <img src="{{ asset('path/to/default/photo.jpg') }}" alt="Default photo"> <!-- Default photo if none exists -->
                                 @endif
                             </ol>
                         </td>
@@ -134,7 +151,7 @@
                                         <li>{{ $negatif->created_at->format('d-m-Y') }}</li>
                                     @endforeach
                                 @else
-                                    -
+                                    - 
                                 @endif
                             </ol>
                         </td>

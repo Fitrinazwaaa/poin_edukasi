@@ -1,10 +1,13 @@
 <?php
+
 namespace App\Exports;
 
 use App\Models\PoinPelajar;
 use Maatwebsite\Excel\Concerns\FromArray;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithStyles;
+use Maatwebsite\Excel\Events\AfterSheet;
+use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class LaporanExport implements FromArray, WithHeadings, WithStyles
@@ -16,17 +19,17 @@ class LaporanExport implements FromArray, WithHeadings, WithStyles
             ->orderBy('jurusan_ke')
             ->get()
             ->groupBy('nis');
-    
+
         $data = [];
         $index = 1;
-    
+
         foreach ($poinPelajar as $groupedData) {
             $poinPertama = $groupedData->first();
-    
+
             // Menghitung poin positif dan negatif
             $poinPositif = $groupedData->where('poin_positif', '>', 0);
             $poinNegatif = $groupedData->where('poin_negatif', '>', 0);
-    
+
             // Baris untuk poin positif
             $data[] = [
                 'NO' => $index,
@@ -40,13 +43,14 @@ class LaporanExport implements FromArray, WithHeadings, WithStyles
                         return ($key + 1) . ". " . $item->nama_poin_positif;
                     })->implode("\n") 
                     : '-',
+                'FOTO' => '-', // Kolom foto diisi '-' untuk poin positif
                 'WAKTU' => $poinPositif->count() > 0 
                     ? $poinPositif->map(function($item, $key) {
                         return ($key + 1) . ". " . $item->created_at->format('d-m-Y');
                     })->implode("\n") 
                     : '-',
             ];
-    
+
             // Baris untuk poin negatif
             $data[] = [
                 'NO' => '',
@@ -60,19 +64,23 @@ class LaporanExport implements FromArray, WithHeadings, WithStyles
                         return ($key + 1) . ". " . $item->nama_poin_negatif;
                     })->implode("\n") 
                     : '-',
+                'FOTO' => $poinNegatif->count() > 0 
+                    ? $poinNegatif->map(function($item, $key) {
+                        return ($key + 1) . ". " . $item->foto;
+                    })->implode("\n") 
+                    : '-', 
                 'WAKTU' => $poinNegatif->count() > 0 
                     ? $poinNegatif->map(function($item, $key) {
                         return ($key + 1) . ". " . $item->created_at->format('d-m-Y');
                     })->implode("\n") 
                     : '-',
             ];
-    
+
             $index++;
         }
-    
+
         return $data;
     }
-    
 
     public function headings(): array
     {
@@ -84,14 +92,14 @@ class LaporanExport implements FromArray, WithHeadings, WithStyles
             'KELAS',
             'POINT',
             'KETERANGAN',
-            'WAKTU'
+            'FOTO',
+            'WAKTU',
         ];
     }
 
     public function styles(Worksheet $sheet)
     {
-        // Mengatur gaya header
-        $sheet->getStyle('A1:H1')->applyFromArray([
+        $sheet->getStyle('A1:I1')->applyFromArray([
             'font' => [
                 'bold' => true,
                 'color' => ['rgb' => 'FFFFFF'],
@@ -106,8 +114,7 @@ class LaporanExport implements FromArray, WithHeadings, WithStyles
             ]
         ]);
 
-        // Menambahkan border untuk seluruh data
-        $sheet->getStyle('A1:H' . ($sheet->getHighestRow()))->applyFromArray([
+        $sheet->getStyle('A1:I' . ($sheet->getHighestRow()))->applyFromArray([
             'borders' => [
                 'allBorders' => [
                     'borderStyle' => 'thin',
@@ -116,7 +123,6 @@ class LaporanExport implements FromArray, WithHeadings, WithStyles
             ],
         ]);
 
-        // Mengatur lebar kolom dan mengaktifkan wrap text untuk kolom keterangan dan waktu
         $sheet->getColumnDimension('A')->setWidth(5);
         $sheet->getColumnDimension('B')->setWidth(10);
         $sheet->getColumnDimension('C')->setWidth(20);
@@ -125,12 +131,39 @@ class LaporanExport implements FromArray, WithHeadings, WithStyles
         $sheet->getColumnDimension('F')->setWidth(10);
         $sheet->getColumnDimension('G')->setWidth(30);
         $sheet->getColumnDimension('H')->setWidth(15);
+        $sheet->getColumnDimension('I')->setWidth(20);
 
-        $sheet->getStyle('G')->getAlignment()->setWrapText(true);
-        $sheet->getStyle('H')->getAlignment()->setWrapText(true);
-
-        // Memusatkan teks di beberapa kolom
+        $sheet->getStyle('G:I')->getAlignment()->setWrapText(true);
         $sheet->getStyle('A:F')->getAlignment()->setHorizontal('center');
-        $sheet->getStyle('A:H')->getAlignment()->setVertical('center');
+        $sheet->getStyle('A:I')->getAlignment()->setVertical('center');
+    }
+
+    public function registerEvents(): array
+    {
+        return [
+            AfterSheet::class => function(AfterSheet $event) {
+                $sheet = $event->sheet->getDelegate();
+                $row = 2;
+
+                foreach ($this->array() as $data) {
+                    if (!empty($data['FOTO']) && strpos($data['POINT'], 'Negatif:') !== false) {
+                        $photos = explode("\n", $data['FOTO']);
+                        foreach ($photos as $key => $photo) {
+                            $path = storage_path("app/public/foto_poin/{$photo}");
+                            if (file_exists($path)) {
+                                $drawing = new Drawing();
+                                $drawing->setName('Foto');
+                                $drawing->setDescription('Foto');
+                                $drawing->setPath($path);
+                                $drawing->setHeight(60);
+                                $drawing->setCoordinates('I' . $row);
+                                $drawing->setWorksheet($sheet);
+                            }
+                        }
+                    }
+                    $row++;
+                }
+            }
+        ];
     }
 }

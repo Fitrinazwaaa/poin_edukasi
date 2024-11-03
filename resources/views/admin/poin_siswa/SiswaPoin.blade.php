@@ -76,81 +76,104 @@
         </form>
         <button class="tambah" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-plus"></i>Tambahkan</button>
     </div>
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
+ <!-- FORMULIR TAMBAH DATA START -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
 
-                <div class="modal-header" style="background-color: #e7f4ff;">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel" >TAMBAH POIN SISWA</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
+            <div class="modal-header" style="background-color: #e7f4ff;">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">TAMBAH POIN SISWA</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
 
-                <div class="modal-body" style="background-color: #e7f4ff;">
-                    <div class="container">
-                        <form action="{{ route('StoreNamaPoinSiswa') }}" method="POST">
-                            @csrf
-                            @method('PUT')
+            <div class="modal-body" style="background-color: #e7f4ff;">
+                <div class="container">
+                    <form action="{{ route('StoreNamaPoinSiswa') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
 
-                            <div class="form-row">
-                                <label for="tingkatan">Kelas</label>
-                                <select name="tingkatan" id="tingkatan" class="form-control" style="margin-right:30px;">
-                                    <option value="" style="color: #ccc;" disabled selected>Tingkatan</option>
-                                    @foreach ($tingkatanList as $tingkatan)
-                                        <option value="{{ $tingkatan }}">{{ $tingkatan }}</option>
-                                    @endforeach
-                                </select>
-                                <select name="jurusan" id="jurusan" class="form-control" style="margin-right:30px;" disabled>
-                                    <option value="" style="color: #ccc;" disabled selected>Jurusan</option>
-                                </select>
-                                <select name="jurusan_ke" id="jurusan_ke" class="form-control" disabled>
-                                    <option value="" disabled selected>Jurusan ke</option>
-                                </select>
+                        <div class="form-row">
+                            <label for="tingkatan">Kelas</label>
+                            <select name="tingkatan" id="tingkatan" class="form-control" style="margin-right:30px;">
+                                <option value="" style="color: #ccc;" disabled selected>Tingkatan</option>
+                                @foreach ($tingkatanList as $tingkatan)
+                                    <option value="{{ $tingkatan }}">{{ $tingkatan }}</option>
+                                @endforeach
+                            </select>
+                            <select name="jurusan" id="jurusan" class="form-control" style="margin-right:30px;" disabled>
+                                <option value="" style="color: #ccc;" disabled selected>Jurusan</option>
+                            </select>
+                            <select name="jurusan_ke" id="jurusan_ke" class="form-control" disabled>
+                                <option value="" disabled selected>Jurusan ke</option>
+                            </select>
+                        </div>
+
+                        <div class="form-row">
+                            <label for="nama">Nama</label>
+                            <select name="nama" id="nama" class="form-control" disabled>
+                                <option value="" disabled selected>Nama siswa</option>
+                            </select>
+                        </div>
+
+                        <div class="form-row">
+                            <label for="jenis_kelamin">Jenis Kelamin</label>
+                            <select name="jenis_kelamin" id="jenis_kelamin" class="form-control" required>
+                                <option value="Laki-laki">Laki-laki</option>
+                                <option value="Perempuan">Perempuan</option>
+                            </select>
+                        </div>
+
+                        <div class="form-row">
+                            <label for="tipe_poin">Tipe Poin</label><br>
+                            <div>
+                                <label style="margin-right: 50px;">
+                                    <input type="radio" name="tipe_poin" value="positif" onclick="toggleFotoInput()" style="margin-right: 10px;">Positif
+                                </label>
+                                <label style="margin-right: 50px;">
+                                    <input type="radio" name="tipe_poin" value="negatif" onclick="toggleFotoInput()" style="margin-right: 10px;">Negatif
+                                </label>
                             </div>
+                        </div>
 
-                            <div class="form-row">
-                                <label for="nama">Nama</label>
-                                <select name="nama" id="nama" class="form-control" disabled>
-                                    <option value="" disabled selected>Nama siswa</option>
-                                </select>
-                            </div>
+                        <div class="form-row">
+                            <label for="nama_poin">Nama Poin</label>
+                            <select name="nama_poin" id="nama_poin" class="form-control" disabled>
+                                <option value="" disabled selected>Nama Poin</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-row" id="foto_input_row" style="display: none;">
+                            <label for="foto">Unggah Foto</label>
+                            <input type="file" name="foto" id="foto" class="form-control" accept="image/*">
+                        </div>
 
-                            <div class="form-row">
-                                <label for="jenis_kelamin">Jenis Kelamin</label>
-                                <select name="jenis_kelamin" id="jenis_kelamin" class="form-control" required>
-                                    <option value="Laki-laki">Laki-laki</option>
-                                    <option value="Perempuan">Perempuan</option>
-                                </select>
-                            </div>
 
-                            <div class="form-row">
-                                <label for="tipe_poin">Tipe Poin</label><br>
-                                <div>
-                                    <label style="margin-right: 50px;">
-                                        <input type="radio" name="tipe_poin" value="positif" style="margin-right: 10px;">Positif
-                                    </label>
-                                    <label style="margin-right: 50px;">
-                                        <input type="radio" name="tipe_poin" value="negatif" style="margin-right: 10px;">Negatif
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="form-row">
-                                <label for="nama_poin">Nama Poin</label>
-                                <select name="nama_poin" id="nama_poin" class="form-control" disabled>
-                                    <option value="" disabled selected>Nama Poin</option>
-                                </select>
-                            </div>
-
-                            <div class="button-group mt-3">
-                                <button type="button" class="btn btn-dua" data-bs-dismiss="modal">Kembali</button>
-                                <button type="submit" class="btn-satu">Tambah Poin</button>
-                            </div>
-                        </form>
-                    </div>
+                        <div class="button-group mt-3">
+                            <button type="button" class="btn btn-dua" data-bs-dismiss="modal">Kembali</button>
+                            <button type="submit" class="btn-satu">Tambah Poin</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+</div>
+<!-- FORMULIR TAMBAH DATA END -->
+
+<script>
+    function toggleFotoInput() {
+        const tipePoinPositif = document.querySelector('input[name="tipe_poin"][value="positif"]');
+        const fotoInputRow = document.getElementById('foto_input_row');
+
+        // Tampilkan input foto jika tipe poin negatif dipilih, sebaliknya sembunyikan
+        if (!tipePoinPositif.checked) {
+            fotoInputRow.style.display = 'block'; // Tampilkan input foto
+        } else {
+            fotoInputRow.style.display = 'none'; // Sembunyikan input foto
+        }
+    }
+</script>
+
         
     <div class="table-wrapper">
         <table>

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('poin_negatif')->default(0); // Poin negatif
             $table->string('nama_poin_positif')->nullable(); // Nama poin positif
             $table->string('nama_poin_negatif')->nullable(); // Nama poin negatif
+            
             $table->timestamps();
         });
     }
