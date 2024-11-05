@@ -4,18 +4,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="{{ asset('css/navbar/nav-form.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
-        /* Add custom styles here */
-        .navbar {
-            z-index: 1030; /* Ensure navbar is above other elements */
-        }
-        .offcanvas {
-            z-index: 1050; /* Ensure offcanvas is above the navbar */
-        }
-    </style>
-        <style>
         /* NAVBAR-START */
 
 /* Mengatur lebar navbar offcanvas saat dalam posisi start (kiri) */
@@ -192,7 +182,7 @@ div.offcanvas-header {
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation" style="margin-left:5%;">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <h5 class="offcanvas-title" style="margin-left:20px;">KETERANGAN DAN JENIS POIN SMK N 1 KAWALI</h5>
+                <h5 class="offcanvas-title" style="margin-left:20px;">KELAS SMKN 1 KAWALI</h5>
             </div>
             <div data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
                 <div class="offcanvas offcanvas-start" tabindex="-1" data-bs-backdrop="false" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
@@ -227,7 +217,7 @@ div.offcanvas-header {
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation" style="margin-left:5%;">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <h5 class="offcanvas-title" style="margin-left:20px;">KETERANGAN DAN JENIS POIN SMK N 1 KAWALI</h5>
+                <h5 class="offcanvas-title" style="margin-left:20px;">KELAS SMKN 1 KAWALI</h5>
             </div>
             <div data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
                 <div class="offcanvas offcanvas-start" tabindex="-1" data-bs-backdrop="false" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
@@ -263,7 +253,7 @@ div.offcanvas-header {
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation" style="margin-left:5%;">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <h5 class="offcanvas-title" style="margin-left:20px;">KETERANGAN DAN JENIS POIN SMK N 1 KAWALI</h5>
+                <h5 class="offcanvas-title" style="margin-left:20px;">KELAS SMKN 1 KAWALI</h5>
             </div>
             <div data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
                 <div class="offcanvas offcanvas-start" tabindex="-1" data-bs-backdrop="false" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
@@ -298,7 +288,7 @@ div.offcanvas-header {
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation" style="margin-left:5%;">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <h5 class="offcanvas-title" style="margin-left:5%;">KETERANGAN DAN JENIS POIN SMK N 1 KAWALI</h5>
+            <h5 class="offcanvas-title" style="margin-left:5%;">KELAS SMKN 1 KAWALI</h5>
         </div>
         <div data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
             <div class="offcanvas offcanvas-start" tabindex="-1" data-bs-backdrop="false" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
@@ -334,7 +324,7 @@ div.offcanvas-header {
                                 <a class="dropdown-item" aria-current="page" href="{{ route('AkunBK') }}">Akun</a>
                                 <hr>
                                 <a class="dropdown-item" aria-current="page" href="{{ route('kelas') }}">Kelas</a>
-                            </div>
+</div>
                         </li>
                         <hr>
                         <li class="nav-item">
@@ -348,9 +338,16 @@ div.offcanvas-header {
     </div>
 </nav>
 {{-- NAVBAR - END --}}
+
     @endif
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybY8vUPg2UODf0p5c1bS1VRSMXh0ZW5eP8EMD/SN7pC38j0r1" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-+ojg32upP8KXy0jK12KV9JAF1Q0CMLuIm/XOZ1PbiRTQG0mGlv7+WZy4uK4c20h3" crossorigin="anonymous"></script>
+        <!-- Main content -->
+        <div class="content">
+        @yield('content')
+    </div>
+
+    <!-- Tambahkan JavaScript -->
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

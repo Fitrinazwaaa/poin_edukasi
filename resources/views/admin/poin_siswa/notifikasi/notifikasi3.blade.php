@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{ asset('css/notifikasi-peringatan.css') }}">
 </head>
 <body>
-@extends('navbar/nav-notifikasi')
+    @extends('navbar/nav-notifikasi')
 
     @if($poinPeringatan3 && $poinPeringatan4)
         <h5 class="text-center">{{ $poinPeringatan3->peringatan }}</h5>
@@ -22,16 +22,15 @@
         @endphp
 
         <div class="{{ $cardClass }}">
-            <h4>{{ $siswa->nama }}</h4>
+            <h4>{{ $siswa->nama }} -  {{ $siswa->nis }}</h4>
             <p class="right bottom">Poin Negatif: {{ $siswa->jumlah_negatif }}</p>
             <hr class="{{ $hrClass }}">
-            <p>{{ $siswa->nis }}</p>
+            
             <!-- Tambahkan container untuk kelas dan tombol -->
             <div class="class-button-container">
-                <p class="kelas">{{ $siswa->tingkatan}} {{ $siswa->jurusan}} {{ $siswa->jurusan_ke}}</p>
-
+                <p class="kelas">Kelas :  {{ $siswa->tingkatan}} {{ $siswa->jurusan}} {{ $siswa->jurusan_ke}}</p>
                 <button class="perbaikan" onclick="window.location.href='{{ route('CreatePerbaikan', ['nis' => $siswa->nis]) }}'">Perbaikan</button>
-                </div>
+            </div>
         </div>
     @endforeach
 </body>

@@ -35,7 +35,6 @@ class DataSiswaController extends Controller
         return view('admin.siswa.siswa', compact('siswaByTahun', 'tahun_angkatan', 'data_kelas'));
     }
     
-    
 
     /**
      * Store a newly created resource in storage.
@@ -194,12 +193,6 @@ public function destroyMultiple(Request $request)
     {
         Excel::import(new SiswaImport, $request->file('file'));
     
-        // Cek apakah ada pesan untuk mengganti data
-        if (Session::has('replace')) {
-            $replaceData = Session::get('replace');
-            return redirect()->back()->with('warning', "Data dengan NIS {$replaceData['nis']} dan nama {$replaceData['nama']} sudah ada. Apakah Anda ingin mengganti data tersebut?");
-        }
-    
         return redirect()->back()->with('success', 'Data siswa berhasil diimpor!');
     }
 
@@ -226,4 +219,13 @@ public function destroyMultiple(Request $request)
     
         return redirect()->route('siswa.index')->with('error', 'Data tidak ditemukan!');
     }    
+    public function increaseTingkatan()
+{
+    // Perbarui semua data siswa dengan menambah nilai tingkatan sebesar 1
+    DB::table('data_siswa')->increment('tingkatan', 1);
+
+    // Redirect kembali ke halaman dengan pesan sukses
+    return redirect()->route('Siswa')->with('success', 'Tingkatan semua siswa berhasil ditambah 1.');
+}
+
 }

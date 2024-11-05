@@ -95,6 +95,20 @@
                             <i class="fas fa-file-excel me-2 text-success"></i> Export Excel
                         </a>
                     </li>
+                    <li>
+                        <div class="container mb-4">
+                            <button class="btn btn-primary" onclick="increaseTingkatan()">Tambah Tingkatan Semua Siswa</button>
+                        </div>
+
+                        <script>
+                            function increaseTingkatan() {
+                                if (confirm("Apakah Anda yakin ingin menambah tingkatan untuk semua siswa?")) {
+                                    // Redirect ke route untuk menambah tingkatan
+                                    window.location.href = "{{ route('increaseTingkatan') }}";
+                                }
+                            }
+                        </script>
+                    </li>
                 </ul>
             </div>
 
@@ -172,69 +186,80 @@
             </div>
         </div>
 
-        @foreach ($siswaByTahun as $tahun_angkatan => $siswa)
-            <div class="tabel" data-tahun-angkatan="{{ $tahun_angkatan }}">
-                <input type="checkbox" id="dropdown{{ $tahun_angkatan }}">
-                <label class="btn-toggle" for="dropdown{{ $tahun_angkatan }}">
-                    ANGKATAN TAHUN {{ $tahun_angkatan }}
-                    <span class="float-end" style="font-weight: 500; margin-right: 30px">Jumlah Siswa: {{ count($siswa) }}</span>
-                </label>
-                <div class="collapse-content" id="content{{ $tahun_angkatan }}">
-                    <div class="card card-body">
-                        <div class="table-wrapper">
-                            <div class="table">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th><input type="checkbox" id="select_all{{ $tahun_angkatan }}" class="select_all"></th>
-                                            <th>NIS</th>
-                                            <th>Nama</th>
-                                            <th>Jenis<br>Kelamin</th>
-                                            <th>Kelas</th>
-                                            <th>Angkatan (Tahun)</th>
-                                            <th>Aksi</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="studentTable{{ $tahun_angkatan }}">
-                                        @foreach ($siswa as $item)
-                                        <tr data-nis="{{ $item->nis }}" data-nama="{{ $item->nama }}">
-                                            <td><input type="checkbox" name="hapus[]" class="checkbox_ids{{ $tahun_angkatan }}" value="{{ $item->nis }}"></td>
-                                            <td>{{ $item->nis }}</td>
-                                            <td style="text-align: left;">{{ $item->nama }}</td>
-                                            <td>{{ $item->jenis_kelamin }}</td>
-                                            <td>{{ $item->tingkatan}} {{ $item->jurusan}} {{ $item->jurusan_ke}}</td>
-                                            <td>{{ $item->tahun_angkatan }}</td>
-                                            <td>
-                                                <button class="icon-btn edit-btn" onclick="window.location.href='{{ route('SiswaEdit', $item->nis) }}';">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+@php
+    // Convert collection to an array and sort it in descending order by keys (tahun_angkatan)
+    $sortedSiswaByTahun = $siswaByTahun->toArray();
+    krsort($sortedSiswaByTahun);
+@endphp
+
+@foreach ($sortedSiswaByTahun as $tahun_angkatan => $siswa)
+    <div class="tabel" data-tahun-angkatan="{{ $tahun_angkatan }}">
+        <input type="checkbox" id="dropdown{{ $tahun_angkatan }}">
+        <label class="btn-toggle" for="dropdown{{ $tahun_angkatan }}">
+            ANGKATAN TAHUN {{ $tahun_angkatan }}
+            <span class="float-end" style="font-weight: 500; margin-right: 30px">Jumlah Siswa: {{ count($siswa) }}</span>
+        </label>
+        <div class="collapse-content" id="content{{ $tahun_angkatan }}">
+            <div class="card card-body">
+                <div class="table-wrapper">
+                    <div class="table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th><input type="checkbox" id="select_all{{ $tahun_angkatan }}" class="select_all"></th>
+                                    <th>NIS</th>
+                                    <th>Nama</th>
+                                    <th>Jenis<br>Kelamin</th>
+                                    <th>Kelas</th>
+                                    <th>Angkatan (Tahun)</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="studentTable{{ $tahun_angkatan }}">
+                                @foreach ($siswa as $item)
+                                <tr data-nis="{{ $item['nis'] }}" data-nama="{{ $item['nama'] }}">
+                                    <td><input type="checkbox" name="hapus[]" class="checkbox_ids{{ $tahun_angkatan }}" value="{{ $item['nis'] }}"></td>
+                                    <td>{{ $item['nis'] }}</td>
+                                    <td style="text-align: left;">{{ $item['nama'] }}</td>
+                                    <td>{{ $item['jenis_kelamin'] }}</td>
+                                    <td>{{ $item['tingkatan'] }} {{ $item['jurusan'] }} {{ $item['jurusan_ke'] }}</td>
+                                    <td>{{ $item['tahun_angkatan'] }}</td>
+                                    <td>
+                                        <button class="icon-btn edit-btn" onclick="window.location.href='{{ route('SiswaEdit', $item['nis']) }}';">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
-        @endforeach
+        </div>
     </div>
+@endforeach
+</div>
 
-    <script type="text/javascript">
-    document.querySelectorAll('.btn-toggle').forEach(button => {
+<script type="text/javascript">
+document.querySelectorAll('.btn-toggle').forEach((button, index) => {
+    // Skip the first button (index === 0) and apply to the rest
+    if (index > 0) {
         button.addEventListener('click', function() {
-            var targetId = this.getAttribute('for'); // ambil ID dari label yang diklik
-            var targetContent = document.getElementById('content' + targetId.replace('dropdown', '')); // sesuaikan ID untuk target content
-
-            if (targetContent && !targetContent.classList.contains('show')) { // cek jika collapse content tidak sedang ditampilkan
+            var targetId = this.getAttribute('for');
+            var targetContent = document.getElementById('content' + targetId.replace('dropdown', ''));
+            
+            if (targetContent && !targetContent.classList.contains('show')) {
                 setTimeout(function() {
-                    targetContent.scrollIntoView({ behavior: 'smooth', block: 'start' }); // scroll dengan smooth
-                }, 400); // delay untuk menunggu animasi collapse
+                    targetContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 400);
             }
         });
-    });
+    }
+});
 </script>
+
+
 
     
 <script>

@@ -130,8 +130,6 @@
     </div>
 
 
-
-
     {{-- TABLE POSITIF DAN NEGATIF START--}}
     <div class="tabel">
         <div class="tipe-poin">
@@ -142,46 +140,46 @@
             <div class="tambah_dan_hapus" style="margin-left: -40px;"> 
                 <button type="button" class="icon-btn delete-btn" id="deleteAllSelectedRecord">
                     <i class="fas fa-trash-alt"></i>
-                    </button>
-                    <a href="{{ route('importExcel') }}" class="btn btn-primary" style="padding: 10px 20px; font-size:14px;" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        <i class="fas fa-plus" style="margin-right: 10px;"></i>Tambah Poin
-                    </a>
-                </div>
-                <!-- TOMBOL TITIK TIGA -->
-                <div class="dropdown" style="margin-left:10px;">
-                    <button class="btn btn-light" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" style="border: none;">
-                        <i class="fas fa-ellipsis-v"></i>
-                    </button>
-                    <ul class="dropdown-menu p-3 shadow-lg" aria-labelledby="dropdownMenuButton" style="width: 400px; border-radius: 8px;">
-                        <li class="mb-3">
-                            <div class="upload-excel">
-                                <form action="{{ route('importExcel') }}" method="POST" enctype="multipart/form-data">
-                                    @csrf
-                                    <div class="input-group">
-                                        <input type="file" name="file" class="form-control" accept=".xls,.xlsx" required>
-                                        <button type="submit" class="btn btn-primary">Impor Excel</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </li>
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center" href="{{ route('exportGabungan') }}">
-                                <i class="fas fa-file-excel me-2 text-success"></i> Export Excel
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center" href="{{ route('exportPDF') }}">
-                                <i class="fas fa-file-pdf me-2 text-danger"></i> Export PDF
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div> 
+                </button>
+                <a href="{{ route('importExcel') }}" class="btn btn-primary" style="padding: 10px 20px; font-size:14px;" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <i class="fas fa-plus" style="margin-right: 10px;"></i>Tambah Poin
+                </a>
+            </div>
+            <!-- TOMBOL TITIK TIGA -->
+            <div class="dropdown" style="margin-left:10px;">
+                <button class="btn btn-light" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" style="border: none;">
+                    <i class="fas fa-ellipsis-v"></i>
+                </button>
+                <ul class="dropdown-menu p-3 shadow-lg" aria-labelledby="dropdownMenuButton" style="width: 400px; border-radius: 8px;">
+                    <li class="mb-3">
+                        <div class="upload-excel">
+                            <form action="{{ route('importExcel') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                <div class="input-group">
+                                    <input type="file" name="file" class="form-control" accept=".xls,.xlsx" required>
+                                    <button type="submit" class="btn btn-primary">Impor Excel</button>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="{{ route('exportGabungan') }}">
+                            <i class="fas fa-file-excel me-2 text-success"></i> Export Excel
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="{{ route('exportPDF') }}">
+                            <i class="fas fa-file-pdf me-2 text-danger"></i> Export PDF
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div> 
 
 
-            <form id="deleteForm" action="{{ route('PoinHapusMultiple') }}" method="POST">
-                @csrf
-                @method('DELETE')
+        <form id="deleteForm" action="{{ route('PoinHapusMultiple') }}" method="POST">
+            @csrf
+            @method('DELETE')
             <div id="negatif-table" style="display: none;">
                 <div class="scroll-container">
                     <div class="table-wrapper1 scrollable-table1">

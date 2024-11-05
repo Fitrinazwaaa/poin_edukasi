@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SISWA DAN ORANG TUA MEMBUAT SURAT PERJANTIAN BERMATRAI</title>
+    <title>Notifikasi 2</title>
     <link rel="stylesheet" href="{{ asset('css/notifikasi-peringatan.css') }}">
 </head>
 <body>
-@extends('navbar/nav-notifikasi')
+    @extends('navbar/nav-notifikasi')
 
     @if($poinPeringatan2 && $poinPeringatan3)
         <h5 class="text-center">{{ $poinPeringatan2->peringatan }}</h5>
@@ -22,14 +22,13 @@
         @endphp
 
         <div class="{{ $cardClass }}">
-            <h4>{{ $siswa->nama }}</h4>
+            <h4>{{ $siswa->nama }} -  {{ $siswa->nis }}</h4>
             <p class="right bottom">Poin Negatif: {{ $siswa->jumlah_negatif }}</p>
             <hr class="{{ $hrClass }}">
-            <p>{{ $siswa->nis }}</p>
+            
             <!-- Tambahkan container untuk kelas dan tombol -->
             <div class="class-button-container">
-                <p class="kelas">{{ $siswa->tingkatan}} {{ $siswa->jurusan}} {{ $siswa->jurusan_ke}}</p>
-
+                <p class="kelas">Kelas :  {{ $siswa->tingkatan}} {{ $siswa->jurusan}} {{ $siswa->jurusan_ke}}</p>
                 <button class="perbaikan" onclick="window.location.href='{{ route('CreatePerbaikan', ['nis' => $siswa->nis]) }}'">Perbaikan</button>
             </div>
         </div>

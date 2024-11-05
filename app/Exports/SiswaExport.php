@@ -16,11 +16,15 @@ class SiswaExport implements FromCollection, WithHeadings
     public function headings(): array
     {
         return [
-            'NIS',
-            'Nama',
-            'Kelas',
-            'Jenis Kelamin',
-            'Tahun Angkatan',
+            'nis', 
+            'nama', 
+            'tingkatan',
+            'jurusan', 
+            'jurusan_ke', 
+            'jenis_kelamin', 
+            'tahun_angkatan',
+            'created_at',
+            'updated_at',
         ];
     }
 }

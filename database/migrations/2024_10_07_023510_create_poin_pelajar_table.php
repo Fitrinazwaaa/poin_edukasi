@@ -24,7 +24,16 @@ return new class extends Migration
             $table->integer('poin_negatif')->default(0); // Poin negatif
             $table->string('nama_poin_positif')->nullable(); // Nama poin positif
             $table->string('nama_poin_negatif')->nullable(); // Nama poin negatif
-            
+            $table->unsignedBigInteger('id_poin_positif')->nullable(); // ID poin positif
+            $table->unsignedBigInteger('id_poin_negatif')->nullable(); // ID poin negatif
+            $table->integer('jumlah_positif')->default(0); // Menyimpan total poin positif setelah dikurangi
+            $table->integer('jumlah_negatif')->default(0); // Menyimpan total poin negatif setelah dikurangi
+            $table->string('foto')->nullable(); // Menambahkan kolom foto
+
+            // Menambahkan foreign key constraint untuk id_poin_positif dan id_poin_negatif
+            $table->foreign('id_poin_positif')->references('id')->on('data_poin_positif')->onDelete('set null');
+            $table->foreign('id_poin_negatif')->references('id')->on('data_poin_negatif')->onDelete('set null');
+
             $table->timestamps();
         });
     }

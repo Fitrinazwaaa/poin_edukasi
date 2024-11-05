@@ -8,6 +8,21 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!-- Bootstrap Icons CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+                /* Navbar Custom Styling */
+                .navbar-custom {
+            padding: 0 60px;
+            background-color: #388DD8;
+            border-bottom: 2px solid white;
+            height: 72px;
+        }
+                /* Profile Info Styling */
+               div .offcanvas-title {
+            display: flex;
+            align-items: center;
+            margin-left: 60px; /* Menambahkan jarak antara tombol kembali dan profil */
+        }
+    </style>
 </head>
 <body>
     @if (Auth::user()->role == 'user_edit')

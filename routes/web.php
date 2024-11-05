@@ -43,9 +43,9 @@ Route::PUT('/siswapoin/store-form1', [PoinPelajarController::class, 'storeFormOn
 Route::get('/siswapoin/perbaikan/{nis}', [PoinPelajarController::class, 'createPerbaikan'])->name('CreatePerbaikan');
 Route::PUT('/siswapoin/store-perbaikan', [PoinPelajarController::class, 'storePerbaikan'])->name('StorePerbaikan');
 Route::get('/siswapoin/search-form1', [PoinPelajarController::class, 'searchSiswa'])->name('SearchNamaPoinSiswa');
-Route::post('/poin-siswa/hapus-semua', [PoinPelajarController::class, 'hapusSemua'])->name('hapusSemuaPoinSiswa');
-Route::post('siswapoin/delete-positif', [PoinPelajarController::class, 'deletePoinPositif'])->name('deletePoinPositif');
-Route::post('siswapoin/delete-negatif', [PoinPelajarController::class, 'deletePoinNegatif'])->name('deletePoinNegatif');
+Route::post('/siswapoin/hapus-semua', [PoinPelajarController::class, 'hapusSemua'])->name('hapusSemuaPoinSiswa');
+Route::post('/siswapoin/delete-positif', [PoinPelajarController::class, 'deletePoinPositif'])->name('deletePoinPositif');
+Route::post('/siswapoin/delete-negatif', [PoinPelajarController::class, 'deletePoinNegatif'])->name('deletePoinNegatif');
 
 Route::get('/get-kelas-by-nis', [PoinPelajarController::class, 'getKelasByNis'])->name('GetKelasByNis');
 Route::get('/search-kelas-poin-siswa', [PoinPelajarController::class, 'searchKelas'])->name('SearchKelasPoinSiswa');
@@ -89,6 +89,8 @@ Route::get('/get-jurusan-ke-datasiswa/{tahun_angkatan}/{jurusan}', [DataSiswaCon
 Route::get('/export-siswa', [DataSiswaController::class, 'exportSiswa'])->name('SiswaExport');
 Route::post('/siswa/import', [DataSiswaController::class, 'import'])->name('siswa.import');
 Route::post('/siswa/replace/{nis}', [DataSiswaController::class, 'replace'])->name('siswa.replace');
+Route::get('/siswa/increase-tingkatan', [DataSiswaController::class, 'increaseTingkatan'])->name('increaseTingkatan');
+
 
 
 Route::get('/kelas', [DataKelasController::class, 'index'])->name('kelas');
