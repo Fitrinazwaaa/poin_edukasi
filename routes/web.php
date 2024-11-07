@@ -93,11 +93,16 @@ Route::get('/siswa/increase-tingkatan', [DataSiswaController::class, 'increaseTi
 
 
 
+
 Route::get('/kelas', [DataKelasController::class, 'index'])->name('kelas');
 Route::get('/kelas/create', [DataKelasController::class, 'create'])->name('TambahKelas');
 Route::PUT('/kelas/store', [DataKelasController::class, 'store'])->name('KelasStore');
 Route::post('/kelas/hapus-multiple', [DataKelasController::class, 'destroyMultiple'])->name('KelasHapusMultiple');
 Route::delete('/kelas/hapus', [DataKelasController::class, 'destroy'])->name('KelasHapusSatu');
+Route::get('/kelas/export', [DataKelasController::class, 'exportKelas'])->name('KelasExport');
+Route::post('/kelas/import', [DataKelasController::class, 'importKelas'])->name('KelasImport');
+
+
 
 Route::get('/user-bk', [UserController::class, 'indexbk'])->name('AkunBK');
 Route::put('/user-bk/{id}', [UserController::class, 'update'])->name('UserUpdate');

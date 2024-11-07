@@ -33,7 +33,7 @@
     <div class="hero">
         <div class="judul_dan_tombol">
             <div class="judul-awal">
-                <p class="judul1">PENGATURAN KELAS SMK N 1 KAWALI</p>
+                <p class="judul1"></p>
             </div>
             <div class="tambah_dan_hapus">
                 <form id="deleteForm" action="{{ route('KelasHapusMultiple') }}" method="POST" style="display: inline;">
@@ -44,12 +44,38 @@
                     <i class="fas fa-plus"></i> Tambahkan
                 </button>
             </div>
+                        <!-- Tombol Titik Tiga -->
+                        <div class="dropdown">
+                <button class="btn btn-light" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" style="border: none;">
+                    <i class="fas fa-ellipsis-v"></i>
+                </button>
+                <!-- Menu Dropdown -->
+                <ul class="dropdown-menu p-3 shadow-lg" aria-labelledby="dropdownMenuButton" style="width: 400px; border-radius: 8px;">
+                    <li class="mb-3">
+                        <div class="upload-excel">
+                            <form action="{{ route('KelasImport') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                <div class="input-group">
+                                    <input type="file" name="file" class="form-control" accept=".xls,.xlsx" style="border-top-right-radius: 0; border-bottom-right-radius: 0;">
+                                    <button type="submit" class="btn btn-primary" style="border-top-left-radius: 0; border-bottom-left-radius: 0;">Impor Excel</button>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="{{ route('KelasExport') }}">
+                            <i class="fas fa-file-excel me-2 text-success"></i> Export Excel
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-xl">
                     <div class="modal-content">
 
                         <div class="modal-header" style="background-color: #e7f4ff;">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel" >TAMBAH DATA SISWA</h1>
+                            <h1 class="modal-title fs-5" id="exampleModalLabel" >TAMBAH KELAS SMK N 1 KAWALI</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
 
