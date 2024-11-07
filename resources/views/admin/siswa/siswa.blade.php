@@ -62,7 +62,7 @@
                 </div>
             </div>
 
-            <div class="tambah_dan_hapus">
+            <div class="tambah_dan_hapus" style="margin-right: 10px;">
                 <form id="deleteForm" action="{{ route('SiswaHapusMultiple') }}" method="POST" style="display: inline;">
                     @csrf
                     <button type="button" class="icon-btn delete-btn" onclick="deleteSelected();"><i class="fas fa-trash-alt"></i></button>
