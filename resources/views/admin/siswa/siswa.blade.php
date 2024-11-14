@@ -90,25 +90,26 @@
                             </form>
                         </div>
                     </li>
+                    <hr>
                     <li>
                         <a class="dropdown-item d-flex align-items-center" href="{{ route('SiswaExport') }}">
                             <i class="fas fa-file-excel me-2 text-success"></i> Export Excel
                         </a>
                     </li>
+                    <hr>
                     <li>
-                        <div class="container mb-4">
-                            <button class="btn btn-primary" onclick="increaseTingkatan()">Tambah Tingkatan Semua Siswa</button>
-                        </div>
-
-                        <script>
-                            function increaseTingkatan() {
-                                if (confirm("Apakah Anda yakin ingin menambah tingkatan untuk semua siswa?")) {
-                                    // Redirect ke route untuk menambah tingkatan
-                                    window.location.href = "{{ route('increaseTingkatan') }}";
-                                }
-                            }
-                        </script>
+                        <a class="dropdown-item d-flex align-items-center" href="javascript:void(0);" onclick="increaseTingkatan()">
+                            Tambah Tingkatan Semua Siswa
+                        </a>
                     </li>
+                    <script>
+                        function increaseTingkatan() {
+                            if (confirm("Apakah Anda yakin ingin menambah tingkatan untuk semua siswa?")) {
+                                // Redirect ke route untuk menambah tingkatan
+                                window.location.href = "{{ route('increaseTingkatan') }}";
+                            }
+                        }
+                    </script>
                 </ul>
             </div>
 
@@ -186,134 +187,130 @@
             </div>
         </div>
 
-@php
-    // Convert collection to an array and sort it in descending order by keys (tahun_angkatan)
-    $sortedSiswaByTahun = $siswaByTahun->toArray();
-    krsort($sortedSiswaByTahun);
-@endphp
+        @php
+            // Convert collection to an array and sort it in descending order by keys (tahun_angkatan)
+            $sortedSiswaByTahun = $siswaByTahun->toArray();
+            krsort($sortedSiswaByTahun);
+        @endphp
 
-@foreach ($sortedSiswaByTahun as $tahun_angkatan => $siswa)
-    <div class="tabel" data-tahun-angkatan="{{ $tahun_angkatan }}">
-        <input type="checkbox" id="dropdown{{ $tahun_angkatan }}">
-        <label class="btn-toggle" for="dropdown{{ $tahun_angkatan }}">
-            ANGKATAN TAHUN {{ $tahun_angkatan }}
-            <span class="float-end" style="font-weight: 500; margin-right: 30px">Jumlah Siswa: {{ count($siswa) }}</span>
-        </label>
-        <div class="collapse-content" id="content{{ $tahun_angkatan }}">
-            <div class="card card-body">
-                <div class="table-wrapper">
-                    <div class="table">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th><input type="checkbox" id="select_all{{ $tahun_angkatan }}" class="select_all"></th>
-                                    <th>NIS</th>
-                                    <th>Nama</th>
-                                    <th>Jenis<br>Kelamin</th>
-                                    <th>Kelas</th>
-                                    <th>Angkatan (Tahun)</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody id="studentTable{{ $tahun_angkatan }}">
-                                @foreach ($siswa as $item)
-                                <tr data-nis="{{ $item['nis'] }}" data-nama="{{ $item['nama'] }}">
-                                    <td><input type="checkbox" name="hapus[]" class="checkbox_ids{{ $tahun_angkatan }}" value="{{ $item['nis'] }}"></td>
-                                    <td>{{ $item['nis'] }}</td>
-                                    <td style="text-align: left;">{{ $item['nama'] }}</td>
-                                    <td>{{ $item['jenis_kelamin'] }}</td>
-                                    <td>{{ $item['tingkatan'] }} {{ $item['jurusan'] }} {{ $item['jurusan_ke'] }}</td>
-                                    <td>{{ $item['tahun_angkatan'] }}</td>
-                                    <td>
-                                        <button class="icon-btn edit-btn" onclick="window.location.href='{{ route('SiswaEdit', $item['nis']) }}';">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+        @foreach ($sortedSiswaByTahun as $tahun_angkatan => $siswa)
+            <div class="tabel" data-tahun-angkatan="{{ $tahun_angkatan }}">
+                <input type="checkbox" id="dropdown{{ $tahun_angkatan }}">
+                <label class="btn-toggle" for="dropdown{{ $tahun_angkatan }}">
+                    ANGKATAN TAHUN {{ $tahun_angkatan }}
+                    <span class="float-end" style="font-weight: 500; margin-right: 30px">Jumlah Siswa: {{ count($siswa) }}</span>
+                </label>
+                <div class="collapse-content" id="content{{ $tahun_angkatan }}">
+                    <div class="card card-body">
+                        <div class="table-wrapper">
+                            <div class="table">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th><input type="checkbox" id="select_all{{ $tahun_angkatan }}" class="select_all"></th>
+                                            <th>NIS</th>
+                                            <th>Nama</th>
+                                            <th>Jenis<br>Kelamin</th>
+                                            <th>Kelas</th>
+                                            <th>Angkatan (Tahun)</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="studentTable{{ $tahun_angkatan }}">
+                                        @foreach ($siswa as $item)
+                                        <tr data-nis="{{ $item['nis'] }}" data-nama="{{ $item['nama'] }}">
+                                            <td><input type="checkbox" name="hapus[]" class="checkbox_ids{{ $tahun_angkatan }}" value="{{ $item['nis'] }}"></td>
+                                            <td>{{ $item['nis'] }}</td>
+                                            <td style="text-align: left;">{{ $item['nama'] }}</td>
+                                            <td>{{ $item['jenis_kelamin'] }}</td>
+                                            <td>{{ $item['tingkatan'] }} {{ $item['jurusan'] }} {{ $item['jurusan_ke'] }}</td>
+                                            <td>{{ $item['tahun_angkatan'] }}</td>
+                                            <td>
+                                                <button class="icon-btn edit-btn" onclick="window.location.href='{{ route('SiswaEdit', $item['nis']) }}';">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        @endforeach
     </div>
-@endforeach
-</div>
 
-<script type="text/javascript">
-document.querySelectorAll('.btn-toggle').forEach((button, index) => {
-    // Skip the first button (index === 0) and apply to the rest
-    if (index > 0) {
-        button.addEventListener('click', function() {
-            var targetId = this.getAttribute('for');
-            var targetContent = document.getElementById('content' + targetId.replace('dropdown', ''));
-            
-            if (targetContent && !targetContent.classList.contains('show')) {
-                setTimeout(function() {
-                    targetContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }, 400);
+    <script type="text/javascript">
+        document.querySelectorAll('.btn-toggle').forEach((button, index) => {
+            // Skip the first button (index === 0) and apply to the rest
+            if (index > 0) {
+                button.addEventListener('click', function() {
+                    var targetId = this.getAttribute('for');
+                    var targetContent = document.getElementById('content' + targetId.replace('dropdown', ''));
+                    
+                    if (targetContent && !targetContent.classList.contains('show')) {
+                        setTimeout(function() {
+                            targetContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }, 400);
+                    }
+                });
             }
         });
-    }
-});
-</script>
-
-
-
-    
-<script>
-// Fungsi untuk memilih semua checkbox di tabel sesuai dengan angkatan
-document.querySelectorAll('.select_all').forEach(function(selectAllCheckbox) {
-    selectAllCheckbox.addEventListener('change', function() {
-        // Ambil angkatan berdasarkan id checkbox "Select All"
-        const tahunAngkatan = this.id.replace('select_all', '');
-        
-        // Cari semua checkbox kelas di tabel yang relevan
-        let checkboxes = document.querySelectorAll(`.checkbox_ids${tahunAngkatan}`);
-        
-        // Ubah status checkbox sesuai dengan checkbox "Select All"
-        checkboxes.forEach(checkbox => {
-            checkbox.checked = this.checked;
-        });
-    });
-});
-
-function deleteSelected() {
-    const checkedBoxes = document.querySelectorAll('input[name="hapus[]"]:checked');
-    if (checkedBoxes.length === 0) {
-        alert('Tidak ada Siswa yang dipilih untuk dihapus.');
-        return;
-    }
-
-    const selectedValues = Array.from(checkedBoxes).map(cb => cb.value);
-    console.log('Siswa yang dipilih untuk dihapus:', selectedValues);
-
-    // Tampilkan modal konfirmasi
-    const confirmModal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'));
-    confirmModal.show();
-
-    // Lampirkan event listener untuk tombol hapus di modal
-    document.getElementById('confirmDeleteBtn').onclick = function() {
-        const deleteForm = document.getElementById('deleteForm');
-        selectedValues.forEach(value => {
-            const input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = 'hapus[]'; // Pastikan sesuai dengan input checkbox yang ingin dihapus
-            input.value = value;
-            deleteForm.appendChild(input);
-        });
-        deleteForm.submit(); // Kirim form
-    };
-}
-
     </script>
+
+    <script>
+        // Fungsi untuk memilih semua checkbox di tabel sesuai dengan angkatan
+        document.querySelectorAll('.select_all').forEach(function(selectAllCheckbox) {
+            selectAllCheckbox.addEventListener('change', function() {
+                // Ambil angkatan berdasarkan id checkbox "Select All"
+                const tahunAngkatan = this.id.replace('select_all', '');
+                
+                // Cari semua checkbox kelas di tabel yang relevan
+                let checkboxes = document.querySelectorAll(`.checkbox_ids${tahunAngkatan}`);
+                
+                // Ubah status checkbox sesuai dengan checkbox "Select All"
+                checkboxes.forEach(checkbox => {
+                    checkbox.checked = this.checked;
+                });
+            });
+        });
+
+        function deleteSelected() {
+            const checkedBoxes = document.querySelectorAll('input[name="hapus[]"]:checked');
+            if (checkedBoxes.length === 0) {
+                alert('Tidak ada Siswa yang dipilih untuk dihapus.');
+                return;
+            }
+
+            const selectedValues = Array.from(checkedBoxes).map(cb => cb.value);
+            console.log('Siswa yang dipilih untuk dihapus:', selectedValues);
+
+            // Tampilkan modal konfirmasi
+            const confirmModal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'));
+            confirmModal.show();
+
+            // Lampirkan event listener untuk tombol hapus di modal
+            document.getElementById('confirmDeleteBtn').onclick = function() {
+                const deleteForm = document.getElementById('deleteForm');
+                selectedValues.forEach(value => {
+                    const input = document.createElement('input');
+                    input.type = 'hidden';
+                    input.name = 'hapus[]'; // Pastikan sesuai dengan input checkbox yang ingin dihapus
+                    input.value = value;
+                    deleteForm.appendChild(input);
+                });
+                deleteForm.submit(); // Kirim form
+            };
+        }
+    </script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
-   <script type="text/javascript">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+    <script type="text/javascript">
         $('#tahun_angkatan').on('change', function() {
             var tahunAngkatan = $(this).val();
             
@@ -343,49 +340,72 @@ function deleteSelected() {
         });
 
         $('#jurusan').on('change', function() {
-    var jurusan = $(this).val();
-    var tahunAngkatan = $('#tahun_angkatan').val(); // Ambil tahun angkatan yang dipilih
+            var jurusan = $(this).val();
+            var tahunAngkatan = $('#tahun_angkatan').val(); // Ambil tahun angkatan yang dipilih
 
-    if (jurusan && tahunAngkatan) {
-        $.ajax({
-            url: '/get-jurusan-ke-datasiswa/' + tahunAngkatan + '/' + jurusan, // URL diubah untuk mencocokkan tahun angkatan dan jurusan
-            type: 'GET',
-            success: function(data) {
-                $('#jurusan_ke').empty();
-                $('#jurusan_ke').append('<option value="" disabled selected>Pilih Jurusan ke</option>');
+            if (jurusan && tahunAngkatan) {
+                $.ajax({
+                    url: '/get-jurusan-ke-datasiswa/' + tahunAngkatan + '/' + jurusan, // URL diubah untuk mencocokkan tahun angkatan dan jurusan
+                    type: 'GET',
+                    success: function(data) {
+                        $('#jurusan_ke').empty();
+                        $('#jurusan_ke').append('<option value="" disabled selected>Pilih Jurusan ke</option>');
 
-                $.each(data, function(index, jurusanKe) {
-                    $('#jurusan_ke').append('<option value="'+ jurusanKe.jurusan_ke +'">'+ jurusanKe.jurusan_ke +'</option>');
+                        $.each(data, function(index, jurusanKe) {
+                            $('#jurusan_ke').append('<option value="'+ jurusanKe.jurusan_ke +'">'+ jurusanKe.jurusan_ke +'</option>');
+                        });
+
+                        $('#jurusan_ke').prop('disabled', false); // Aktifkan dropdown 'jurusan ke'
+                    },
+                    error: function(xhr, status, error) {
+                        console.log("Error: " + error);
+                    }
                 });
-
-                $('#jurusan_ke').prop('disabled', false); // Aktifkan dropdown 'jurusan ke'
-            },
-            error: function(xhr, status, error) {
-                console.log("Error: " + error);
             }
         });
-    }
-});
    </script>
+
    <!-- Script Pencarian -->
    <script>
-// Fungsi untuk menghapus input pencarian
-function clearSearch() {
-    document.getElementById("searchInput").value = ""; // Hapus nilai input
-    document.querySelector(".clear-input").style.display = "none"; // Sembunyikan ikon
-    searchStudents(); // Panggil fungsi pencarian untuk menyembunyikan semua siswa
-}
+    // Fungsi untuk menghapus input pencarian, menyembunyikan ikon clear, dan menutup semua dropdown
+    function clearSearch() {
+        document.getElementById("searchInput").value = ""; // Kosongkan input
+        document.querySelector(".clear-input").style.display = "none"; // Sembunyikan ikon clear
+        closeAllDropdowns(); // Tutup semua dropdown
+    }
 
-// Pastikan fungsi ini diatur di luar fungsi lain
-document.getElementById("searchInput").addEventListener("input", function() {
-    const clearInput = document.querySelector(".clear-input");
-    clearInput.style.display = this.value ? "block" : "none"; // Sembunyikan atau tampilkan ikon
-});
+    // Fungsi untuk menutup semua dropdown
+    function closeAllDropdowns() {
+        const tables = document.querySelectorAll(".tabel");
+        
+        tables.forEach(table => {
+            const tahunAngkatan = table.getAttribute("data-tahun-angkatan");
+            const collapseContent = document.getElementById(`content${tahunAngkatan}`);
+            collapseContent.classList.remove("show"); // Tutup isi tabel
+            document.getElementById(`dropdown${tahunAngkatan}`).checked = false; // Nonaktifkan dropdown
+        });
+    }
 
+    // Event listener untuk ikon clear
+    document.getElementById("searchInput").addEventListener("input", function() {
+        const clearInput = document.querySelector(".clear-input");
+        clearInput.style.display = this.value ? "block" : "none"; // Tampilkan ikon clear jika ada input
+
+        // Jika input kosong, tutup semua dropdown
+        if (this.value === "") {
+            closeAllDropdowns();
+        }
+    });
 
     function searchStudents() {
         const searchInput = document.getElementById("searchInput").value.toLowerCase();
         const tables = document.querySelectorAll(".tabel");
+
+        // Jika input kosong, tutup semua dropdown dan keluar dari fungsi
+        if (searchInput === "") {
+            closeAllDropdowns();
+            return;
+        }
 
         let found = false;
         tables.forEach(table => {
@@ -406,14 +426,14 @@ document.getElementById("searchInput").addEventListener("input", function() {
                 }
             });
 
-            // Jika ada kecocokan di tabel ini, aktifkan dropdown dan buka isi tabel
+            // Atur tampilan dropdown sesuai hasil pencarian
             const collapseContent = document.getElementById(`content${tahunAngkatan}`);
             if (matchFound) {
-                collapseContent.classList.add("show"); // Tampilkan isi tabel
-                document.getElementById(`dropdown${tahunAngkatan}`).checked = true; // Otomatis aktifkan dropdown
+                collapseContent.classList.add("show");
+                document.getElementById(`dropdown${tahunAngkatan}`).checked = true;
             } else {
-                collapseContent.classList.remove("show"); // Sembunyikan isi tabel jika tidak ada kecocokan
-                document.getElementById(`dropdown${tahunAngkatan}`).checked = false; // Nonaktifkan dropdown
+                collapseContent.classList.remove("show");
+                document.getElementById(`dropdown${tahunAngkatan}`).checked = false;
             }
         });
 
@@ -422,5 +442,6 @@ document.getElementById("searchInput").addEventListener("input", function() {
         }
     }
 </script>
+
 </body>
 </html>

@@ -9,12 +9,73 @@
 
 /* Hero Section */
 .hero {
-    margin: 0 30px;
+  margin: 0 30px;
 }
 
+/* Container yang menggabungkan judul dan tombol */
+.judul_dan_tombol {
+  display: flex;
+  justify-content: space-between; /* Membuat jarak antara judul dan tombol */
+  align-items: center; /* Menyelaraskan elemen secara vertikal */
+  margin: 23px 21px 12px 21px; /* Memberikan jarak atas-bawah */
+}
+
+/* Judul-judul */
 .judul-awal {
-  text-align: center;
-  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column; /* Membuat judul 1 dan judul 2 dalam satu kolom */
+  width: 1000px;
+}
+
+/* Container untuk tombol tambah dan hapus */
+.tambah_dan_hapus {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px; /* Mengatur jarak antara tombol */
+}
+
+/* Add Button */
+.tambah {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  background-color: #FFFF00;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.tambah:hover {
+  background-color: #dada5d;
+  transform: scale(1.05);
+}
+
+/* Delete Button */
+.icon-btn.delete-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  background-color: #f44336;
+  color: white;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.icon-btn.delete-btn:hover {
+  background-color: #cd3f35;
+  transform: scale(1.05);
 }
 
 .judul1 {
@@ -76,59 +137,6 @@
     transform: scale(1.05);
 }
 
-/* Container untuk tombol tambah dan hapus */
-.tambah_dan_hapus {
-    display: flex;
-    justify-content: right;
-    align-items: center;
-    gap: 10px; /* Mengatur jarak antara tombol */
-  }
-  
-/* Add Button */
-.tambah {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 10px 20px;
-    background-color: #FFFF00;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 13px;
-    font-weight: 600;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    float: right;
-    margin: 20px 21px 20px 0;
-  }
-  
-  .tambah:hover {
-    background-color: #dada5d;
-    transform: scale(1.05);
-  }
-
-  /* Delete Button */
-.icon-btn.delete-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 20px;
-    gap: 8px;
-    font-size: 13px;
-    cursor: pointer;
-    border: none;
-    border-radius: 8px;
-    background-color: #f44336;
-    color: white;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  }
-  
-  .icon-btn.delete-btn:hover {
-    background-color: #cd3f35;
-    transform: scale(1.05);
-  }
 
 /* Toggle Button */
 label.btn-toggle {

@@ -130,16 +130,10 @@ div.offcanvas-header {
     /* Custom styling for dropdown items */
 
     
-    /* Mengatur tampilan item dropdown saat di-hover */
-    .dropdown-item {
-        color: white; /* Warna teks */
-        transition: background-color 0.3s ease; /* Tambahkan transisi agar lebih halus */
-        padding: 15px 0;
-    }
-
-/* Mengatur warna dropdown sesuai dengan warna "Pengaturan" */
-.nav-item.dropdown:hover .dropdown-menu {
-    background-color: #1676ca;
+    
+    /* Mengatur warna dropdown sesuai dengan warna "Pengaturan" */
+    .nav-item.dropdown:hover .dropdown-menu {
+        background-color: #1676ca;
 }
 
 /* Warna default dropdown menu */
@@ -149,6 +143,12 @@ div.offcanvas-header {
     box-shadow: none;
 }
 
+/* Mengatur tampilan item dropdown saat di-hover */
+.dropdown-item {
+    color: white; /* Warna teks */
+    transition: background-color 0.3s ease; /* Tambahkan transisi agar lebih halus */
+    padding: 15px 0;
+}
 /* Item dropdown saat di-hover */
 .dropdown-item:hover {
     background: #1676ca; /* Warna saat di-hover */

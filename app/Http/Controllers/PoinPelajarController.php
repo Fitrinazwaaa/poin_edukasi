@@ -36,9 +36,7 @@ class PoinPelajarController extends Controller
             DB::raw('SUM(poin_negatif) as jumlah_negatif')  // Menghitung total poin negatif
         )
         ->groupBy('nis', 'nama', 'jenis_kelamin', 'tingkatan', 'jurusan', 'jurusan_ke')
-        ->orderBy('tingkatan') // Mengurutkan berdasarkan tingkatan
-        ->orderBy('jurusan')   // Mengurutkan berdasarkan jurusan
-        ->orderBy('jurusan_ke') // Mengurutkan berdasarkan kelas
+        ->orderByRaw("CONCAT(tingkatan, ' ', jurusan, ' ', jurusan_ke)")
         ->get();
     
         // Perhitungan sisa poin positif dan negatif
@@ -164,94 +162,107 @@ class PoinPelajarController extends Controller
         return view('admin.poin_siswa.tambahNama_siswa_poin', compact('tingkatanList'));
     }
     
- public function storeFormOne(Request $request)
-{
-    // Validasi input form
-    $request->validate([
-        'tingkatan' => 'required|integer',
-        'jurusan' => 'required|string',
-        'jurusan_ke' => 'required|integer',
-        'nama' => 'required|exists:data_siswa,nama',
-        'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
-        'tipe_poin' => 'required|in:positif,negatif',
-        'nama_poin' => 'required|string',
-        'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi untuk foto
-    ]);
-
-    $userRole = auth()->user()->role; // Mengambil role pengguna saat ini
-    $isGuruRole = $userRole == 'user_edit'; // 'Guru' role untuk user yang hanya bisa input poin negatif satu kali
-
-    // Ambil data siswa dari tabel data_siswa berdasarkan input
-    $siswa = DataSiswa::where('nama', $request->nama)
-                      ->where('tingkatan', $request->tingkatan)
-                      ->where('jurusan', $request->jurusan)
-                      ->where('jurusan_ke', $request->jurusan_ke)
-                      ->first();
-
-    // Cek apakah data siswa ditemukan
-    if (!$siswa) {
-        return redirect()->back()->with('error', 'Siswa tidak ditemukan.');
-    }
-
-    // Ambil data poin dari tabel poin yang sesuai dengan tipe poin
-    $poin = $request->tipe_poin === 'negatif'
-        ? DataPoinNegatif::where('nama_poin', $request->nama_poin)->first()
-        : DataPoinPositif::where('nama_poin', $request->nama_poin)->first();
-
-    // Cek apakah poin ditemukan
-    if (!$poin) {
-        return redirect()->back()->with('error', 'Poin yang dipilih tidak ditemukan.');
-    }
-
-    // Cek input poin negatif yang sama di hari yang sama untuk role Guru
-    if ($isGuruRole && $request->tipe_poin === 'negatif') {
-        $today = now()->startOfDay();
-        $alreadyExists = PoinPelajar::where('nis', $siswa->nis)
-            ->where('nama_poin_negatif', $request->nama_poin)
-            ->where('created_at', '>=', $today) // Filter poin negatif yang dibuat hari ini
-            ->exists();
-
-        if ($alreadyExists) {
-            return redirect()->back()->with('error', 'Anda hanya dapat menginput poin negatif ini satu kali dalam sehari.');
+    public function storeFormOne(Request $request)
+    {
+        // Validasi input form
+        $request->validate([
+            'tingkatan' => 'required|integer',
+            'jurusan' => 'required|string',
+            'jurusan_ke' => 'required|integer',
+            'nama' => 'required|exists:data_siswa,nama',
+            'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
+            'tipe_poin' => 'required|in:positif,negatif',
+            'nama_poin' => 'required|string',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi untuk foto
+        ]);
+    
+        $userRole = auth()->user()->role; // Mengambil role pengguna saat ini
+        $isGuruRole = $userRole == 'user_edit'; // 'Guru' role untuk user yang hanya bisa input poin negatif satu kali
+    
+        // Ambil data siswa dari tabel data_siswa berdasarkan input
+        $siswa = DataSiswa::where('nama', $request->nama)
+                          ->where('tingkatan', $request->tingkatan)
+                          ->where('jurusan', $request->jurusan)
+                          ->where('jurusan_ke', $request->jurusan_ke)
+                          ->first();
+    
+        // Cek apakah data siswa ditemukan
+        if (!$siswa) {
+            return redirect()->back()->with('error', 'Siswa tidak ditemukan.');
         }
-    }
-
-    // Buat entri baru di tabel poin_pelajar
-    $poinPelajar = new PoinPelajar();
-    $poinPelajar->nis = $siswa->nis; // Ambil NIS dari data siswa
-    $poinPelajar->nama = $siswa->nama;
-    $poinPelajar->tingkatan = $siswa->tingkatan;
-    $poinPelajar->jurusan = $siswa->jurusan;
-    $poinPelajar->jurusan_ke = $siswa->jurusan_ke;
-    $poinPelajar->jenis_kelamin = $siswa->jenis_kelamin;
-    $poinPelajar->tahun_angkatan = $siswa->tahun_angkatan; // Ambil tahun angkatan
-
-    // Tambahkan poin sesuai tipe poin
-    if ($request->tipe_poin === 'positif') {
-        $poinPelajar->poin_positif = $poin->poin; // Set poin positif
-        $poinPelajar->poin_negatif = 0; // Poin negatif diisi 0
-        $poinPelajar->nama_poin_positif = $poin->nama_poin; // Set nama poin positif
-        $poinPelajar->nama_poin_negatif = null; // Kosongkan nama poin negatif
-    } elseif ($request->tipe_poin === 'negatif') {
-        $poinPelajar->poin_negatif = $poin->poin; // Set poin negatif
-        $poinPelajar->poin_positif = 0; // Poin positif diisi 0
-        $poinPelajar->nama_poin_negatif = $poin->nama_poin; // Set nama poin negatif
-        $poinPelajar->nama_poin_positif = null; // Kosongkan nama poin positif
-
-        // Proses upload foto jika ada
-        if ($request->hasFile('foto')) {
-            $file = $request->file('foto');
-            $fileName = time() . '_' . $file->getClientOriginalName(); // Buat nama file unik
-            $file->storeAs('public/foto_poin', $fileName); // Simpan file ke folder public/foto_poin
-            $poinPelajar->foto = $fileName; // Simpan nama file di database
+    
+        // Ambil data poin dari tabel poin yang sesuai dengan tipe poin
+        $poin = $request->tipe_poin === 'negatif'
+            ? DataPoinNegatif::where('nama_poin', $request->nama_poin)->first()
+            : DataPoinPositif::where('nama_poin', $request->nama_poin)->first();
+    
+        // Cek apakah poin ditemukan
+        if (!$poin) {
+            return redirect()->back()->with('error', 'Poin yang dipilih tidak ditemukan.');
         }
+
+    
+        // Cek apakah kombinasi ID poin negatif, tanggal, dan nis sudah ada
+        if ($request->tipe_poin === 'negatif') {
+            $existingRecord = PoinPelajar::where('id_poin_negatif', $poin->id_poin_negatif)
+                ->where('tanggal', now()->toDateString())
+                ->where('nis', $siswa->nis) // Tambahkan pengecekan nis
+                ->first();
+
+            if ($existingRecord) {
+                // Perbaikan pada pesan untuk menampilkan nama poin dengan nama siswa dalam tag <strong> dan rata tengah
+                return redirect()->back()->with('success', 
+                    '<div style="text-align: center;">Data sudah ditambahkan sebelumnya pada hari ini untuk siswa dengan nama <strong>' . $siswa->nama . '</strong></div>'
+                );
+            }
+        }
+
+    
+        // Buat entri baru di tabel poin_pelajar
+        $poinPelajar = new PoinPelajar();
+        $poinPelajar->nis = $siswa->nis; // Ambil NIS dari data siswa
+        $poinPelajar->nama = $siswa->nama;
+        $poinPelajar->tingkatan = $siswa->tingkatan;
+        $poinPelajar->jurusan = $siswa->jurusan;
+        $poinPelajar->jurusan_ke = $siswa->jurusan_ke;
+        $poinPelajar->jenis_kelamin = $siswa->jenis_kelamin;
+        $poinPelajar->tahun_angkatan = $siswa->tahun_angkatan; // Ambil tahun angkatan
+        $poinPelajar->tanggal = now()->toDateString(); // Atur tanggal dengan nilai hari ini
+    
+        // Tambahkan poin sesuai tipe poin
+        if ($request->tipe_poin === 'positif') {
+            $poinPelajar->poin_positif = $poin->poin; // Set poin positif
+            $poinPelajar->poin_negatif = 0; // Poin negatif diisi 0
+            $poinPelajar->nama_poin_positif = $poin->nama_poin; // Set nama poin positif
+            $poinPelajar->nama_poin_negatif = null; // Kosongkan nama poin negatif
+            $poinPelajar->id_poin_positif = $poin->id_poin_positif; // Simpan ID poin positif
+            $poinPelajar->id_poin_negatif = null; // Kosongkan ID poin negatif
+        } elseif ($request->tipe_poin === 'negatif') {
+            $poinPelajar->poin_negatif = $poin->poin; // Set poin negatif
+            $poinPelajar->poin_positif = 0; // Poin positif diisi 0
+            $poinPelajar->nama_poin_negatif = $poin->nama_poin; // Set nama poin negatif
+            $poinPelajar->nama_poin_positif = null; // Kosongkan nama poin positif
+            $poinPelajar->id_poin_negatif = $poin->id_poin_negatif; // Simpan ID poin negatif
+            $poinPelajar->id_poin_positif = null; // Kosongkan ID poin positif
+    
+            // Proses upload foto jika ada
+            if ($request->hasFile('foto')) {
+                $file = $request->file('foto');
+                $fileName = time() . '_' . $file->getClientOriginalName(); // Buat nama file unik
+                $file->storeAs('public/foto_poin', $fileName); // Simpan file ke folder public/foto_poin
+                $poinPelajar->foto = $fileName; // Simpan nama file di database
+            }
+        }
+    
+        // Atur tanggal menjadi hari ini
+        $poinPelajar->tanggal = now()->toDateString();
+    
+        // Simpan data ke tabel poin_pelajar
+        $poinPelajar->save();
+    
+        return redirect()->route('PoinSiswa')->with('success', 'Poin berhasil ditambahkan.');
     }
-
-    // Simpan data ke tabel poin_pelajar
-    $poinPelajar->save();
-
-    return redirect()->route('PoinSiswa')->with('success', 'Poin berhasil ditambahkan.');
-}
+    
 
     
     public function createPerbaikan(string $id)

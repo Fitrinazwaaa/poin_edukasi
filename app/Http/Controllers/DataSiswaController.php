@@ -14,9 +14,6 @@ use Session;
 
 class DataSiswaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         // Mengambil semua data siswa
@@ -36,9 +33,6 @@ class DataSiswaController extends Controller
     }
     
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         // Tambahkan validasi
@@ -60,21 +54,13 @@ class DataSiswaController extends Controller
         }
     }
     
-    
-    
-    
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit($nis)
     {
         // Ambil data siswa berdasarkan NIS
@@ -94,9 +80,6 @@ class DataSiswaController extends Controller
     }
     
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         // Validasi input data
@@ -140,28 +123,24 @@ class DataSiswaController extends Controller
     }
     
 
-/**
- * Remove the specified resource from storage.
- */
-public function destroyMultiple(Request $request)
-{
-    // Validasi input
-    $request->validate([
-        'hapus' => 'required|array|min:1',
-        'hapus.*' => 'exists:data_siswa,nis', // pastikan nis yang dipilih valid
-    ]);
+    public function destroyMultiple(Request $request)
+    {
+        // Validasi input
+        $request->validate([
+            'hapus' => 'required|array|min:1',
+            'hapus.*' => 'exists:data_siswa,nis', // pastikan nis yang dipilih valid
+        ]);
 
-    // Hapus data poin pelajar dengan NIS yang sesuai
-    PoinPelajar::whereIn('nis', $request->hapus)->delete();
+        // Hapus data poin pelajar dengan NIS yang sesuai
+        PoinPelajar::whereIn('nis', $request->hapus)->delete();
 
-    // Hapus entri siswa berdasarkan NIS yang dipilih
-    DataSiswa::whereIn('nis', $request->hapus)->delete();
+        // Hapus entri siswa berdasarkan NIS yang dipilih
+        DataSiswa::whereIn('nis', $request->hapus)->delete();
 
-    return redirect()->route('Siswa')->with('success', 'Siswa yang dipilih beserta data poin berhasil dihapus.');
-}
+        return redirect()->route('Siswa')->with('success', 'Siswa yang dipilih beserta data poin berhasil dihapus.');
+    }
 
     
-
     public function getJurusanDataSiswa($tahun_angkatan)
     {
         $jurusan = DB::table('data_kelas')
@@ -184,10 +163,12 @@ public function destroyMultiple(Request $request)
         return response()->json($data);
     }    
 
+
     public function exportSiswa()
     {
         return Excel::download(new SiswaExport, 'data_siswa.xlsx');
     }
+
 
     public function import(Request $request)
     {
@@ -195,6 +176,7 @@ public function destroyMultiple(Request $request)
     
         return redirect()->back()->with('success', 'Data siswa berhasil diimpor!');
     }
+
 
     public function replace(Request $request, $nis)
     {
@@ -219,13 +201,15 @@ public function destroyMultiple(Request $request)
     
         return redirect()->route('siswa.index')->with('error', 'Data tidak ditemukan!');
     }    
-    public function increaseTingkatan()
-{
-    // Perbarui semua data siswa dengan menambah nilai tingkatan sebesar 1
-    DB::table('data_siswa')->increment('tingkatan', 1);
 
-    // Redirect kembali ke halaman dengan pesan sukses
-    return redirect()->route('Siswa')->with('success', 'Tingkatan semua siswa berhasil ditambah 1.');
-}
+
+    public function increaseTingkatan()
+    {
+        // Perbarui semua data siswa dengan menambah nilai tingkatan sebesar 1
+        DB::table('data_siswa')->increment('tingkatan', 1);
+
+        // Redirect kembali ke halaman dengan pesan sukses
+        return redirect()->route('Siswa')->with('success', 'Tingkatan semua siswa berhasil ditambah 1.');
+    }
 
 }

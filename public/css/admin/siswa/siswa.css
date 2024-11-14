@@ -365,38 +365,27 @@ select.kategori-dua {
 }
 
 /* Style untuk dropdown */
+/* Warna default dropdown menu */
 .dropdown-menu {
-  width: 100%; /* Atur lebar sesuai kebutuhan */
-  max-width: 500px; /* Batas maksimal lebar */
-  padding: 15px;
-  border-radius: 8px;
+  background-color: #388DD8; /* Warna default */
+  border: none;
+  box-shadow: none;
 }
 
-.dropdown-item {
-  display: flex;
-  align-items: center;
-  font-size: 14px;
-  color: #333;
+/* Mengatur tampilan item dropdown saat di-hover */
+li .dropdown-item {
+  color: white; /* Warna teks */
+  transition: background-color 0.3s ease; /* Tambahkan transisi agar lebih halus */
+  padding: 15px 15px;
 }
-
-.dropdown-item i {
-  font-size: 16px;
-}
-
-.upload-excel .form-control {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
-.upload-excel .btn-primary {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-}
-
-.dropdown-menu li {
-  margin-bottom: 10px;
-}
-
-.dropdown-menu li:last-child {
-  margin-bottom: 0;
+/* Item dropdown saat di-hover */
+li .dropdown-item:hover {
+  background: #1676ca; /* Warna saat di-hover */
+  color: white;
+  border-style: solid;
+  border-color: #ffffff;
+  border-width: 6px;
+  border-right: black;
+  border-top: black;
+  border-bottom: black;
 }
