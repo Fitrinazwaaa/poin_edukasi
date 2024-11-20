@@ -33,10 +33,10 @@
                                     <label for="tipe_poin">Tipe Poin</label>
                                     <div class="positif_negatif">
                                         <label>
-                                            <input type="checkbox" class="positif" id="poin_positif" name="type" value="positive"> Positif
+                                            <input class="positif" id="poin_positif" type="radio" name="type" value="positive"> Positif
                                         </label>
                                         <label>
-                                            <input type="checkbox" class="negatif" id="poin_negatif" name="type" value="negative"> Negatif
+                                            <input class="negatif" id="poin_negatif" type="radio" name="type" value="negative"> Negatif
                                         </label>
                                     </div>
                                 </div>
@@ -141,7 +141,7 @@
                 <button type="button" class="icon-btn delete-btn" id="deleteAllSelectedRecord">
                     <i class="fas fa-trash-alt"></i>
                 </button>
-                <a href="{{ route('importExcel') }}" class="btn btn-primary" style="padding: 10px 20px; font-size:14px;" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <a class="btn btn-primary" style="padding: 10px 20px; font-size:14px;" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     <i class="fas fa-plus" style="margin-right: 10px;"></i>Tambah Poin
                 </a>
             </div>
@@ -152,15 +152,15 @@
                 </button>
                 <ul class="dropdown-menu p-3 shadow-lg" aria-labelledby="dropdownMenuButton" style="width: 400px; border-radius: 8px;">
                     <li class="mb-3">
-                        <div class="upload-excel">
-                            <form action="{{ route('importExcel') }}" method="POST" enctype="multipart/form-data">
-                                @csrf
-                                <div class="input-group">
-                                    <input type="file" name="file" class="form-control" accept=".xls,.xlsx" required>
-                                    <button type="submit" class="btn btn-primary">Impor Excel</button>
-                                </div>
-                            </form>
-                        </div>
+                    <div class="upload-excel">
+                        <form action="{{ route('importExcel') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="input-group">
+                                <input type="file" name="file" class="form-control" accept=".xls,.xlsx" required style="border-top-right-radius: 0; border-bottom-right-radius: 0;">
+                                <button type="submit"  style="background-color:#FFFF00; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border: none; color: black;">Impor Excel</button>
+                            </div>
+                        </form>
+                    </div>
                     </li>
                     <li>
                         <a class="dropdown-item d-flex align-items-center" href="{{ route('exportGabungan') }}">

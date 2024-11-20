@@ -7,6 +7,13 @@
     <link rel="stylesheet" href="{{ asset('css/admin/siswa/siswa.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+                button.btn-outline-secondary:hover{
+            color: black; /* Mengubah warna teks saat hover */
+            background-color: #FFFF00; /* Pastikan latar belakang tetap kuning */
+            border-color: #FFFF00; /* Pastikan border tetap kuning saat hover */
+        }
+    </style>
 </head>
 <body>
     @extends('navbar/nav-siswa')
@@ -53,8 +60,8 @@
                 <!-- Search Bar -->
                 <div class="container mt-7">
                     <div class="input-group position-relative">
-                        <input type="text" class="form-control" id="searchInput" placeholder="Cari siswa berdasarkan NIS atau Nama" aria-label="Search">
-                        <button class="btn btn-outline-secondary" type="button" onclick="searchStudents()">Cari</button>
+                        <input type="text" class="form-control" id="searchInput" placeholder="Cari siswa berdasarkan NIS atau Nama" aria-label="Search" style="border-color: #FFFF00;">
+                        <button class="btn btn-outline-secondary" type="button" onclick="searchStudents()" style=" border-width: 2px 0; border-style: solid; border-color: #FFFF00; border-radius: 0 8px 8px 0; background-color: #FFFF00;">Cari</button>
                         <span class="clear-input position-absolute" onclick="clearSearch()" style="right: 60px; top: 8px; display: none; cursor: pointer;">
                             <i class="fas fa-times" style="font-size: 18px; color: #dc3545;"></i>
                         </span>
@@ -85,7 +92,7 @@
                                 @csrf
                                 <div class="input-group">
                                     <input type="file" name="file" class="form-control" accept=".xls,.xlsx" style="border-top-right-radius: 0; border-bottom-right-radius: 0;">
-                                    <button type="submit" class="btn btn-primary" style="border-top-left-radius: 0; border-bottom-left-radius: 0;">Impor Excel</button>
+                                    <button type="submit" class="btn btn-primary" style="background-color:#FFFF00; border-top-left-radius: 0; border-bottom-left-radius: 0; border: none; color: black;">Impor Excel</button>
                                 </div>
                             </form>
                         </div>
@@ -93,7 +100,7 @@
                     <hr>
                     <li>
                         <a class="dropdown-item d-flex align-items-center" href="{{ route('SiswaExport') }}">
-                            <i class="fas fa-file-excel me-2 text-success"></i> Export Excel
+                            <i class="fas fa-file-excel me-2 text-success "></i> Export Excel
                         </a>
                     </li>
                     <hr>
@@ -166,12 +173,12 @@
                                                 <option value="12">12</option>
                                         </select>
 
-                                        <select name="jurusan" id="jurusan" class="form-control" style="margin-right:30px;">
-                                            <option value="" style="color: #ccc;" disabled selected>Jurusan</option>
+                                        <select name="jurusan" id="jurusan" class="form-control" style="margin-right:30px;" disabled>
+                                            <option value="" style="color: #ccc;" disabled selected>Pilih Jurusan</option>
                                         </select>
 
-                                        <select name="jurusan_ke" id="jurusan_ke" class="form-control">
-                                            <option value="" style="color: #ccc;" disabled selected>Jurusan ke</option>
+                                        <select name="jurusan_ke" id="jurusan_ke" class="form-control" disabled>
+                                            <option value="" style="color: #ccc;" disabled selected>Pilih Jurusan ke</option>
                                         </select>
                                     </div>
 
@@ -331,6 +338,8 @@
                                 jurusanSet.add(jurusan.jurusan);
                             }
                         });
+
+                        $('#jurusan').prop('disabled', false);
                     },
                     error: function(xhr, status, error) {
                         console.log("Error: " + error);
@@ -361,6 +370,8 @@
                         console.log("Error: " + error);
                     }
                 });
+            } else {
+                $('#jurusan_ke').empty().prop('disabled', true);
             }
         });
    </script>

@@ -15,6 +15,7 @@ class DataPoinPositif extends Model
     protected $primaryKey = 'id_poin_positif';
     
     protected $fillable = ['nama_poin', 'poin', 'kategori_poin'];
+    // protected $fillable = ['nama_poin', 'id_poin_positif', 'poin', 'kategori_poin'];
 
     // Relasi yang lebih tepat, misalnya jika ada 'nis' di tabel siswa
     public function siswa()

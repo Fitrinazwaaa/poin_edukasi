@@ -176,6 +176,8 @@ input[type="checkbox"]:checked ~ .collapse-content {
     border: 2px solid #388DD8;
     margin-top: 10px;
     border-radius: 4px;
+    margin-top: 1px;
+
 }
 
 .table-wrapper {
@@ -192,7 +194,7 @@ table {
     border-collapse: collapse;
     font-size: 12px;
     margin-bottom: -16px;
-}
+  }
 
 tbody tr {
     border: 1px solid #C0E2FF;
@@ -254,17 +256,12 @@ td {
 
 
 
-
-
-
-
 /* Form Group */
 .form-row {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
 }
-
 
 /* Label */
 .form-row label {
@@ -273,7 +270,6 @@ td {
   color: #333;
   margin-right: 10px;
 }
-
 
 /* Input dan Select Field */
 .form-control {
@@ -289,7 +285,6 @@ td {
   display: flex;
   justify-content: start;
 }
-
 
 .form-row div label {
   font-size: 14px;
@@ -353,8 +348,6 @@ select.kategori-dua {
   padding: 8px 10px; /* Padding dalam dropdown */
   box-sizing: border-box; /* Agar padding dan border dihitung dalam lebar elemen */
 }
-
-
 
 .clear-input {
   transition: color 0.3s ease;
