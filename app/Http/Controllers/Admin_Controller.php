@@ -11,12 +11,15 @@ use DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\DataSiswa; // Menggunakan model DataSiswa
-
+use App\Models\DataUser;
 
 class Admin_Controller extends Controller
 {
     public function index()
     {
+        // Ambil semua data user dari database
+        $datauser = DataUser::all();
+
         // Mengambil semua data siswa
         $siswa = DataSiswa::all();
     
@@ -30,8 +33,9 @@ class Admin_Controller extends Controller
         $data_kelas = DataKelas::all(); // Mengambil semua data dari tabel data_kelas
     
         // Mengirim data ke view
-        return view('admin.siswa.siswa', compact('siswaByTahun', 'tahun_angkatan', 'data_kelas'));
+        return view('admin.siswa.siswa', compact('siswaByTahun', 'tahun_angkatan', 'data_kelas', 'datauser'));
     }
+    
     public function user1()
     {
         // Ambil data dari tabel poin_pelajar

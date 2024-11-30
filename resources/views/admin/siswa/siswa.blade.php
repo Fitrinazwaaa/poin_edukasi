@@ -10,8 +10,8 @@
     <style>
                 button.btn-outline-secondary:hover{
             color: black; /* Mengubah warna teks saat hover */
-            background-color: #FFFF00; /* Pastikan latar belakang tetap kuning */
-            border-color: #FFFF00; /* Pastikan border tetap kuning saat hover */
+            background-color: #fcfc38; /* Pastikan latar belakang tetap kuning */
+            border-color: #fcfc38; /* Pastikan border tetap kuning saat hover */
         }
     </style>
 </head>
@@ -38,7 +38,7 @@
     <!-- Confirmation Modal -->
     <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content" style="margin-top: -20px; padding: -20px;">
+            <div class="modal-content" style=" padding: -20px;">
                 <div class="modal-header">
                     <h5 class="modal-title" id="confirmDeleteModalLabel">Konfirmasi Penghapusan</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -59,10 +59,10 @@
             <div class="judul-awal">
                 <!-- Search Bar -->
                 <div class="container mt-7">
-                    <div class="input-group position-relative">
-                        <input type="text" class="form-control" id="searchInput" placeholder="Cari siswa berdasarkan NIS atau Nama" aria-label="Search" style="border-color: #FFFF00;">
-                        <button class="btn btn-outline-secondary" type="button" onclick="searchStudents()" style=" border-width: 2px 0; border-style: solid; border-color: #FFFF00; border-radius: 0 8px 8px 0; background-color: #FFFF00;">Cari</button>
-                        <span class="clear-input position-absolute" onclick="clearSearch()" style="right: 60px; top: 8px; display: none; cursor: pointer;">
+                    <div class="input-group position-relative" style="border-radius: 5px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                        <input type="text" class="form-control" id="searchInput" placeholder="Cari siswa berdasarkan NIS atau Nama" aria-label="Search" style="border-color: #fcfc38; font-size: 12px; margin-bottom: 0;">
+                        <button class="btn btn-outline-secondary" type="button" onclick="searchStudents()" style=" border-width: 2px 0; border-style: solid; border-color: #fcfc38; border-radius: 0 5px 5px 0; background-color: #fcfc38; font-size: 13px; color: black; font-weight: 600;">Cari</button>
+                        <span class="clear-input position-absolute" onclick="clearSearch()" style="right: 60px; top: 5px; display: none; cursor: pointer;">
                             <i class="fas fa-times" style="font-size: 18px; color: #dc3545;"></i>
                         </span>
                     </div>
@@ -75,50 +75,50 @@
                     <button type="button" class="icon-btn delete-btn" onclick="deleteSelected();"><i class="fas fa-trash-alt"></i></button>
                 </form>
                 <button class="tambah" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    <i class="fas fa-plus"></i> Tambahkan
+                    <i class="fas fa-plus" style="margin-right: -4px;"></i> Tambahkan
                 </button>
+                <!-- Tombol Titik Tiga -->
+                <div class="dropdown">
+                    <button class="btn btn-light" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" style="border: none; background-color:white; margin-left:-10px; margin-right:-10px;">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </button>
+                    <!-- Menu Dropdown -->
+                    <ul class="dropdown-menu p-3 shadow-lg" aria-labelledby="dropdownMenuButton" style="width: 400px; border-radius: 8px;">
+                        <li class="mb-3">
+                            <div class="upload-excel">
+                                <form action="{{ route('siswa.import') }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="input-group">
+                                        <input type="file" name="file" class="form-control" accept=".xls,.xlsx" style="border-top-right-radius: 0; border-bottom-right-radius: 0; margin-bottom: 0; font-size: 14px;">
+                                        <button type="submit" class="btn btn-primary" style="background-color:#fcfc38; border-top-left-radius: 0; border-bottom-left-radius: 0; border: none; color: black;font-size: 14px; font-weight: 600;">Impor Excel</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+                        <hr>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="{{ route('SiswaExport') }}" style="font-size: 14px;">
+                                <i class="fas fa-file-excel me-2 text-success "></i> Export Excel
+                            </a>
+                        </li>
+                        <hr>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="javascript:void(0);" onclick="increaseTingkatan()" style="font-size: 14px;">
+                                Tambah Tingkatan Semua Siswa
+                            </a>
+                        </li>
+                        <script>
+                            function increaseTingkatan() {
+                                if (confirm("Apakah Anda yakin ingin menambah tingkatan untuk semua siswa?")) {
+                                    // Redirect ke route untuk menambah tingkatan
+                                    window.location.href = "{{ route('increaseTingkatan') }}";
+                                }
+                            }
+                        </script>
+                    </ul>
+                </div>
             </div>
 
-            <!-- Tombol Titik Tiga -->
-            <div class="dropdown">
-                <button class="btn btn-light" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" style="border: none;">
-                    <i class="fas fa-ellipsis-v"></i>
-                </button>
-                <!-- Menu Dropdown -->
-                <ul class="dropdown-menu p-3 shadow-lg" aria-labelledby="dropdownMenuButton" style="width: 400px; border-radius: 8px;">
-                    <li class="mb-3">
-                        <div class="upload-excel">
-                            <form action="{{ route('siswa.import') }}" method="POST" enctype="multipart/form-data">
-                                @csrf
-                                <div class="input-group">
-                                    <input type="file" name="file" class="form-control" accept=".xls,.xlsx" style="border-top-right-radius: 0; border-bottom-right-radius: 0;">
-                                    <button type="submit" class="btn btn-primary" style="background-color:#FFFF00; border-top-left-radius: 0; border-bottom-left-radius: 0; border: none; color: black;">Impor Excel</button>
-                                </div>
-                            </form>
-                        </div>
-                    </li>
-                    <hr>
-                    <li>
-                        <a class="dropdown-item d-flex align-items-center" href="{{ route('SiswaExport') }}">
-                            <i class="fas fa-file-excel me-2 text-success "></i> Export Excel
-                        </a>
-                    </li>
-                    <hr>
-                    <li>
-                        <a class="dropdown-item d-flex align-items-center" href="javascript:void(0);" onclick="increaseTingkatan()">
-                            Tambah Tingkatan Semua Siswa
-                        </a>
-                    </li>
-                    <script>
-                        function increaseTingkatan() {
-                            if (confirm("Apakah Anda yakin ingin menambah tingkatan untuk semua siswa?")) {
-                                // Redirect ke route untuk menambah tingkatan
-                                window.location.href = "{{ route('increaseTingkatan') }}";
-                            }
-                        }
-                    </script>
-                </ul>
-            </div>
 
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-xl">
@@ -134,7 +134,6 @@
                                 <form method="POST" action="{{ route('SiswaStore') }}">
                                     @csrf
                                     @method('PUT')
-                                    <br>
                                     <div class="form-row">
                                         <label for="nama">Nama Lengkap</label>
                                         <input type="text" name="nama" class="form-control">
@@ -148,6 +147,7 @@
                                     <div class="form-row">
                                         <label for="jenis_kelamin">Jenis Kelamin</label>
                                         <select name="jenis_kelamin" class="form-control">
+                                            <option value="" disabled selected > Pilih Jenis Kelamin</option>
                                             <option value="laki-laki">Laki-Laki</option>
                                             <option value="perempuan">Perempuan</option>
                                         </select>
@@ -165,18 +165,17 @@
 
                                     <div class="form-row">
                                         <label for="kelas">Kelas</label>
-
                                         <select name="tingkatan" class="form-control" style="margin-right:30px;">
-                                            <option value="" style="color: #ccc;" disabled selected>Tingkatan</option>
-                                                <option value="10">10</option>
-                                                <option value="11">11</option>
-                                                <option value="12">12</option>
+                                            <option value="" style="color: #ccc;" disabled selected>Pilih Tingkatan</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
                                         </select>
-
+                                        
                                         <select name="jurusan" id="jurusan" class="form-control" style="margin-right:30px;" disabled>
                                             <option value="" style="color: #ccc;" disabled selected>Pilih Jurusan</option>
                                         </select>
-
+                                        
                                         <select name="jurusan_ke" id="jurusan_ke" class="form-control" disabled>
                                             <option value="" style="color: #ccc;" disabled selected>Pilih Jurusan ke</option>
                                         </select>
@@ -204,11 +203,11 @@
             <div class="tabel" data-tahun-angkatan="{{ $tahun_angkatan }}">
                 <input type="checkbox" id="dropdown{{ $tahun_angkatan }}">
                 <label class="btn-toggle" for="dropdown{{ $tahun_angkatan }}">
-                    ANGKATAN TAHUN {{ $tahun_angkatan }}
-                    <span class="float-end" style="font-weight: 500; margin-right: 30px">Jumlah Siswa: {{ count($siswa) }}</span>
+                    Angkatan Tahun {{ $tahun_angkatan }}
+                    <span class="float-end" style="font-weight: 500; margin-right: 20px; font-size: 11px;">Jumlah Siswa: {{ count($siswa) }}</span>
                 </label>
                 <div class="collapse-content" id="content{{ $tahun_angkatan }}">
-                    <div class="card card-body">
+                    <div class="card card-body" style="border: none;">
                         <div class="table-wrapper">
                             <div class="table">
                                 <table>
@@ -226,12 +225,12 @@
                                     <tbody id="studentTable{{ $tahun_angkatan }}">
                                         @foreach ($siswa as $item)
                                         <tr data-nis="{{ $item['nis'] }}" data-nama="{{ $item['nama'] }}">
-                                            <td><input type="checkbox" name="hapus[]" class="checkbox_ids{{ $tahun_angkatan }}" value="{{ $item['nis'] }}"></td>
-                                            <td>{{ $item['nis'] }}</td>
-                                            <td style="text-align: left;">{{ $item['nama'] }}</td>
-                                            <td>{{ $item['jenis_kelamin'] }}</td>
-                                            <td>{{ $item['tingkatan'] }} {{ $item['jurusan'] }} {{ $item['jurusan_ke'] }}</td>
-                                            <td>{{ $item['tahun_angkatan'] }}</td>
+                                            <td style="font-weight: 400; font-size: 11px;"><input type="checkbox" name="hapus[]" class="checkbox_ids{{ $tahun_angkatan }}" value="{{ $item['nis'] }}"></td>
+                                            <td style="font-weight: 400; font-size: 11px;">{{ $item['nis'] }}</td>
+                                            <td style="text-align: left; font-weight: 400; font-size: 11px;">{{ $item['nama'] }}</td>
+                                            <td style="font-weight: 400; font-size: 11px;">{{ $item['jenis_kelamin'] }}</td>
+                                            <td style="font-weight: 400; font-size: 11px;">{{ $item['tingkatan'] }} {{ $item['jurusan'] }} {{ $item['jurusan_ke'] }}</td>
+                                            <td style="font-weight: 400; font-size: 11px;">{{ $item['tahun_angkatan'] }}</td>
                                             <td>
                                                 <button class="icon-btn edit-btn" onclick="window.location.href='{{ route('SiswaEdit', $item['nis']) }}';">
                                                     <i class="fas fa-edit"></i>
@@ -382,18 +381,25 @@
     function clearSearch() {
         document.getElementById("searchInput").value = ""; // Kosongkan input
         document.querySelector(".clear-input").style.display = "none"; // Sembunyikan ikon clear
+        resetTableRows(); // Tampilkan semua baris tabel
         closeAllDropdowns(); // Tutup semua dropdown
     }
 
     // Fungsi untuk menutup semua dropdown
     function closeAllDropdowns() {
         const tables = document.querySelectorAll(".tabel");
-        
+
         tables.forEach(table => {
             const tahunAngkatan = table.getAttribute("data-tahun-angkatan");
             const collapseContent = document.getElementById(`content${tahunAngkatan}`);
             collapseContent.classList.remove("show"); // Tutup isi tabel
             document.getElementById(`dropdown${tahunAngkatan}`).checked = false; // Nonaktifkan dropdown
+
+            // Reset tampilan semua baris di tabel
+            const rows = table.querySelectorAll(`#studentTable${tahunAngkatan} tr`);
+            rows.forEach(row => {
+                row.style.display = ""; // Tampilkan semua baris
+            });
         });
     }
 
@@ -402,18 +408,21 @@
         const clearInput = document.querySelector(".clear-input");
         clearInput.style.display = this.value ? "block" : "none"; // Tampilkan ikon clear jika ada input
 
-        // Jika input kosong, tutup semua dropdown
+        // Jika input kosong, tutup semua dropdown dan tampilkan semua data
         if (this.value === "") {
+            resetTableRows();
             closeAllDropdowns();
         }
     });
 
+    // Fungsi untuk mencari siswa berdasarkan input pencarian
     function searchStudents() {
         const searchInput = document.getElementById("searchInput").value.toLowerCase();
         const tables = document.querySelectorAll(".tabel");
 
-        // Jika input kosong, tutup semua dropdown dan keluar dari fungsi
+        // Jika input kosong, tutup semua dropdown dan tampilkan semua data, lalu keluar dari fungsi
         if (searchInput === "") {
+            resetTableRows();
             closeAllDropdowns();
             return;
         }
@@ -429,11 +438,11 @@
                 const nama = row.getAttribute("data-nama").toLowerCase();
 
                 if (nis.includes(searchInput) || nama.includes(searchInput)) {
-                    row.style.display = "";
+                    row.style.display = ""; // Tampilkan baris yang cocok
                     matchFound = true;
                     found = true;
                 } else {
-                    row.style.display = "none";
+                    row.style.display = "none"; // Sembunyikan baris yang tidak cocok
                 }
             });
 
@@ -452,7 +461,17 @@
             alert("Data tidak ditemukan.");
         }
     }
-</script>
 
+    // Fungsi untuk mereset tampilan semua baris di tabel
+    function resetTableRows() {
+        const tables = document.querySelectorAll(".tabel");
+        tables.forEach(table => {
+            const rows = table.querySelectorAll("tr");
+            rows.forEach(row => {
+                row.style.display = ""; // Tampilkan semua baris
+            });
+        });
+    }
+</script>
 </body>
 </html>

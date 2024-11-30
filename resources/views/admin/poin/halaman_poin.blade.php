@@ -19,7 +19,7 @@
             <div class="modal-content">
 
                 <div class="modal-header" style="background-color: #e7f4ff;">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel" >TAMBAH DATA SISWA</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel" >TAMBAH DATA POIN NEGATIF ATAU POSITIF</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
@@ -27,11 +27,10 @@
                     <div class="container">
                         <form action="{{ route('submitPoin') }}" method="POST">
                         @csrf
-                            <p class="text-center">FORMULIR INPUT DATA PERATURAN</p>
                             <div class="container">
                                 <div class="form-row">
-                                    <label for="tipe_poin">Tipe Poin</label>
                                     <div class="positif_negatif">
+                                        <label for="tipe_poin" style="margin-right: 30px;">Tipe Poin</label>
                                         <label>
                                             <input class="positif" id="poin_positif" type="radio" name="type" value="positive"> Positif
                                         </label>
@@ -122,8 +121,8 @@
                     Apakah Anda yakin ingin menghapus data yang dipilih?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                    <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Hapus</button>
+                    <button type="button" class="btn btn-dua" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-satu" id="confirmDeleteBtn">Hapus</button>
                 </div>
             </div>
         </div>
@@ -141,9 +140,9 @@
                 <button type="button" class="icon-btn delete-btn" id="deleteAllSelectedRecord">
                     <i class="fas fa-trash-alt"></i>
                 </button>
-                <a class="btn btn-primary" style="padding: 10px 20px; font-size:14px;" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    <i class="fas fa-plus" style="margin-right: 10px;"></i>Tambah Poin
-                </a>
+                <button class="tambah" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <i class="fas fa-plus" style="margin-right: -4px;"></i> Tambah Poin
+                </button>
             </div>
             <!-- TOMBOL TITIK TIGA -->
             <div class="dropdown" style="margin-left:10px;">
@@ -152,15 +151,15 @@
                 </button>
                 <ul class="dropdown-menu p-3 shadow-lg" aria-labelledby="dropdownMenuButton" style="width: 400px; border-radius: 8px;">
                     <li class="mb-3">
-                    <div class="upload-excel">
-                        <form action="{{ route('importExcel') }}" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            <div class="input-group">
-                                <input type="file" name="file" class="form-control" accept=".xls,.xlsx" required style="border-top-right-radius: 0; border-bottom-right-radius: 0;">
-                                <button type="submit"  style="background-color:#FFFF00; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border: none; color: black;">Impor Excel</button>
-                            </div>
-                        </form>
-                    </div>
+                        <div class="upload-excel">
+                            <form action="{{ route('importExcel') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                <div class="input-group">
+                                    <input type="file" name="file" class="form-control" accept=".xls,.xlsx" style="border-top-right-radius: 0; border-bottom-right-radius: 0; margin-bottom: 0; font-size: 14px;">
+                                    <button type="submit" class="btn btn-primary" style="background-color:#fcfc38; border-top-left-radius: 0; border-bottom-left-radius: 0; border: none; color: black;font-size: 14px; font-weight: 600;">Impor Excel</button>
+                                </div>
+                            </form>
+                        </div>
                     </li>
                     <li>
                         <a class="dropdown-item d-flex align-items-center" href="{{ route('exportGabungan') }}">

@@ -2,13 +2,11 @@
     margin: 0;
     padding : 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
 }
 
 body {
     background-color: #B6DCFD;
     padding-top: 80px;
-
 }
 
 .profile-header {
@@ -196,3 +194,16 @@ td, tr {
     background-color: #cd3f35;
     transform: scale(1.05);
   }
+
+  /* Tambahkan ke dalam file CSS Anda atau <style> di halaman */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Ubah dari baris ke kolom */
+        align-items: center; /* Pusatkan elemen */
+    }
+
+    .table-section {
+        width: 100%; /* Pastikan tabel memenuhi lebar layar */
+        margin-bottom: 20px; /* Beri jarak antar tabel */
+    }
+}

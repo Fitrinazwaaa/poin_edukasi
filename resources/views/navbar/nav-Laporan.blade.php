@@ -1,3 +1,9 @@
+<?php
+
+use App\Models\DataUser;
+
+$datauser = DataUser::all();
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,6 +18,7 @@
 /* Mengatur lebar navbar offcanvas saat dalam posisi start (kiri) */
 div#offcanvasDarkNavbar.offcanvas.offcanvas-start {
     width: 270px;
+    font-size: 14px;
 }
 
 /* Mengatur warna latar belakang navbar offcanvas */
@@ -23,12 +30,13 @@ div#offcanvasDarkNavbar.offcanvas.offcanvas-start {
 .navbar {
     background-color: #388DD8;
     position: fixed;
-    height: 72px;
+    height: 65px;
 }
 
 /* Mengatur warna teks judul navbar menjadi putih */
 .offcanvas-title {
     color: white;
+    font-size: 17px;
 }
 
 /* Memberi padding di sebelah kiri setiap item dalam navbar */
@@ -69,6 +77,7 @@ div.satu{
     justify-content: flex-start;
     align-items: center;
     width: 100%;
+    height: 54px;
 }
 
 h5.offcanvas-title{
@@ -114,10 +123,7 @@ div.offcanvas-header {
     font-weight: bold; /* Set bold to match h5 */
 }
 
-/* Icon Styling */
-.back-button .bi-arrow-left {
-    font-size: 20px;
-}
+
 
 /* Hover effect on back button */
 .back-button button:hover {
@@ -169,9 +175,6 @@ div.offcanvas-header {
     border-top: black;
     border-bottom: black;
 }
-
-
-
     </style>
 </head>
 <body>
@@ -289,7 +292,7 @@ div.offcanvas-header {
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation" style="margin-left:5%;">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <h5 class="offcanvas-title" style="margin-left:5%;">LAPORAN SISWA SMKN 1 KAWALI</h5>
+            <h5 class="offcanvas-title" style="margin-left:5%;">DATA SISWA SMKN 1 KAWALI</h5>
         </div>
         <div data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
             <div class="offcanvas offcanvas-start" tabindex="-1" data-bs-backdrop="false" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
@@ -322,9 +325,15 @@ div.offcanvas-header {
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
                                 <hr>
-                                <a class="dropdown-item" aria-current="page" href="{{ route('AkunBK') }}">Akun</a>
+                                <a class="dropdown-item" aria-current="page" href="{{ route('AkunBK') }}" style="font-size: 14px; font-weight: 300;"><strong id="profile-username">{{ $datauser->firstWhere('role', 'admin')->username ?? 'Bimbingan Konseling' }}</strong></a>
                                 <hr>
-                                <a class="dropdown-item" aria-current="page" href="{{ route('kelas') }}">Kelas</a>
+                                <a class="dropdown-item" aria-current="page" href="{{ route('AkunGuru') }}" style="font-size: 14px; font-weight: 300;"><strong id="profile-username">{{ $datauser->firstWhere('role', 'user_edit')->username ?? 'Guru' }}</strong></a>
+                                <hr>
+                                <a class="dropdown-item" aria-current="page" href="{{ route('AkunOsis') }}" style="font-size: 14px; font-weight: 300;"><strong id="profile-username">{{ $datauser->firstWhere('role', 'user1')->username ?? 'Kesiswaan' }}</strong></a>
+                                <hr>
+                                <a class="dropdown-item" aria-current="page" href="{{ route('AkunKesiswaan') }}" style="font-size: 14px; font-weight: 300;"><strong id="profile-username">{{ $datauser->firstWhere('role', 'user2')->username ?? 'OSIS' }}</strong></a>
+                                <hr>
+                                <a class="dropdown-item" aria-current="page" href="{{ route('kelas') }}" style="font-size: 14px;" >Kelas</a>
                             </div>
                         </li>
                         <hr>

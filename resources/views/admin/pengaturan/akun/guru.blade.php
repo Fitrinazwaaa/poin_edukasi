@@ -1,80 +1,207 @@
+@extends('navbar/nav-PengaturanAkun')
+
+@section('content')
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Settings</title>
+    <title>user_edit Settings</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-    <link rel="stylesheet" href="{{ asset('css/admin/pengaturan_akun/bk.css') }}">
+    <style>
+        body{
+            margin-top: -40px;
+        }
+        #user_edit-settings-container {
+            background-color: #F0F4F9;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 50px 10px 10px 10px; /* Tambahkan padding atas untuk jarak */
+        }
+
+        #user_edit-settings-container .container {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            width: 100%;
+            max-width: 450px;
+            position: relative;
+        }
+
+        #user_edit-settings-container .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #user_edit-settings-container .profile-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #1e90ff;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 36px;
+            color: white;
+        }
+
+        #user_edit-settings-container .profile-text strong {
+            font-size: 22px;
+            display: block;
+            margin-top: 10px;
+        }
+
+        #user_edit-settings-container .profile-text p {
+            color: #555;
+            font-size: 14px;
+        }
+
+        #user_edit-settings-container hr {
+            border: 0;
+            height: 1px;
+            background-color: #388DD8;
+            margin: 20px 0;
+        }
+
+        #user_edit-settings-container h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        #user_edit-settings-container label {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        #user_edit-settings-container input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #cfcfcf;
+            border-radius: 5px;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        #user_edit-settings-container button.btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #1e90ff;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #user_edit-settings-container button.btn:hover {
+            background-color: #1c86ee;
+        }
+
+        #user_edit-settings-container .alert {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        #user_edit-settings-container .secure-info {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 12px;
+            color: #555;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #user_edit-settings-container .secure-info a {
+            color: #1e90ff;
+            text-decoration: none;
+        }
+
+        #user_edit-settings-container .secure-info a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 
 <body>
-@extends('navbar/nav-PengaturanAkun')
-    <div class="container">
-        <div class="form-container">
+    <div id="user_edit-settings-container">
+        <div class="container">
             <div class="header">
-                <h2>Pengaturan Profil User Edit</h2>
-                <br>
-                <img src="https://cdn-icons-png.flaticon.com/512/7641/7641828.png" alt="" class="profile-icon" width="40" height="40">
+                <div class="profile-icon">
+                    <i class="fa fa-user"></i>
+                </div>
                 <div class="profile-text">
-                    <strong id="profile-username">{{ $datauser->firstWhere('role', 'user_edit')->username ?? 'GURU' }}</strong>
-                    <p>{{ $datauser->firstWhere('role', 'user_edit')->email ?? 'smkn1kawali@gmail.com' }}</p>
+                    <strong id="profile-username">{{ $datauser->firstWhere('role', 'user_edit')->username ?? 'Guru' }}</strong>
+                    <p>smkn1kawali@gmail.com</p>
                 </div>
             </div>
-            <br>
             <hr>
+
+            <!-- Alert -->
+            <div id="alert-container" class="alert">
+                Perubahan berhasil disimpan.
+            </div>
+
             <h3>Metode Masuk</h3>
 
             @foreach ($datauser as $user)
-                @if ($user->role == 'user_edit')
-                <form action="{{ route('UserUpdate', ['id' => $user->id]) }}" method="POST"> <!-- Tambahkan ID pengguna -->
-                    @csrf
-                    @method('PUT')
-                    
-                    <!-- Input Username -->
-                    <label for="username">Username</label>
-                    <input type="text" id="username" name="username" value="{{ $user->username }}" oninput="changeUsername()"> <!-- Event listener 'oninput' untuk sinkronisasi -->
-                    <button type="submit" class="btn">Ganti Username</button> <!-- Tambahkan onclick -->
+            @if ($user->role == 'user_edit')
+            <form action="{{ route('UserUpdate', ['id' => $user->id]) }}" method="POST" onsubmit="return validateForm();">
+                @csrf
+                @method('PUT')
 
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" value="{{ $user->username }}" oninput="changeUsername()">
 
-                    <!-- Input Password -->
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" placeholder="Masukkan password baru jika ingin mengganti">
-                    <button type="submit" class="btn">Ganti Password</button> <!-- Tambahkan onclick -->
-                    @if(session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
-                    @endif
-                </form>
-                @endif
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Masukkan password baru">
+
+                <button type="submit" class="btn">Ubah Akun</button>
+            </form>
+            @endif
             @endforeach
 
             <div class="secure-info">
-                <p>Amankan Akun Anda</p>
-                <p>Otentikasi dua faktor menambahkan lapisan keamanan ekstra ke akun Anda. Untuk masuk, Anda juga perlu memberikan kode 6 digit. Pelajari lebih lanjut.</p>
+                <p><strong>Amankan Akun Anda</strong></p>
+                <p>Keamanan akun Anda adalah prioritas utama kami. Pastikan untuk menggunakan kata sandi yang kompleks, perbarui secara berkala, dan hindari berbagi informasi pribadi dengan pihak yang tidak dikenal.</p>
             </div>
         </div>
     </div>
 
     <script>
-        // Fungsi untuk mengganti username
         function changeUsername() {
-            // Ambil nilai dari input username
             var newUsername = document.getElementById("username").value;
-            // Perbarui teks username di bawah ikon profil
             document.getElementById("profile-username").textContent = newUsername;
         }
 
-        // Fungsi untuk mengganti password
-        function changePassword() {
-            // Ambil nilai dari input password
-            var newPassword = document.getElementById("password").value;
-            // Simpan atau perbarui password (di sini hanya untuk simulasi)
-            alert("Password berhasil diubah ke: " + newPassword);
+        function validateForm() {
+            var alertContainer = document.getElementById("alert-container");
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            if (!username || !password) {
+                alertContainer.style.display = 'block';
+                alertContainer.textContent = "Username dan password tidak boleh kosong.";
+                return false; // Hentikan pengiriman form
+            } else {
+                alertContainer.style.display = 'block';
+                alertContainer.textContent = "Perubahan berhasil disimpan.";
+                return true; // Lanjutkan pengiriman form
+            }
         }
     </script>
-
 </body>
+
 </html>
+@endsection

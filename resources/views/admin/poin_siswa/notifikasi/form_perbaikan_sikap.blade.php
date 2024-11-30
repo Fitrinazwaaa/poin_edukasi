@@ -52,13 +52,19 @@
             </div>
 
             <div class="button-group mt-3">
-                <button type="button" class="btn-dua" onclick="window.location.href='{{ route('TipePoinSiswa') }}';">Kembali</button>
+                <button type="button" class="btn-dua" onclick="goBack()">Kembali</button>
                 <button type="submit" class="btn-satu">Tambah Poin</button>
             </div>
         </form>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Function to go back to the previous page
+        function goBack() {
+            window.history.back();
+        }
+    </script>
     <script type="text/javascript">
         // Function to handle tipe poin selection and load relevant points
         $('input[name="tipe_poin"]').on('change', function() {

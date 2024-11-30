@@ -1,3 +1,10 @@
+
+<?php
+
+use App\Models\DataUser;
+
+$datauser = DataUser::all();
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -322,9 +329,15 @@ div.offcanvas-header {
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
                                 <hr>
-                                <a class="dropdown-item" aria-current="page" href="{{ route('AkunBK') }}">Akun</a>
+                                <a class="dropdown-item" aria-current="page" href="{{ route('AkunBK') }}" style="font-size: 14px; font-weight: 300;"><strong id="profile-username">{{ $datauser->firstWhere('role', 'admin')->username ?? 'Bimbingan Konseling' }}</strong></a>
                                 <hr>
-                                <a class="dropdown-item" aria-current="page" href="{{ route('kelas') }}">Kelas</a>
+                                <a class="dropdown-item" aria-current="page" href="{{ route('AkunGuru') }}" style="font-size: 14px; font-weight: 300;"><strong id="profile-username">{{ $datauser->firstWhere('role', 'user_edit')->username ?? 'Guru' }}</strong></a>
+                                <hr>
+                                <a class="dropdown-item" aria-current="page" href="{{ route('AkunOsis') }}" style="font-size: 14px; font-weight: 300;"><strong id="profile-username">{{ $datauser->firstWhere('role', 'user1')->username ?? 'Kesiswaan' }}</strong></a>
+                                <hr>
+                                <a class="dropdown-item" aria-current="page" href="{{ route('AkunKesiswaan') }}" style="font-size: 14px; font-weight: 300;"><strong id="profile-username">{{ $datauser->firstWhere('role', 'user2')->username ?? 'OSIS' }}</strong></a>
+                                <hr>
+                                <a class="dropdown-item" aria-current="page" href="{{ route('kelas') }}" style="font-size: 14px;" >Kelas</a>
                             </div>
                         </li>
                         <hr>

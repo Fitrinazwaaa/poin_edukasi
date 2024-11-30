@@ -1,40 +1,93 @@
 body {
-  font-family: Arial, sans-serif;
-  background-color: #C0E2FF;
-  /* margin-top: 50px; */
+  /* font-size: 14px; */
+  background-color: #f4f4f9;
+  padding: 20px;
   padding-top: 80px;
-  overflow-x: hidden;
+  overflow-y: auto; /* Mengizinkan scroll bar vertikal jika konten melebihi tinggi maksimum */
+  overflow-x: hidden; /* Menghilangkan scroll bar horizontal */
 }
 
+/* Warna default dropdown menu */
 .dropdown-menu {
-  z-index: 1050; /* Pastikan ini lebih tinggi dari elemen lain */
-    display: none; /* Pastikan ini tidak ada */
+  background-color: #388DD8; /* Warna default */
+  border: none;
+  box-shadow: none;
 }
 
-.tambah {
+/* Mengatur tampilan item dropdown saat di-hover */
+li .dropdown-item {
+  color: white; /* Warna teks */
+  transition: background-color 0.3s ease; /* Tambahkan transisi agar lebih halus */
+  padding: 15px 15px;
+}
+/* Item dropdown saat di-hover */
+li .dropdown-item:hover {
+  background: #1676ca; /* Warna saat di-hover */
+  color: white;
+  border-style: solid;
+  border-color: #ffffff;
+  border-width: 6px;
+  border-right: black;
+  border-top: black;
+  border-bottom: black;
+}
+
+/* Container untuk tombol tambah dan hapus */
+.tambah_dan_hapus {
   display: flex;
-  align-items: center; /* Menyelaraskan konten secara vertikal */
-  gap: 8px; /* Jarak antara gambar dan teks */
-  padding: 8px 16px; /* Ruang dalam tombol */
-  background-color: #FFFF00; /* Warna latar belakang tombol */
-  border: none; /* Menghilangkan border tombol */
-  border-radius: 10px; /* Sudut membulat */
-  cursor: pointer; /* Mengubah kursor menjadi pointer saat hover */
-  /* float: right;  */
-  margin: 20px 0 10px 10%;
-  font-size: 13px;
-  font-weight: 600;
+  justify-content: center;
+  align-items: center;
+  gap: 10px; /* Mengatur jarak antara tombol */
 }
 
-.tambah img {
-  vertical-align: middle; /* Menyelaraskan gambar secara vertikal dengan teks */
+/* Add Button */
+.tambah {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #fcfc38;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  white-space: nowrap; /* Mencegah teks turun ke baris berikutnya */
+  gap: 12px;
+}
+
+.tambah i {
+  margin-right: 5px; /* Mengatur jarak antara ikon dan teks */
 }
 
 .tambah:hover {
-  background-color: #dada5d; /* Warna saat di-hover */
+  background-color: #d2d200;
+  transform: scale(1.05);
 }
 
+/* Delete Button */
+.icon-btn.delete-btn {
+  margin-left: 190px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #f44336;
+  color: white;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
 
+.icon-btn.delete-btn:hover {
+  background-color: #cd3f35;
+  transform: scale(1.05);
+}
 
 /* TABLE STYLES */
 .table-wrapper3 {
@@ -103,17 +156,9 @@ table tbody tr:hover {
   transform: translateX(-50%); /* Center horizontally by adjusting left position */
 }
 
-
-
 .tipe-poin .tipe a:hover::after,
 .tipe-poin .tipe a.active::after {
   width: 50%; /* Adjust width of the underline */
-}
-
-/* Container untuk tombol tambah dan hapus */
-.tambah_dan_hapus {
-  display: flex;
-  gap: 10px; /* Mengatur jarak antara tombol */
 }
 
 /* Add Button */
@@ -121,7 +166,7 @@ table tbody tr:hover {
   color: black;
   font-weight: 600;
   border: none;
-  background-color: #FFFF00;
+  background-color: #fcfc38;
   transition: background-color 0.3s ease, transform 0.2s ease;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -132,30 +177,6 @@ table tbody tr:hover {
   background-color: #dada5d;
   transform: scale(1.05);
 }
-
-
-/* Delete Button */
-.icon-btn.delete-btn {
-  margin-left: 190px;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 15px;
-  font-size: 16px;
-  cursor: pointer;
-  border: none;
-  border-radius: 8px;
-  background-color: #f44336;
-  color: white;
-  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-}
-
-.icon-btn.delete-btn:hover {
-  background-color: #cd3f35;
-  transform: scale(1.05);
-}
-
-
 
 .table-wrapper1 {
   /* margin-top: 10px; */
@@ -210,7 +231,7 @@ th {
   display: flex;
   /* justify-content: center;
   align-items: center; */
-  padding: 11px;
+  padding: 9px;
   font-size: 16px;
   cursor: pointer;
   border: none;
@@ -230,13 +251,13 @@ th {
 
 
 
-/* Form Group */
+/* Default styling for larger screens (desktop) */
 .form-row {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
+  flex-wrap: wrap; /* Membuat elemen bisa dibungkus ke baris baru jika perlu */
 }
-
 
 /* Label */
 .form-row label {
@@ -246,7 +267,6 @@ th {
   margin-right: 10px;
 }
 
-
 /* Input dan Select Field */
 .form-control {
   flex: 1;
@@ -254,25 +274,47 @@ th {
   font-size: 14px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  margin-bottom: 10px; /* Memberikan jarak bawah antar elemen */
 }
 
-/* Radio Button */
-.form-row div {
+/* Responsif untuk perangkat kecil */
+@media (max-width: 768px) {
+  .form-row {
+    display: block; /* Ubah menjadi blok vertikal untuk perangkat mobile */
+  }
+
+  /* Label */
+  .form-row label {
+    width: auto; /* Label mengambil lebar otomatis */
+    margin-right: 0; /* Menghapus margin kanan pada label */
+    margin-bottom: 8px; /* Memberikan jarak antara label dan select */
+  }
+
+  /* Input dan Select Field */
+  .form-control {
+    width: 100%; /* Setel lebar input dan select menjadi 100% */
+    margin-right: 0; /* Menghapus margin kanan */
+  }
+}
+
+/* Radio Button Group */
+.positif_negatif {
   display: flex;
-  justify-content: start;
+  gap: 30px; /* Jarak antar label radio */
+  align-items: center;
+  margin-top: 8px;
+  margin-bottom: -10px;
 }
 
-
-.form-row div label {
+.positif_negatif label {
   font-size: 14px;
   color: #333;
 }
 
-/* Tombol Submit dan Kembali */
 .button-group {
   display: flex;
   justify-content: flex-end; /* Menyusun elemen ke kanan */
-  gap: 10px; /* Memberi jarak antar tombol */
+  gap: 15px; /* Memberi jarak antar tombol */
 }
 
 button {
@@ -288,6 +330,7 @@ button.btn-satu {
   border-radius: 3px;
   transition: background-color 0.3s ease, transform 0.2s ease;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 6px 25px;
 }
 
 button.btn-satu:hover{
@@ -302,6 +345,7 @@ button.btn-dua {
   border-radius: 3px;
   transition: background-color 0.3s ease, transform 0.2s ease;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 6px 25px;
 }
 
 button.btn-dua:hover{
@@ -310,3 +354,94 @@ button.btn-dua:hover{
   color: white;
 }
 
+/* Tambahkan meta viewport di file HTML */
+@media (max-width: 768px) {
+  body {
+    padding: 80px 35px 0 35px; /* Sesuaikan dengan ukuran header atau navbar */
+  }
+
+  /* Tabel */
+  .table-wrapper3, .table-wrapper1 {
+    width: 100%; /* Membuat tabel memenuhi lebar layar */
+  }
+
+  .scroll-container {
+    width: 100%; /* Pastikan container scroll juga responsif */
+    border: 3px solid #dcefff;
+    margin-top: 18px;
+  }
+
+  .scrollable-table1 {
+    max-height: 300px; /* Kurangi tinggi jika layar kecil */
+    overflow-y: auto;
+  }
+
+  table th{
+    font-size: 14px; /* Perkecil teks tabel */
+    padding: 6px 8px;
+  }
+
+  table td {
+    font-size: 13px; /* Perkecil teks tabel */
+    padding: 6px 8px;
+  }
+
+  th {
+    font-size: 14px;
+  }
+
+  /* Tombol */
+  .tambah {
+    width: 100%; /* Tombol memenuhi lebar layar */
+    padding: 10px; /* Tambah padding agar lebih nyaman di sentuh */
+    font-size: 14px; /* Perkecil ukuran font */
+  }
+  .icon-btn.delete-btn {
+    width: 100%; /* Tombol memenuhi lebar layar */
+    font-size: 14px; /* Perkecil ukuran font */
+    margin-left: 70px;
+  }
+
+  .tambah_dan_hapus {
+    gap: 15px;
+  }
+
+  .tambah img {
+    width: 18px; /* Perkecil ukuran gambar */
+    height: 18px;
+  }
+
+  /* Tipe Poin */
+  .tipe-poin .tipe a {
+    font-size: 14px; /* Perkecil font */
+    padding: 10px 20px; /* Kurangi padding */
+  }
+}
+
+/* Responsif untuk layar lebih kecil (di bawah 576px) */
+@media (max-width: 576px) {
+  table th, table td {
+    font-size: 14px; /* Lebih kecil untuk layar sangat kecil */
+    /* padding: 4px 6px; */
+  }
+
+  table td {
+    font-size: 13px; /* Lebih kecil untuk layar sangat kecil */
+    /* padding: 4px 6px; */
+  }
+
+  .tambah {
+    font-size: 14px; /* Perkecil font untuk tombol */
+    gap: 12px;
+  }
+
+  .form-control {
+    font-size: 12px; /* Perkecil font input */
+    padding: 8px; /* Kurangi padding */
+  }
+
+  .tipe-poin .tipe a {
+    font-size: 14px;
+    padding: 8px 20px;
+  }
+}

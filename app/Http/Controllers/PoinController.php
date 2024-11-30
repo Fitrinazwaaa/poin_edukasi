@@ -14,19 +14,21 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
  use App\Models\DataPoinPositif;
  use App\Models\DataPoinNegatif;
- use App\Models\PoinPeringatan;
+use App\Models\DataUser;
+use App\Models\PoinPeringatan;
  use Maatwebsite\Excel\Facades\Excel;
 
 class PoinController extends Controller
 {
     public function index()
     {
+        $datauser = DataUser::all();
         $poinNegatif = DataPoinNegatif::orderBy('kategori_poin', 'asc')->get();
     
         // Mengambil dan mengurutkan data poin positif berdasarkan kategori
         $poinPositif = DataPoinPositif::orderBy('kategori_poin', 'asc')->get();
         $poinPeringatan = PoinPeringatan::all(); 
-        return view('admin.poin.halaman_poin', compact('poinPositif', 'poinNegatif', 'poinPeringatan')); // Mengirim kedua variabel
+        return view('admin.poin.halaman_poin', compact('poinPositif', 'poinNegatif', 'poinPeringatan', 'datauser')); // Mengirim kedua variabel
     }
 
     public function create()

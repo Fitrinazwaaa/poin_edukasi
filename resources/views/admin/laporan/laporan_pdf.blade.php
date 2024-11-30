@@ -6,7 +6,7 @@
     <title>Daftar Siswa SMK</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            
             font-size: 12px;
         }
         h3 {

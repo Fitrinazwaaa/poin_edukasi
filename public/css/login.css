@@ -2,8 +2,6 @@ body, html {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Memastikan tinggi layar penuh untuk penempatan tengah */
-    margin: 0;
 }
 form {
     border: 1px solid #ccc;

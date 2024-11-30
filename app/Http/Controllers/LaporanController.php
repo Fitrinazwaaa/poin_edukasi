@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\LaporanExport;
+use App\Models\DataUser;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use App\Models\PoinPelajar;
@@ -12,6 +13,7 @@ class LaporanController extends Controller
 {
     public function index()
     {
+        $datauser = DataUser::all();
         // Mengurutkan dan mengelompokkan berdasarkan NIS
         $poinPelajar = PoinPelajar::orderBy('tingkatan')
                                    ->orderBy('jurusan')
@@ -19,7 +21,7 @@ class LaporanController extends Controller
                                    ->get()
                                    ->groupBy('nis');
     
-        return view('admin.laporan.laporan_poin_siswa', ['poinPelajar' => $poinPelajar]);
+        return view('admin.laporan.laporan_poin_siswa', ['poinPelajar' => $poinPelajar], compact('datauser'));
     }
     
 

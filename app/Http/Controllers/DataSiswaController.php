@@ -10,12 +10,16 @@ use DB;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\SiswaExport;
+use App\Models\DataUser;
 use Session;
 
 class DataSiswaController extends Controller
 {
     public function index()
     {
+        // Ambil semua data user dari database
+        $datauser = DataUser::all();
+        
         // Mengambil semua data siswa
         $siswa = DataSiswa::all();
     
@@ -29,7 +33,7 @@ class DataSiswaController extends Controller
         $data_kelas = DataKelas::all(); // Mengambil semua data dari tabel data_kelas
     
         // Mengirim data ke view
-        return view('admin.siswa.siswa', compact('siswaByTahun', 'tahun_angkatan', 'data_kelas'));
+        return view('admin.siswa.siswa', compact('siswaByTahun', 'tahun_angkatan', 'data_kelas', 'datauser'));
     }
     
 

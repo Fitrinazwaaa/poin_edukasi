@@ -87,12 +87,39 @@
 
     /* Responsive Design */
     @media (max-width: 768px) {
-        .table, .table th, .table td {
+        /* Wrapper Styles */
+        .table-wrapper {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 2px solid #388DD8;
+            border-radius: 6px;
+            width: 100%;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background: #ffffff;
+            box-sizing: border-box;
+            margin: 20px 0;
+        }
+    
+        /* Table Styles */
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+    
+        .table th, .table td {
             font-size: 12px;
             padding: 8px;
+            white-space: nowrap; /* Menghilangkan pembungkusan teks */
+            overflow: visible;   /* Memastikan teks terlihat jika lebih panjang */
+            text-overflow: clip; /* Tidak memotong teks */
+            max-width: none;     /* Menghilangkan batas lebar default */
         }
+    
+        /* Tombol agar responsif */
         .btn-primary {
             width: 100%;
             font-size: 14px;
         }
     }
+    
+    

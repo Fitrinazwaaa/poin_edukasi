@@ -73,9 +73,6 @@
         .profile-gender,
         .profile-class {
             font-size: 14px;
-        }
-
-        .profile-class {
             font-weight: bold;
         }
 
@@ -83,6 +80,102 @@
         .content {
             margin-top: 80px;
         }
+
+        @media (max-width: 768px) {
+    /* Navbar custom styling for mobile */
+    .navbar-custom {
+        padding: 0 10px;
+        height: 67px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: nowrap;
+    }
+
+    /* Back button styling */
+    .back-button {
+        flex-shrink: 0; /* Pastikan ukuran tetap */
+        margin-right: 10px; /* Beri jarak dengan elemen berikutnya */
+    }
+
+    /* Profile Info Styling */
+    .profile-info {
+        flex-grow: 1; /* Mengisi ruang kosong */
+        display: flex;
+        align-items: center;
+        overflow: hidden; /* Menghindari teks terlalu panjang */
+    }
+
+    .profile-image img {
+        width: 35px;
+        height: 35px;
+        margin-right: 8px; /* Jarak antara gambar dan detail */
+    }
+
+    .profile-details {
+        overflow: hidden; /* Menyembunyikan teks yang panjang */
+        white-space: nowrap; /* Teks tidak memotong baris */
+        text-overflow: ellipsis; /* Tambahkan '...' jika teks terlalu panjang */
+        max-width: 150px; /* Batasi panjang maksimum */
+    }
+
+    .profile-details .profile-name {
+        font-size: 13px;
+        font-weight: bold;
+    }
+
+    .profile-details .profile-id {
+        font-size: 13px;
+        color: white;
+        text-align: left;
+    }
+
+    /* Profile Meta Styling */
+    .profile-meta, .profile-details {
+        flex-shrink: 0; /* Ukuran tetap, tidak ikut meregang */
+        text-align: right;
+        margin-left: 10px; /* Beri jarak dengan elemen sebelumnya */
+        max-width: 100px; /* Batasi lebar pada profil meta */
+    }
+
+    .profile-meta .profile-class,
+    .profile-details .profile-name {
+        font-size: 13px;
+        white-space: nowrap; /* Hindari pemotongan baris */
+        text-overflow: ellipsis; /* Tambahkan '...' jika teks terlalu panjang */
+        overflow: hidden; /* Sembunyikan teks yang melewati batas */
+    }
+
+/* Text Marquee Animation */
+@keyframes marquee {
+    0% {
+        transform: translateX(110%);
+    }
+    100% {
+        transform: translateX(-110%);
+    }
+}
+
+/* Scrolling Text Container */
+.scrolling-container {
+    width: 150px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding-right: 30px; /* Tambahkan ruang ekstra */
+}
+
+/* Scrolling Text */
+.scrolling-text {
+    display: inline-block;
+    white-space: nowrap;
+    animation: marquee 10s linear infinite; /* Animasi terus-menerus */
+    padding-right: 30px; /* Tambahkan ruang ekstra di akhir teks */
+}
+
+
+}
+
     </style>
 </head>
 
@@ -105,16 +198,20 @@
                         <img src="https://cdn-icons-png.flaticon.com/512/9449/9449194.png" alt="Profile Image">
                     </div>
                     <div class="profile-details">
+                        <div class="profile-name scrolling-container"> 
+                            <div class="scrolling-text">{{ $siswa->nama }} </div>
+                        </div>
                         <div class="profile-id">{{ $siswa->nis }}</div>
-                        <div class="profile-name">{{ $siswa->nama }}</div>
                     </div>
                 </div>
             </div>
 
             <!-- Profile Meta (right) -->
             <div class="profile-meta">
+                <div class="profile-class scrolling-container">
+                    <div class="scrolling-text">{{ $siswa->tingkatan }} {{ $siswa->jurusan }} {{ $siswa->jurusan_ke }} </div>
+                </div>
                 <div class="profile-gender">{{ $siswa->jenis_kelamin }}</div>
-                <div class="profile-class">{{ $siswa->tingkatan }} {{ $siswa->jurusan }} {{ $siswa->jurusan_ke }}</div>
             </div>
         </div>
     </nav>

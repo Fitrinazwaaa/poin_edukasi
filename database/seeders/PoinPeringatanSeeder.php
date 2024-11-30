@@ -21,7 +21,7 @@ class PoinPeringatanSeeder extends Seeder
             ],
             [
                 'peringatan' => 'Peringatan tertulis',
-                'max_poin'     => '8',
+                'max_poin'     => '18',
             ],
             [ 
                 'peringatan' => 'Peringatan tertulis disampaikan kepada orang tua',
@@ -40,7 +40,7 @@ class PoinPeringatanSeeder extends Seeder
                 'max_poin'     => '100',
             ],
             [ 
-                'peringatan' => 'Siswa di skors selama  hari',
+                'peringatan' => 'Siswa di skors selama 6 hari',
                 'max_poin'     => '135',
             ],
             [

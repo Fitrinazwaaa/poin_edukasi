@@ -10,7 +10,7 @@
 <body class="body">
     @extends('navbar/nav-siswa')
     
-    <p class="text-center">FORMULIR EDIT DATA SISWA</p>
+    <p  style="font-size: 15px; text-align: center; font-weight: 800;">FORMULIR EDIT DATA SISWA</p>
     <div class="container">
         <form method="POST" action="{{ route('SiswaUpdate', $data['nis']) }}">
             @csrf

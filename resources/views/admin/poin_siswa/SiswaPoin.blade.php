@@ -6,63 +6,51 @@
     <title>Daftar Siswa SMK</title>
     <link rel="stylesheet" href="{{ asset('css/admin/poin_siswa/SiswaPoin.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet"></head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+</head>
 <body>
     @extends('navbar/nav-PoinSiswa')
     <div class="button-container">
-        @foreach ($jumlahNotifikasi as $index => $jumlah)
-            <button class="notification-btn" onclick="window.location.href='{{ route('pesan' . ($index + 1)) }}'">
-                @php
-                    // Ambil poin peringatan berdasarkan index
-                    $peringatan = null;
-                    switch ($index) {
-                        case 0:
-                            $peringatan = $poinPeringatan1->peringatan;
-                            break;
-                        case 1:
-                            $peringatan = $poinPeringatan2->peringatan;
-                            break;
-                        case 2:
-                            $peringatan = $poinPeringatan3->peringatan;
-                            break;
-                        case 3:
-                            $peringatan = $poinPeringatan4->peringatan;
-                            break;
-                        case 4:
-                            $peringatan = $poinPeringatan5->peringatan;
-                            break;
-                        case 5:
-                            $peringatan = $poinPeringatan6->peringatan;
-                            break;
-                        case 6:
-                            $peringatan = $poinPeringatan7->peringatan;
-                            break;
-                        case 7:
-                            $peringatan = $poinPeringatan8->peringatan;
-                            break;
-                        default:
-                            $peringatan = 'Notifikasi Tidak Diketahui';
-                            break;
-                    }
-                @endphp
-                {{ $peringatan }} <!-- Tampilkan peringatan yang diambil dari variabel -->
-                <span class="notification-count">{{ $jumlah }}</span>
-            </button>
-        @endforeach
-    </div>
+    @foreach ($jumlahNotifikasi as $index => $jumlah)
+        <button class="notification-btn" onclick="window.location.href='{{ route('pesan' . ($index + 1)) }}'">
+            @php
+                $peringatan = match($index) {
+                    0 => $poinPeringatan1->peringatan ?? 'Tidak Diketahui',
+                    1 => $poinPeringatan2->peringatan ?? 'Tidak Diketahui',
+                    2 => $poinPeringatan3->peringatan ?? 'Tidak Diketahui',
+                    3 => $poinPeringatan4->peringatan ?? 'Tidak Diketahui',
+                    4 => $poinPeringatan5->peringatan ?? 'Tidak Diketahui',
+                    5 => $poinPeringatan6->peringatan ?? 'Tidak Diketahui',
+                    6 => $poinPeringatan7->peringatan ?? 'Tidak Diketahui',
+                    7 => $poinPeringatan8->peringatan ?? 'Tidak Diketahui',
+                    default => 'Notifikasi Tidak Diketahui',
+                };
+            @endphp
+            {{ $peringatan }}
+            <span class="notification-count">{{ $jumlah }}</span>
+        </button>
+    @endforeach
+</div>
 
     <div class="hero">
         <div class="judul_dan_tombol">
             <div class="judul-awal">
                 <!-- Search Bar -->
                 <div class="container mt-7">
-                <div class="input-group position-relative">
-    <input type="text" id="searchInput" class="form-control" placeholder="Cari berdasarkan NIS, Nama, atau Kelas (Tingkatan, Jurusan, Jurusan ke)" aria-label="Search">
-    <button class="btn btn-outline-secondary" onclick="filterTable()">Cari</button>
-    <span class="clear-input position-absolute" onclick="clearSearch()" style="right: 60px; top: 8px; display: none; cursor: pointer;">
-        <i class="fas fa-times" style="font-size: 18px; color: #dc3545;"></i>
-    </span>
-</div>
+                    <div class="input-group position-relative" style="border-radius: 5px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                        <input type="text" class="form-control" id="searchInput" placeholder="Cari berdasarkan NIS, Nama, atau Kelas (Tingkatan, Jurusan, Jurusan ke)" aria-label="Search" style="border-color: #fcfc38; font-size: 12px; margin-bottom: 0;">
+                        <button class="btn btn-outline-secondary" type="button" onclick="filterTable()" style=" border-width: 2px 0; border-style: solid; border-color: #fcfc38; border-radius: 0 5px 5px 0; background-color: #fcfc38; font-size: 13px; color: black; font-weight: 600;">Cari</button>
+                        <span class="clear-input position-absolute" onclick="clearSearch()" style="right: 60px; top: 5px; display: none; cursor: pointer;">
+                            <i class="fas fa-times" style="font-size: 18px; color: #dc3545;"></i>
+                        </span>
+                    </div>
+                    <!-- <div class="input-group position-relative">
+                        <input type="text" id="searchInput" class="form-control" placeholder="Cari berdasarkan NIS, Nama, atau Kelas (Tingkatan, Jurusan, Jurusan ke)" aria-label="Search">
+                        <button class="btn btn-outline-secondary" onclick="filterTable()">Cari</button>
+                        <span class="clear-input position-absolute" onclick="clearSearch()" style="right: 60px; top: 8px; display: none; cursor: pointer;">
+                            <i class="fas fa-times" style="font-size: 18px; color: #dc3545;"></i>
+                        </span>
+                    </div> -->
                 </div>
             </div>
             <div class="tambah_dan_hapus">
@@ -90,30 +78,32 @@
                                     @method('PUT')
 
                                     <div class="form-row">
-                                        <label for="tingkatan">Kelas</label>
-                                        <select name="tingkatan" id="tingkatan" class="form-control" style="margin-right:30px;">
-                                            <option value="" style="color: #ccc;" disabled selected>Tingkatan</option>
-                                            @foreach ($tingkatanList as $tingkatan)
-                                            <option value="{{ $tingkatan }}">{{ $tingkatan }}</option>
-                                            @endforeach
-                                        </select>
-                                        <select name="jurusan" id="jurusan" class="form-control" style="margin-right:30px;" disabled>
-                                            <option value="" style="color: #ccc;" disabled selected>Jurusan</option>
-                                        </select>
-                                        <select name="jurusan_ke" id="jurusan_ke" class="form-control" disabled>
-                                            <option value="" disabled selected>Jurusan ke</option>
-                                        </select>
+                                        <label for="tingkatan" class="form-label">Kelas</label>
+                                        
+                                            <select name="tingkatan" id="tingkatan" class="form-control">
+                                                <option value="" style="color: #ccc;" disabled selected>Tingkatan</option>
+                                                @foreach ($tingkatanList as $tingkatan)
+                                                <option value="{{ $tingkatan }}">{{ $tingkatan }}</option>
+                                                @endforeach
+                                            </select>
+                                            <select name="jurusan" id="jurusan" class="form-control" disabled>
+                                                <option value="" style="color: #ccc;" disabled selected>Jurusan</option>
+                                            </select>
+                                            <select name="jurusan_ke" id="jurusan_ke" class="form-control" disabled>
+                                                <option value="" disabled selected>Jurusan ke</option>
+                                            </select>
+                                        
                                     </div>
 
                                     <div class="form-row">
-                                        <label for="nama">Nama</label>
+                                        <label for="nama" class="form-label">Nama</label>
                                         <select name="nama" id="nama" class="form-control" disabled>
                                             <option value="" disabled selected>Nama siswa</option>
                                         </select>
                                     </div>
-                                    
+
                                     <div class="form-row">
-                                        <label for="jenis_kelamin">Jenis Kelamin</label>
+                                        <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
                                         <select name="jenis_kelamin" id="jenis_kelamin" class="form-control" required>
                                             <option value="Laki-laki">Laki-laki</option>
                                             <option value="Perempuan">Perempuan</option>
@@ -121,26 +111,26 @@
                                     </div>
 
                                     <div class="form-row">
-                                        <label for="tipe_poin">Tipe Poin</label><br>
-                                        <div>
-                                            <label style="margin-right: 50px;">
-                                                <input type="radio" name="tipe_poin" value="positif" onclick="toggleFotoInput()" style="margin-right: 10px;">Positif
+                                        <label for="tipe_poin" class="form-label">Tipe Poin</label>
+                                        <div class="radio-group">
+                                            <label>
+                                                <input type="radio" name="tipe_poin" value="positif" onclick="toggleFotoInput()"> Positif
                                             </label>
-                                            <label style="margin-right: 50px;">
-                                                <input type="radio" name="tipe_poin" value="negatif" onclick="toggleFotoInput()" style="margin-right: 10px;">Negatif
+                                            <label>
+                                                <input type="radio" name="tipe_poin" value="negatif" onclick="toggleFotoInput()"> Negatif
                                             </label>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="form-row">
-                                        <label for="nama_poin">Nama Poin</label>
+                                        <label for="nama_poin" class="form-label">Nama Poin</label>
                                         <select name="nama_poin" id="nama_poin" class="form-control" disabled>
                                             <option value="" disabled selected>Nama Poin</option>
                                         </select>
                                     </div>
-                                    
+
                                     <div class="form-row" id="foto_input_row" style="display: none;">
-                                        <label for="foto">Unggah Foto</label>
+                                        <label for="foto" class="form-label">Unggah Foto</label>
                                         <input type="file" name="foto" id="foto" class="form-control" accept="image/*">
                                     </div>
 
@@ -159,43 +149,48 @@
         </div>
         
         <script>
-            function toggleFotoInput() {
-                const tipePoinPositif = document.querySelector('input[name="tipe_poin"][value="positif"]');
-                const fotoInputRow = document.getElementById('foto_input_row');
-                
-                // Tampilkan input foto jika tipe poin negatif dipilih, sebaliknya sembunyikan
-                if (!tipePoinPositif.checked) {
-                    fotoInputRow.style.display = 'block'; // Tampilkan input foto
-                } else {
-                    fotoInputRow.style.display = 'none'; // Sembunyikan input foto
-                }
-            }
-            </script>
+    function toggleFotoInput() {
+        const tipePoinPositif = document.querySelector('input[name="tipe_poin"][value="positif"]');
+        const fotoInputRow = document.getElementById('foto_input_row');
+        
+        // Tampilkan input foto jika tipe poin negatif dipilih, sebaliknya sembunyikan
+        if (tipePoinPositif && !tipePoinPositif.checked) {
+            fotoInputRow.style.display = 'block'; // Tampilkan input foto
+        } else {
+            fotoInputRow.style.display = 'none'; // Sembunyikan input foto
+        }
+    }
+
+    // Pastikan event listener ditambahkan jika ada perubahan input pada tipe poin
+    document.querySelectorAll('input[name="tipe_poin"]').forEach(input => {
+        input.addEventListener('change', toggleFotoInput);
+    });
+</script>
 
 
-    @if(session('error'))
-        <div id="popupAlert" class="alert alert-danger alert-popup">
-            {{ session('error') }}
-        </div>
-    @endif
-    @if(session('success'))
-        <div id="popupAlert" class="alert alert-success alert-popup">
-            {!! session('success') !!}
-        </div>
-    @endif
+        @if(session('error'))
+            <div id="popupAlert" class="alert alert-danger alert-popup">
+                {{ session('error') }}
+            </div>
+        @endif
+        @if(session('success'))
+            <div id="popupAlert" class="alert alert-success alert-popup">
+                {!! session('success') !!}
+            </div>
+        @endif
 
-    <script>
-        // Menutup pop-up alert secara otomatis setelah 2 detik
-        document.addEventListener("DOMContentLoaded", function() {
-            setTimeout(function() {
-                const alert = document.getElementById("popupAlert");
-                if (alert) {
-                    alert.style.opacity = '0';
-                    setTimeout(() => alert.remove(), 500); // Hapus elemen setelah animasi selesai
-                }
-            }, 6000); // 6000 ms = 6 detik
-        });
-    </script>
+        <script>
+            // Menutup pop-up alert secara otomatis setelah 2 detik
+            document.addEventListener("DOMContentLoaded", function() {
+                setTimeout(function() {
+                    const alert = document.getElementById("popupAlert");
+                    if (alert) {
+                        alert.style.opacity = '0';
+                        setTimeout(() => alert.remove(), 500); // Hapus elemen setelah animasi selesai
+                    }
+                }, 10000); // 10000 ms = 10 detik
+            });
+        </script>
     
         <div class="table-wrapper">
             <table>
@@ -208,19 +203,19 @@
                         <th>KELAS</th>
                         <th>NEGATIF</th>
                         <th>POSITIF</th>
-                        <th></th>
+                        <th>AKSI</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($dataSiswa as $siswa)
                     <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $siswa->nis }}</td>
-                        <td style="text-align: left;">{{ $siswa->nama }}</td>
-                        <td>{{ $siswa->jenis_kelamin }}</td>
-                        <td>{{ $siswa->tingkatan}} {{ $siswa->jurusan}} {{ $siswa->jurusan_ke}}</td>
-                        <td>{{ $siswa->poin_negatif_akhir > 0 ? $siswa->poin_negatif_akhir : 0 }}</td>
-                        <td>{{ $siswa->poin_positif_akhir > 0 ? $siswa->poin_positif_akhir : 0 }}</td>
+                        <td style="font-weight: 400; font-size: 11px;">{{ $loop->iteration }}</td>
+                        <td style="font-weight: 400; font-size: 11px;">{{ $siswa->nis }}</td>
+                        <td style="text-align: left; font-weight: 400; font-size: 11px;">{{ $siswa->nama }}</td>
+                        <td style="font-weight: 400; font-size: 11px;">{{ $siswa->jenis_kelamin }}</td>
+                        <td style="font-weight: 400; font-size: 11px;">{{ $siswa->tingkatan}} {{ $siswa->jurusan}} {{ $siswa->jurusan_ke}}</td>
+                        <td style="font-weight: 400; font-size: 11px;">{{ $siswa->poin_negatif_akhir > 0 ? $siswa->poin_negatif_akhir : 0 }}</td>
+                        <td style="font-weight: 400; font-size: 11px;">{{ $siswa->poin_positif_akhir > 0 ? $siswa->poin_positif_akhir : 0 }}</td>
                         <td>
                             <button class="add-btn" onclick="window.location.href='{{ route('viewSiswaDetail', ['nis' => $siswa->nis]) }}';">View More</button>
                         </td>

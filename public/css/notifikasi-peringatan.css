@@ -1,255 +1,281 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f3f4f6;
-    margin: 0;
-    padding-top: 90px;
-    overflow-x: hidden;
+    
+  background-color: #f3f4f6;
+  margin: 0;
+  padding-top: 90px;
+  overflow-x: hidden;
 }
 
 /* Mengatur teks judul */
 h5.text-center {
-    text-align: center;
-    color: #180853;
-    margin-bottom: 27px;
+  text-align: center;
+  color: #180853;
+  margin-bottom: 27px;
 }
 
 /* Mengatur teks judul */
 p.text-center {
-    margin-top: -25px;
-    font-weight: 400;
-    font-size: 13px;
-    text-align: center;
-    color: #180853;
-    margin-bottom: 50px;
+  margin-top: -25px;
+  font-weight: 400;
+  font-size: 13px;
+  text-align: center;
+  color: #180853;
+  margin-bottom: 50px;
 }
 
 .card_blue{
-    background-color: #dce6ff; /* Warna latar belakang pink muda */
-    border-radius: 10px; /* Sudut melengkung */
-    padding: 16px; /* Ruang di dalam card */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Bayangan halus */
-    max-width: 650px; /* Lebar maksimum card */
-    margin: 30px auto; /* Margin otomatis untuk sentralisasi */
-    font-family: 'Arial', sans-serif; /* Jenis font */
-    border-left: 8px solid #0579DE;
+  background-color: #dce6ff; /* Warna latar belakang pink muda */
+  border-radius: 10px; /* Sudut melengkung */
+  padding: 16px; /* Ruang di dalam card */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Bayangan halus */
+  max-width: 650px; /* Lebar maksimum card */
+  margin: 30px auto; /* Margin otomatis untuk sentralisasi */
+  border-left: 8px solid #0579DE;
 }
 
 .card_blue h4 {
-    color: #0579DE; /* Warna teks judul */
-    margin: 0; /* Menghilangkan margin default */
-    margin-bottom: 10px;
+  color: #0579DE; /* Warna teks judul */
+  margin: 0; /* Menghilangkan margin default */
+  margin-bottom: 10px;
 } 
 
 .card_blue p {
-    color: #333; /* Warna teks */
-    margin: 0;
-    font-size: 12px;
+  color: #333; /* Warna teks */
+  margin: 0;
+  font-size: 12px;
 }
 
 .card_blue .right {
-    text-align: right; /* Mengatur teks ke kanan */
+  text-align: right; /* Mengatur teks ke kanan */
 }
 .card_blue .bottom {
-    margin-top: -30px;
-    margin-bottom: -10px;
+  margin-top: -30px;
+  margin-bottom: -10px;
 }
 
 .blue-hr {
-    border: none; /* Menghilangkan garis default */
-    height: 3px; /* Tinggi garis */
-    background-color: #0579DE; /* Warna garis */
-    margin-bottom: 10px;}
+  border: none; /* Menghilangkan garis default */
+  height: 3px; /* Tinggi garis */
+  background-color: #0579DE; /* Warna garis */
+  margin-bottom: 10px;}
 
 .card_blue .class-button-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .card_blue .kelas {
-    margin-top: -15px;
+  margin-top: -15px;
 }
 
 .card_blue .perbaikan {
-    padding: 5px 11px;
-    font-size: 16px;
-    cursor: pointer;
-    border: none;
-    border-radius: 4px;
-    margin-top: 0;
-    margin-right: 5px;
-    background-color: #2196F3;
-    color: white;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  padding: 5px 11px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  margin-top: 0;
+  margin-right: 5px;
+  background-color: #2196F3;
+  color: white;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .card_blue .perbaikan:hover {
-    background-color: #328cd6;
-    transform: scale(1.05);
+  background-color: #328cd6;
+  transform: scale(1.05);
 }
-    
+  
 .card_pink{
-    background-color: #ffe0f0; /* Warna latar belakang pink muda */
-    border-radius: 10px; /* Sudut melengkung */
-    padding: 16px; /* Ruang di dalam card */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Bayangan halus */
-    max-width: 650px; /* Lebar maksimum card */
-    margin: 30px auto; /* Margin otomatis untuk sentralisasi */
-    font-family: 'Arial', sans-serif; /* Jenis font */
-    border-left: 8px solid #D30089;
+  background-color: #ffe0f0; /* Warna latar belakang pink muda */
+  border-radius: 10px; /* Sudut melengkung */
+  padding: 16px; /* Ruang di dalam card */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Bayangan halus */
+  max-width: 650px; /* Lebar maksimum card */
+  margin: 30px auto; /* Margin otomatis untuk sentralisasi */
+  border-left: 8px solid #D30089;
 }
 
 .card_pink h4 {
-    color: #D30089; /* Warna teks judul */
-    margin: 0; /* Menghilangkan margin default */
-    margin-bottom: 10px;
+  color: #D30089; /* Warna teks judul */
+  margin: 0; /* Menghilangkan margin default */
+  margin-bottom: 10px;
 } 
 
 .card_pink p {
-    color: #333; /* Warna teks */
-    margin: 0;
-    font-size: 12px;
+  color: #333; /* Warna teks */
+  margin: 0;
+  font-size: 12px;
 }
 
 .card_pink .right {
-    text-align: right; /* Mengatur teks ke kanan */
+  text-align: right; /* Mengatur teks ke kanan */
 }
 .card_pink .bottom {
-    margin-top: -30px;
-    margin-bottom: -10px;
+  margin-top: -30px;
+  margin-bottom: -10px;
 }
 
 .pink-hr {
-    border: none; /* Menghilangkan garis default */
-    height: 3px; /* Tinggi garis */
-    background-color: #D30089; /* Warna garis */
-    margin-bottom: 10px;}
+  border: none; /* Menghilangkan garis default */
+  height: 3px; /* Tinggi garis */
+  background-color: #D30089; /* Warna garis */
+  margin-bottom: 10px;}
 
 .card_pink .class-button-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .card_pink .kelas {
-    margin-top: -15px;
+  margin-top: -15px;
 }
 
 .card_pink .perbaikan {
-    padding: 5px 11px;
-    font-size: 16px;
-    cursor: pointer;
-    border: none;
-    border-radius: 4px;
-    margin-top: 0;
-    margin-right: 5px;
-    background-color: #ff1baf;
-    color: white;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  padding: 5px 11px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  margin-top: 0;
+  margin-right: 5px;
+  background-color: #ff1baf;
+  color: white;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .card_pink .perbaikan:hover {
-    background-color: #c83093;
-    transform: scale(1.05);
+  background-color: #c83093;
+  transform: scale(1.05);
 }
-    
+  
 
 
 
 /* Form Group */
 .form-row {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+
+/* Label */
+.form-row label {
+  width: 120px;
+  font-size: 14px;
+  color: #333;
+  margin-right: 10px;
+}
+
+
+/* Input dan Select Field */
+.form-control {
+  flex: 1;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Radio Button */
+.form-row div {
+  display: flex;
+  justify-content: start;
+}
+
+
+.form-row div label {
+  font-size: 14px;
+  color: #333;
+}
+
+/* Tombol Submit dan Kembali */
+.button-group {
+  display: flex;
+  justify-content: flex-end; /* Menyusun elemen ke kanan */
+  gap: 10px; /* Memberi jarak antar tombol */
+}
+
+button {
+  padding: 4px 20px 6px 20px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+button.btn-satu {
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 3px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+button.btn-satu:hover{
+  background-color: #2f9232;
+  transform: scale(1.05);
+  color: white;
+}
+
+button.btn-dua {
+  background-color: #438BC9;
+  color: white;
+  border-radius: 3px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+button.btn-dua:hover{
+  background-color: #336fa3; 
+  transform: scale(1.05);  
+  color: white;
+}
+
+.keterangan {
+  display: flex; /* Mengatur dropdown pada satu baris */
+  gap: 10px; /* Jarak antara dropdown */
+}
+
+select.kategori-satu,
+select.kategori-dua {
+  margin-left: 60px;
+  border: 1px solid #ccc;
+  width: 450px; /* Lebar dropdown */
+  border-radius: 4px;
+  font-size: 14px;
+  padding: 8px 10px; /* Padding dalam dropdown */
+  box-sizing: border-box; /* Agar padding dan border dihitung dalam lebar elemen */
+}
+/* Media query untuk perangkat dengan lebar kurang dari 600px */
+@media (max-width: 600px) {
+  h5.text-center {
+      font-size: 16px; /* Kurangi ukuran font */
+      margin-bottom: 26px;
   }
-  
-  
-  /* Label */
-  .form-row label {
-    width: 120px;
-    font-size: 14px;
-    color: #333;
-    margin-right: 10px;
+  p.text-center {
+      font-size: 11px;
+      margin-bottom: 30px;
   }
-  
-  
-  /* Input dan Select Field */
-  .form-control {
-    flex: 1;
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+
+  .card_blue, .card_pink {
+      padding: 12px; /* Kurangi padding untuk perangkat kecil */
+      margin: 20px 27px; /* Beri jarak kanan dan kiri masing-masing 10px */
   }
-  
-  /* Radio Button */
-  .form-row div {
-    display: flex;
-    justify-content: start;
+
+  .card_blue h4, .card_pink h4 {
+      font-size: 15px; /* Kurangi ukuran font */
   }
-  
-  
-  .form-row div label {
-    font-size: 14px;
-    color: #333;
+
+  .class-button-container {
+      gap: 8px; /* Tambahkan jarak antar elemen */
   }
-  
-  /* Tombol Submit dan Kembali */
-  .button-group {
-    display: flex;
-    justify-content: flex-end; /* Menyusun elemen ke kanan */
-    gap: 10px; /* Memberi jarak antar tombol */
+
+  .perbaikan {
+      font-size: 14px; /* Kurangi ukuran font tombol */
   }
-  
-  button {
-    padding: 4px 20px 6px 20px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-  }
-  
-  button.btn-satu {
-    background-color: #4CAF50;
-    color: white;
-    border-radius: 3px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  button.btn-satu:hover{
-    background-color: #2f9232;
-    transform: scale(1.05);
-    color: white;
-  }
-  
-  button.btn-dua {
-    background-color: #438BC9;
-    color: white;
-    border-radius: 3px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  button.btn-dua:hover{
-    background-color: #336fa3; 
-    transform: scale(1.05);  
-    color: white;
-  }
-  
-  .keterangan {
-    display: flex; /* Mengatur dropdown pada satu baris */
-    gap: 10px; /* Jarak antara dropdown */
-  }
-  
-  select.kategori-satu,
-  select.kategori-dua {
-    margin-left: 60px;
-    border: 1px solid #ccc;
-    width: 450px; /* Lebar dropdown */
-    border-radius: 4px;
-    font-size: 14px;
-    padding: 8px 10px; /* Padding dalam dropdown */
-    box-sizing: border-box; /* Agar padding dan border dihitung dalam lebar elemen */
-  }
+}

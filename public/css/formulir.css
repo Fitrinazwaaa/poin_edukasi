@@ -1,7 +1,7 @@
 /* GLOBAL STYLES */
   /* Mengatur font umum menjadi Arial dan latar belakang halaman menjadi biru muda */
   body {
-    font-family: Arial, sans-serif;
+    
     padding-top: 100px;
 }
 body.body {
@@ -11,11 +11,13 @@ body.body {
 
 /* FORMULIR */
 /* Container form */
-div.container{
+div.container {
     background: #fff;
     padding: 40px 40px 25px 40px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
+    margin: 0 auto; /* Memastikan berada di tengah */
+    width: 100%; /* Lebar penuh secara default */
 }
 
 /* Mengatur teks judul */
@@ -65,6 +67,33 @@ p.text-center {
     color: #333;
 }
 
+/* Responsif untuk perangkat kecil */
+@media (max-width: 768px) {
+    div.container {
+        padding: 20px; /* Kurangi padding untuk mobile */
+        margin-left: 15px; /* Jarak di kiri */
+        margin-right: 15px; /* Jarak di kanan */
+        width: calc(100% - 30px); /* Lebar menyesuaikan dengan margin */
+    }
+
+    .form-row {
+      display: block; /* Ubah menjadi blok vertikal untuk perangkat mobile */
+    }
+  
+    /* Label */
+    .form-row label {
+      width: auto; /* Label mengambil lebar otomatis */
+      margin-right: 0; /* Menghapus margin kanan pada label */
+      margin-bottom: 8px; /* Memberikan jarak antara label dan select */
+    }
+  
+    /* Input dan Select Field */
+    .form-control {
+      width: 100%; /* Setel lebar input dan select menjadi 100% */
+      margin-right: 0; /* Menghapus margin kanan */
+      margin-bottom: 10px;
+    }
+  }
 /* Tombol Submit dan Kembali */
 .button-group {
     display: flex;
@@ -73,7 +102,7 @@ p.text-center {
 }
 
 button {
-    padding: 4px 20px 6px 20px;
+    /* padding: 4px 20px 6px 20px; */
     font-size: 16px;
     border: none;
     cursor: pointer;
@@ -83,6 +112,7 @@ button.btn-satu {
     background-color: #4CAF50;
     color: white;
     border-radius: 3px;
+    padding: 8px 25px;
 }
 
 button.btn-satu:hover{
@@ -93,6 +123,7 @@ button.btn-dua {
     background-color: #438BC9;
     color: white;
     border-radius: 3px;
+    padding: 8px 25px;
 }
 
 button.btn-dua:hover{

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DataPoinNegatif;
 use App\Models\DataPoinPositif;
 use App\Models\DataSiswa;
+use App\Models\DataUser;
 use App\Models\PoinPelajar;
 use App\Models\PoinPeringatan;
 use DB;
@@ -15,6 +16,8 @@ class PoinPelajarController extends Controller
 {
     public function index()
     {
+        $datauser = DataUser::all();
+        
         $poinPeringatan1 = PoinPeringatan::where('id_peringatan', '1')->first();
         $poinPeringatan2 = PoinPeringatan::where('id_peringatan', '2')->first();
         $poinPeringatan3 = PoinPeringatan::where('id_peringatan', '3')->first();
@@ -97,7 +100,8 @@ class PoinPelajarController extends Controller
             'poinPeringatan5', 
             'poinPeringatan6', 
             'poinPeringatan7', 
-            'poinPeringatan8'
+            'poinPeringatan8',
+            'datauser'
         ));
     }
     
@@ -212,7 +216,7 @@ class PoinPelajarController extends Controller
             if ($existingRecord) {
                 // Perbaikan pada pesan untuk menampilkan nama poin dengan nama siswa dalam tag <strong> dan rata tengah
                 return redirect()->back()->with('success', 
-                    '<div style="text-align: center;">Data sudah ditambahkan sebelumnya pada hari ini untuk siswa dengan nama <strong>' . $siswa->nama . '</strong></div>'
+                    '<div style="text-align: center;">Pelanggaran <strong>' . htmlspecialchars($poin->nama_poin, ENT_QUOTES, 'UTF-8') . '</strong> sudah ditambahkan sebelumnya pada hari ini untuk siswa dengan nama <strong>' . $siswa->nama . '</strong></div>'
                 );
             }
         }

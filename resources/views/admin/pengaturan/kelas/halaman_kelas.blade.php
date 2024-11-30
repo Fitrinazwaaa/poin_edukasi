@@ -43,31 +43,31 @@
                 <button class="tambah" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     <i class="fas fa-plus"></i> Tambahkan
                 </button>
-            </div>
-                        <!-- Tombol Titik Tiga -->
-                        <div class="dropdown">
-                <button class="btn btn-light" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" style="border: none;">
-                    <i class="fas fa-ellipsis-v"></i>
-                </button>
-                <!-- Menu Dropdown -->
-                <ul class="dropdown-menu p-3 shadow-lg" aria-labelledby="dropdownMenuButton" style="width: 400px; border-radius: 8px;">
-                    <li class="mb-3">
-                        <div class="upload-excel">
-                            <form action="{{ route('KelasImport') }}" method="POST" enctype="multipart/form-data">
-                                @csrf
-                                <div class="input-group">
-                                    <input type="file" name="file" class="form-control" accept=".xls,.xlsx" style="border-top-right-radius: 0; border-bottom-right-radius: 0;">
-                                    <button type="submit" class="btn btn-primary" style="border-top-left-radius: 0; border-bottom-left-radius: 0;">Impor Excel</button>
-                                </div>
-                            </form>
-                        </div>
-                    </li>
-                    <li>
-                        <a class="dropdown-item d-flex align-items-center" href="{{ route('KelasExport') }}">
-                            <i class="fas fa-file-excel me-2 text-success"></i> Export Excel
-                        </a>
-                    </li>
-                </ul>
+                <!-- Tombol Titik Tiga -->
+                <div class="dropdown">
+                    <button class="btn btn-light" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" style="border: none; background-color:white; margin-left:-10px; ">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </button>
+                    <!-- Menu Dropdown -->
+                    <ul class="dropdown-menu p-3 shadow-lg" aria-labelledby="dropdownMenuButton" style="width: 400px; border-radius: 8px;">
+                        <li class="mb-3">
+                            <div class="upload-excel">
+                                <form action="{{ route('KelasImport') }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="input-group">
+                                        <input type="file" name="file" class="form-control" accept=".xls,.xlsx" style="border-top-right-radius: 0; border-bottom-right-radius: 0;">
+                                        <button type="submit" class="btn btn-primary" style="border-top-left-radius: 0; border-bottom-left-radius: 0;">Impor Excel</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="{{ route('KelasExport') }}">
+                                <i class="fas fa-file-excel me-2 text-success"></i> Export Excel
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
 
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -120,7 +120,7 @@
                 <span class="float-end" style="font-weight: 500; margin-right: 30px">Jumlah Kelas: {{ count($Kelas) }}</span>
             </label>
             <div class="collapse-content" id="content{{ $tahun_angkatan }}">
-                <div class="card card-body">
+                <div class="card card-body" style="border: none;">
                     <div class="table-wrapper">
                         <div class="table">
                             <table>
@@ -151,7 +151,23 @@
         @endforeach
     </div>
 
-
+    <script type="text/javascript">
+        document.querySelectorAll('.btn-toggle').forEach((button, index) => {
+            // Skip the first button (index === 0) and apply to the rest
+            if (index > 0) {
+                button.addEventListener('click', function() {
+                    var targetId = this.getAttribute('for');
+                    var targetContent = document.getElementById('content' + targetId.replace('dropdown', ''));
+                    
+                    if (targetContent && !targetContent.classList.contains('show')) {
+                        setTimeout(function() {
+                            targetContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }, 400);
+                    }
+                });
+            }
+        });
+    </script>
 <script>
 // Fungsi untuk memilih semua checkbox di tabel sesuai dengan angkatan
 document.querySelectorAll('.select_all').forEach(function(selectAllCheckbox) {
