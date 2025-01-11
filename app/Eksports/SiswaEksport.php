@@ -1,11 +1,12 @@
 <?php
-namespace App\Exports;
+namespace App\Eksports;
 
 use App\Models\DataSiswa;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 
-class SiswaExport implements FromCollection, WithHeadings
+class SiswaEksport implements FromCollection, WithHeadings, WithMultipleSheets
 {
     public function collection()
     {
@@ -26,6 +27,20 @@ class SiswaExport implements FromCollection, WithHeadings
             'created_at',
             'updated_at',
         ];
+    }
+    public function sheets(): array
+    {
+        $sheets = [];
+
+        // Ambil semua tahun angkatan unik dari database
+        $tahunAngkatan = DataSiswa::select('tahun_angkatan')->distinct()->pluck('tahun_angkatan');
+
+        // Buat satu sheet untuk setiap tahun angkatan
+        foreach ($tahunAngkatan as $tahun) {
+            $sheets[] = new SiswaPerAngkatanEksport($tahun);
+        }
+
+        return $sheets;
     }
 }
 

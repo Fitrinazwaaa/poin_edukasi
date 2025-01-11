@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Exports;
+namespace App\Eksports;
 
 use App\Models\DataPoinPositif;
 use App\Models\DataPoinNegatif;
@@ -14,7 +14,7 @@ use PhpOffice\PhpSpreadsheet\Style\Color;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 
-class PoinExportGabungan implements WithMultipleSheets
+class PoinEksportGabungan implements WithMultipleSheets
 {
     public function sheets(): array
     {

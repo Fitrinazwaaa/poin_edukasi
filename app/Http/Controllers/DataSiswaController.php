@@ -9,7 +9,7 @@ use App\Models\PoinPelajar;
 use DB;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\SiswaExport;
+use App\Eksports\SiswaEksport;
 use App\Models\DataUser;
 use Session;
 
@@ -168,9 +168,9 @@ class DataSiswaController extends Controller
     }    
 
 
-    public function exportSiswa()
+    public function EksportSiswa()
     {
-        return Excel::download(new SiswaExport, 'data_siswa.xlsx');
+        return Excel::download(new SiswaEksport, 'data_siswa.xlsx');
     }
 
 

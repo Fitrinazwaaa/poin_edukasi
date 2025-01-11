@@ -29,13 +29,17 @@ class Koneksi_Controller extends Controller
         // Cek kredensial menggunakan Auth
         if (Auth::attempt($infologin)) {
             if (Auth::user()->role == 'admin') {
-                return redirect('admin');
+                return redirect('role/admin');
             } elseif (Auth::user()->role == 'user1') {
-                return redirect('/user_kesiswaan');
+                return redirect('/role/user1');
             } elseif (Auth::user()->role == 'user2') {
-                return redirect('/user_osis');
+                return redirect('/role/user2');
+            } elseif (Auth::user()->role == 'user3') {
+                return redirect('/role/user3');
+            } elseif (Auth::user()->role == 'user4') {
+                return redirect('/role/user4');
             } elseif (Auth::user()->role == 'user_edit') {
-                return redirect('user_edit');
+                return redirect('role/user_edit');
             }
             // Jika login sukses
             return redirect('admin');
@@ -53,4 +57,3 @@ class Koneksi_Controller extends Controller
         return redirect('');
     }
 }
-

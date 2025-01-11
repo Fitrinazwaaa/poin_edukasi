@@ -6,13 +6,16 @@
     <title>Document</title>
     <link rel="stylesheet" href="{{ asset('css/formulir.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 </head>
 <body class="body">
     @extends('navbar/nav-siswa')
     
     <p  style="font-size: 15px; text-align: center; font-weight: 800;">FORMULIR EDIT DATA SISWA</p>
     <div class="container">
-        <form method="POST" action="{{ route('SiswaUpdate', $data['nis']) }}">
+        <form method="POST" action="{{ route('DataSiswaUpdate', $data['nis']) }}">
             @csrf
             @method('PUT')
 
@@ -55,7 +58,7 @@
                     <option value="12" @if($data['tingkatan'] == '12') selected @endif>12</option>
                 </select>
                 <select name="jurusan" id="jurusan" class="form-control" style="margin-right:30px;">
-                    <option value="" disabled selected>Pilih Jurusan</option>
+                    <option value="" disabled selected>Pilih Konsentrasi Keahlian</option>
                     @foreach($jurusan as $satu)
                         <option value="{{ $satu }}" @if($data->jurusan == $satu) selected @endif>
                             {{ $satu }}
@@ -63,7 +66,7 @@
                     @endforeach
                 </select>
                 <select name="jurusan_ke" id="jurusan_ke" class="form-control" >
-                    <option value="" disabled selected>Pilih Jurusan ke</option>
+                    <option value="" disabled selected>Pilih Konsentrasi Keahlian ke</option>
                     @foreach($jurusan_ke as $dua)
                         <option value="{{ $dua }}" @if($data->jurusan_ke == $dua) selected @endif>
                             {{ $dua }}
@@ -102,7 +105,7 @@ $('#tahun_angkatan').on('change', function() {
             success: function(data) {
                 var selectedJurusan = $('#jurusan').val(); // Ambil jurusan yang sudah dipilih
                 $('#jurusan').empty();
-                $('#jurusan').append('<option value="" disabled selected>Pilih Jurusan</option>');
+                $('#jurusan').append('<option value="" disabled selected>Pilih Konsentrasi Keahlian</option>');
 
                 var jurusanSet = new Set();
                 $.each(data, function(index, jurusan) {
@@ -130,7 +133,7 @@ $('#jurusan').on('change', function() {
             type: 'GET',
             success: function(data) {
                 $('#jurusan_ke').empty();
-                $('#jurusan_ke').append('<option value="" disabled selected>Pilih Jurusan ke</option>');
+                $('#jurusan_ke').append('<option value="" disabled selected>Pilih Konsentrasi Keahlian ke</option>');
 
                 var jurusanKeSet = new Set();  // Gunakan Set untuk menghindari duplikasi
                 $.each(data, function(index, jurusanKe) {
@@ -146,6 +149,8 @@ $('#jurusan').on('change', function() {
     }
 });
    </script>
+       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

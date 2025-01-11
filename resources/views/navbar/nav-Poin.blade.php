@@ -10,332 +10,392 @@ $datauser = DataUser::all();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="{{ asset('css/navbar/nav-form.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
+
     <style>
-        /* NAVBAR-START */
+    /* Mengatur lebar navbar offcanvas saat dalam posisi start (kiri) */
+    div#offcanvasDarkNavbar.offcanvas.offcanvas-start {
+        width: 270px;
+        font-size: 14px;
+    }
 
-/* Mengatur lebar navbar offcanvas saat dalam posisi start (kiri) */
-div#offcanvasDarkNavbar.offcanvas.offcanvas-start {
-    width: 270px;
-    font-size: 14px;
-}
+    /* Mengatur warna latar belakang navbar offcanvas */
+    .offcanvas.offcanvas-start {
+        background-color: #388DD8;
+    }
 
-/* Mengatur warna latar belakang navbar offcanvas */
-.offcanvas.offcanvas-start {
-    background-color: #388DD8;
-}
+    /* Mengatur warna latar belakang navbar bagian atas */
+    .navbar {
+        background-color: #388DD8;
+        position: fixed;
+        height: 65px;
+    }
 
-/* Mengatur warna latar belakang navbar bagian atas */
-.navbar {
-    background-color: #388DD8;
-    position: fixed;
-    height: 65px;
-}
+    /* Mengatur warna teks judul navbar menjadi putih */
+    .offcanvas-title {
+        color: white;
+        font-size: 17px;
+    }
 
-/* Mengatur warna teks judul navbar menjadi putih */
-.offcanvas-title {
-    color: white;
-    font-size: 17px;
-}
+    /* Memberi padding di sebelah kiri setiap item dalam navbar */
+    li.nav-item {
+        padding-left: 15px;
+    }
 
-/* Memberi padding di sebelah kiri setiap item dalam navbar */
-li.nav-item {
-    padding-left: 15px;
-}
+    /* Mengatur warna garis pemisah dalam menu navbar menjadi putih dan tanpa margin */
+    ul hr {
+        color: white;
+        margin: 0;
+    }
 
-/* Mengatur warna garis pemisah dalam menu navbar menjadi putih dan tanpa margin */
-ul hr {
-    color: white;
-    margin: 0;
-}
-
-/* Mengatur padding tautan navbar */
-a.nav-link {
-    padding: 15px 0;
-}
-
-/* Mengubah tampilan item navbar saat di-hover dengan menambahkan bayangan dan mengubah warna latar belakang */
-.offcanvas ul li:hover {
-    box-shadow: 0 0.5px 5px rgba(0, 0, 0, 0.192);
-    background: #1676ca;
-    border-style: solid;
-    border-color: #ffffff;
-    border-width: 5px;
-    border-right: black;
-    border-top: black;
-    border-bottom: black;
-}
-
-/* Mengatur warna tautan navbar menjadi putih saat di-hover */
-.offcanvas ul li .nav-link:hover {
-    color: white;
-}
-
-div.satu{
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    width: 100%;
-    height: 54px;
-}
-
-h5.offcanvas-title{
-    margin-left: 20px;
-}
-
-/* Menghapus padding default pada body offcanvas */
-div.offcanvas-body {
-    padding-top: 0;
-    text-align: left !important;
-}
-
-/* Menambahkan padding bawah pada header offcanvas */
-div.offcanvas-header {
-    padding-bottom: 10px;
-}
-
-/* NAVBAR-END */
-
-/* Navbar Custom Styling */
-.navbar-custom {
-    padding: 0 50px;
-    background-color: #388DD8;
-    border-bottom: 2px solid white;
-    height: 72px;
-    display: flex;
-    align-items: center;
-}
-
-/* Back Button Styling */
-.back-button {
-    display: flex;
-    align-items: center;
-}
-
-.back-button button {
-    color: white;
-    background: #388DD8;
-    border: none;
-    border-radius: 50%;
-    padding: 5px 10px;
-    transition: all 0.3s ease;
-    font-weight: bold; /* Set bold to match h5 */
-}
-
-
-
-/* Hover effect on back button */
-.back-button button:hover {
-    background: #388DD8;
-    transform: scale(1.1);
-}
-
-/* Teks H5 di sebelah kanan tombol back */
-.navbar-custom h5 {
-    color: white;
-    margin-left: 15px;
-    margin-bottom: 0;
-}
-
-/* Ensure content is not overlapped by navbar */
-.content {
-    margin-top: 80px;
-}
-    /* Custom styling for dropdown items */
-
-    
-    /* Mengatur tampilan item dropdown saat di-hover */
-    .dropdown-item {
-        color: white; /* Warna teks */
-        transition: background-color 0.3s ease; /* Tambahkan transisi agar lebih halus */
+    /* Mengatur padding tautan navbar */
+    a.nav-link {
         padding: 15px 0;
     }
 
-/* Mengatur warna dropdown sesuai dengan warna "Pengaturan" */
-.nav-item.dropdown:hover .dropdown-menu {
-    background-color: #1676ca;
+    /* Mengubah tampilan item navbar saat di-hover dengan menambahkan bayangan dan mengubah warna latar belakang */
+    .offcanvas ul li:hover {
+        box-shadow: 0 0.5px 5px rgba(0, 0, 0, 0.192);
+        background: #1676ca;
+        border-style: solid;
+        border-color: #ffffff;
+        border-width: 5px;
+        border-right: black;
+        border-top: black;
+        border-bottom: black;
+    }
+
+    /* Mengatur warna tautan navbar menjadi putih saat di-hover */
+    .offcanvas ul li .nav-link:hover {
+        color: white;
+    }
+
+    div.satu{
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+        height: 54px;
+    }
+
+    h5.offcanvas-title{
+        margin-left: 20px;
+    }
+
+    /* Menghapus padding default pada body offcanvas */
+    div.offcanvas-body {
+        padding-top: 0;
+        text-align: left !important;
+    }
+
+    /* Menambahkan padding bawah pada header offcanvas */
+    div.offcanvas-header {
+        padding-bottom: 10px;
+    }
+
+    /* Navbar Custom Styling */
+    .navbar-custom {
+        padding: 0 50px;
+        background-color: #388DD8;
+        border-bottom: 2px solid white;
+        height: 72px;
+        display: flex;
+        align-items: center;
+    }
+
+    /* Back Button Styling */
+    .back-button {
+        display: flex;
+        align-items: center;
+    }
+
+    .back-button button {
+        color: white;
+        background: #388DD8;
+        border: none;
+        border-radius: 50%;
+        padding: 5px 10px;
+        transition: all 0.3s ease;
+        font-weight: bold; /* Set bold to match h5 */
+    }
+
+    /* Hover effect on back button */
+    .back-button button:hover {
+        background: #388DD8;
+        transform: scale(1.1);
+    }
+
+    /* Teks H5 di sebelah kanan tombol back */
+    .navbar-custom h5 {
+        color: white;
+        margin-left: 15px;
+        margin-bottom: 0;
+    }
+
+    /* Ensure content is not overlapped by navbar */
+    .content {
+        margin-top: 80px;
+    }
+
+    /* Mengatur warna dropdown sesuai dengan warna "Pengaturan" */
+    .nav-item.dropdown:hover .dropdown-menu {
+        background-color: #1676ca;
+    }
+
+    /* Warna default dropdown menu */
+    .dropdown-menu {
+        background-color: #388DD8; /* Warna default */
+        border: none;
+        box-shadow: none;
+    }
+    
+ /* Mengatur warna teks default dropdown item menjadi merah */
+.dropdown-item {
+    color: white !important; /* Teks merah */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transisi halus untuk perubahan warna */
 }
 
-/* Warna default dropdown menu */
-.dropdown-menu {
-    background-color: #388DD8; /* Warna default */
-    border: none;
-    box-shadow: none;
-}
-
-/* Item dropdown saat di-hover */
+/* Mengatur warna dropdown item saat di-hover */
 .dropdown-item:hover {
-    background: #1676ca; /* Warna saat di-hover */
-    color: white;
-    border-style: solid;
-    border-color: #1676ca;
-    border-width: 10px;
-    border-right: black;
-    border-top: black;
-    border-bottom: black;
+    background-color: transparent; /* Menghilangkan background hover */
+    color: white !important; /* Menjadikan teks hover tetap merah */
+    border-left: none !important;
+    margin-left: 17px !important;
 }
 
-/* Menentukan area teks yang akan di-scroll jika terlalu panjang */
-.marquee {
-    position: relative;
-    overflow: hidden;
-    white-space: nowrap;
-    width: 100%; /* Lebar penuh */
+/* Warna teks dropdown item saat sudah aktif atau terfokus */
+.dropdown-item:focus, .dropdown-item:active {
+    background-color: transparent !important;
+    color: white !important; /* Teks tetap merah */
 }
 
-/* Gaya teks */
-.marquee-text {
-    display: inline-block;
-    padding-left: 7%; /* Memulai dari luar layar */
-    animation: marquee 10s linear infinite; /* Animasikan marquee */
+/* Default styling for logo */
+.navbar img {
+    width: 48px; /* Adjust default size */
+    height: auto;
+    margin-left: auto;
+    margin-right: 55px;
 }
 
-/* Animasi marquee bergerak dari kanan ke kiri */
-@keyframes marquee {
-    0% {
-        transform: translateX(100%);
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .navbar img {
+        width: 36px; /* Smaller logo for mobile */
+        margin-right: 20px; /* Adjust margin for proper alignment */
     }
-    100% {
-        transform: translateX(-100%);
-    }
-}
 
-/* Menghentikan animasi di tampilan desktop */
-@media (min-width: 768px) {
-    .marquee-text {
-        animation: none;
-        transform: translateX(0);
-        white-space: normal;
+    .offcanvas-title {
+        font-size: 16px; /* Reduce font size for mobile */
+    }
+
+    .satu h5 {
+        margin-left: 10px; /* Adjust margin for better alignment */
+    }
+
+    .navbar-toggler {
+        margin-left: 10px; /* Adjust toggle button margin for better placement */
     }
 }
 
     </style>
 </head>
 <body>
+
     @if (Auth::user()->role == 'user_edit')
-    {{-- NAVBAR - START --}}
-    <nav class="navbar navbar-dark fixed-top">
-        <div class="container-fluid">
-            <div class="satu">
-                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation" style="margin-left:5%;">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="marquee">
-                    <h5 class="marquee-text offcanvas-title" style="margin-left:5%;">
-                        KETERANGAN DAN JENIS POIN SMKN 1 KAWALI
-                    </h5>
-                </div>        
-            </div>
-            <div data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
-                <div class="offcanvas offcanvas-start" tabindex="-1" data-bs-backdrop="false" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
-                    <div class="offcanvas-header">
-                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel" style="margin-left:5%;">Menu</h5>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                    </div>
-                    <div class="offcanvas-body">
-                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                            <hr>
-                            <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="{{ route('PoinSiswa') }}">Poin Siswa</a>
-                            </li>
-                            <hr>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/logout">Keluar Akun</a>
-                            </li>
-                            <hr>
-                        </ul>
+        {{-- NAVBAR - START --}}
+        <nav class="navbar navbar-dark fixed-top">
+            <div class="container-fluid">
+                <div class="satu">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation" style="margin-left:5%;">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <h5 class="offcanvas-title" style="margin-left:5%;">POIN SMKN 1 KAWALI</h5>
+                    <img src="{{ asset('storage/smkn1kawali.png') }}" alt="Logo" width="48px" class="ms-auto">
+                </div>
+                <div data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+                    <div class="offcanvas offcanvas-start" tabindex="-1" data-bs-backdrop="false" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+                        <div class="offcanvas-header">
+                            <h5 class="offcanvas-title" id="offcanvasNavbarLabel" style="margin-left:5%;">Menu</h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body">
+                            <ul class="navbar-nav flex-grow-1">
+                                <li class="nav-item"><a class="nav-link" href="{{ route('dashboard') }}"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a></li>
+                                <hr class="menu-divider">
+                                <li class="nav-item"><a class="nav-link" href="{{ route('PoinSiswa') }}"><i class="bi bi-card-list me-2"></i>Poin Siswa</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ route('LaporanPoinSiswa') }}"><i class="bi bi-file-earmark-text me-2"></i>Laporan</a></li>
+                                <hr class="menu-divider">
+                                <li class="nav-item"><a class="nav-link" href="/logout"><i class="bi bi-box-arrow-right me-2"></i>Keluar Akun</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </nav>
-    {{-- NAVBAR - END --}}
+        </nav>
+        {{-- NAVBAR - END --}}
+
+    @elseif (Auth::user()->role == 'user1')
+        {{-- NAVBAR - START --}}
+        <nav class="navbar navbar-dark fixed-top">
+            <div class="container-fluid">
+                <div class="satu">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation" style="margin-left:5%;">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <h5 class="offcanvas-title" style="margin-left:5%;">POIN SMKN 1 KAWALI</h5>
+                    <img src="{{ asset('storage/smkn1kawali.png') }}" alt="Logo" width="48px" class="ms-auto">
+                </div>
+                <div data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+                    <div class="offcanvas offcanvas-start" tabindex="-1" data-bs-backdrop="false" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+                        <div class="offcanvas-header">
+                            <h5 class="offcanvas-title" id="offcanvasNavbarLabel" style="margin-left:5%;">Menu</h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body">
+                            <ul class="navbar-nav flex-grow-1">
+                                <li class="nav-item"><a class="nav-link" href="{{ route('dashboard') }}"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a></li>
+                                <hr class="menu-divider">
+                                <li class="nav-item"><a class="nav-link" href="{{ route('LaporanPoinSiswa') }}"><i class="bi bi-file-earmark-text me-2"></i>Laporan</a></li>
+                                <hr class="menu-divider">
+                                <li class="nav-item"><a class="nav-link" href="/logout"><i class="bi bi-box-arrow-right me-2"></i>Keluar Akun</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        {{-- NAVBAR - END --}}
+
+    @elseif (Auth::user()->role == 'user2')
+        {{-- NAVBAR - START --}}
+        <nav class="navbar navbar-dark fixed-top">
+            <div class="container-fluid">
+                <div class="satu">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation" style="margin-left:5%;">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <h5 class="offcanvas-title" style="margin-left:5%;">POIN SMKN 1 KAWALI</h5>
+                    <img src="{{ asset('storage/smkn1kawali.png') }}" alt="Logo" width="48px" class="ms-auto">
+                </div>
+                <div data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+                    <div class="offcanvas offcanvas-start" tabindex="-1" data-bs-backdrop="false" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+                        <div class="offcanvas-header">
+                            <h5 class="offcanvas-title" id="offcanvasNavbarLabel" style="margin-left:5%;">Menu</h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body">
+                            <ul class="navbar-nav flex-grow-1">
+                                <li class="nav-item"><a class="nav-link" href="{{ route('dashboard') }}"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a></li>
+                                <hr class="menu-divider">
+                                <li class="nav-item"><a class="nav-link" href="{{ route('LaporanPoinSiswa') }}"><i class="bi bi-file-earmark-text me-2"></i>Laporan</a></li>
+                                <hr class="menu-divider">
+                                <li class="nav-item"><a class="nav-link" href="/logout"><i class="bi bi-box-arrow-right me-2"></i>Keluar Akun</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        {{-- NAVBAR - END --}}
+
+    @elseif (Auth::user()->role == 'user3')
+        {{-- NAVBAR - START --}}
+        <nav class="navbar navbar-dark fixed-top">
+            <div class="container-fluid">
+                <div class="satu">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation" style="margin-left:5%;">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <h5 class="offcanvas-title" style="margin-left:5%;">POIN SMKN 1 KAWALI</h5>
+                    <img src="{{ asset('storage/smkn1kawali.png') }}" alt="Logo" width="48px" class="ms-auto">
+                </div>
+                <div data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+                    <div class="offcanvas offcanvas-start" tabindex="-1" data-bs-backdrop="false" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+                        <div class="offcanvas-header">
+                            <h5 class="offcanvas-title" id="offcanvasNavbarLabel" style="margin-left:5%;">Menu</h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body">
+                            <ul class="navbar-nav flex-grow-1">
+                                <li class="nav-item"><a class="nav-link" href="{{ route('dashboard') }}"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a></li>
+                                <hr class="menu-divider">
+                                <li class="nav-item"><a class="nav-link" href="{{ route('LaporanPoinSiswa') }}"><i class="bi bi-file-earmark-text me-2"></i>Laporan</a></li>
+                                <hr class="menu-divider">
+                                <li class="nav-item"><a class="nav-link" href="/logout"><i class="bi bi-box-arrow-right me-2"></i>Keluar Akun</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        {{-- NAVBAR - END --}}
 
     @elseif (Auth::user()->role == 'admin')
-{{-- NAVBAR - START --}}
-<nav class="navbar navbar-dark fixed-top">
-    <div class="container-fluid">
-        <div class="satu">
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation" style="margin-left:5%;">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="marquee">
-            <h5 class="marquee-text offcanvas-title" style="margin-left:-18px;">KETERANGAN DAN JENIS POIN SMKN 1 KAWALI</h5>
-            </div>        
-        </div>
-        <div data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
-            <div class="offcanvas offcanvas-start" tabindex="-1" data-bs-backdrop="false" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
-                <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel" style="margin-left:5%;">Menu</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        {{-- NAVBAR - START --}}
+        <nav class="navbar navbar-dark fixed-top">
+            <div class="container-fluid">
+                <div class="satu">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation" style="margin-left:5%;">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <h5 class="offcanvas-title" style="margin-left:5%;">POIN SMKN 1 KAWALI</h5>
+                    <img src="{{ asset('storage/smkn1kawali.png') }}" alt="Logo" width="48px" class="ms-auto">
                 </div>
-                <div class="offcanvas-body">
-                    <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
-                        <hr>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="{{ route('Siswa') }}">Data Siswa</a>
-                        </li>
-                        <hr>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="{{ route('PoinSiswa') }}">Poin Siswa</a>
-                        </li>
-                        <hr>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="{{ route('HalamanPoin') }}">Keterangan Dan Jenis Poin</a>
-                        </li>
-                        <hr>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="{{ route('LaporanPoinSiswa') }}">Laporan Akhir Semester</a>
-                        </li>
-                        <hr>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Pengaturan
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
-                                <hr>
-                                <a class="dropdown-item" aria-current="page" href="{{ route('AkunBK') }}" style="font-size: 14px; font-weight: 300;"><strong id="profile-username">{{ $datauser->firstWhere('role', 'admin')->username ?? 'Bimbingan Konseling' }}</strong></a>
-                                <hr>
-                                <a class="dropdown-item" aria-current="page" href="{{ route('AkunGuru') }}" style="font-size: 14px; font-weight: 300;"><strong id="profile-username">{{ $datauser->firstWhere('role', 'user_edit')->username ?? 'Guru' }}</strong></a>
-                                <hr>
-                                <a class="dropdown-item" aria-current="page" href="{{ route('AkunOsis') }}" style="font-size: 14px; font-weight: 300;"><strong id="profile-username">{{ $datauser->firstWhere('role', 'user1')->username ?? 'Kesiswaan' }}</strong></a>
-                                <hr>
-                                <a class="dropdown-item" aria-current="page" href="{{ route('AkunKesiswaan') }}" style="font-size: 14px; font-weight: 300;"><strong id="profile-username">{{ $datauser->firstWhere('role', 'user2')->username ?? 'OSIS' }}</strong></a>
-                                <hr>
-                                <a class="dropdown-item" aria-current="page" href="{{ route('kelas') }}" style="font-size: 14px;" >Kelas</a>
-                            </div>
-                        </li>
-                        <hr>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/logout">Keluar Akun</a>
-                        </li>
-                        <hr>
-                    </ul>
+                <div data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+                    <div class="offcanvas offcanvas-start" tabindex="-1" data-bs-backdrop="false" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+                        <div class="offcanvas-header">
+                            <h5 class="offcanvas-title" id="offcanvasNavbarLabel" style="margin-left:5%;">Menu</h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body">
+                            <ul class="navbar-nav flex-grow-1">
+                                <li class="nav-item"><a class="nav-link" href="{{ route('dashboard') }}"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a></li>
+                                <hr class="menu-divider">
+                                <li class="nav-item"><a class="nav-link" href="{{ route('Siswa') }}"><i class="bi bi-person-lines-fill me-2"></i>Data Siswa</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ route('PoinSiswa') }}"><i class="bi bi-card-list me-2"></i>Poin Siswa</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ route('HalamanPoin') }}"><i class="bi bi-info-circle me-2"></i>Keterangan Dan Jenis Poin</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ route('LaporanPoinSiswa') }}"><i class="bi bi-file-earmark-text me-2"></i>Laporan</a></li>
+                                <hr class="menu-divider">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-gear me-2"></i>Pengaturan
+                                    </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown" ><hr>
+                                    <a class="dropdown-item" aria-current="page" href="{{ route('AkunBK') }}" style="font-size: 14px; width: 170px; font-weight: 300; margin-left: 7px;"><strong id="profile-username"><i class="bi bi-person" style="margin-right: 10px;"></i>{{ $datauser->firstWhere('role', 'admin')->username ?? 'Bimbingan Konseling' }}</strong></a>
+                                    <a class="dropdown-item" aria-current="page" href="{{ route('AkunGuru') }}" style="font-size: 14px; width: 170px; font-weight: 300; margin-left: 7px;"><strong id="profile-username"><i class="bi bi-person" style="margin-right: 10px;"></i>{{ $datauser->firstWhere('role', 'user_edit')->username ?? 'Guru' }}</strong></a>
+                                    <a class="dropdown-item" aria-current="page" href="{{ route('AkunKesiswaan') }}" style="font-size: 14px; width: 170px; font-weight: 300; margin-left: 7px;"><strong id="profile-username"><i class="bi bi-person" style="margin-right: 10px;"></i>{{ $datauser->firstWhere('role', 'user1')->username ?? 'Kesiswaan' }}</strong></a>
+                                    <a class="dropdown-item" aria-current="page" href="{{ route('AkunOsis') }}" style="font-size: 14px; width: 170px; font-weight: 300; margin-left: 7px;"><strong id="profile-username"><i class="bi bi-person" style="margin-right: 10px;"></i>{{ $datauser->firstWhere('role', 'user2')->username ?? 'OSIS' }}</strong></a>
+                                    <a class="dropdown-item" aria-current="page" href="{{ route('AkunSiswa') }}" style="font-size: 14px; width: 170px; font-weight: 300; margin-left: 7px;"><strong id="profile-username"><i class="bi bi-person" style="margin-right: 10px;"></i>{{ $datauser->firstWhere('role', 'user3')->username ?? 'Siswa' }}</strong></a>
+                                    <a class="dropdown-item" aria-current="page" href="{{ route('AkunPetugas') }}" style="font-size: 14px; width: 170px; font-weight: 300; margin-left: 7px;"><strong id="profile-username"><i class="bi bi-person" style="margin-right: 10px;"></i>{{ $datauser->firstWhere('role', 'user4')->username ?? 'Penegak Disiplin' }}</strong></a><hr>
+                                    <a class="dropdown-item" aria-current="page" href="{{ route('kelas') }}" style="font-size: 14px; width: 170px; margin-left: 7px;"><i class="bi bi-file-ruled" style="margin-right: 10px;"></i>Kelas</a>
+                                </div>
+                                </li>
+                                <hr class="menu-divider">
+                                <li class="nav-item"><a class="nav-link" href="/logout"><i class="bi bi-box-arrow-right me-2"></i>Keluar Akun</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-</nav>
-{{-- NAVBAR - END --}}
-    @endif
-
+        </nav>
+        {{-- NAVBAR - END --}}
+        @else
+    {{-- Logout user if the role is not valid --}}
+    @php
+        Auth::logout();
+    @endphp
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-    var marquee = document.querySelector(".marquee");
-    var text = document.querySelector(".marquee-text");
-
-    if (marquee && text) {
-        // Jika panjang teks lebih besar dari container, aktifkan animasi
-        if (text.scrollWidth > marquee.offsetWidth) {
-            text.style.animationPlayState = "running";
-        } else {
-            text.style.animationPlayState = "paused";
-        }
-    }
-});
-
+        window.location.href = "{{ route('login') }}";
     </script>
+    @endif
+        <!-- Main content -->
+        <div class="content">
+        @yield('content')
+    </div>
+
+
+    <script src="{{ asset('js/app.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybY8vUPg2UODf0p5c1bS1VRSMXh0ZW5eP8EMD/SN7pC38j0r1" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-+ojg32upP8KXy0jK12KV9JAF1Q0CMLuIm/XOZ1PbiRTQG0mGlv7+WZy4uK4c20h3" crossorigin="anonymous"></script>
 </body>

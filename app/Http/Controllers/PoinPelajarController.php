@@ -177,7 +177,8 @@ class PoinPelajarController extends Controller
             'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
             'tipe_poin' => 'required|in:positif,negatif',
             'nama_poin' => 'required|string',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi untuk foto
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp,heic|max:51200',
+
         ]);
     
         $userRole = auth()->user()->role; // Mengambil role pengguna saat ini
@@ -194,18 +195,14 @@ class PoinPelajarController extends Controller
         if (!$siswa) {
             return redirect()->back()->with('error', 'Siswa tidak ditemukan.');
         }
-    
         // Ambil data poin dari tabel poin yang sesuai dengan tipe poin
         $poin = $request->tipe_poin === 'negatif'
             ? DataPoinNegatif::where('nama_poin', $request->nama_poin)->first()
             : DataPoinPositif::where('nama_poin', $request->nama_poin)->first();
-    
         // Cek apakah poin ditemukan
         if (!$poin) {
             return redirect()->back()->with('error', 'Poin yang dipilih tidak ditemukan.');
         }
-
-    
         // Cek apakah kombinasi ID poin negatif, tanggal, dan nis sudah ada
         if ($request->tipe_poin === 'negatif') {
             $existingRecord = PoinPelajar::where('id_poin_negatif', $poin->id_poin_negatif)
@@ -220,8 +217,6 @@ class PoinPelajarController extends Controller
                 );
             }
         }
-
-    
         // Buat entri baru di tabel poin_pelajar
         $poinPelajar = new PoinPelajar();
         $poinPelajar->nis = $siswa->nis; // Ambil NIS dari data siswa
@@ -251,19 +246,28 @@ class PoinPelajarController extends Controller
     
             // Proses upload foto jika ada
             if ($request->hasFile('foto')) {
+                // Ambil file yang diupload
                 $file = $request->file('foto');
-                $fileName = time() . '_' . $file->getClientOriginalName(); // Buat nama file unik
-                $file->storeAs('public/foto_poin', $fileName); // Simpan file ke folder public/foto_poin
-                $poinPelajar->foto = $fileName; // Simpan nama file di database
+            
+                // Buat nama file unik menggunakan timestamp
+                $fileName = time() . '_' . preg_replace('/[^a-zA-Z0-9_\-\.]/', '', $file->getClientOriginalName());
+            
+                // Simpan file ke folder 'public/foto_poin' dan ambil path relatif
+                $filePath = $file->storeAs('public/foto_poin', $fileName);
+            
+                // Simpan nama file yang tersimpan di folder public/foto_poin ke dalam database
+                // Path yang disimpan di database harus relatif terhadap 'storage/app/public'
+                $poinPelajar->foto = 'foto_poin/' . $fileName;
+            
+                // Pastikan file tersimpan dengan benar, Anda bisa menambahkan log untuk pengecekan
+                \Log::info('File tersimpan di: ' . $filePath);
             }
+            
         }
-    
         // Atur tanggal menjadi hari ini
         $poinPelajar->tanggal = now()->toDateString();
-    
         // Simpan data ke tabel poin_pelajar
         $poinPelajar->save();
-    
         return redirect()->route('PoinSiswa')->with('success', 'Poin berhasil ditambahkan.');
     }
     

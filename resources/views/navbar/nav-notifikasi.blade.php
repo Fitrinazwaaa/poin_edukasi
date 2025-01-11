@@ -7,6 +7,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!-- Bootstrap Icons CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
+
     <style>
         :root {
             --primary-color: #388DD8;
@@ -172,6 +174,42 @@
                 margin-top: 72px;
             }
         }
+ 
+/* Default styling for navbar logo */
+.navbar img {
+        width: 48px; /* Default width */
+        height: auto;
+        margin-left: auto; /* Push logo to the right */
+        margin-right: 55px;
+
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .navbar img {
+            width: 36px; /* Adjust size for smaller screens */
+            margin-right: 15px; /* Adjust margin for alignment */
+        }
+        .offcanvas-title {
+            font-size: 16px; /* Reduce font size for mobile */
+        }
+        
+        .satu h5 {
+            margin-left: 10px; /* Adjust margin for better alignment */
+        }
+        
+        .navbar-toggler {
+            margin-left: 10px; /* Adjust toggle button margin for better placement */
+        }
+    }
+
+    @media (max-width: 576px) {
+        .navbar img {
+            width: 32px; /* Smaller logo for extra small screens */
+            margin-right: 10px;
+        }
+    }
+
         /* NAVBAR-END */
     </style>
 </head>
@@ -179,32 +217,43 @@
     @if (Auth::user()->role == 'user_edit')
     {{-- NAVBAR - START --}}
     <nav class="navbar navbar-custom navbar-light fixed-top">
-        <div class="container-fluid">
-            <!-- Back button with text -->
-            <div class="back-button">
+        <div class="container-fluid d-flex align-items-center">
+            <!-- Back button -->
+            <div class="back-button d-flex align-items-center">
                 <button onclick="goBack()">
                     <i class="bi bi-arrow-left"></i> <!-- Bootstrap Icons -->
                 </button>
-                <h5 class="offcanvas-title">POIN SISWA SMKN 1 KAWALI</h5>
+                <h5 class="offcanvas-title ms-2">POIN SISWA SMKN 1 KAWALI</h5>
             </div>
+            <!-- Logo -->
+            <img src="{{ asset('storage/smkn1kawali.png') }}" alt="Logo" class="ms-auto">
         </div>
     </nav>
     {{-- NAVBAR - END --}}
-
+    
     @elseif (Auth::user()->role == 'admin')
     {{-- NAVBAR - START --}}
     <nav class="navbar navbar-custom navbar-light fixed-top">
-        <div class="container-fluid">
-            <!-- Back button with text -->
-            <div class="back-button">
+        <div class="container-fluid d-flex align-items-center">
+            <!-- Back button -->
+            <div class="back-button d-flex align-items-center">
                 <button onclick="goBack()">
                     <i class="bi bi-arrow-left"></i> <!-- Bootstrap Icons -->
                 </button>
-                <h5 class="offcanvas-title">POIN SISWA SMKN 1 KAWALI</h5>
+                <h5 class="offcanvas-title ms-2">POIN SISWA SMKN 1 KAWALI</h5>
             </div>
+            <!-- Logo -->
+            <img src="{{ asset('storage/smkn1kawali.png') }}" alt="Logo" class="ms-auto">
         </div>
     </nav>
-    {{-- NAVBAR - END --}}
+    @else
+    {{-- Logout user if the role is not valid --}}
+    @php
+        Auth::logout();
+    @endphp
+    <script>
+        window.location.href = "{{ route('login') }}";
+    </script>
     @endif
 
     <!-- Main content -->

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\DataUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+
 
 class UserController extends Controller
 {
@@ -15,6 +17,7 @@ class UserController extends Controller
         $datauser = DataUser::all();
         return view('admin.pengaturan.akun.bk', compact('datauser'));
     }
+
     public function indexguru()
     {
         // Ambil semua data user dari database
@@ -27,17 +30,27 @@ class UserController extends Controller
         $datauser = DataUser::all();
         return view('admin.pengaturan.akun.osis', compact('datauser'));
     }
+
+    public function indexsiswa()
+    {
+        // Ambil semua data user dari database
+        $datauser = DataUser::all();
+        return view('admin.pengaturan.akun.siswa', compact('datauser'));
+    }
+
+    public function indexpetugas()
+    {
+        // Ambil semua data user dari database
+        $datauser = DataUser::all();
+        return
+         view('admin.pengaturan.akun.petugas', compact('datauser'));
+    }
     public function indexkesiswaan()
     {
         // Ambil semua data user dari database
         $datauser = DataUser::all();
         return view('admin.pengaturan.akun.kesiswaan', compact('datauser'));
     }
-
-
-
-
-
 
     // Method untuk mengedit berdasarkan ID user
     public function edit(string $id)
@@ -46,9 +59,6 @@ class UserController extends Controller
         $pengguna = DataUser::findOrFail($id);
         return view('admin.pengaturan_akun.edit', compact('pengguna'));
     }
-
-
-
 
     // Method untuk update akun berdasarkan ID
     public function update(Request $request, string $id)
@@ -62,6 +72,9 @@ class UserController extends Controller
         // Cari user berdasarkan ID
         $pengguna = DataUser::findOrFail($id);
 
+        // Cek apakah role yang diedit adalah admin
+        $isAdmin = $pengguna->role === 'admin';
+
         // Update username
         $pengguna->username = $request->input('username');
 
@@ -73,9 +86,13 @@ class UserController extends Controller
         // Simpan perubahan ke database
         $pengguna->save();
 
-        // Redirect dengan pesan sukses
+        // Jika yang diedit adalah admin, logout dan arahkan ke login
+        if ($isAdmin) {
+            Auth::logout(); // Logout pengguna
+            return redirect('/')->with('info', 'Profil berhasil diperbarui. Silakan login kembali.');
+        }
+
+        // Redirect dengan pesan sukses jika bukan admin
         return back()->with('success', 'Profil berhasil diperbarui!');
     }
-
-    
 }

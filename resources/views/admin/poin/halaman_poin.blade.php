@@ -26,7 +26,7 @@
                 <div class="modal-body" style="background-color: #e7f4ff;">
                     <div class="container">
                         <form action="{{ route('submitPoin') }}" method="POST">
-                        @csrf
+                            @csrf
                             <div class="container">
                                 <div class="form-row">
                                     <div class="positif_negatif">
@@ -40,18 +40,18 @@
                                     </div>
                                 </div>
 
-                                <div class="form-row">
+                                <div class="form-row" style="margin-top: 35px;">
                                     <label for="id_poin">Id Poin</label>
                                     <input type="text" name="id_poin" class="form-control" >
                                 </div>
                                 
                                 <div class="form-row">
-                                    <label for="np">Nama Pelanggaran</label>
+                                    <label for="np">Keterangan Poin</label>
                                     <input type="text" name="np" class="form-control" >
                                 </div>
 
                                 <div class="form-row">
-                                    <label for="poin">Poin</label>
+                                    <label for="poin">Skor Poin</label>
                                     <input type="text" name="poin" class="form-control" >
                                 </div>
 
@@ -140,13 +140,13 @@
                 <button type="button" class="icon-btn delete-btn" id="deleteAllSelectedRecord">
                     <i class="fas fa-trash-alt"></i>
                 </button>
-                <button class="tambah" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <button class="tambah" data-bs-toggle="modal" data-bs-target="#exampleModal" style="z-index: 111;">
                     <i class="fas fa-plus" style="margin-right: -4px;"></i> Tambah Poin
                 </button>
             </div>
             <!-- TOMBOL TITIK TIGA -->
             <div class="dropdown" style="margin-left:10px;">
-                <button class="btn btn-light" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" style="border: none;">
+                <button class="btn btn-light" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" style="border: none; background-color:white; margin-left:-10px; margin-right:-10px;">
                     <i class="fas fa-ellipsis-v"></i>
                 </button>
                 <ul class="dropdown-menu p-3 shadow-lg" aria-labelledby="dropdownMenuButton" style="width: 400px; border-radius: 8px;">
@@ -162,13 +162,13 @@
                         </div>
                     </li>
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="{{ route('exportGabungan') }}">
-                            <i class="fas fa-file-excel me-2 text-success"></i> Export Excel
+                        <a class="dropdown-item d-flex align-items-center" href="{{ route('EksportGabungan') }}">
+                            <i class="fas fa-file-excel me-2 text-success"></i> Eksport Excel
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="{{ route('exportPDF') }}">
-                            <i class="fas fa-file-pdf me-2 text-danger"></i> Export PDF
+                        <a class="dropdown-item d-flex align-items-center" href="{{ route('EksportPDF') }}">
+                            <i class="fas fa-file-pdf me-2 text-danger"></i> Eksport PDF
                         </a>
                     </li>
                 </ul>
@@ -187,7 +187,7 @@
                                 <tr>
                                     <th><input type="checkbox" id="select_all_negatif"></th>
                                     <th>No</th>
-                                    <th>Keterangan</th>
+                                    <th>Keterangan Poin</th>
                                     <th>Kategori</th>
                                     <th>Poin</th>
                                 </tr>
@@ -216,7 +216,7 @@
                                 <tr>
                                     <th><input type="checkbox" id="select_all_positif"></th>
                                     <th>No</th>
-                                    <th>Keterangan</th>
+                                    <th>Keterangan Poin</th>
                                     <th>Kategori</th>
                                     <th>Poin</th>
                                 </tr>
@@ -303,13 +303,14 @@
 
 
     <!-- TABEL PERINGATAN START -->
-    <div class="container">
+    <div class="container" style="margin-top: 50px;">
+        <h5 style="margin-bottom: -7px; margin-left: 60px;">Peringatan</h5>
         <div class="table-wrapper3">
             <table>
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Peringatan</th>
+                        <th>Keterangan</th>
                         <th>Poin</th>
                         <th>Aksi</th>
                     </tr>

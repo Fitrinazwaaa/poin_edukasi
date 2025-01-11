@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\KelasExport;
+use App\Eksports\KelasEksport;
 use App\Imports\KelasImport;
 use App\Models\DataKelas;
 use Illuminate\Http\Request;
@@ -77,9 +77,9 @@ class DataKelasController extends Controller
         return redirect()->route('kelas')->with('success', 'Kelas yang dipilih berhasil dihapus.');
     }
 
-    public function exportKelas()
+    public function EksportKelas()
     {
-        return Excel::download(new KelasExport, 'data_kelas.xlsx');
+        return Excel::download(new KelasEksport, 'data_kelas.xlsx');
     }
 
     public function importKelas(Request $request)

@@ -55,15 +55,15 @@
                                 <form action="{{ route('KelasImport') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div class="input-group">
-                                        <input type="file" name="file" class="form-control" accept=".xls,.xlsx" style="border-top-right-radius: 0; border-bottom-right-radius: 0;">
-                                        <button type="submit" class="btn btn-primary" style="border-top-left-radius: 0; border-bottom-left-radius: 0;">Impor Excel</button>
+                                        <input type="file" name="file" class="form-control" accept=".xls,.xlsx" style="border-top-right-radius: 0; border-bottom-right-radius: 0; margin-bottom: 0; font-size: 14px;">
+                                        <button type="submit" class="btn btn-primary" style="background-color:#fcfc38; border-top-left-radius: 0; border-bottom-left-radius: 0; border: none; color: black;font-size: 14px; font-weight: 600;">Impor Excel</button>
                                     </div>
                                 </form>
                             </div>
                         </li>
                         <li>
-                            <a class="dropdown-item d-flex align-items-center" href="{{ route('KelasExport') }}">
-                                <i class="fas fa-file-excel me-2 text-success"></i> Export Excel
+                            <a class="dropdown-item d-flex align-items-center" href="{{ route('KelasEksport') }}">
+                                <i class="fas fa-file-excel me-2 text-success"></i> Eksport Excel
                             </a>
                         </li>
                     </ul>
@@ -75,7 +75,7 @@
                     <div class="modal-content">
 
                         <div class="modal-header" style="background-color: #e7f4ff;">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel" >TAMBAH KELAS SMK N 1 KAWALI</h1>
+                            <h1 class="modal-title fs-5" id="exampleModalLabel" >TAMBAH KONSENTRASI KEAHLIAN SMK N 1 KAWALI</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
 
@@ -90,7 +90,7 @@
                 </div>
 
                 <div class="form-row">
-                    <label for="jurusan">Jurusan</label>
+                    <label for="jurusan">Konsentrasi Keahlian</label>
                     <input type="text" name="jurusan" class="form-control" required>
                 </div>
 
@@ -116,8 +116,8 @@
         <div class="tabel">
             <input type="checkbox" id="dropdown{{ $tahun_angkatan }}">
             <label class="btn-toggle" for="dropdown{{ $tahun_angkatan }}">
-                ANGKATAN TAHUN {{ $tahun_angkatan }}
-                <span class="float-end" style="font-weight: 500; margin-right: 30px">Jumlah Kelas: {{ count($Kelas) }}</span>
+                Angkatan Tahun {{ $tahun_angkatan }}
+                <span class="float-end" style="font-weight: 500; margin-right: 20px; font-size: 11px;">Jumlah Kelas: {{ count($Kelas) }}</span>
             </label>
             <div class="collapse-content" id="content{{ $tahun_angkatan }}">
                 <div class="card card-body" style="border: none;">
@@ -128,8 +128,8 @@
                                     <tr>
                                         <th><input type="checkbox" id="select_all{{ $tahun_angkatan }}" class="select_all"></th>
                                         <th>Tahun Angkatan</th>
-                                        <th>Jurusan</th>
-                                        <th>Jurusan Ke-</th>
+                                        <th>Konsentrasi Keahlian</th>
+                                        <th>Konsentrasi Keahlian Ke-</th>
                                     </tr>
                                 </thead>
                                 <tbody id="studentTable{{ $tahun_angkatan }}">
@@ -168,53 +168,54 @@
             }
         });
     </script>
-<script>
-// Fungsi untuk memilih semua checkbox di tabel sesuai dengan angkatan
-document.querySelectorAll('.select_all').forEach(function(selectAllCheckbox) {
-    selectAllCheckbox.addEventListener('change', function() {
-        // Ambil angkatan berdasarkan id checkbox "Select All"
-        const tahunAngkatan = this.id.replace('select_all', '');
-        
-        // Cari semua checkbox kelas di tabel yang relevan
-        let checkboxes = document.querySelectorAll(`.checkbox_ids${tahunAngkatan}`);
-        
-        // Ubah status checkbox sesuai dengan checkbox "Select All"
-        checkboxes.forEach(checkbox => {
-            checkbox.checked = this.checked;
+    <script>
+    // Fungsi untuk memilih semua checkbox di tabel sesuai dengan angkatan
+    document.querySelectorAll('.select_all').forEach(function(selectAllCheckbox) {
+        selectAllCheckbox.addEventListener('change', function() {
+            // Ambil angkatan berdasarkan id checkbox "Select All"
+            const tahunAngkatan = this.id.replace('select_all', '');
+            
+            // Cari semua checkbox kelas di tabel yang relevan
+            let checkboxes = document.querySelectorAll(`.checkbox_ids${tahunAngkatan}`);
+            
+            // Ubah status checkbox sesuai dengan checkbox "Select All"
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = this.checked;
+            });
         });
     });
-});
 
-function deleteSelected() {
-    const checkedBoxes = document.querySelectorAll('input[name="hapus[]"]:checked');
-    if (checkedBoxes.length === 0) {
-        alert('Tidak ada kelas yang dipilih untuk dihapus.');
-        return;
+    function deleteSelected() {
+        const checkedBoxes = document.querySelectorAll('input[name="hapus[]"]:checked');
+        if (checkedBoxes.length === 0) {
+            alert('Tidak ada kelas yang dipilih untuk dihapus.');
+            return;
+        }
+
+        const selectedValues = Array.from(checkedBoxes).map(cb => cb.value);
+        console.log('Kelas yang dipilih untuk dihapus:', selectedValues);
+
+        // Tampilkan modal konfirmasi
+        const confirmModal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'));
+        confirmModal.show();
+
+        // Lampirkan event listener untuk tombol hapus di modal
+        document.getElementById('confirmDeleteBtn').onclick = function() {
+            const deleteForm = document.getElementById('deleteForm');
+            checkedBoxes.forEach(cb => {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'hapus[]'; // Pastikan sesuai dengan input checkbox yang ingin dihapus
+                input.value = cb.value;
+                deleteForm.appendChild(input);
+            });
+            deleteForm.submit(); // Kirim form
+        };
     }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-    const selectedValues = Array.from(checkedBoxes).map(cb => cb.value);
-    console.log('Kelas yang dipilih untuk dihapus:', selectedValues);
-
-    // Tampilkan modal konfirmasi
-    const confirmModal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'));
-    confirmModal.show();
-
-    // Lampirkan event listener untuk tombol hapus di modal
-    document.getElementById('confirmDeleteBtn').onclick = function() {
-        const deleteForm = document.getElementById('deleteForm');
-        checkedBoxes.forEach(cb => {
-            const input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = 'hapus[]'; // Pastikan sesuai dengan input checkbox yang ingin dihapus
-            input.value = cb.value;
-            deleteForm.appendChild(input);
-        });
-        deleteForm.submit(); // Kirim form
-    };
-}
-</script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script></body>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
 </html>

@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>user1 Settings</title>
+    <title>user3 Settings</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
 
@@ -15,7 +15,7 @@
         body{
             margin-top: -40px;
         }
-        #user1-settings-container {
+        #user3-settings-container {
             background-color: #F0F4F9;
             font-family: Arial, sans-serif;
             display: flex;
@@ -25,7 +25,7 @@
             padding: 50px 10px 10px 10px; /* Tambahkan padding atas untuk jarak */
         }
 
-        #user1-settings-container .container {
+        #user3-settings-container .container {
             background-color: white;
             border-radius: 15px;
             box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
@@ -35,12 +35,12 @@
             position: relative;
         }
 
-        #user1-settings-container .header {
+        #user3-settings-container .header {
             text-align: center;
             margin-bottom: 20px;
         }
 
-        #user1-settings-container .profile-icon {
+        #user3-settings-container .profile-icon {
             width: 80px;
             height: 80px;
             border-radius: 50%;
@@ -52,36 +52,36 @@
             color: white;
         }
 
-        #user1-settings-container .profile-text strong {
+        #user3-settings-container .profile-text strong {
             font-size: 22px;
             display: block;
             margin-top: 10px;
         }
 
-        #user1-settings-container .profile-text p {
+        #user3-settings-container .profile-text p {
             color: #555;
             font-size: 14px;
         }
 
-        #user1-settings-container hr {
+        #user3-settings-container hr {
             border: 0;
             height: 1px;
             background-color: #388DD8;
             margin: 20px 0;
         }
 
-        #user1-settings-container h3 {
+        #user3-settings-container h3 {
             font-size: 18px;
             margin-bottom: 10px;
         }
 
-        #user1-settings-container label {
+        #user3-settings-container label {
             display: block;
             font-size: 14px;
             margin-bottom: 5px;
         }
 
-        #user1-settings-container input {
+        #user3-settings-container input {
             width: 100%;
             padding: 10px;
             border: 1px solid #cfcfcf;
@@ -90,7 +90,7 @@
             margin-bottom: 15px;
         }
 
-        #user1-settings-container button.btn {
+        #user3-settings-container button.btn {
             width: 100%;
             padding: 12px;
             background-color: #1e90ff;
@@ -102,11 +102,11 @@
             transition: background-color 0.3s;
         }
 
-        #user1-settings-container button.btn:hover {
+        #user3-settings-container button.btn:hover {
             background-color: #1c86ee;
         }
 
-        #user1-settings-container .alert {
+        #user3-settings-container .alert {
             background-color: #d4edda;
             color: #155724;
             padding: 10px;
@@ -115,7 +115,7 @@
             display: none;
         }
 
-        #user1-settings-container .secure-info {
+        #user3-settings-container .secure-info {
             background-color: #f9f9f9;
             padding: 15px;
             border-radius: 5px;
@@ -125,26 +125,26 @@
             margin-top: 20px;
         }
 
-        #user1-settings-container .secure-info a {
+        #user3-settings-container .secure-info a {
             color: #1e90ff;
             text-decoration: none;
         }
 
-        #user1-settings-container .secure-info a:hover {
+        #user3-settings-container .secure-info a:hover {
             text-decoration: underline;
         }
     </style>
 </head>
 
 <body>
-    <div id="user1-settings-container">
+    <div id="user3-settings-container">
         <div class="container">
             <div class="header">
                 <div class="profile-icon">
                     <i class="fa fa-user"></i>
                 </div>
                 <div class="profile-text">
-                    <strong id="profile-username">{{ $datauser->firstWhere('role', 'user1')->username ?? 'Kesiswaan' }}</strong>
+                    <strong id="profile-username">{{ $datauser->firstWhere('role', 'user3')->username ?? 'Siswa' }}</strong>
                     <p>smkn1kawali@gmail.com</p>
                 </div>
             </div>
@@ -158,7 +158,7 @@
             <h3 style="text-align: center;">Metode Masuk</h3>
 
             @foreach ($datauser as $user)
-            @if ($user->role == 'user1')
+            @if ($user->role == 'user3')
             <form action="{{ route('UserUpdate', ['id' => $user->id]) }}" method="POST" onsubmit="return validateForm();">
                 @csrf
                 @method('PUT')

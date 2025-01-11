@@ -24,7 +24,6 @@ class DataSiswa extends Model
         return $this->hasMany(PoinPelajar::class, 'nis', 'nis');
     }
 
-
     // Relasi ke PoinPositif
     public function poinPositif()
     {

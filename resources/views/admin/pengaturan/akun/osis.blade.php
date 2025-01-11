@@ -9,6 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>user2 Settings</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
+
     <style>
         body{
             margin-top: -40px;
@@ -153,7 +155,7 @@
                 Perubahan berhasil disimpan.
             </div>
 
-            <h3>Metode Masuk</h3>
+            <h3 style="text-align: center;">Metode Masuk</h3>
 
             @foreach ($datauser as $user)
             @if ($user->role == 'user2')
@@ -205,36 +207,3 @@
 
 </html>
 @endsection
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<hr>
-<a class="dropdown-item" aria-current="page" href="{{ route('AkunBK') }}" style="font-size: 14px;"><strong id="profile-username">{{ $datauser->firstWhere('role', 'admin')->username ?? 'Bimbingan Konseling' }}</strong></a>
-<hr>
-<a class="dropdown-item" aria-current="page" href="{{ route('AkunBK') }}" style="font-size: 14px;"><strong id="profile-username">{{ $datauser->firstWhere('role', 'user_edit')->username ?? 'Guru' }}</strong></a>
-<hr>
-<a class="dropdown-item" aria-current="page" href="{{ route('AkunBK') }}" style="font-size: 14px;"><strong id="profile-username">{{ $datauser->firstWhere('role', 'user1')->username ?? 'Kesiswaan' }}</strong></a>
-<hr>
-<a class="dropdown-item" aria-current="page" href="{{ route('AkunBK') }}" style="font-size: 14px;"><strong id="profile-username">{{ $datauser->firstWhere('role', 'user2')->username ?? 'OSIS' }}</strong></a>

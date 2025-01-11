@@ -1,125 +1,203 @@
-    /* Global Styling */
-    body {
-        font-size: 14px;
-        background-color: #f4f4f9;
-        margin: 0;
-        padding: 20px;
+/* Global Styling */
+body {
+    font-size: 13px;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 24px;
+    letter-spacing: 1px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Adjust spacing between buttons */
+    margin-bottom: 20px; /* Space below buttons */
+}
+
+.btn-primary {
+    padding: 10px 20px;
+    background-color: #388DD8;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    font-size: 15px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary:hover {
+    background-color: #286193;
+    transform: scale(1.05);
+    font-size: 15px;
+}
+
+.btn-primary-cari {
+    padding: 10px 13px;
+    background-color: #388DD8;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary-cari:hover {
+    background-color: #286193;
+    color: white;
+}
+
+/* Table Styling */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.table td {
+    padding: 12px 15px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    font-size: 12px;
+}
+
+.table th {
+    padding: 12px 15px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    font-size: 13px;
+    background-color: #388DD8;
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    vertical-align: middle; /* Center text vertically */
+    height: 50px; /* Optional: set a height to enhance vertical alignment */
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: #388DD8;
+}
+
+.table tbody tr:hover {
+    background-color: #388DD8;
+    transition: background-color 0.2s;
+}
+
+.left-align {
+    text-align: left;
+    padding-left: 15px;
+}
+
+/* Ordered List Styling */
+ol {
+    padding-left: 15px;
+    margin: 0;
+    text-align: left;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    /* Wrapper Styles */
+    .table-wrapper {
+        max-height: 400px;
+        overflow-y: auto;
+        border: 2px solid #388DD8;
+        border-radius: 6px;
+        width: 100%;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        background: #ffffff;
+        box-sizing: border-box;
+        margin: 20px 0;
     }
 
-    h1 {
-        text-align: center;
-        color: #333;
-        margin-bottom: 20px;
-        font-size: 24px;
-        letter-spacing: 1px;
-    }
-
-    .button-container {
-        display: flex;
-        justify-content: center;
-        gap: 20px; /* Adjust spacing between buttons */
-        margin-bottom: 20px; /* Space below buttons */
-    }
-
-    .btn-primary {
-        padding: 10px 20px;
-        background-color: #388DD8;
-        color: #fff;
-        text-align: center;
-        text-decoration: none;
-        border-radius: 5px;
-        font-weight: bold;
-        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-        transition: background-color 0.3s;
-    }
-    .btn-primary:hover {
-        background-color: #45a049;
-    }
-
-    /* Table Styling */
+    /* Table Styles */
     .table {
         width: 100%;
         border-collapse: collapse;
-        background-color: #fff;
-        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
-        border-radius: 8px;
-        overflow: hidden;
-        margin-bottom: 20px;
     }
 
     .table th, .table td {
-        padding: 12px 15px;
-        text-align: center;
-        border-bottom: 1px solid #ddd;
-        font-size: 13px;
+        font-size: 12px;
+        padding: 8px;
+        white-space: nowrap; /* Menghilangkan pembungkusan teks */
+        overflow: visible;   /* Memastikan teks terlihat jika lebih panjang */
+        text-overflow: clip; /* Tidak memotong teks */
+        max-width: none;     /* Menghilangkan batas lebar default */
     }
 
-    .table th {
-        background-color: #388DD8;
-        color: #fff;
-        font-weight: bold;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        vertical-align: middle; /* Center text vertically */
-        height: 50px; /* Optional: set a height to enhance vertical alignment */
+    /* Tombol agar responsif */
+    .btn-primary {
+        width: 100%;
+        font-size: 14px;
+    }
+}
+
+/* Modal Pencarian Styling */
+.modal-content {
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+/* Form Search Styling */
+.search-form {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    flex-wrap: nowrap; /* Menghindari elemen membungkus pada layar besar */
+}
+
+.search-form input,
+.search-form select,
+.search-form button {
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    width: 20%; /* Menyesuaikan lebar elemen supaya rapi dan rata */
+    margin-bottom: 10px;
+}
+
+.search-form button {
+    width: 100px; /* Ukuran tombol cari tetap */
+}
+
+/* Media Query untuk tampilan mobile */
+@media (max-width: 768px) {
+    .search-form {
+        flex-direction: column;
+        align-items: flex-start;
     }
 
-    .table tbody tr:nth-child(even) {
-        background-color: #388DD8;
+    .search-form input,
+    .search-form select,
+    .search-form button {
+        width: 100%;
     }
 
-    .table tbody tr:hover {
-        background-color: #388DD8;
-        transition: background-color 0.2s;
+    /* Memastikan input bulan memenuhi lebar pada tampilan mobile */
+    .search-form input[type="month"] {
+        width: 100%;
     }
 
-    .left-align {
-        text-align: left;
-        padding-left: 15px;
+    .search-form button {
+        margin-top: 10px;
     }
-
-    /* Ordered List Styling */
-    ol {
-        padding-left: 15px;
-        margin: 0;
-        text-align: left;
-    }
-
-    /* Responsive Design */
-    @media (max-width: 768px) {
-        /* Wrapper Styles */
-        .table-wrapper {
-            max-height: 400px;
-            overflow-y: auto;
-            border: 2px solid #388DD8;
-            border-radius: 6px;
-            width: 100%;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            background: #ffffff;
-            box-sizing: border-box;
-            margin: 20px 0;
-        }
-    
-        /* Table Styles */
-        .table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-    
-        .table th, .table td {
-            font-size: 12px;
-            padding: 8px;
-            white-space: nowrap; /* Menghilangkan pembungkusan teks */
-            overflow: visible;   /* Memastikan teks terlihat jika lebih panjang */
-            text-overflow: clip; /* Tidak memotong teks */
-            max-width: none;     /* Menghilangkan batas lebar default */
-        }
-    
-        /* Tombol agar responsif */
-        .btn-primary {
-            width: 100%;
-            font-size: 14px;
-        }
-    }
-    
-    
+}

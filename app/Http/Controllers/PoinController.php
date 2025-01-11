@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
- use App\Exports\PoinExportGabungan;
+ use App\Eksports\PoinEksportGabungan;
  use App\Imports\PoinImport;
  use App\Imports\PoinImportGabungan;
  use App\Imports\PoinImportNegatif;
  use App\Imports\PoinImportPositif;
- use App\Exports\PoinExportNegatif;
- use App\Exports\PoinExportPositif;
+ use App\Eksports\PoinEksportNegatif;
+ use App\Eksports\PoinEksportPositif;
  use Barryvdh\DomPDF\Facade\Pdf;
  use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -120,12 +120,12 @@ class PoinController extends Controller
     }
     
     
-    public function exportGabungan()
+    public function EksportGabungan()
     {
-        return Excel::download(new PoinExportGabungan, 'poin_positif_dan_negatif.xlsx');
+        return Excel::download(new PoinEksportGabungan, 'poin_positif_dan_negatif.xlsx');
     }
 
-    public function exportPDF()
+    public function EksportPDF()
     {
         
         // Ambil data dari model Anda

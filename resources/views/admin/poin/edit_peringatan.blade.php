@@ -10,18 +10,18 @@
     <body class="body">
        @extends('navbar/nav-Poin')
        
-       <p class="text-center">FORMULIR EDIT DATA POIN</p>
+       <p class="text-center">FORMULIR EDIT DATA PERINGATAN</p>
        <div class="container">
            <form method="POST" action="{{ route('poinUpdate', $poinPeringatan['id_peringatan']) }}">
               @csrf
               @method('PUT')
               <div class="form-row">
-                  <label for="peringatan">Peringatan</label>
+                  <label for="peringatan">Isi Peringatan</label>
                   <input type="text" name="peringatan" value="{{ $poinPeringatan['peringatan'] }}" class="form-control">
               </div>
 
                <div class="form-row">
-                   <label for="max_poin">Poin Lengkap</label>
+                   <label for="max_poin">Maksimal Poin Peringatan</label>
                    <input type="text" name="max_poin" value="{{ $poinPeringatan['max_poin'] }}" class="form-control">
                </div>
    

@@ -11,6 +11,8 @@ $datauser = DataUser::all();
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
+
     <style>
         /* NAVBAR-START */
 
@@ -148,7 +150,7 @@ div.offcanvas-header {
     .dropdown-item {
         color: white; /* Warna teks */
         transition: background-color 0.3s ease; /* Tambahkan transisi agar lebih halus */
-        padding: 15px 0;
+        padding: 15px 0 15px 16px;
     }
 
 /* Mengatur warna dropdown sesuai dengan warna "Pengaturan" */
@@ -174,6 +176,34 @@ div.offcanvas-header {
     border-top: black;
     border-bottom: black;
 }
+/* Default styling for logo */
+.navbar img {
+    width: 48px;
+    height: auto;
+    margin-left: auto;
+    margin-right: 55px;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .navbar img {
+        width: 36px; /* Smaller logo for mobile */
+        margin-right: 20px; /* Adjust margin for proper alignment */
+    }
+
+    .offcanvas-title {
+        font-size: 16px; /* Reduce font size for mobile */
+    }
+
+    .satu h5 {
+        margin-left: 10px; /* Adjust margin for better alignment */
+    }
+
+    .navbar-toggler {
+        margin-left: 10px; /* Adjust toggle button margin for better placement */
+    }
+}
+
     </style>
 </head>
 <body>
@@ -186,6 +216,7 @@ div.offcanvas-header {
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <h5 class="offcanvas-title" style="margin-left:20px;">PENGATURAN AKUN</h5>
+                <img src="{{ asset('storage/smkn1kawali.png') }}" alt="Logo" width="48px" class="ms-auto">
             </div>
             <div data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
                 <div class="offcanvas offcanvas-start" tabindex="-1" data-bs-backdrop="false" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
@@ -197,11 +228,19 @@ div.offcanvas-header {
                         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                             <hr>
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="{{ route('PoinSiswa') }}">Poin Siswa</a>
+                                <a class="nav-link" aria-current="page" href="{{ route('dashboard') }}"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a>
                             </li>
                             <hr>
                             <li class="nav-item">
-                                <a class="nav-link" href="/logout">Keluar Akun</a>
+                                <a class="nav-link" aria-current="page" href="{{ route('PoinSiswa') }}"><i class="bi bi-card-list me-2"></i>Poin Siswa</a>
+                            </li>
+                            <hr>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="{{ route('LaporanPoinSiswa') }}"><i class="bi bi-file-earmark-text me-2">Laporan</a>
+                            </li>
+                            <hr>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/logout"><i class="bi bi-box-arrow-right me-2"></i>Keluar Akun</a>
                             </li>
                             <hr>
                         </ul>
@@ -221,6 +260,7 @@ div.offcanvas-header {
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <h5 class="offcanvas-title" style="margin-left:20px;">PENGATURAN AKUN</h5>
+                <img src="{{ asset('storage/smkn1kawali.png') }}" alt="Logo" width="48px" class="ms-auto">
             </div>
             <div data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
                 <div class="offcanvas offcanvas-start" tabindex="-1" data-bs-backdrop="false" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
@@ -232,11 +272,15 @@ div.offcanvas-header {
                         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                             <hr>
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="{{ route('LaporanPoinSiswa') }}">Laporan Akhir Semester</a>
+                                <a class="nav-link" aria-current="page" href="{{ route('dashboard') }}"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a>
                             </li>
                             <hr>
                             <li class="nav-item">
-                                <a class="nav-link" href="/logout">Keluar Akun</a>
+                                <a class="nav-link" aria-current="page" href="{{ route('LaporanPoinSiswa') }}"><i class="bi bi-file-earmark-text me-2">Laporan</a>
+                            </li>
+                            <hr>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/logout"><i class="bi bi-box-arrow-right me-2"></i>Keluar Akun</a>
                             </li>
                             <hr>
                         </ul>
@@ -248,7 +292,6 @@ div.offcanvas-header {
     {{-- NAVBAR - END --}}
 
     @elseif (Auth::user()->role == 'user2')
-    
     {{-- NAVBAR - START --}}
     <nav class="navbar navbar-dark fixed-top">
         <div class="container-fluid">
@@ -257,6 +300,7 @@ div.offcanvas-header {
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <h5 class="offcanvas-title" style="margin-left:20px;">PENGATURAN AKUN</h5>
+                <img src="{{ asset('storage/smkn1kawali.png') }}" alt="Logo" width="48px" class="ms-auto">
             </div>
             <div data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
                 <div class="offcanvas offcanvas-start" tabindex="-1" data-bs-backdrop="false" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
@@ -268,11 +312,55 @@ div.offcanvas-header {
                         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                             <hr>
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="{{ route('LaporanPoinSiswa') }}">Laporan Akhir Semester</a>
+                                <a class="nav-link" aria-current="page" href="{{ route('dashboard') }}"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a>
                             </li>
                             <hr>
                             <li class="nav-item">
-                                <a class="nav-link" href="/logout">Keluar Akun</a>
+                                <a class="nav-link" aria-current="page" href="{{ route('LaporanPoinSiswa') }}"><i class="bi bi-file-earmark-text me-2">Laporan</a>
+                            </li>
+                            <hr>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/logout"><i class="bi bi-box-arrow-right me-2"></i>Keluar Akun</a>
+                            </li>
+                            <hr>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    {{-- NAVBAR - END --}}
+
+    @elseif (Auth::user()->role == 'user3')
+    {{-- NAVBAR - START --}}
+    <nav class="navbar navbar-dark fixed-top">
+        <div class="container-fluid">
+            <div class="satu">
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation" style="margin-left:5%;">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <h5 class="offcanvas-title" style="margin-left:20px;">PENGATURAN AKUN</h5>
+                <img src="{{ asset('storage/smkn1kawali.png') }}" alt="Logo" width="48px" class="ms-auto">
+            </div>
+            <div data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+                <div class="offcanvas offcanvas-start" tabindex="-1" data-bs-backdrop="false" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel" style="margin-left:5%;">Menu</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                            <hr>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="{{ route('dashboard') }}"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a>
+                            </li>
+                            <hr>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="{{ route('LaporanPoinSiswa') }}"><i class="bi bi-file-earmark-text me-2">Laporan</a>
+                            </li>
+                            <hr>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/logout"><i class="bi bi-box-arrow-right me-2"></i>Keluar Akun</a>
                             </li>
                             <hr>
                         </ul>
@@ -292,6 +380,7 @@ div.offcanvas-header {
                 <span class="navbar-toggler-icon"></span>
             </button>
             <h5 class="offcanvas-title" style="margin-left:5%;">PENGATURAN AKUN</h5>
+            <img src="{{ asset('storage/smkn1kawali.png') }}" alt="Logo" width="48px" class="ms-auto">
         </div>
         <div data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
             <div class="offcanvas offcanvas-start" tabindex="-1" data-bs-backdrop="false" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
@@ -301,43 +390,39 @@ div.offcanvas-header {
                 </div>
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
-                        <hr>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="{{ route('Siswa') }}">Data Siswa</a>
+                            <a class="nav-link" aria-current="page" href="{{ route('dashboard') }}"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a>
                         </li>
                         <hr>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="{{ route('PoinSiswa') }}">Poin Siswa</a>
+                            <a class="nav-link" aria-current="page" href="{{ route('Siswa') }}"><i class="bi bi-person-lines-fill me-2"></i>Data Siswa</a>
                         </li>
-                        <hr>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="{{ route('HalamanPoin') }}">Keterangan Dan Jenis Poin</a>
+                            <a class="nav-link" aria-current="page" href="{{ route('PoinSiswa') }}"><i class="bi bi-card-list me-2"></i>Poin Siswa</a>
                         </li>
-                        <hr>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="{{ route('LaporanPoinSiswa') }}">Laporan Akhir Semester</a>
+                            <a class="nav-link" aria-current="page" href="{{ route('HalamanPoin') }}"><i class="bi bi-info-circle me-2"></i>Keterangan Dan Jenis Poin</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{{ route('LaporanPoinSiswa') }}"><i class="bi bi-file-earmark-text me-2"></i>Laporan</a>
                         </li>
                         <hr>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Pengaturan
+                            <i class="bi bi-gear me-2"></i>Pengaturan
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
-                                <hr>
-                                <a class="dropdown-item" aria-current="page" href="{{ route('AkunBK') }}" style="font-size: 14px; font-weight: 300;"><strong id="profile-username">{{ $datauser->firstWhere('role', 'admin')->username ?? 'Bimbingan Konseling' }}</strong></a>
-                                <hr>
-                                <a class="dropdown-item" aria-current="page" href="{{ route('AkunGuru') }}" style="font-size: 14px; font-weight: 300;"><strong id="profile-username">{{ $datauser->firstWhere('role', 'user_edit')->username ?? 'Guru' }}</strong></a>
-                                <hr>
-                                <a class="dropdown-item" aria-current="page" href="{{ route('AkunOsis') }}" style="font-size: 14px; font-weight: 300;"><strong id="profile-username">{{ $datauser->firstWhere('role', 'user1')->username ?? 'Kesiswaan' }}</strong></a>
-                                <hr>
-                                <a class="dropdown-item" aria-current="page" href="{{ route('AkunKesiswaan') }}" style="font-size: 14px; font-weight: 300;"><strong id="profile-username">{{ $datauser->firstWhere('role', 'user2')->username ?? 'OSIS' }}</strong></a>
-                                <hr>
-                                <a class="dropdown-item" aria-current="page" href="{{ route('kelas') }}" style="font-size: 14px;" >Kelas</a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown" ><hr>
+                                <a class="dropdown-item" aria-current="page" href="{{ route('AkunBK') }}" style="font-size: 14px; width: 170px; font-weight: 300; margin-left: 7px;"><strong id="profile-username"><i class="bi bi-person" style="margin-right: 10px;"></i>{{ $datauser->firstWhere('role', 'admin')->username ?? 'Bimbingan Konseling' }}</strong></a>
+                                <a class="dropdown-item" aria-current="page" href="{{ route('AkunGuru') }}" style="font-size: 14px; width: 170px; font-weight: 300; margin-left: 7px;"><strong id="profile-username"><i class="bi bi-person" style="margin-right: 10px;"></i>{{ $datauser->firstWhere('role', 'user_edit')->username ?? 'Guru' }}</strong></a>
+                                <a class="dropdown-item" aria-current="page" href="{{ route('AkunKesiswaan') }}" style="font-size: 14px; width: 170px; font-weight: 300; margin-left: 7px;"><strong id="profile-username"><i class="bi bi-person" style="margin-right: 10px;"></i>{{ $datauser->firstWhere('role', 'user1')->username ?? 'Kesiswaan' }}</strong></a>
+                                <a class="dropdown-item" aria-current="page" href="{{ route('AkunOsis') }}" style="font-size: 14px; width: 170px; font-weight: 300; margin-left: 7px;"><strong id="profile-username"><i class="bi bi-person" style="margin-right: 10px;"></i>{{ $datauser->firstWhere('role', 'user2')->username ?? 'OSIS' }}</strong></a>
+                                <a class="dropdown-item" aria-current="page" href="{{ route('AkunSiswa') }}" style="font-size: 14px; width: 170px; font-weight: 300; margin-left: 7px;"><strong id="profile-username"><i class="bi bi-person" style="margin-right: 10px;"></i>{{ $datauser->firstWhere('role', 'user3')->username ?? 'Siswa' }}</strong></a><hr>
+                                <a class="dropdown-item" aria-current="page" href="{{ route('kelas') }}" style="font-size: 14px; width: 170px; margin-left: 7px;"><i class="bi bi-file-ruled" style="margin-right: 10px;"></i>Kelas</a>
                             </div>
                         </li>
                         <hr>
                         <li class="nav-item">
-                            <a class="nav-link" href="/logout">Keluar Akun</a>
+                            <a class="nav-link" href="/logout"><i class="bi bi-box-arrow-right me-2"></i>Keluar Akun</a>
                         </li>
                         <hr>
                     </ul>
@@ -348,8 +433,15 @@ div.offcanvas-header {
 </nav>
 {{-- NAVBAR - END --}}
 
+@else
+    {{-- Logout user if the role is not valid --}}
+    @php
+        Auth::logout();
+    @endphp
+    <script>
+        window.location.href = "{{ route('login') }}";
+    </script>
     @endif
-
         <!-- Main content -->
         <div class="content">
         @yield('content')

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Exports;
+namespace App\Eksports;
 
 use App\Models\DataKelas;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class KelasExport implements FromCollection, WithHeadings
+class KelasEksport implements FromCollection, WithHeadings
 {
     public function collection()
     {

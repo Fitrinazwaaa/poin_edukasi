@@ -22,7 +22,7 @@
     <thead>
         <tr>
             <th>Id Poin</th>
-            <th>Nama Poin</th>
+            <th>Keterangan Poin</th>
             <th>Poin</th>
             <th>Kategori Poin</th>
         </tr>

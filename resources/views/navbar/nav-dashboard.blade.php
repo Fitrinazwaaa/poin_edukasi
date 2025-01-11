@@ -123,8 +123,6 @@ div.offcanvas-header {
     font-weight: bold; /* Set bold to match h5 */
 }
 
-
-
 /* Hover effect on back button */
 .back-button button:hover {
     background: #388DD8;
@@ -145,31 +143,38 @@ div.offcanvas-header {
     /* Custom styling for dropdown items */
 
     
-    /* Mengatur tampilan item dropdown saat di-hover */
-    .dropdown-item {
-        color: white; /* Warna teks */
-        transition: background-color 0.3s ease; /* Tambahkan transisi agar lebih halus */
-        padding: 15px 0 15px 16px;
-    }
+/* Mengatur tampilan item dropdown saat di-hover */
+.dropdown-item {
+    color: white !important; /* Warna teks */
+    transition: background-color 0.3s ease !important; /* Tambahkan transisi agar lebih halus */
+    padding: 15px!important;
+}
 
 /* Mengatur warna dropdown sesuai dengan warna "Pengaturan" */
 .nav-item.dropdown:hover .dropdown-menu {
-    background-color: #1676ca;
+    background-color: #1676ca !important;
 }
 
 /* Warna default dropdown menu */
 .dropdown-menu {
-    background-color: #388DD8; /* Warna default */
-    border: none;
-    box-shadow: none;
+    background-color: #388DD8 !important; /* Warna default */
+    border: none !important;
+    box-shadow: none !important;
+    max-height: none !important; /* Pastikan menu dropdown tidak dibatasi tinggi */
+    overflow: hidden !important; /* Hilangkan scroll dari dropdown */
 }
+
 
 /* Item dropdown saat di-hover */
 .dropdown-item:hover {
-    background-color: transparent; /* Menghilangkan background hover */
-    color: white !important; /* Menjadikan teks hover tetap merah */
-    border-left: none !important;
-    margin-left: 16px !important;
+    background: #1676ca !important; /* Warna saat di-hover */
+    color: white !important;
+    border-style: solid !important;
+    border-color: #1676ca !important;
+    border-width: 10px !important;
+    border-right: black !important;
+    border-top: black !important;
+    border-bottom: black !important;
 }
 
 /* Mengatur ulang hover setelah klik */
@@ -217,7 +222,7 @@ div.offcanvas-header {
                     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation" style="margin-left:5%;">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <h5 class="offcanvas-title" style="margin-left:5%;">POIN SISWA SMKN 1 KAWALI</h5>
+                    <h5 class="offcanvas-title" style="margin-left:5%;">DASHBOARD</h5>
                     <img src="{{ asset('storage/smkn1kawali.png') }}" alt="Logo" width="48px" class="ms-auto">
                 </div>
                 <div data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
@@ -250,7 +255,7 @@ div.offcanvas-header {
                     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation" style="margin-left:5%;">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <h5 class="offcanvas-title" style="margin-left:5%;">POIN SISWA SMKN 1 KAWALI</h5>
+                    <h5 class="offcanvas-title" style="margin-left:5%;">DASHBOARD</h5>
                     <img src="{{ asset('storage/smkn1kawali.png') }}" alt="Logo" width="48px" class="ms-auto">
                 </div>
                 <div data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
@@ -282,7 +287,7 @@ div.offcanvas-header {
                     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation" style="margin-left:5%;">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <h5 class="offcanvas-title" style="margin-left:5%;">POIN SISWA SMKN 1 KAWALI</h5>
+                    <h5 class="offcanvas-title" style="margin-left:5%;">DASHBOARD</h5>
                     <img src="{{ asset('storage/smkn1kawali.png') }}" alt="Logo" width="48px" class="ms-auto">
                 </div>
                 <div data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
@@ -314,7 +319,7 @@ div.offcanvas-header {
                     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation" style="margin-left:5%;">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <h5 class="offcanvas-title" style="margin-left:5%;">POIN SISWA SMKN 1 KAWALI</h5>
+                    <h5 class="offcanvas-title" style="margin-left:5%;">DASHBOARD</h5>
                     <img src="{{ asset('storage/smkn1kawali.png') }}" alt="Logo" width="48px" class="ms-auto">
                 </div>
                 <div data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
@@ -346,7 +351,7 @@ div.offcanvas-header {
                     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation" style="margin-left:5%;">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <h5 class="offcanvas-title" style="margin-left:5%;">POIN SISWA SMKN 1 KAWALI</h5>
+                    <h5 class="offcanvas-title" style="margin-left:5%;">DASHBOARD</h5>
                     <img src="{{ asset('storage/smkn1kawali.png') }}" alt="Logo" width="48px" class="ms-auto">
                 </div>
                 <div data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
@@ -429,7 +434,7 @@ div.offcanvas-header {
         window.location.href = "{{ route('login') }}";
     </script>
     @endif
-    
+
         <!-- Main content -->
         <div class="content">
         @yield('content')
@@ -449,6 +454,6 @@ div.offcanvas-header {
         });
     </script>
     <script src="{{ asset('js/app.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybY8vUPg2UODf0p5c1bS1VRSMXh0ZW5eP8EMD/SN7pC38j0r1" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-+ojg32upP8KXy0jK12KV9JAF1Q0CMLuIm/XOZ1PbiRTQG0mGlv7+WZy4uK4c20h3" crossorigin="anonymous"></script></body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
 </html>

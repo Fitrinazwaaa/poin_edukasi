@@ -97,8 +97,8 @@
                         </li>
                         <hr>
                         <li>
-                            <a class="dropdown-item d-flex align-items-center" href="{{ route('SiswaExport') }}" style="font-size: 14px;">
-                                <i class="fas fa-file-excel me-2 text-success "></i> Export Excel
+                            <a class="dropdown-item d-flex align-items-center" href="{{ route('SiswaEksport') }}" style="font-size: 14px;">
+                                <i class="fas fa-file-excel me-2 text-success "></i> Eksport Excel
                             </a>
                         </li>
                         <hr>
@@ -173,11 +173,11 @@
                                         </select>
                                         
                                         <select name="jurusan" id="jurusan" class="form-control" style="margin-right:30px;" disabled>
-                                            <option value="" style="color: #ccc;" disabled selected>Pilih Jurusan</option>
+                                            <option value="" style="color: #ccc;" disabled selected>Pilih Konsentrasi Keahlian</option>
                                         </select>
                                         
                                         <select name="jurusan_ke" id="jurusan_ke" class="form-control" disabled>
-                                            <option value="" style="color: #ccc;" disabled selected>Pilih Jurusan ke</option>
+                                            <option value="" style="color: #ccc;" disabled selected>Pilih Konsentrasi Keahlian ke</option>
                                         </select>
                                     </div>
 
@@ -217,8 +217,8 @@
                                             <th>NIS</th>
                                             <th>Nama</th>
                                             <th>Jenis<br>Kelamin</th>
-                                            <th>Kelas</th>
-                                            <th>Angkatan (Tahun)</th>
+                                            <th>Kelas Konsentrasi Keahlian</th>
+                                            <th>Angkatan (Tahun Masuk)</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -326,9 +326,9 @@
                     type: 'GET',
                     success: function(data) {
                         $('#jurusan').empty();
-                        $('#jurusan').append('<option value="" disabled selected>Pilih Jurusan</option>');
+                        $('#jurusan').append('<option value="" disabled selected>Pilih Konsentrasi Keahlian</option>');
                         $('#jurusan_ke').empty();
-                        $('#jurusan_ke').append('<option value="" disabled selected>Pilih Jurusan ke</option>');
+                        $('#jurusan_ke').append('<option value="" disabled selected>Pilih Konsentrasi Keahlian ke</option>');
 
                         var jurusanSet = new Set();
                         $.each(data, function(index, jurusan) {
