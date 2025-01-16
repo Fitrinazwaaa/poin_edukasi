@@ -8,10 +8,42 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
-
+    <style>
+        .error-message {
+            font-size: 13px;
+            color: #ff0000; /* Merah untuk error */
+            margin-top: 10px;
+            white-space: pre-line; /* Agar newline ditampilkan dengan benar */
+        }
+    </style>
 </head>
 
 <body>
+    @if (Session::has('error'))
+    <div class="alert alert-danger alert-dismissible fade show error-message" role="alert">
+        {{ Session::get('error') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
+    @if(session('message'))
+        <div id="popupAlert" class="alert alert-success alert-popup">
+            {!! session('message') !!}
+        </div>
+    @endif
+
+    <script>
+        // Menutup pop-up alert secara otomatis setelah 2 detik
+        document.addEventListener("DOMContentLoaded", function() {
+            setTimeout(function() {
+                const alert = document.getElementById("popupAlert");
+                if (alert) {
+                    alert.style.opacity = '0';
+                    setTimeout(() => alert.remove(), 500); // Hapus elemen setelah animasi selesai
+                }
+            }, 4000); // 4000 ms = 4 detik
+        });
+    </script>
+
     @extends('navbar/nav-Poin')
     <!-- FORMULIR TAMBAH DATA START -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

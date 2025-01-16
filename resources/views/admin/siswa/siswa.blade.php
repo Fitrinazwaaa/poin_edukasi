@@ -8,7 +8,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <style>
-                button.btn-outline-secondary:hover{
+        .error-message {
+            font-size: 13px;
+            color: #ff0000; /* Merah untuk error */
+            margin-top: 10px;
+            white-space: pre-line; /* Agar newline ditampilkan dengan benar */
+        }
+        button.btn-outline-secondary:hover{
             color: black; /* Mengubah warna teks saat hover */
             background-color: #fcfc38; /* Pastikan latar belakang tetap kuning */
             border-color: #fcfc38; /* Pastikan border tetap kuning saat hover */
@@ -16,6 +22,31 @@
     </style>
 </head>
 <body>
+    @if (Session::has('error'))
+    <div class="alert alert-danger alert-dismissible fade show error-message" role="alert">
+        {{ Session::get('error') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
+    @if(session('message'))
+        <div id="popupAlert" class="alert alert-success alert-popup">
+            {!! session('message') !!}
+        </div>
+    @endif
+
+    <script>
+        // Menutup pop-up alert secara otomatis setelah 2 detik
+        document.addEventListener("DOMContentLoaded", function() {
+            setTimeout(function() {
+                const alert = document.getElementById("popupAlert");
+                if (alert) {
+                    alert.style.opacity = '0';
+                    setTimeout(() => alert.remove(), 500); // Hapus elemen setelah animasi selesai
+                }
+            }, 4000); // 4000 ms = 4 detik
+        });
+    </script>
+    
     @extends('navbar/nav-siswa')
     @if(session('warning'))
         <div class="alert alert-warning">
@@ -173,11 +204,11 @@
                                         </select>
                                         
                                         <select name="jurusan" id="jurusan" class="form-control" style="margin-right:30px;" disabled>
-                                            <option value="" style="color: #ccc;" disabled selected>Pilih Konsentrasi Keahlian</option>
+                                            <option value="" style="color: #ccc;" disabled selected>Konsentrasi Keahlian</option>
                                         </select>
                                         
                                         <select name="jurusan_ke" id="jurusan_ke" class="form-control" disabled>
-                                            <option value="" style="color: #ccc;" disabled selected>Pilih Konsentrasi Keahlian ke</option>
+                                            <option value="" style="color: #ccc;" disabled selected>Konsentrasi Keahlian ke</option>
                                         </select>
                                     </div>
 
@@ -326,9 +357,9 @@
                     type: 'GET',
                     success: function(data) {
                         $('#jurusan').empty();
-                        $('#jurusan').append('<option value="" disabled selected>Pilih Konsentrasi Keahlian</option>');
+                        $('#jurusan').append('<option value="" disabled selected>Konsentrasi Keahlian</option>');
                         $('#jurusan_ke').empty();
-                        $('#jurusan_ke').append('<option value="" disabled selected>Pilih Konsentrasi Keahlian ke</option>');
+                        $('#jurusan_ke').append('<option value="" disabled selected>Konsentrasi Keahlian ke</option>');
 
                         var jurusanSet = new Set();
                         $.each(data, function(index, jurusan) {
@@ -357,7 +388,7 @@
                     type: 'GET',
                     success: function(data) {
                         $('#jurusan_ke').empty();
-                        $('#jurusan_ke').append('<option value="" disabled selected>Pilih Jurusan ke</option>');
+                        $('#jurusan_ke').append('<option value="" disabled selected>Konsentrasi Keahlian ke</option>');
 
                         $.each(data, function(index, jurusanKe) {
                             $('#jurusan_ke').append('<option value="'+ jurusanKe.jurusan_ke +'">'+ jurusanKe.jurusan_ke +'</option>');

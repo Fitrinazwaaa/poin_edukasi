@@ -7,10 +7,42 @@
     <link rel="stylesheet" href="{{ asset('css/admin/siswa/siswa.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        .error-message {
+            font-size: 13px;
+            color: #ff0000; /* Merah untuk error */
+            margin-top: 10px;
+            white-space: pre-line; /* Agar newline ditampilkan dengan benar */
+        }
+    </style>
 </head>
 <body>
-    @extends('navbar/nav-kelas')
+    @if (Session::has('error'))
+    <div class="alert alert-danger alert-dismissible fade show error-message" role="alert">
+        {{ Session::get('error') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
+    @if(session('message'))
+        <div id="popupAlert" class="alert alert-success alert-popup">
+            {!! session('message') !!}
+        </div>
+    @endif
 
+    <script>
+        // Menutup pop-up alert secara otomatis setelah 2 detik
+        document.addEventListener("DOMContentLoaded", function() {
+            setTimeout(function() {
+                const alert = document.getElementById("popupAlert");
+                if (alert) {
+                    alert.style.opacity = '0';
+                    setTimeout(() => alert.remove(), 500); // Hapus elemen setelah animasi selesai
+                }
+            }, 4000); // 4000 ms = 4 detik
+        });
+    </script>
+
+    @extends('navbar/nav-kelas')
     <!-- Confirmation Modal -->
     <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -20,7 +52,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p style="font-size: 13px;">Anda yakin ingin menghapus siswa yang dipilih?</p>
+                    <p style="font-size: 13px;">Anda yakin ingin menghapus kelas yang dipilih?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-dua" data-bs-dismiss="modal">Batal</button>

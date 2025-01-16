@@ -28,10 +28,10 @@
                     @endforeach
                 </select>
                 <select name="jurusan" id="jurusan" class="form-control" style="margin-right:30px;" disabled>
-                    <option value="" style="color: #ccc;" disabled selected>Jurusan</option>
+                    <option value="" style="color: #ccc;" disabled selected>Konsentrasi Keahlian</option>
                 </select>
                 <select name="jurusan_ke" id="jurusan_ke" class="form-control" disabled>
-                    <option value="" disabled selected>Jurusan ke</option>
+                    <option value="" disabled selected>Konsentrasi Keahlian ke</option>
                 </select>
             </div>
 
@@ -92,9 +92,9 @@ $('#tingkatan').on('change', function() {
                 console.log(data); // Debugging: lihat data yang diterima
 
                 $('#jurusan').empty();
-                $('#jurusan').append('<option value="" disabled selected>Pilih Jurusan</option>');
+                $('#jurusan').append('<option value="" disabled selected>Konsentrasi Keahlian</option>');
                 $('#jurusan_ke').empty();
-                $('#jurusan_ke').append('<option value="" disabled selected>Pilih Jurusan ke</option>');
+                $('#jurusan_ke').append('<option value="" disabled selected>Konsentrasi Keahlian Ke</option>');
 
                 // Tambahkan jurusan yang diterima dari server
                 $.each(data, function(index, jurusan) {
@@ -117,7 +117,7 @@ $('#jurusan').on('change', function() {
             type: 'GET',
             success: function(data) {
                 $('#jurusan_ke').empty();
-                $('#jurusan_ke').append('<option value="" disabled selected>Pilih Jurusan ke</option>');
+                $('#jurusan_ke').append('<option value="" disabled selected>Konsentrasi Keahlian Ke</option>');
 
                 // Pastikan data yang diterima dalam format array objek
                 $.each(data, function(index, jurusanKe) {

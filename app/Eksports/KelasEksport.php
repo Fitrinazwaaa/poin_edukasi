@@ -16,12 +16,12 @@ class KelasEksport implements FromCollection, WithHeadings
     public function headings(): array
     {
         return [
-            'id',
-            'tahun_angkatan',
-            'jurusan',
-            'jurusan_ke',
-            'created_at',
-            'updated_at',
+            'ID',
+            'Tahun Angkatan',
+            'Konsentrasi Keahlian',
+            'Konsentrasi Keahlian Ke',
+            'Dibuat (kosongkan)',
+            'Diperbaharui (kosongkan)',
         ];
     }
 }

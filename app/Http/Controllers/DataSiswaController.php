@@ -145,7 +145,7 @@ class DataSiswaController extends Controller
     }
 
     
-    public function getJurusanDataSiswa($tahun_angkatan)
+    public function getjurusanDataSiswa($tahun_angkatan)
     {
         $jurusan = DB::table('data_kelas')
                      ->where('tahun_angkatan', $tahun_angkatan)
@@ -155,7 +155,7 @@ class DataSiswaController extends Controller
     }
     
     
-    public function getJurusanKeDataSiswa($tahun_angkatan, $jurusan)
+    public function getjurusanKeDataSiswa($tahun_angkatan, $jurusan)
     {
         // Ambil data jurusan_ke yang unik berdasarkan tahun angkatan dan jurusan
         $data = DB::table('data_kelas')
@@ -176,10 +176,15 @@ class DataSiswaController extends Controller
 
     public function import(Request $request)
     {
-        Excel::import(new SiswaImport, $request->file('file'));
-    
-        return redirect()->back()->with('success', 'Data siswa berhasil diimpor!');
-    }
+        try {
+            Excel::import(new SiswaImport, $request->file('file'));
+            return redirect()->back()
+                             ->with('success', 'Data siswa berhasil diimpor!');
+        } catch (\Exception $e) {
+            return redirect()->back()
+                             ->with('error', 'Terjadi kesalahan saat impor :  ' . $e->getMessage());
+        }
+    }    
 
 
     public function replace(Request $request, $nis)

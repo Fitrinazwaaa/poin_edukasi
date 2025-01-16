@@ -109,16 +109,15 @@ class PoinController extends Controller
     
     public function importExcel(Request $request)
     {
-        $request->validate([
-            'file' => 'required|mimes:xlsx,csv,xls',
-        ]);
-
-        // Mengimpor file yang diunggah
-        Excel::import(new PoinImportGabungan, $request->file('file'));
-
-        return redirect()->back()->with('success', 'Data Poin berhasil diimpor.');
+        try {
+            Excel::import(new PoinImportGabungan, $request->file('file'));
+            return redirect()->back()
+                             ->with('success', 'Data siswa berhasil diimpor!');
+        } catch (\Exception $e) {
+            return redirect()->back()
+                             ->with('error', 'Terjadi kesalahan saat impor :  ' . $e->getMessage());
+        }
     }
-    
     
     public function EksportGabungan()
     {
@@ -127,7 +126,6 @@ class PoinController extends Controller
 
     public function EksportPDF()
     {
-        
         // Ambil data dari model Anda
         $dataPoinPositif = DataPoinPositif::all(); // Data poin positif
         $dataPoinNegatif = DataPoinNegatif::all(); // Data poin negatif
@@ -141,6 +139,4 @@ class PoinController extends Controller
         // Kembalikan file PDF untuk diunduh
         return $pdf->download('poin.pdf');
     }
-    
-    
 }

@@ -22,7 +22,7 @@
                 </div>
 
                 <div class="form-row">
-                    <label for="jurusan">Jurusan</label>
+                    <label for="jurusan">jurusan</label>
                     <input type="text" name="jurusan" class="form-control" required>
                 </div>
 

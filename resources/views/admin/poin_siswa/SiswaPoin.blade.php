@@ -88,7 +88,7 @@
                     <!-- Search Bar -->
                     <div class="container mt-7">
                         <div class="input-group position-relative" style="border-radius: 5px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                            <input type="text" class="form-control" id="searchInput" placeholder="Cari berdasarkan NIS, Nama, atau Kelas (Tingkatan, Jurusan, Jurusan ke)" aria-label="Search" style="border-color: #fcfc38; font-size: 12px; margin-bottom: 0;">
+                            <input type="text" class="form-control" id="searchInput" placeholder="Cari berdasarkan NIS, Nama, atau Kelas (Tingkatan, jurusan, jurusan ke)" aria-label="Search" style="border-color: #fcfc38; font-size: 12px; margin-bottom: 0;">
                             <button class="btn btn-outline-secondary" type="button" onclick="filterTable()" style=" border-width: 2px 0; border-style: solid; border-color: #fcfc38; border-radius: 0 5px 5px 0; background-color: #fcfc38; font-size: 13px; color: black; font-weight: 600;">Cari</button>
                             <span class="clear-input position-absolute" onclick="clearSearch()" style="right: 60px; top: 5px; display: none; cursor: pointer;">
                                 <i class="fas fa-times" style="font-size: 18px; color: #dc3545;"></i>
@@ -99,7 +99,7 @@
                 <div class="tambah_dan_hapus">
                     <button class="tambah" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-plus"></i>Tambahkan</button>
                 </div>
-                
+
                 <!-- FORMULIR TAMBAH DATA START -->
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-xl">
@@ -137,7 +137,7 @@
                                         <div class="form-row">
                                             <label for="nama" class="form-label">Nama</label>
                                             <select name="nama" id="nama" class="form-control" disabled>
-                                                <option value="" disabled selected>Nama siswa</option>
+                                                <option value="" disabled selected>Nama</option>
                                             </select>
                                         </div>
 
@@ -186,7 +186,30 @@
                 <!-- FORMULIR TAMBAH DATA END -->
             </div>
             
-        
+            @if(session('error'))
+                <div id="popupAlert" class="alert alert-danger alert-popup">
+                    {{ session('error') }}
+                </div>
+            @endif
+            @if(session('success'))
+                <div id="popupAlert" class="alert alert-success alert-popup">
+                    {!! session('success') !!}
+                </div>
+            @endif
+
+            <script>
+                // Menutup pop-up alert secara otomatis setelah 2 detik
+                document.addEventListener("DOMContentLoaded", function() {
+                    setTimeout(function() {
+                        const alert = document.getElementById("popupAlert");
+                        if (alert) {
+                            alert.style.opacity = '0';
+                            setTimeout(() => alert.remove(), 500); // Hapus elemen setelah animasi selesai
+                        }
+                    }, 10000); // 10000 ms = 10 detik
+                });
+            </script>
+
             <div class="table-wrapper">
                 <table>
                     <thead>
@@ -237,30 +260,6 @@
             // Pastikan event listener ditambahkan jika ada perubahan input pada tipe poin
             document.querySelectorAll('input[name="tipe_poin"]').forEach(input => {
                 input.addEventListener('change', toggleFotoInput);
-            });
-        </script>
-
-        @if(session('error'))
-            <div id="popupAlert" class="alert alert-danger alert-popup">
-                {{ session('error') }}
-            </div>
-        @endif
-        @if(session('success'))
-            <div id="popupAlert" class="alert alert-success alert-popup">
-                {!! session('success') !!}
-            </div>
-        @endif
-
-        <script>
-            // Menutup pop-up alert secara otomatis setelah 2 detik
-            document.addEventListener("DOMContentLoaded", function() {
-                setTimeout(function() {
-                    const alert = document.getElementById("popupAlert");
-                    if (alert) {
-                        alert.style.opacity = '0';
-                        setTimeout(() => alert.remove(), 500); // Hapus elemen setelah animasi selesai
-                    }
-                }, 10000); // 10000 ms = 10 detik
             });
         </script>
 
@@ -469,7 +468,7 @@
                     <!-- Search Bar -->
                     <div class="container mt-7">
                         <div class="input-group position-relative" style="border-radius: 5px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                            <input type="text" class="form-control" id="searchInput" placeholder="Cari berdasarkan NIS, Nama, atau Kelas (Tingkatan, Jurusan, Jurusan ke)" aria-label="Search" style="border-color: #fcfc38; font-size: 12px; margin-bottom: 0;">
+                            <input type="text" class="form-control" id="searchInput" placeholder="Cari berdasarkan NIS, Nama, atau Kelas (Tingkatan, jurusan, jurusan ke)" aria-label="Search" style="border-color: #fcfc38; font-size: 12px; margin-bottom: 0;">
                             <button class="btn btn-outline-secondary" type="button" onclick="filterTable()" style=" border-width: 2px 0; border-style: solid; border-color: #fcfc38; border-radius: 0 5px 5px 0; background-color: #fcfc38; font-size: 13px; color: black; font-weight: 600;">Cari</button>
                             <span class="clear-input position-absolute" onclick="clearSearch()" style="right: 60px; top: 5px; display: none; cursor: pointer;">
                                 <i class="fas fa-times" style="font-size: 18px; color: #dc3545;"></i>
@@ -518,7 +517,7 @@
                                         <div class="form-row">
                                             <label for="nama" class="form-label">Nama</label>
                                             <select name="nama" id="nama" class="form-control" disabled>
-                                                <option value="" disabled selected>Nama siswa</option>
+                                                <option value="" disabled selected>Nama</option>
                                             </select>
                                         </div>
 
@@ -567,7 +566,30 @@
                 <!-- FORMULIR TAMBAH DATA END -->
             </div>
             
-        
+            @if(session('error'))
+                <div id="popupAlert" class="alert alert-danger alert-popup">
+                    {{ session('error') }}
+                </div>
+            @endif
+            @if(session('success'))
+                <div id="popupAlert" class="alert alert-success alert-popup">
+                    {!! session('success') !!}
+                </div>
+            @endif
+
+            <script>
+                // Menutup pop-up alert secara otomatis setelah 2 detik
+                document.addEventListener("DOMContentLoaded", function() {
+                    setTimeout(function() {
+                        const alert = document.getElementById("popupAlert");
+                        if (alert) {
+                            alert.style.opacity = '0';
+                            setTimeout(() => alert.remove(), 500); // Hapus elemen setelah animasi selesai
+                        }
+                    }, 10000); // 10000 ms = 10 detik
+                });
+            </script>
+
             <div class="table-wrapper">
                 <table>
                     <thead>
@@ -618,30 +640,6 @@
             // Pastikan event listener ditambahkan jika ada perubahan input pada tipe poin
             document.querySelectorAll('input[name="tipe_poin"]').forEach(input => {
                 input.addEventListener('change', toggleFotoInput);
-            });
-        </script>
-
-        @if(session('error'))
-            <div id="popupAlert" class="alert alert-danger alert-popup">
-                {{ session('error') }}
-            </div>
-        @endif
-        @if(session('success'))
-            <div id="popupAlert" class="alert alert-success alert-popup">
-                {!! session('success') !!}
-            </div>
-        @endif
-
-        <script>
-            // Menutup pop-up alert secara otomatis setelah 2 detik
-            document.addEventListener("DOMContentLoaded", function() {
-                setTimeout(function() {
-                    const alert = document.getElementById("popupAlert");
-                    if (alert) {
-                        alert.style.opacity = '0';
-                        setTimeout(() => alert.remove(), 500); // Hapus elemen setelah animasi selesai
-                    }
-                }, 10000); // 10000 ms = 10 detik
             });
         </script>
 
@@ -850,7 +848,7 @@
                     <!-- Search Bar -->
                     <div class="container mt-7">
                         <div class="input-group position-relative" style="border-radius: 5px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                            <input type="text" class="form-control" id="searchInput" placeholder="Cari berdasarkan NIS, Nama, atau Kelas (Tingkatan, Jurusan, Jurusan ke)" aria-label="Search" style="border-color: #fcfc38; font-size: 12px; margin-bottom: 0;">
+                            <input type="text" class="form-control" id="searchInput" placeholder="Cari berdasarkan NIS, Nama, atau Kelas (Tingkatan, jurusan, jurusan ke)" aria-label="Search" style="border-color: #fcfc38; font-size: 12px; margin-bottom: 0;">
                             <button class="btn btn-outline-secondary" type="button" onclick="filterTable()" style=" border-width: 2px 0; border-style: solid; border-color: #fcfc38; border-radius: 0 5px 5px 0; background-color: #fcfc38; font-size: 13px; color: black; font-weight: 600;">Cari</button>
                             <span class="clear-input position-absolute" onclick="clearSearch()" style="right: 60px; top: 5px; display: none; cursor: pointer;">
                                 <i class="fas fa-times" style="font-size: 18px; color: #dc3545;"></i>
@@ -899,7 +897,7 @@
                                         <div class="form-row">
                                             <label for="nama" class="form-label">Nama</label>
                                             <select name="nama" id="nama" class="form-control" disabled>
-                                                <option value="" disabled selected>Nama siswa</option>
+                                                <option value="" disabled selected>Nama</option>
                                             </select>
                                         </div>
 
@@ -948,7 +946,30 @@
                 <!-- FORMULIR TAMBAH DATA END -->
             </div>
             
-        
+            @if(session('error'))
+                <div id="popupAlert" class="alert alert-danger alert-popup">
+                    {{ session('error') }}
+                </div>
+            @endif
+            @if(session('success'))
+                <div id="popupAlert" class="alert alert-success alert-popup">
+                    {!! session('success') !!}
+                </div>
+            @endif
+
+            <script>
+                // Menutup pop-up alert secara otomatis setelah 2 detik
+                document.addEventListener("DOMContentLoaded", function() {
+                    setTimeout(function() {
+                        const alert = document.getElementById("popupAlert");
+                        if (alert) {
+                            alert.style.opacity = '0';
+                            setTimeout(() => alert.remove(), 500); // Hapus elemen setelah animasi selesai
+                        }
+                    }, 10000); // 10000 ms = 10 detik
+                });
+            </script>
+
             <div class="table-wrapper">
                 <table>
                     <thead>
@@ -999,30 +1020,6 @@
             // Pastikan event listener ditambahkan jika ada perubahan input pada tipe poin
             document.querySelectorAll('input[name="tipe_poin"]').forEach(input => {
                 input.addEventListener('change', toggleFotoInput);
-            });
-        </script>
-
-        @if(session('error'))
-            <div id="popupAlert" class="alert alert-danger alert-popup">
-                {{ session('error') }}
-            </div>
-        @endif
-        @if(session('success'))
-            <div id="popupAlert" class="alert alert-success alert-popup">
-                {!! session('success') !!}
-            </div>
-        @endif
-
-        <script>
-            // Menutup pop-up alert secara otomatis setelah 2 detik
-            document.addEventListener("DOMContentLoaded", function() {
-                setTimeout(function() {
-                    const alert = document.getElementById("popupAlert");
-                    if (alert) {
-                        alert.style.opacity = '0';
-                        setTimeout(() => alert.remove(), 500); // Hapus elemen setelah animasi selesai
-                    }
-                }, 10000); // 10000 ms = 10 detik
             });
         </script>
 
@@ -1231,7 +1228,7 @@
                     <!-- Search Bar -->
                     <div class="container mt-7">
                         <div class="input-group position-relative" style="border-radius: 5px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                            <input type="text" class="form-control" id="searchInput" placeholder="Cari berdasarkan NIS, Nama, atau Kelas (Tingkatan, Jurusan, Jurusan ke)" aria-label="Search" style="border-color: #fcfc38; font-size: 12px; margin-bottom: 0;">
+                            <input type="text" class="form-control" id="searchInput" placeholder="Cari berdasarkan NIS, Nama, atau Kelas (Tingkatan, jurusan, jurusan ke)" aria-label="Search" style="border-color: #fcfc38; font-size: 12px; margin-bottom: 0;">
                             <button class="btn btn-outline-secondary" type="button" onclick="filterTable()" style=" border-width: 2px 0; border-style: solid; border-color: #fcfc38; border-radius: 0 5px 5px 0; background-color: #fcfc38; font-size: 13px; color: black; font-weight: 600;">Cari</button>
                             <span class="clear-input position-absolute" onclick="clearSearch()" style="right: 60px; top: 5px; display: none; cursor: pointer;">
                                 <i class="fas fa-times" style="font-size: 18px; color: #dc3545;"></i>
@@ -1242,7 +1239,7 @@
                 <div class="tambah_dan_hapus">
                     <button class="tambah" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-plus"></i>Tambahkan</button>
                 </div>
-                
+            
                 <!-- FORMULIR TAMBAH DATA START -->
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-xl">
@@ -1280,7 +1277,7 @@
                                         <div class="form-row">
                                             <label for="nama" class="form-label">Nama</label>
                                             <select name="nama" id="nama" class="form-control" disabled>
-                                                <option value="" disabled selected>Nama siswa</option>
+                                                <option value="" disabled selected>Nama</option>
                                             </select>
                                         </div>
 
@@ -1329,7 +1326,30 @@
                 <!-- FORMULIR TAMBAH DATA END -->
             </div>
             
-        
+            @if(session('error'))
+                <div id="popupAlert" class="alert alert-danger alert-popup">
+                    {{ session('error') }}
+                </div>
+            @endif
+            @if(session('success'))
+                <div id="popupAlert" class="alert alert-success alert-popup">
+                    {!! session('success') !!}
+                </div>
+            @endif
+
+            <script>
+                // Menutup pop-up alert secara otomatis setelah 2 detik
+                document.addEventListener("DOMContentLoaded", function() {
+                    setTimeout(function() {
+                        const alert = document.getElementById("popupAlert");
+                        if (alert) {
+                            alert.style.opacity = '0';
+                            setTimeout(() => alert.remove(), 500); // Hapus elemen setelah animasi selesai
+                        }
+                    }, 10000); // 10000 ms = 10 detik
+                });
+            </script>
+
             <div class="table-wrapper">
                 <table>
                     <thead>
@@ -1380,30 +1400,6 @@
             // Pastikan event listener ditambahkan jika ada perubahan input pada tipe poin
             document.querySelectorAll('input[name="tipe_poin"]').forEach(input => {
                 input.addEventListener('change', toggleFotoInput);
-            });
-        </script>
-
-        @if(session('error'))
-            <div id="popupAlert" class="alert alert-danger alert-popup">
-                {{ session('error') }}
-            </div>
-        @endif
-        @if(session('success'))
-            <div id="popupAlert" class="alert alert-success alert-popup">
-                {!! session('success') !!}
-            </div>
-        @endif
-
-        <script>
-            // Menutup pop-up alert secara otomatis setelah 2 detik
-            document.addEventListener("DOMContentLoaded", function() {
-                setTimeout(function() {
-                    const alert = document.getElementById("popupAlert");
-                    if (alert) {
-                        alert.style.opacity = '0';
-                        setTimeout(() => alert.remove(), 500); // Hapus elemen setelah animasi selesai
-                    }
-                }, 10000); // 10000 ms = 10 detik
             });
         </script>
 
@@ -1695,7 +1691,7 @@
                     <!-- Search Bar -->
                     <div class="container mt-7">
                         <div class="input-group position-relative" style="border-radius: 5px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                            <input type="text" class="form-control" id="searchInput" placeholder="Cari berdasarkan NIS, Nama, atau Kelas (Tingkatan, Jurusan, Jurusan ke)" aria-label="Search" style="border-color: #fcfc38; font-size: 12px; margin-bottom: 0;">
+                            <input type="text" class="form-control" id="searchInput" placeholder="Cari berdasarkan NIS, Nama, atau Kelas (Tingkatan, jurusan, jurusan ke)" aria-label="Search" style="border-color: #fcfc38; font-size: 12px; margin-bottom: 0;">
                             <button class="btn btn-outline-secondary" type="button" onclick="filterTable()" style=" border-width: 2px 0; border-style: solid; border-color: #fcfc38; border-radius: 0 5px 5px 0; background-color: #fcfc38; font-size: 13px; color: black; font-weight: 600;">Cari</button>
                             <span class="clear-input position-absolute" onclick="clearSearch()" style="right: 60px; top: 5px; display: none; cursor: pointer;">
                                 <i class="fas fa-times" style="font-size: 18px; color: #dc3545;"></i>
@@ -1744,7 +1740,7 @@
                                         <div class="form-row">
                                             <label for="nama" class="form-label">Nama</label>
                                             <select name="nama" id="nama" class="form-control" disabled>
-                                                <option value="" disabled selected>Nama siswa</option>
+                                                <option value="" disabled selected>Nama</option>
                                             </select>
                                         </div>
 
@@ -1793,7 +1789,30 @@
                 <!-- FORMULIR TAMBAH DATA END -->
             </div>
             
-        
+            @if(session('error'))
+                <div id="popupAlert" class="alert alert-danger alert-popup">
+                    {{ session('error') }}
+                </div>
+            @endif
+            @if(session('success'))
+                <div id="popupAlert" class="alert alert-success alert-popup">
+                    {!! session('success') !!}
+                </div>
+            @endif
+
+            <script>
+                // Menutup pop-up alert secara otomatis setelah 2 detik
+                document.addEventListener("DOMContentLoaded", function() {
+                    setTimeout(function() {
+                        const alert = document.getElementById("popupAlert");
+                        if (alert) {
+                            alert.style.opacity = '0';
+                            setTimeout(() => alert.remove(), 500); // Hapus elemen setelah animasi selesai
+                        }
+                    }, 10000); // 10000 ms = 10 detik
+                });
+            </script>
+
             <div class="table-wrapper">
                 <table>
                     <thead>
@@ -1844,30 +1863,6 @@
             // Pastikan event listener ditambahkan jika ada perubahan input pada tipe poin
             document.querySelectorAll('input[name="tipe_poin"]').forEach(input => {
                 input.addEventListener('change', toggleFotoInput);
-            });
-        </script>
-
-        @if(session('error'))
-            <div id="popupAlert" class="alert alert-danger alert-popup">
-                {{ session('error') }}
-            </div>
-        @endif
-        @if(session('success'))
-            <div id="popupAlert" class="alert alert-success alert-popup">
-                {!! session('success') !!}
-            </div>
-        @endif
-
-        <script>
-            // Menutup pop-up alert secara otomatis setelah 2 detik
-            document.addEventListener("DOMContentLoaded", function() {
-                setTimeout(function() {
-                    const alert = document.getElementById("popupAlert");
-                    if (alert) {
-                        alert.style.opacity = '0';
-                        setTimeout(() => alert.remove(), 500); // Hapus elemen setelah animasi selesai
-                    }
-                }, 10000); // 10000 ms = 10 detik
             });
         </script>
 
@@ -2077,7 +2072,7 @@
                     <!-- Search Bar -->
                     <div class="container mt-7">
                         <div class="input-group position-relative" style="border-radius: 5px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                            <input type="text" class="form-control" id="searchInput" placeholder="Cari berdasarkan NIS, Nama, atau Kelas (Tingkatan, Jurusan, Jurusan ke)" aria-label="Search" style="border-color: #fcfc38; font-size: 12px; margin-bottom: 0;">
+                            <input type="text" class="form-control" id="searchInput" placeholder="Cari berdasarkan NIS, Nama, atau Kelas (Tingkatan, jurusan, jurusan ke)" aria-label="Search" style="border-color: #fcfc38; font-size: 12px; margin-bottom: 0;">
                             <button class="btn btn-outline-secondary" type="button" onclick="filterTable()" style=" border-width: 2px 0; border-style: solid; border-color: #fcfc38; border-radius: 0 5px 5px 0; background-color: #fcfc38; font-size: 13px; color: black; font-weight: 600;">Cari</button>
                             <span class="clear-input position-absolute" onclick="clearSearch()" style="right: 60px; top: 5px; display: none; cursor: pointer;">
                                 <i class="fas fa-times" style="font-size: 18px; color: #dc3545;"></i>
@@ -2126,7 +2121,7 @@
                                         <div class="form-row">
                                             <label for="nama" class="form-label">Nama</label>
                                             <select name="nama" id="nama" class="form-control" disabled>
-                                                <option value="" disabled selected>Nama siswa</option>
+                                                <option value="" disabled selected>Nama</option>
                                             </select>
                                         </div>
     
@@ -2175,7 +2170,30 @@
                 <!-- FORMULIR TAMBAH DATA END -->
             </div>
             
-        
+            @if(session('error'))
+                <div id="popupAlert" class="alert alert-danger alert-popup">
+                    {{ session('error') }}
+                </div>
+            @endif
+            @if(session('success'))
+                <div id="popupAlert" class="alert alert-success alert-popup">
+                    {!! session('success') !!}
+                </div>
+            @endif
+
+            <script>
+                // Menutup pop-up alert secara otomatis setelah 2 detik
+                document.addEventListener("DOMContentLoaded", function() {
+                    setTimeout(function() {
+                        const alert = document.getElementById("popupAlert");
+                        if (alert) {
+                            alert.style.opacity = '0';
+                            setTimeout(() => alert.remove(), 500); // Hapus elemen setelah animasi selesai
+                        }
+                    }, 10000); // 10000 ms = 10 detik
+                });
+            </script>
+            
             <div class="table-wrapper">
                 <table>
                     <thead>
@@ -2226,30 +2244,6 @@
             // Pastikan event listener ditambahkan jika ada perubahan input pada tipe poin
             document.querySelectorAll('input[name="tipe_poin"]').forEach(input => {
                 input.addEventListener('change', toggleFotoInput);
-            });
-        </script>
-    
-        @if(session('error'))
-            <div id="popupAlert" class="alert alert-danger alert-popup">
-                {{ session('error') }}
-            </div>
-        @endif
-        @if(session('success'))
-            <div id="popupAlert" class="alert alert-success alert-popup">
-                {!! session('success') !!}
-            </div>
-        @endif
-    
-        <script>
-            // Menutup pop-up alert secara otomatis setelah 2 detik
-            document.addEventListener("DOMContentLoaded", function() {
-                setTimeout(function() {
-                    const alert = document.getElementById("popupAlert");
-                    if (alert) {
-                        alert.style.opacity = '0';
-                        setTimeout(() => alert.remove(), 500); // Hapus elemen setelah animasi selesai
-                    }
-                }, 10000); // 10000 ms = 10 detik
             });
         </script>
     

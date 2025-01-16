@@ -29,18 +29,21 @@ class PoinPositifSheet implements FromCollection, WithTitle, WithStyles, WithHea
 {
     public function collection()
     {
-        return DataPoinPositif::orderBy('nama_poin', 'asc')->get();
+        // Data disusun berdasarkan kategori dan nama poin
+        return DataPoinPositif::orderBy('kategori_poin', 'asc')
+            ->orderBy('nama_poin', 'asc')
+            ->get();
     }
 
     public function headings(): array
     {
         return [
-            'id_poin_positif',
-            'nama_poin',
-            'poin',
-            'kategori_poin',
-            'created_at',
-            'updated_at',
+            'Id Poin Positif',
+            'Nama Poin',
+            'Poin',
+            'Kategori Poin',
+            'Dibuat (kosongkan)',
+            'Diperbaharui (kosongkan)',
         ];
     }
 
@@ -78,18 +81,21 @@ class PoinNegatifSheet implements FromCollection, WithTitle, WithStyles, WithHea
 {
     public function collection()
     {
-        return DataPoinNegatif::orderBy('nama_poin', 'asc')->get();
+        // Data disusun berdasarkan kategori dan nama poin
+        return DataPoinNegatif::orderBy('kategori_poin', 'asc')
+            ->orderBy('nama_poin', 'asc')
+            ->get();
     }
 
     public function headings(): array
     {
         return [
-            'id_poin_negatif',
-            'nama_poin',
-            'poin',
-            'kategori_poin',
-            'created_at',
-            'updated_at',
+            'Id Poin Negatif',
+            'Nama Poin',
+            'Poin',
+            'Kategori Poin',
+            'Dibuat (kosongkan)',
+            'Diperbaharui (kosongkan)',
         ];
     }
 

@@ -40,20 +40,20 @@ class DataKelasController extends Controller
     {
         $request->validate([
             'tahun_angkatan' => 'required|numeric',
-            'jurusan' => 'required|string',
-            'jurusan_ke' => 'required|numeric|min:1',
+            'konsentrasi_keahlian' => 'required|string',
+            'konsentrasi_keahlian_ke' => 'required|numeric|min:1',
         ]);
     
         try {
             $tahun_angkatan = $request->input('tahun_angkatan');
-            $jurusan = $request->input('jurusan');
-            $jumlahKelas = $request->input('jurusan_ke');
+            $konsentrasi_keahlian = $request->input('konsentrasi_keahlian');
+            $jumlahKelas = $request->input('konsentrasi_keahlian_ke');
     
             for ($i = 1; $i <= $jumlahKelas; $i++) {
                 DataKelas::create([
                     'tahun_angkatan' => $tahun_angkatan,
-                    'jurusan' => $jurusan,
-                    'jurusan_ke' => $i,
+                    'konsentrasi_keahlian' => $konsentrasi_keahlian,
+                    'konsentrasi_keahlian_ke' => $i,
                 ]);
             }
     
@@ -84,12 +84,20 @@ class DataKelasController extends Controller
 
     public function importKelas(Request $request)
     {
-        $request->validate([
-            'file' => 'required|mimes:xlsx,xls',
-        ]);
-
-        Excel::import(new KelasImport, $request->file('file'));
-
-        return redirect()->route('kelas')->with('success', 'Data kelas berhasil diimport dan diperbarui jika sudah ada.');
+        try {
+            $request->validate([
+                'file' => 'required|mimes:xlsx,xls',
+            ]);
+    
+            // Proses impor file Excel
+            \Maatwebsite\Excel\Facades\Excel::import(new KelasImport, $request->file('file'));
+    
+            return redirect()->route('kelas')
+                             ->with('success', 'Data kelas berhasil diimpor dan diperbarui jika sudah ada.');
+        } catch (\Exception $e) {
+            return redirect()->back()
+                             ->with('error', 'Terjadi kesalahan saat impor :  ' . $e->getMessage());
+        }
     }
+    
 }

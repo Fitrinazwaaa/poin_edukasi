@@ -118,7 +118,7 @@ public function admin()
     }
 
     
-    public function getJurusan($tingkatan)
+    public function getjurusan($tingkatan)
     {
         // Mengambil jurusan yang unik berdasarkan tingkatan
         $jurusan = DB::table('data_siswa')
@@ -129,7 +129,7 @@ public function admin()
         return response()->json($jurusan);
     }
     
-    public function getJurusanKe($jurusan)
+    public function getjurusanKe($jurusan)
     {
         // Mengambil jurusan_ke yang unik berdasarkan jurusan
         $jurusanKeList = DB::table('data_siswa')

@@ -50,8 +50,8 @@ Route::post('/siswapoin/delete-negatif', [PoinPelajarController::class, 'deleteP
 Route::get('/get-kelas-by-nis', [PoinPelajarController::class, 'getKelasByNis'])->name('GetKelasByNis');
 Route::get('/search-kelas-poin-siswa', [PoinPelajarController::class, 'searchKelas'])->name('SearchKelasPoinSiswa');
 
-Route::get('/get-jurusan/{tingkatan}', [PoinPelajarController::class, 'getJurusan']);
-Route::get('/get-jurusan-ke/{jurusan}', [PoinPelajarController::class, 'getJurusanKe']);
+Route::get('/get-jurusan/{tingkatan}', [PoinPelajarController::class, 'getjurusan']);
+Route::get('/get-jurusan-ke/{jurusan}', [PoinPelajarController::class, 'getjurusanKe']);
 Route::get('/search-nama-poin-siswa', [PoinPelajarController::class, 'searchNamaPoinSiswa'])->name('SearchNamaPoinSiswa');
 Route::get('/get-nama-poin/{tipe}', [PoinPelajarController::class, 'getNamaPoin']);
 
@@ -84,8 +84,8 @@ Route::PUT('/siswa/store', [DataSiswaController::class, 'store'])->name('SiswaSt
 Route::get('/siswa/edit/{id}', [DataSiswaController::class, 'edit'])->name('SiswaEdit');
 Route::PUT('/siswa/update/{id}', [DataSiswaController::class, 'update'])->name('DataSiswaUpdate');
 Route::post('/siswa/hapus-multiple', [DataSiswaController::class, 'destroyMultiple'])->name('SiswaHapusMultiple');
-Route::get('/get-jurusan-datasiswa/{tahun_angkatan}', [DataSiswaController::class, 'getJurusanDataSiswa']);
-Route::get('/get-jurusan-ke-datasiswa/{tahun_angkatan}/{jurusan}', [DataSiswaController::class, 'getJurusanKeDataSiswa']);
+Route::get('/get-jurusan-datasiswa/{tahun_angkatan}', [DataSiswaController::class, 'getjurusanDataSiswa']);
+Route::get('/get-jurusan-ke-datasiswa/{tahun_angkatan}/{jurusan}', [DataSiswaController::class, 'getjurusanKeDataSiswa']);
 Route::get('/Eksport-siswa', [DataSiswaController::class, 'EksportSiswa'])->name('SiswaEksport');
 Route::post('/siswa/import', [DataSiswaController::class, 'import'])->name('siswa.import');
 Route::post('/siswa/replace/{nis}', [DataSiswaController::class, 'replace'])->name('siswa.replace');

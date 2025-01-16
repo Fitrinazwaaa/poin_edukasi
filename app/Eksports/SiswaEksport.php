@@ -17,15 +17,15 @@ class SiswaEksport implements FromCollection, WithHeadings, WithMultipleSheets
     public function headings(): array
     {
         return [
-            'nis', 
-            'nama', 
-            'tingkatan',
-            'jurusan', 
-            'jurusan_ke', 
-            'jenis_kelamin', 
-            'tahun_angkatan',
-            'created_at',
-            'updated_at',
+            'NIS', 
+            'Nama', 
+            'Tingkatan',
+            'Konsentrasi Keahlian', 
+            'Konsentrasi Keahlian Ke', 
+            'Jenis Kelamin', 
+            'Tahun Angkatan',
+            'Dibuat (kosongkan)',
+            'Diperbaharui (kosongkan)',
         ];
     }
     public function sheets(): array
